@@ -1,1 +1,1 @@
-# SAM-Activity-AUI2018
+# SAM Activity
