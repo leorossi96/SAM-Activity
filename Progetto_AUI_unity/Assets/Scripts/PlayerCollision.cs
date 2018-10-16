@@ -7,18 +7,17 @@ public class PlayerCollision : MonoBehaviour
     public PlayerMovement movement;
      
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.collider.tag == "Turning Point")
+        if (collider.tag == "Turning Point")
         {
 
             movement.enabled = false;
 
-            Vector3 savedVelocity = GetComponent<Rigidbody>().velocity; 
-
+            /*Vector3 savedVelocity = GetComponent<Rigidbody>().velocity; 
+*/
 
             GetComponent<Rigidbody>().velocity= Vector3.zero;
-
 
             //asking input to the user
             transform.Rotate(new Vector3(0, -90, 0));
@@ -34,4 +33,6 @@ public class PlayerCollision : MonoBehaviour
             //FindObjectOfType<GameManager>().EndGame();
         }
     }
+
+
 }
