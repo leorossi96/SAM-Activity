@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 761870481}
   - component: {fileID: 761870482}
   - component: {fileID: 761870483}
+  - component: {fileID: 761870484}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -470,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 761870482}
-  forwardForce: 1000
+  forwardForce: 100
   movementForce: 20
   rightArrow: 0
   leftArrow: 0
@@ -501,7 +502,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &761870483
 MonoBehaviour:
@@ -512,6 +513,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af32aba09a8b2485dbe1dc6107ab9762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 761870480}
+  rotate: {fileID: 761870484}
+--- !u!114 &761870484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 761870478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b467c97fd56d640e1a55aa1b5441ab3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 761870480}
