@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Turning Point
+  - TurningPoint Left
+  - TurningPoint Right
   layers:
   - Default
   - TransparentFX
