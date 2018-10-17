@@ -1,14 +1,21 @@
 ﻿using UnityEngine;
 using System;
+using UnityStandardAssets.Utility;
+using System.Net;
+using System.Security.Cryptography;
 
 public class PlayerCollision : MonoBehaviour
 {
 
     public PlayerMovement movement;
 
+    public RotationsSlow rotate; 
+
+
     public Boolean isTriggerLeft = false;
 
     public Boolean isTriggerRight = false;
+
 
 
     private void OnTriggerEnter(Collider collider)
@@ -55,17 +62,25 @@ public class PlayerCollision : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
-            transform.Rotate(new Vector3(0, -90, 0));
+            rotate.setUpRotation(new Vector3(0 + transform.rotation.eulerAngles.x,
+                                             -90 + transform.rotation.eulerAngles.y,
+                                             0 + transform.rotation.eulerAngles.z));
+
 
             movement.enabled = true;
+
 
             isTriggerLeft = false;
         }
 
 
+
        else if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
         {
-            transform.Rotate(new Vector3(0, 90, 0));
+            rotate.setUpRotation(new Vector3(0 + transform.rotation.eulerAngles.x,
+                                             90 + transform.rotation.eulerAngles.y,
+                                             0 + transform.rotation.eulerAngles.z));
+
 
             movement.enabled = true;
 
@@ -74,7 +89,16 @@ public class PlayerCollision : MonoBehaviour
 
 
 
+
     }
+
+
+
+	
+
+
+
+
 
 
 }
