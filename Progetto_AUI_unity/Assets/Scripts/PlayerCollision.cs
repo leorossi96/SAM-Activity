@@ -53,7 +53,7 @@ public class PlayerCollision : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)
+        if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
             transform.Rotate(new Vector3(0, -90, 0));
 
