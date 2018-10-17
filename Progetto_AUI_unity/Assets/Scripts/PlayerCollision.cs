@@ -67,7 +67,7 @@ public class PlayerCollision : MonoBehaviour
                                              0 + transform.rotation.eulerAngles.z));
 
 
-            movement.enabled = true;
+
 
 
             isTriggerLeft = false;
@@ -77,12 +77,16 @@ public class PlayerCollision : MonoBehaviour
 
        else if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
         {
+
+
+
+
             rotate.setUpRotation(new Vector3(0 + transform.rotation.eulerAngles.x,
                                              90 + transform.rotation.eulerAngles.y,
                                              0 + transform.rotation.eulerAngles.z));
 
 
-            movement.enabled = true;
+
 
             isTriggerRight = false;
         }
