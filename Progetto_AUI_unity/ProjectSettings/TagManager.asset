@@ -4,11 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Turning Point
   - TurningPoint Left
   - TurningPoint Right
-  - Obstacle
-  - ObstacleBase
+  - Obstacle Down
+  - Obstacle Up
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [ExecuteInEditMode]
-public class AvoidObstacle : MonoBehaviour
+public class AvoidObstacleDown : MonoBehaviour
 {
 
     [Space(10)]

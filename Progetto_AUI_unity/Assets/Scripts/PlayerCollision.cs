@@ -16,7 +16,9 @@ public class PlayerCollision : MonoBehaviour
 
     public Boolean isTriggerRight = false;
 
-    public Boolean isTriggerObst = false;
+    public Boolean isTriggerObstDown = false;
+
+    public Boolean isTriggerObstUp = false;
 
 
 
@@ -47,11 +49,24 @@ public class PlayerCollision : MonoBehaviour
                     break;
                 }
 
-            case "Obstacle":
+            case "Obstacle Down":
                 {
                     print("ho colliso");
 
-                    isTriggerObst = true;
+                    isTriggerObstDown = true;
+
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    break;
+                }
+
+            case "Obstacle Up":
+                {
+                    print("ho colliso");
+
+                    isTriggerObstUp = true;
 
                     movement.enabled = false;
 
@@ -74,7 +89,7 @@ public class PlayerCollision : MonoBehaviour
     {
         switch (collider.tag)
         {
-            case "Obstacle":
+            case "Obstacle Down":
                 {
                     print("sto uscendo");
 
@@ -86,6 +101,21 @@ public class PlayerCollision : MonoBehaviour
                                           0 + transform.rotation.eulerAngles.y,
                                           0 + transform.rotation.eulerAngles.z));
                     
+                    break;
+                }
+
+            case "Obstacle Up":
+                {
+                    print("sto uscendo");
+
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    rotate.setUpRotation(new Vector3(40 + transform.rotation.eulerAngles.x,
+                                          0 + transform.rotation.eulerAngles.y,
+                                          0 + transform.rotation.eulerAngles.z));
+
                     break;
                 }
 
@@ -135,15 +165,29 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObst == true)
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObstDown == true)
         {
             rotate.setUpRotation(new Vector3(40 + transform.rotation.eulerAngles.x,
                                             0 + transform.rotation.eulerAngles.y,
                                             0 + transform.rotation.eulerAngles.z));
 
 
-            isTriggerObst = false;
+            isTriggerObstDown = false;
 
+
+        }
+
+
+        else if (Input.GetKeyDown(KeyCode.UpArrow) && isTriggerObstUp == true)
+        {
+            rotate.setUpRotation(new Vector3(-40 + transform.rotation.eulerAngles.x,
+                                            0 + transform.rotation.eulerAngles.y,
+                                            0 + transform.rotation.eulerAngles.z));
+
+
+            isTriggerObstUp = false;
+            movement.enabled = true;
+            print("Finito Update1");
 
         }
 

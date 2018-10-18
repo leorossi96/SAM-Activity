@@ -26,7 +26,7 @@ public class RotationsSlow : MonoBehaviour
         {
             this.enabled = false;
             movement.enabled = true;
-
+            print("Cacca");
         }
     }
 
@@ -35,7 +35,8 @@ public class RotationsSlow : MonoBehaviour
     {
         
         this.rotateDirection = direction;
-        this.enabled = true; 
+        this.enabled = true;
+        print("finita rotazione e mov");
     }
 
 }
