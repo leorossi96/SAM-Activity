@@ -78,6 +78,8 @@ public class PlayerCollision : MonoBehaviour
                 {
                     print("sto uscendo");
 
+                    movement.enabled = false;
+
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
                     rotate.setUpRotation(new Vector3(-40 + transform.rotation.eulerAngles.x,
