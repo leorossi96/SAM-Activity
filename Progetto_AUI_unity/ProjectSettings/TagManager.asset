@@ -7,6 +7,8 @@ TagManager:
   - Turning Point
   - TurningPoint Left
   - TurningPoint Right
+  - Obstacle
+  - ObstacleBase
   layers:
   - Default
   - TransparentFX

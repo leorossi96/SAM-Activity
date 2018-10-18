@@ -16,45 +16,85 @@ public class PlayerCollision : MonoBehaviour
 
     public Boolean isTriggerRight = false;
 
+    public Boolean isTriggerObst = false;
+
 
 
     private void OnTriggerEnter(Collider collider)
     {
 
-        if (collider.tag == "TurningPoint Left")
+        switch (collider.tag)
         {
-            isTriggerLeft = true;
-            movement.enabled = false;
+            case "TurningPoint Left":
+                {
+                    isTriggerLeft = true;
 
-            /*Vector3 savedVelocity = GetComponent<Rigidbody>().velocity; 
-*/
+                    movement.enabled = false;
 
-            GetComponent<Rigidbody>().velocity= Vector3.zero;
-                         
-                  //asking input to the user
-            /*transform.Rotate(new Vector3(0, -90, 0));
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+                    break;
+                }
 
-            //reset the velocity
-            movement.enabled = true; */
-            
-                    //invece di mettere variabile con riferimento da associare anche nell'inspector
-            //uso find object così quando cambio personaggio non perdo il riferimento a Game Manager
-            //FindObjectOfType<GameManager>().EndGame();
+            case "TurningPoint Right":
+                {
+                    isTriggerRight = true;
+         
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    break;
+                }
+
+            case "Obstacle":
+                {
+                    print("ho colliso");
+
+                    isTriggerObst = true;
+
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    break;
+                }
+
+            default: break;
+
+               
+
         }
-
-
-       else if(collider.tag == "TurningPoint Right")
-        {
-            isTriggerRight = true;
-
-            movement.enabled = false;
-
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
-
-
+                 
     }
+
+
+
+    void OnTriggerExit(Collider collider)
+    {
+        switch (collider.tag)
+        {
+            case "Obstacle":
+                {
+                    print("sto uscendo");
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    rotate.setUpRotation(new Vector3(-40 + transform.rotation.eulerAngles.x,
+                                          0 + transform.rotation.eulerAngles.y,
+                                          0 + transform.rotation.eulerAngles.z));
+                    
+                    break;
+                }
+
+            default: break;
+        }
+    }
+
+        
+
+
+   
 
 
 
@@ -89,6 +129,20 @@ public class PlayerCollision : MonoBehaviour
 
 
             isTriggerRight = false;
+        }
+
+
+
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObst == true)
+        {
+            rotate.setUpRotation(new Vector3(40 + transform.rotation.eulerAngles.x,
+                                            0 + transform.rotation.eulerAngles.y,
+                                            0 + transform.rotation.eulerAngles.z));
+
+
+            isTriggerObst = false;
+
+
         }
 
 
