@@ -186,8 +186,7 @@ public class PlayerCollision : MonoBehaviour
 
 
             isTriggerObstUp = false;
-            movement.enabled = true;
-            print("Finito Update1");
+
 
         }
 

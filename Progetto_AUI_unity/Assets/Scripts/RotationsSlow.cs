@@ -21,12 +21,12 @@ public class RotationsSlow : MonoBehaviour
 
         //Rotate slowly towards the rotateDirection, when the rotation is over the 
         //movement is stopped and this component is deactivated
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rotateDirection), 180.0f * Time.deltaTime);
-        if (transform.rotation.Equals(Quaternion.Euler(rotateDirection)) || transform.rotation == Quaternion.Euler(rotateDirection))
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rotateDirection), 2.0f);
+        if (transform.rotation == Quaternion.Euler(rotateDirection))
         {
             this.enabled = false;
             movement.enabled = true;
-            print("Cacca");
+
         }
     }
 
@@ -36,7 +36,7 @@ public class RotationsSlow : MonoBehaviour
         
         this.rotateDirection = direction;
         this.enabled = true;
-        print("finita rotazione e mov");
+
     }
 
 }
