@@ -6,7 +6,7 @@ public class RotationsSlow : MonoBehaviour
 {
 
     public PlayerMovement movement;
-    private Vector3 rotateDirection;
+    private Quaternion rotateDirection;
 
     private void Start()
     {
@@ -15,20 +15,31 @@ public class RotationsSlow : MonoBehaviour
         //@method setUpRotation is activated
         this.enabled = false;
     }
+
     // Update is called once per frame
     void Update()
     {
+        
+        //Rotate slowly towards the rotateDirection, when the rotation is over the 
+        //movement is stopped and this component is deactivated
+
 
         //Rotate slowly towards the rotateDirection, when the rotation is over the 
         //movement is stopped and this component is deactivated
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rotateDirection), 100.0f*Time.deltaTime);
-        if (transform.rotation.Equals(Quaternion.Euler(rotateDirection)) || transform.rotation == Quaternion.Euler(rotateDirection))
+        
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, 1.0f);
+        if (transform.rotation == rotateDirection)
+
         {
+            print("finished rotation"); 
             this.enabled = false;
             movement.enabled = true;
-            print("Cacca");
+
+            //print("Cacca");
             // Quaternion prova = GetComponent<Transform>().rotation;
             //  Vector3 cacca = Vector3.RotateTowards(new Vector3(prova.x, prova.y, prova.z), rotateDirection, 1.0f, 0.0f);
+
 
 
         }
@@ -82,11 +93,11 @@ public class RotationsSlow : MonoBehaviour
     public void setUpRotation(Vector3 direction)
     {
         
-        this.rotateDirection = direction;
+        this.rotateDirection = transform.rotation * Quaternion.Euler(direction);
+        print(transform.localRotation.eulerAngles);
         this.enabled = true;
-      //  Quaternion prova = GetComponent<Transform>().rotation;
-      //  Vector3 cacca = Vector3.RotateTowards(new Vector3(prova.x, prova.y, prova.z), rotateDirection, 1.0f, 0.0f);
-        print("finita rotazione e mov");
+
+       
     }
 
 }

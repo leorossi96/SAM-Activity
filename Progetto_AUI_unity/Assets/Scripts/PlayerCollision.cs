@@ -97,9 +97,9 @@ public class PlayerCollision : MonoBehaviour
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-                    rotate.setUpRotation(new Vector3(-40 + transform.rotation.eulerAngles.x,
-                                          0 + transform.rotation.eulerAngles.y,
-                                          0 + transform.rotation.eulerAngles.z));
+                    rotate.setUpRotation(new Vector3(-40 ,
+                                          0,
+                                          0));
                     
                     break;
                 }
@@ -112,9 +112,9 @@ public class PlayerCollision : MonoBehaviour
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-                    rotate.setUpRotation(new Vector3(40 + transform.rotation.eulerAngles.x,
-                                          0 + transform.rotation.eulerAngles.y,
-                                          0 + transform.rotation.eulerAngles.z));
+                    rotate.setUpRotation(new Vector3(40 ,
+                                          0,
+                                          0 ));
 
                     break;
                 }
@@ -134,9 +134,10 @@ public class PlayerCollision : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
-            rotate.setUpRotation(new Vector3(0 + transform.rotation.eulerAngles.x,
-                                             -90 + transform.rotation.eulerAngles.y,
-                                             0 + transform.rotation.eulerAngles.z));
+
+            rotate.setUpRotation(new Vector3(0,
+                                             -90 ,
+                                             0));
 
 
 
@@ -147,15 +148,15 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-       else if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
+       if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
         {
 
 
 
 
-            rotate.setUpRotation(new Vector3(0 + transform.rotation.eulerAngles.x,
-                                             90 + transform.rotation.eulerAngles.y,
-                                             0 + transform.rotation.eulerAngles.z));
+            rotate.setUpRotation(new Vector3(0,
+                                             90 ,
+                                             0));
 
 
 
@@ -165,11 +166,11 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObstDown == true)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObstDown == true)
         {
-            rotate.setUpRotation(new Vector3(40 + transform.rotation.eulerAngles.x,
-                                            0 + transform.rotation.eulerAngles.y,
-                                            0 + transform.rotation.eulerAngles.z));
+            rotate.setUpRotation(new Vector3(40 ,
+                                            0,
+                                            0));
 
 
             isTriggerObstDown = false;
@@ -178,16 +179,16 @@ public class PlayerCollision : MonoBehaviour
         }
 
 
-        else if (Input.GetKeyDown(KeyCode.UpArrow) && isTriggerObstUp == true)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isTriggerObstUp == true)
         {
-            rotate.setUpRotation(new Vector3(-40 + transform.rotation.eulerAngles.x,
-                                            0 + transform.rotation.eulerAngles.y,
-                                            0 + transform.rotation.eulerAngles.z));
+            print("inizio rotazione"); 
+            rotate.setUpRotation(new Vector3(-40,
+                                            0,
+                                            0));
 
 
             isTriggerObstUp = false;
-            movement.enabled = true;
-            print("Finito Update1");
+
 
         }
 
