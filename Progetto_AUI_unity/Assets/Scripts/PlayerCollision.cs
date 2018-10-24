@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-public class VoicesOffline : MonoBehaviour
+public class PlayerCollision : MonoBehaviour
 {
 
     public PlayerMovement movement;
