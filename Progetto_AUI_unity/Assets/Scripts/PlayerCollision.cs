@@ -23,16 +23,16 @@ public class PlayerCollision : MonoBehaviour
 
     //public VoicesOffline voice = new VoicesOffline();
 
-    private IEnumerator fadecolor() {
+   /* private IEnumerator fadecolor() {
         MagicRoomLightManager.instance.sendColour("#000088", 100);
         yield return new WaitForSeconds(1f);
         MagicRoomLightManager.instance.sendColour(Color.blue);
        // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("ciao", voice);
-    }
+    }*/
 
     private void OnTriggerEnter(Collider colliderActual)
     {
-        StartCoroutine(fadecolor());
+        //StartCoroutine(fadecolor());
 
         
        
