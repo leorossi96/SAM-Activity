@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -413,7 +413,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: dfe299b166356784591e716a358ca633, type: 2}
+  - {fileID: 2100000, guid: ef1ff0d5c55ff5445ac46f862b16cba8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -581,7 +581,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: dfe299b166356784591e716a358ca633, type: 2}
+  - {fileID: 2100000, guid: ef1ff0d5c55ff5445ac46f862b16cba8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -914,10 +914,6 @@ MonoBehaviour:
   isTriggerObstUp: 0
   awayFromMe: {fileID: 217238389}
   colliderActual: {fileID: 0}
-  voice:
-    voiceName: 
-    voiceGender: 
-    voiceLang: 
 --- !u!114 &761870484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1296,7 +1292,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: dfe299b166356784591e716a358ca633, type: 2}
+  - {fileID: 2100000, guid: ef1ff0d5c55ff5445ac46f862b16cba8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1610,7 +1606,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: dfe299b166356784591e716a358ca633, type: 2}
+  - {fileID: 2100000, guid: ef1ff0d5c55ff5445ac46f862b16cba8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
