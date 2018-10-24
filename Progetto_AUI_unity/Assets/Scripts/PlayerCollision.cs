@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System;
-using UnityStandardAssets.Utility;
-using System.Net;
-using System.Security.Cryptography;
+using System.Collections;
 
-public class PlayerCollision : MonoBehaviour
+public class VoicesOffline : MonoBehaviour
 {
 
     public PlayerMovement movement;
@@ -20,10 +18,23 @@ public class PlayerCollision : MonoBehaviour
 
     public Boolean isTriggerObstUp = false;
 
+    public Voices voice = new Voices();
 
+    private IEnumerator fadecolor() {
+        MagicRoomLightManager.instance.sendColour("#000088", 100);
+        yield return new WaitForSeconds(1f);
+        MagicRoomLightManager.instance.sendColour(Color.blue);
+
+    }
 
     private void OnTriggerEnter(Collider collider)
     {
+        StartCoroutine(fadecolor());
+
+        
+       
+    
+
 
         switch (collider.tag)
         {
