@@ -1341,8 +1341,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1676200194}
   - component: {fileID: 1676200197}
-  - component: {fileID: 1676200196}
   - component: {fileID: 1676200195}
+  - component: {fileID: 1676200196}
   m_Layer: 0
   m_Name: Collider Obstacle front
   m_TagString: Obstacle Down

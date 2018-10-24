@@ -666,7 +666,7 @@ PlayerSettings:
     Hub: 0
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: bf58a055-d33b-430e-a0a4-56cd625894cc
   projectName: ProvaUnityCloud
   organizationId: leorossi96
