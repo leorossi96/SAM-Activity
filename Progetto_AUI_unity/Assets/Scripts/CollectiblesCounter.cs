@@ -17,7 +17,17 @@ public class CollectiblesCounter : MonoBehaviour {
         counter++;
         Debug.Log(counter);
         if(counter == nCollectibles){
+            MagicRoomLightManager.instance.sendColour(Color.red);
+            /*Voices aoao = new Voices();
+            MagicRoomTextToSpeechManagerOnline.instance.generateAudioFromText("HAI VINTO!", aoao, "");*/
             Debug.Log("HAI VINTO");
+            StartCoroutine(BubbleMachine());
         }
+    }
+
+    private IEnumerator BubbleMachine(){
+        MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
+        yield return new WaitForSeconds(2f);
+        MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
     }
 }
