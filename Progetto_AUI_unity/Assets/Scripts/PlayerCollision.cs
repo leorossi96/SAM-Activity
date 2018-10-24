@@ -73,6 +73,8 @@ public class PlayerCollision : MonoBehaviour
 
                     movement.enabled = false;
 
+                    print("Mi sono fermato");
+
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
                     break;

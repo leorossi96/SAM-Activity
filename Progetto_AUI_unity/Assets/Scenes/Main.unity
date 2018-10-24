@@ -1341,11 +1341,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1676200194}
   - component: {fileID: 1676200197}
-  - component: {fileID: 1676200196}
   - component: {fileID: 1676200195}
+  - component: {fileID: 1676200196}
   m_Layer: 0
   m_Name: Collider Obstacle front
-  m_TagString: Untagged
+  m_TagString: Obstacle Down
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1357,8 +1357,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1676200193}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000000017881, y: 0.01, z: -8.93}
-  m_LocalScale: {x: -0.9601037, y: 2.119345, z: 2.8208258}
+  m_LocalPosition: {x: -0.103, y: 0.23, z: -0.08}
+  m_LocalScale: {x: -0.9552797, y: 2.119345, z: 8.836051}
   m_Children: []
   m_Father: {fileID: 1591858012}
   m_RootOrder: 0
