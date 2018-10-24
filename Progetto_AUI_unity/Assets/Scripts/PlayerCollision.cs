@@ -9,14 +9,17 @@ public class VoicesOffline : MonoBehaviour
 
     public RotationsSlow rotate; 
 
-
     public Boolean isTriggerLeft = false;
 
     public Boolean isTriggerRight = false;
 
     public Boolean isTriggerObstDown = false;
 
-    public Boolean isTriggerObstUp = false;
+    public Boolean isTriggerObstUp = false; 
+   
+    public AvoidObstacle awayFromMe;
+
+    public Collider colliderActual; 
 
     public Voices voice = new Voices();
 
@@ -27,7 +30,7 @@ public class VoicesOffline : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider colliderActual)
     {
         StartCoroutine(fadecolor());
 
@@ -36,7 +39,9 @@ public class VoicesOffline : MonoBehaviour
     
 
 
-        switch (collider.tag)
+        this.colliderActual = colliderActual; 
+
+        switch (colliderActual.tag)
         {
             case "TurningPoint Left":
                 {
@@ -45,7 +50,7 @@ public class VoicesOffline : MonoBehaviour
                     movement.enabled = false;
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-
+                    print("finsh"); 
                     break;
                 }
 
@@ -98,7 +103,7 @@ public class VoicesOffline : MonoBehaviour
 
     void OnTriggerExit(Collider collider)
     {
-        switch (collider.tag)
+        /*switch (collider.tag)
         {
             case "Obstacle Down":
                 {
@@ -108,11 +113,11 @@ public class VoicesOffline : MonoBehaviour
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-                    rotate.setUpRotation(new Vector3(-40 ,
-                                          0,
-                                          0));
+                    rotate.setUpRotation(new Vector3(-40,0,0));
                     
                     break;
+
+
                 }
 
             case "Obstacle Up":
@@ -123,15 +128,20 @@ public class VoicesOffline : MonoBehaviour
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-                    rotate.setUpRotation(new Vector3(40 ,
-                                          0,
-                                          0 ));
+                    rotate.setUpRotation(new Vector3(40,0,0));
 
                     break;
+
+
                 }
 
             default: break;
         }
+        */
+
+
+        awayFromMe.enabled = false;
+        this.movement.enabled = true; 
     }
 
         
@@ -146,9 +156,7 @@ public class VoicesOffline : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
 
-            rotate.setUpRotation(new Vector3(0,
-                                             -90 ,
-                                             0));
+            rotate.setUpRotation(new Vector3(0,-90 ,0));
 
 
 
@@ -165,9 +173,7 @@ public class VoicesOffline : MonoBehaviour
 
 
 
-            rotate.setUpRotation(new Vector3(0,
-                                             90 ,
-                                             0));
+            rotate.setUpRotation(new Vector3(0,90 ,0));
 
 
 
@@ -179,10 +185,9 @@ public class VoicesOffline : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObstDown == true)
         {
-            rotate.setUpRotation(new Vector3(40 ,
-                                            0,
-                                            0));
+            //rotate.setUpRotation(new Vector3(40 ,0,0));
 
+            awayFromMe.setUpAvoiding(-transform.right, colliderActual); 
 
             isTriggerObstDown = false;
 
@@ -192,10 +197,10 @@ public class VoicesOffline : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && isTriggerObstUp == true)
         {
-            print("inizio rotazione"); 
-            rotate.setUpRotation(new Vector3(-40,
-                                            0,
-                                            0));
+            
+            //rotate.setUpRotation(new Vector3(-40, 0,0));
+
+            awayFromMe.setUpAvoiding(transform.right, colliderActual);
 
 
             isTriggerObstUp = false;

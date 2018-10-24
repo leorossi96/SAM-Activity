@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RotationsSlow : MonoBehaviour
 {
-
     public PlayerMovement movement;
     private Quaternion rotateDirection;
 
@@ -12,7 +11,7 @@ public class RotationsSlow : MonoBehaviour
     {
 
         //By default is not active, only when we call the 
-        //@method setUpRotation is activated
+        //method setUpRotation is activated
         this.enabled = false;
     }
 
@@ -23,81 +22,26 @@ public class RotationsSlow : MonoBehaviour
         //Rotate slowly towards the rotateDirection, when the rotation is over the 
         //movement is stopped and this component is deactivated
 
-
-        //Rotate slowly towards the rotateDirection, when the rotation is over the 
-        //movement is stopped and this component is deactivated
-        
-
         transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, 1.0f);
         if (transform.rotation == rotateDirection)
 
         {
-            print("finished rotation"); 
+            
             this.enabled = false;
             movement.enabled = true;
 
-            //print("Cacca");
-            // Quaternion prova = GetComponent<Transform>().rotation;
-            //  Vector3 cacca = Vector3.RotateTowards(new Vector3(prova.x, prova.y, prova.z), rotateDirection, 1.0f, 0.0f);
-
-
-
         }
-
-
-
-        /* if (test(transform.rotation.eulerAngles, rotateDirection))
-         {
-             this.enabled = false;
-             movement.enabled = true;
-             print("Cacca");
-             // Quaternion prova = GetComponent<Transform>().rotation;
-             //  Vector3 cacca = Vector3.RotateTowards(new Vector3(prova.x, prova.y, prova.z), rotateDirection, 1.0f, 0.0f)
-         }
-         else
-         {
-             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(rotateDirection), 180.0f * Time.deltaTime);
-         }
-
-
-
-
-     }
-
-
-     private bool test(Vector3 uno, Vector3 due)
-     {
-         const float kEpsilon = 1E-05F;
-
-         if (Mathf.Abs(Mathf.Abs(uno.x - due.x) % (Mathf.PI)) > kEpsilon)
-         {
-             return false;
-         }
-         if (Mathf.Abs(Mathf.Abs(uno.y - due.y) % (Mathf.PI)) > kEpsilon)
-         {
-             return false;
-         }
-         if (Mathf.Abs(Mathf.Abs(uno.z - due.z) % (Mathf.PI)) > kEpsilon)
-         {
-             return false;
-         }
-
-
-
-         return true;
-     }*/
 
     }
 
-    //Activate the component and set up the rotate direction
+    ///<summary>
+    /// Activate the component and set up the rotate direction by applying 
+    /// </summary>
+    /// <param name="direction"></param>
     public void setUpRotation(Vector3 direction)
     {
-        
         this.rotateDirection = transform.rotation * Quaternion.Euler(direction);
-        print(transform.localRotation.eulerAngles);
         this.enabled = true;
-
-       
     }
 
 }
