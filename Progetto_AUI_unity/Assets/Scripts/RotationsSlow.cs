@@ -5,15 +5,12 @@ using System.Runtime.CompilerServices;
 
 public class RotationsSlow : MonoBehaviour
 {
-
     public PlayerMovement movement;
-   
-    private Quaternion actual;
 
-   
-
+    private Quaternion rotateDirection;
 
     private void Start()
+
     {
 
 
@@ -27,43 +24,36 @@ public class RotationsSlow : MonoBehaviour
 
 
     }
+
+
     // Update is called once per frame
     void Update()
     {
-
-
-
-
-
-
-
-
-
-
+        
         //Rotate slowly towards the rotateDirection, when the rotation is over the 
         //movement is stopped and this component is deactivated
-        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotateDirection), 0.1f); 
 
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, 1.0f);
+        if (transform.rotation == rotateDirection)
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, actual, 4.0f); 
-         
-        if(transform.rotation==actual){
+        {
+            
             this.enabled = false;
-            this.movement.enabled = true; 
-        }
+            movement.enabled = true;
 
+        }
 
     }
 
-    //Activate the component and set up the rotate direction
+    ///<summary>
+    /// Activate the component and set up the rotate direction by applying 
+    /// </summary>
+    /// <param name="direction"></param>
     public void setUpRotation(Vector3 direction)
     {
+        this.rotateDirection = transform.rotation * Quaternion.Euler(direction);
+        this.enabled = true;
 
-
-
-        this.actual = Quaternion.Euler(direction); 
-
-        this.enabled = true; 
     }
 
 }

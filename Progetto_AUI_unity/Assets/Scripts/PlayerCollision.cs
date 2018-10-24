@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using UnityStandardAssets.Utility;
-using System.Net;
-using System.Security.Cryptography;
+using System.Collections;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -11,50 +9,145 @@ public class PlayerCollision : MonoBehaviour
 
     public RotationsSlow rotate; 
 
-
     public Boolean isTriggerLeft = false;
 
     public Boolean isTriggerRight = false;
 
+    public Boolean isTriggerObstDown = false;
 
+    public Boolean isTriggerObstUp = false; 
+   
+    public AvoidObstacle awayFromMe;
 
-    private void OnTriggerEnter(Collider collider)
-    {
+    public Collider colliderActual; 
 
-        if (collider.tag == "TurningPoint Left")
-        {
-            isTriggerLeft = true;
-            movement.enabled = false;
+    //public VoicesOffline voice = new VoicesOffline();
 
-            /*Vector3 savedVelocity = GetComponent<Rigidbody>().velocity; 
-*/
-
-            GetComponent<Rigidbody>().velocity= Vector3.zero;
-                         
-                  //asking input to the user
-            /*transform.Rotate(new Vector3(0, -90, 0));
-
-
-            //reset the velocity
-            movement.enabled = true; */
-            
-                    //invece di mettere variabile con riferimento da associare anche nell'inspector
-            //uso find object così quando cambio personaggio non perdo il riferimento a Game Manager
-            //FindObjectOfType<GameManager>().EndGame();
-        }
-
-
-       else if(collider.tag == "TurningPoint Right")
-        {
-            isTriggerRight = true;
-
-            movement.enabled = false;
-
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-        }
-
-
+    private IEnumerator fadecolor() {
+        MagicRoomLightManager.instance.sendColour("#000088", 100);
+        yield return new WaitForSeconds(1f);
+        MagicRoomLightManager.instance.sendColour(Color.blue);
+       // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("ciao", voice);
     }
+
+    private void OnTriggerEnter(Collider colliderActual)
+    {
+        StartCoroutine(fadecolor());
+
+        
+       
+    
+
+
+        this.colliderActual = colliderActual; 
+
+        switch (colliderActual.tag)
+        {
+            case "TurningPoint Left":
+                {
+                    isTriggerLeft = true;
+
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    print("finsh"); 
+                    break;
+                }
+
+            case "TurningPoint Right":
+                {
+                    isTriggerRight = true;
+         
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    break;
+                }
+
+            case "Obstacle Down":
+                {
+                    print("ho colliso");
+
+                    isTriggerObstDown = true;
+
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    break;
+                }
+
+            case "Obstacle Up":
+                {
+                    print("ho colliso");
+
+                    isTriggerObstUp = true;
+
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    break;
+                }
+
+            default: break;
+
+               
+
+        }
+                 
+    }
+
+
+
+    void OnTriggerExit(Collider collider)
+    {
+        /*switch (collider.tag)
+        {
+            case "Obstacle Down":
+                {
+                    print("sto uscendo");
+
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    rotate.setUpRotation(new Vector3(-40,0,0));
+                    
+                    break;
+
+
+                }
+
+            case "Obstacle Up":
+                {
+                    print("sto uscendo");
+
+                    movement.enabled = false;
+
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    rotate.setUpRotation(new Vector3(40,0,0));
+
+                    break;
+
+
+                }
+
+            default: break;
+        }
+        */
+
+
+        awayFromMe.enabled = false;
+        this.movement.enabled = true; 
+    }
+
+        
+
+
+   
 
 
 
@@ -62,9 +155,8 @@ public class PlayerCollision : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
-            rotate.setUpRotation(new Vector3(0 + transform.rotation.eulerAngles.x,
-                                             -90 + transform.rotation.eulerAngles.y,
-                                             0 + transform.rotation.eulerAngles.z));
+
+            rotate.setUpRotation(new Vector3(0,-90 ,0));
 
 
 
@@ -75,20 +167,45 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-       else if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
+       if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
         {
 
 
 
 
-            rotate.setUpRotation(new Vector3(0 + transform.rotation.eulerAngles.x,
-                                             90 + transform.rotation.eulerAngles.y,
-                                             0 + transform.rotation.eulerAngles.z));
+            rotate.setUpRotation(new Vector3(0,90 ,0));
 
 
 
 
             isTriggerRight = false;
+        }
+
+
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObstDown == true)
+        {
+            //rotate.setUpRotation(new Vector3(40 ,0,0));
+
+            awayFromMe.setUpAvoiding(-transform.right, colliderActual); 
+
+            isTriggerObstDown = false;
+
+
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isTriggerObstUp == true)
+        {
+            
+            //rotate.setUpRotation(new Vector3(-40, 0,0));
+
+            awayFromMe.setUpAvoiding(transform.right, colliderActual);
+
+
+            isTriggerObstUp = false;
+
+
         }
 
 

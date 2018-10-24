@@ -37,7 +37,7 @@ public string[] listofAssociatedNames;
         else {
             GameObject.DestroyImmediate(this);
         }
-        address = "http://localhost:7070";
+        address = "http://192.168.31.214:7070"; //localhost:7070";
         
         MagicRoomLightManager_active = true;
     }
@@ -46,7 +46,7 @@ public string[] listofAssociatedNames;
     {
         Logger.addToLogNewLine("ServerHue", "Searching Light Server");
         StartCoroutine(sendConfigurationRequest());
-        sendColour("#FFFFFF", 255);
+        sendColour("#FFFFFF", 100);
     }
 
  /// <summary>
