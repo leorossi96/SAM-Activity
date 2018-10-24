@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -192,6 +192,8 @@ GameObject:
   - component: {fileID: 217238392}
   - component: {fileID: 217238391}
   - component: {fileID: 217238390}
+  - component: {fileID: 217238389}
+  - component: {fileID: 217238393}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -199,6 +201,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &217238389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 217238388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bf97bf14d55419b807d471a225117f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &217238390
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -254,6 +267,18 @@ Transform:
   m_Father: {fileID: 761870479}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &217238393
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 217238388}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &282840810
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +360,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 282840810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.79, z: -7.5}
+  m_LocalPosition: {x: 0, y: 1.71, z: -15.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 761870479}
@@ -594,8 +619,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 545299471}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09, y: 0.42, z: -8.03}
-  m_LocalScale: {x: -0.9601037, y: 1.3736287, z: 4.1829267}
+  m_LocalPosition: {x: 0.09, y: 0.11, z: -0.05}
+  m_LocalScale: {x: -0.9601037, y: 1.0784756, z: 7.3431463}
   m_Children: []
   m_Father: {fileID: 652251622}
   m_RootOrder: 0
@@ -728,7 +753,6 @@ GameObject:
   m_Component:
   - component: {fileID: 761870479}
   - component: {fileID: 761870480}
-  - component: {fileID: 761870481}
   - component: {fileID: 761870482}
   - component: {fileID: 761870483}
   - component: {fileID: 761870484}
@@ -774,18 +798,6 @@ MonoBehaviour:
   leftArrow: 0
   downArrow: 0
   upArrow: 0
---- !u!135 &761870481
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 761870478}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &761870482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -818,6 +830,8 @@ MonoBehaviour:
   isTriggerRight: 0
   isTriggerObstDown: 0
   isTriggerObstUp: 0
+  awayFromMe: {fileID: 217238389}
+  colliderActual: {fileID: 0}
 --- !u!114 &761870484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1037,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1591858009}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.48564872, y: 7.7492876, z: 118.25}
+  m_LocalPosition: {x: 0.48564872, y: 7.7492876, z: 179.84}
   m_LocalScale: {x: 5, y: 2.5, z: 1}
   m_Children:
   - {fileID: 1676200194}
@@ -1055,8 +1069,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1622980502}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.000000017881, y: 0.01, z: -8.93}
-  m_LocalScale: {x: -0.9601037, y: 2.119345, z: 2.8208258}
+  m_LocalPosition: {x: -0.000000017881, y: 0.01, z: 0.08}
+  m_LocalScale: {x: -0.9601037, y: 1.6073714, z: 6.4616838}
   m_Children: []
   m_Father: {fileID: 1774912431}
   m_RootOrder: 0
