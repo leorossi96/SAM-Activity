@@ -18,8 +18,7 @@ public class CollectiblesCounter : MonoBehaviour {
         Debug.Log(counter);
         if(counter == nCollectibles){
             MagicRoomLightManager.instance.sendColour(Color.red);
-            /*Voices aoao = new Voices();
-            MagicRoomTextToSpeechManagerOnline.instance.generateAudioFromText("HAI VINTO!", aoao, "");*/
+            MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("COMPLIMENTI FRATE HAI VINTO!", MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[1]);
             Debug.Log("HAI VINTO");
             StartCoroutine(BubbleMachine());
         }

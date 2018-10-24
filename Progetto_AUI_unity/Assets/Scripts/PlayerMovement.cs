@@ -15,8 +15,16 @@ public class PlayerMovement : MonoBehaviour {
     public bool upArrow;
 
 
-    // Update is called once per frame
-    void FixedUpdate () {
+	private void Awake()
+	{
+        for (int i = 1; i < Display.displays.Length; i++)
+        {
+            Display.displays[i].Activate();
+        }
+	}
+
+	// Update is called once per frame
+	void FixedUpdate () {
 
         
 

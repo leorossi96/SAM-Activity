@@ -30,11 +30,15 @@ public class PlayerCollision : MonoBehaviour
         MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("La riprende vecino", MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[3]);
 
         print("ciao");
+    
+
+       // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("ciao", voice);
     }
+
 
     private void OnTriggerEnter(Collider colliderActual)
     {
-        StartCoroutine(fadecolor());
+        //StartCoroutine(fadecolor());
 
         
        
