@@ -21,13 +21,13 @@ public class PlayerCollision : MonoBehaviour
 
     public Collider colliderActual; 
 
-    public Voices voice = new Voices();
+    //public VoicesOffline voice = new VoicesOffline();
 
     private IEnumerator fadecolor() {
         MagicRoomLightManager.instance.sendColour("#000088", 100);
         yield return new WaitForSeconds(1f);
         MagicRoomLightManager.instance.sendColour(Color.blue);
-
+       // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("ciao", voice);
     }
 
     private void OnTriggerEnter(Collider colliderActual)
