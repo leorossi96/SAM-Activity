@@ -15,10 +15,12 @@ public class CollectiblesCounter : MonoBehaviour {
 
     public void CollectibleFound(){
         counter++;
+        VoicesOffline voice = MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[2];
+        MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("Hai trovato un collezionabile! Cerca gli altri nella mappa", voice);
         Debug.Log(counter);
         if(counter == nCollectibles){
             MagicRoomLightManager.instance.sendColour(Color.red);
-            MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("COMPLIMENTI FRATE HAI VINTO!", MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[1]);
+            MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("Complimenti, hai vinto!", voice);
             Debug.Log("HAI VINTO");
             StartCoroutine(BubbleMachine());
         }
