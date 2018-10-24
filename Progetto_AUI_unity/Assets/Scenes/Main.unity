@@ -874,7 +874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 761870482}
-  forwardForce: 1000
+  forwardForce: 500
   movementForce: 20
   rightArrow: 0
   leftArrow: 0
@@ -926,6 +926,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 761870480}
+--- !u!1 &958117129 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1476209112218834, guid: 50a6b60aea17c5d42b136bc7d32aa701,
+    type: 2}
+  m_PrefabInternal: {fileID: 1626195572}
+--- !u!114 &958117131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 958117129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bece82c91601924e99535eae7c68042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MagicRoomSpeachToText_active: 0
+  listofAssociatedNames: []
+  isPlaying: 0
 --- !u!4 &1138973917 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400026, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
@@ -1242,7 +1261,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114420053087228888, guid: 50a6b60aea17c5d42b136bc7d32aa701, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 50a6b60aea17c5d42b136bc7d32aa701, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1633015566
