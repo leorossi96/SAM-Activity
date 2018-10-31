@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerMovementSearch : MonoBehaviour
 {
@@ -6,10 +8,9 @@ public class PlayerMovementSearch : MonoBehaviour
     public Rigidbody rb;
     public Transform tf;
 
-    public float movementForce = 500f;
     public float velocityApplied = 10f;
-    public float viscosityResistence = 250f;
     public float rotationSpeed = 3f;
+    public float lerpSpeed = 0.5f;
      
     public bool rightArrow;
     public bool leftArrow;
@@ -17,6 +18,8 @@ public class PlayerMovementSearch : MonoBehaviour
     public bool upArrow;
     public bool tabKey;
     public bool shiftKey;
+
+    public bool moving;
 
 
     // Update is called once per frame
@@ -33,36 +36,55 @@ public class PlayerMovementSearch : MonoBehaviour
 
         if (Input.anyKey)
         {
-            Vector3 vect = tf.position;
+            Vector3 position = tf.position;
 
             if (rightArrow)
             {
-                transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
+                tf.Rotate(0, rotationSpeed * Time.deltaTime, 0);
             }
             if (leftArrow)
             {
-                transform.Rotate(0, -rotationSpeed * Time.deltaTime, 0); //Usa quaternioni
+                tf.Rotate(0, -rotationSpeed * Time.deltaTime, 0); //Usa quaternioni
             }
             if (downArrow)
             {
-                vect = vect - tf.up  * velocityApplied * Time.deltaTime;
-                tf.position = vect;
+                position = position - tf.up  * velocityApplied * Time.deltaTime;
+                tf.position = position;
             }
             if (upArrow)
             {
-                vect = vect + tf.up * velocityApplied * Time.deltaTime;
-                tf.position = vect;
+                position = position + tf.up * velocityApplied * Time.deltaTime;
+                tf.position = position;
             }
             if (tabKey)
             {
-                vect = vect + tf.forward * velocityApplied * Time.deltaTime;
-                tf.position = vect;
+                position = position + tf.forward * velocityApplied * Time.deltaTime;
+                tf.position = position;
+                /*moving = false;
+                StartCoroutine(MoveFromTo(position, position + tf.forward, lerpSpeed));*/
             }
             if (shiftKey)
             {
-                vect = vect - tf.forward * velocityApplied * Time.deltaTime;
-                tf.position = vect;
+                position = position - tf.forward * velocityApplied * Time.deltaTime;
+                tf.position = position;
             }
         }
     }
+
+    /*private IEnumerator MoveFromTo(Vector3 start, Vector3 end, float time)
+    {
+        if (!moving)
+        {               // Do nothing if already moving
+            moving = true;           // Set flag to true
+            float t = 0f;
+            while (t < 1.0f)
+            {
+                t += Time.deltaTime / time; // Sweeps from 0 to 1 in time seconds
+                transform.position = Vector3.Lerp(start, end, t); // Set position proportional to t
+                yield return 0;      // Leave the routine and return here in the next frame
+            }
+            moving = false;        // Finished moving
+        }
+    }*/
+
 }
