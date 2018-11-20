@@ -148,8 +148,7 @@ public class PlayerCollision : MonoBehaviour
         */
 
 
-        awayFromMe.enabled = false;
-        this.movement.enabled = true; 
+
     }
 
         
@@ -195,7 +194,7 @@ public class PlayerCollision : MonoBehaviour
         {
             //rotate.setUpRotation(new Vector3(40 ,0,0));
 
-            awayFromMe.setUpAvoiding(-transform.right, colliderActual); 
+            awayFromMe.setUpAvoiding(-transform.up, colliderActual); 
 
             isTriggerObstDown = false;
 
@@ -208,7 +207,7 @@ public class PlayerCollision : MonoBehaviour
             
             //rotate.setUpRotation(new Vector3(-40, 0,0));
 
-            awayFromMe.setUpAvoiding(transform.right, colliderActual);
+            awayFromMe.setUpAvoiding(transform.up, colliderActual);
 
 
             isTriggerObstUp = false;
