@@ -17,7 +17,21 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Collectible")
+        if (collider.tag == "CollectibleArea")
+        {
+/*            Camera[] cameras = new Camera[2];
+            Camera.GetAllCameras(cameras);
+            for (int i = 0; i < cameras.Length; i++)
+                if (cameras[i].name == "Camera")
+                {
+                    Debug.Log(cameras.ToString());
+                    Camera.SetupCurrent(cameras[i]);
+                }
+*/
+            
+        }
+
+            if (collider.tag == "Collectible")
         {
 
             Debug.Log("Collectible found");

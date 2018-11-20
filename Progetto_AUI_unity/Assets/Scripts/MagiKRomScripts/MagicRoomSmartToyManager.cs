@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +16,7 @@ public class MagicRoomSmartToyManager : MonoBehaviour {
     /// <summary>
     /// receiving udp address for smart objectstream
     /// </summary>
+
     const string receivigUDPAddress = "http://192.168.31.209:7082";
 
     /// <summary>

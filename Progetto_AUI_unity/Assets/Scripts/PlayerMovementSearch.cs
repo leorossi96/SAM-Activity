@@ -21,6 +21,8 @@ public class PlayerMovementSearch : MonoBehaviour
 
     public bool moving;
 
+    public bool delfinoFound = false;
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -67,6 +69,15 @@ public class PlayerMovementSearch : MonoBehaviour
             {
                 position = position - tf.forward * velocityApplied * Time.deltaTime;
                 tf.position = position;
+            }
+        }
+        if (!delfinoFound)
+        {
+            if (GameObject.Find("Dolphin1") != null)
+            {
+                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+                delfinoFound = true;
             }
         }
     }
