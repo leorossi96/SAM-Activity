@@ -6,6 +6,7 @@ public class CollectiblesCounter : MonoBehaviour {
 
     public int counter;
     public int nCollectibles;
+    SmartToy Dolphin;
 
     public void Start()
     {
@@ -17,6 +18,14 @@ public class CollectiblesCounter : MonoBehaviour {
     {
         counter++;
         Debug.Log(counter);
+        if(Dolphin == null){
+            Dolphin = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+        }
+            Dolphin.executeCommandLightController(Color.black, 0, "parthead");
+            Debug.Log("LUCE DELFINO ACCESA");
+
+        //MagicRoomSmartToyManager.instance.sendCommandExecuteSmartToy("Dolphin1", "partrightfin");
+
         VoicesOffline voice = MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[2];
         while (counter < nCollectibles)
         {

@@ -48,7 +48,7 @@ public class TouchSensor:MonoBehaviour{
         }
     }
 }
-
+[Serializable]
 public class TouchPoint {
     public string name;
     public bool touched;

@@ -8,6 +8,8 @@ TagManager:
   - TurningPoint Right
   - Obstacle Down
   - Obstacle Up
+  - Collectible
+  - CollectibleArea
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - Dolphin
   - 
   - 
   - 
