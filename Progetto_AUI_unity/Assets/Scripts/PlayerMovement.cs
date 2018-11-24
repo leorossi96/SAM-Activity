@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool leftArrow;
     public bool downArrow;
     public bool upArrow;
-
+    public GameObject dolphin; 
 
 	private void Awake()
 	{
@@ -26,8 +26,9 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        
-
+         
+        dolphin.GetComponent<Animation>().Play("Swimming"); 
+         
         rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
 
 
