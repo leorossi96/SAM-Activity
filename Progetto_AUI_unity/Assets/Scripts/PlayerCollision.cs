@@ -21,8 +21,6 @@ public class PlayerCollision : MonoBehaviour
 
     public Collider colliderActual;
 
-    public GameObject dolphin; 
-
     
 
     private IEnumerator fadecolor() {
@@ -49,12 +47,8 @@ public class PlayerCollision : MonoBehaviour
 
         this.colliderActual = colliderActual; 
 
-
-        dolphin.GetComponent<Animation>().Play("Idle");
         switch (colliderActual.tag)
         {
-            
-
             case "TurningPoint Left":
                 {
                     isTriggerLeft = true;
@@ -62,7 +56,7 @@ public class PlayerCollision : MonoBehaviour
                     movement.enabled = false;
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-
+                    print("finsh"); 
                     break;
                 }
 
@@ -79,13 +73,13 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Down":
                 {
-                    
+                    print("ho colliso");
 
                     isTriggerObstDown = true;
 
                     movement.enabled = false;
 
-
+                    print("Mi sono fermato");
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
@@ -94,7 +88,7 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Up":
                 {
-                    
+                    print("ho colliso");
 
                     isTriggerObstUp = true;
 
