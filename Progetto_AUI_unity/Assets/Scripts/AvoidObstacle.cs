@@ -102,7 +102,7 @@ public class AvoidObstacle : MonoBehaviour {
         this.camSeq[0] = new Vector3(camera.transform.localPosition.x, playerChar.transform.localPosition.y, camera.transform.localPosition.z);
         this.camSeq[1] = new Vector3(camera.transform.localPosition.x, playerChar.transform.localPosition.y, camera.transform.localPosition.z);
         this.camSeq[2] = camera.transform.localPosition; 
-        this.playerChar.GetComponent<Animation>().Play("Swimming"); 
+        this.playerChar.GetComponent<Animation>().Play("Up"); 
         this.enabled = true;
 
 

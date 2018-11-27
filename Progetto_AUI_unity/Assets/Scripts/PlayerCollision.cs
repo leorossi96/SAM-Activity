@@ -21,15 +21,16 @@ public class PlayerCollision : MonoBehaviour
 
     public Collider colliderActual;
 
-    public GameObject dolphin; 
+    public GameObject dolphin;
 
+    
     
 
     private IEnumerator fadecolor() {
         MagicRoomLightManager.instance.sendColour("#000088", 100);
         yield return new WaitForSeconds(1f);
         MagicRoomLightManager.instance.sendColour(Color.blue);
-        MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("La riprende vecino", MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[3]);
+       // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("La riprende vecino", MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[3]);
 
         print("ciao");
     
@@ -38,11 +39,16 @@ public class PlayerCollision : MonoBehaviour
     }
 
 
+    
+   
+
+
     private void OnTriggerEnter(Collider colliderActual)
     {
-        //StartCoroutine(fadecolor());
 
-        
+
+        movement.start = false;
+        dolphin.GetComponent<Animation>().Stop("Swimming");
        
     
 
@@ -50,7 +56,7 @@ public class PlayerCollision : MonoBehaviour
         this.colliderActual = colliderActual; 
 
 
-        dolphin.GetComponent<Animation>().Play("Idle");
+        
         switch (colliderActual.tag)
         {
             
@@ -62,7 +68,7 @@ public class PlayerCollision : MonoBehaviour
                     movement.enabled = false;
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-
+                    
                     break;
                 }
 
@@ -169,9 +175,9 @@ public class PlayerCollision : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
 
-            rotate.setUpRotation(new Vector3(0,-90 ,0));
-
-
+            //rotate.setUpRotation(new Vector3(0,-90 ,0));
+            dolphin.GetComponent<Animation>().Play("TurnLeft");
+            movement.start = true;
 
 
 
@@ -214,6 +220,7 @@ public class PlayerCollision : MonoBehaviour
             //rotate.setUpRotation(new Vector3(-40, 0,0));
 
             awayFromMe.setUpAvoiding(transform.up, colliderActual);
+            movement.start = true;
 
 
             isTriggerObstUp = false;
