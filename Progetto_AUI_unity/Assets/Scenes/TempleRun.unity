@@ -1121,6 +1121,7 @@ MonoBehaviour:
   awayFromMe: {fileID: 761870481}
   colliderActual: {fileID: 0}
   dolphin: {fileID: 103248595}
+  turnLeft: 0
 --- !u!114 &761870484
 MonoBehaviour:
   m_ObjectHideFlags: 0

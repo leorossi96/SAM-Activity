@@ -23,6 +23,8 @@ public class PlayerCollision : MonoBehaviour
 
     public GameObject dolphin;
 
+    public bool turnLeft = false;
+
     
     
 
@@ -38,9 +40,18 @@ public class PlayerCollision : MonoBehaviour
        // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("ciao", voice);
     }
 
+    private IEnumerator turnLeftAnimation()
+    {
+        dolphin.GetComponent<Animation>().Play("TurnLeft");
+        yield return new WaitForSeconds(1.0f);
+        movement.start = true;
+        movement.enabled = true;
 
-    
-   
+    }
+
+
+
+
 
 
     private void OnTriggerEnter(Collider colliderActual)
@@ -176,9 +187,15 @@ public class PlayerCollision : MonoBehaviour
         {
 
             //rotate.setUpRotation(new Vector3(0,-90 ,0));
-            dolphin.GetComponent<Animation>().Play("TurnLeft");
-            movement.start = true;
-
+            
+            //dolphin.GetComponent<Animation>().Play("TurnLeft");
+            StartCoroutine(turnLeftAnimation());
+            
+                
+            
+            
+            
+          
 
 
             isTriggerLeft = false;

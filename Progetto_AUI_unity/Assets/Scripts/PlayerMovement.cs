@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour {
 	void FixedUpdate () {
 
         rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
-      
+        Debug.Log("Swimming");
         if (start)
         {
             dolphin.GetComponent<Animation>().Play("Swimming");
