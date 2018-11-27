@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 using System;
 using UnityStandardAssets.Utility;
 using System.Net;
@@ -13,22 +15,30 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public Transform terrain;
 
-
+    public Canvas canvas;
 
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "CollectibleArea")
         {
-/*            Camera[] cameras = new Camera[2];
-            Camera.GetAllCameras(cameras);
-            for (int i = 0; i < cameras.Length; i++)
-                if (cameras[i].name == "Camera")
+            /*            Camera[] cameras = new Camera[2];
+                        Camera.GetAllCameras(cameras);
+                        for (int i = 0; i < cameras.Length; i++)
+                            if (cameras[i].name == "Camera")
+                            {
+                                Debug.Log(cameras.ToString());
+                                Camera.SetupCurrent(cameras[i]);
+                            }
+            */
+
+            Image[] images = canvas.GetComponentsInChildren<Image>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                if (images[i].name == "Magnifier")
                 {
-                    Debug.Log(cameras.ToString());
-                    Camera.SetupCurrent(cameras[i]);
+                    images[i].GetComponent<Image>().enabled = true;
                 }
-*/
-            
+            }
         }
 
             if (collider.tag == "Collectible")
@@ -49,14 +59,4 @@ public class PlayerCollisionSearch : MonoBehaviour
     {
 
     }
-
-
-
-
-
-
-
-
-
-
 }
