@@ -19,10 +19,11 @@ public class PlayerMovementSearch : MonoBehaviour
     public bool tabKey;
     public bool shiftKey;
 
+    SmartToy dolphinController;
+
     public bool moving;
 
     public bool delfinoFound = false;
-
 
     // Update is called once per frame
     void FixedUpdate()
@@ -50,7 +51,7 @@ public class PlayerMovementSearch : MonoBehaviour
             }
             if (downArrow)
             {
-                position = position - tf.up  * velocityApplied * Time.deltaTime;
+                position = position - tf.up * velocityApplied * Time.deltaTime;
                 tf.position = position;
             }
             if (upArrow)
@@ -71,15 +72,24 @@ public class PlayerMovementSearch : MonoBehaviour
                 tf.position = position;
             }
         }
+        MagicRoomLightManager.instance.sendColour(Color.black);
+
         if (!delfinoFound)
         {
             if (GameObject.Find("Dolphin1") != null)
             {
                 MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
                 MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+                StartCoroutine(waittoStartGreenLight());
                 delfinoFound = true;
             }
         }
+    }
+
+    IEnumerator waittoStartGreenLight(){
+        yield return new WaitForSeconds(1);
+        dolphinController.executeCommandLightController(Color.green, 0, "parthead");
     }
 
     /*private IEnumerator MoveFromTo(Vector3 start, Vector3 end, float time)
