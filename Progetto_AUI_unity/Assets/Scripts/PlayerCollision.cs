@@ -21,13 +21,20 @@ public class PlayerCollision : MonoBehaviour
 
     public Collider colliderActual;
 
+
+    public GameObject dolphin;
+
+    public bool turnLeft = false;
+
+    
+
     
 
     private IEnumerator fadecolor() {
         MagicRoomLightManager.instance.sendColour("#000088", 100);
         yield return new WaitForSeconds(1f);
         MagicRoomLightManager.instance.sendColour(Color.blue);
-        MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("La riprende vecino", MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[3]);
+       // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("La riprende vecino", MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[3]);
 
         print("ciao");
     
@@ -35,17 +42,34 @@ public class PlayerCollision : MonoBehaviour
        // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("ciao", voice);
     }
 
+    private IEnumerator turnLeftAnimation()
+    {
+        dolphin.GetComponent<Animation>().Play("TurnLeft");
+        yield return new WaitForSeconds(1.0f);
+        movement.start = true;
+        movement.enabled = true;
+
+    }
+
+
+
+
+
 
     private void OnTriggerEnter(Collider colliderActual)
     {
-        //StartCoroutine(fadecolor());
 
-        
+
+        movement.start = false;
+        dolphin.GetComponent<Animation>().Stop("Swimming");
        
     
 
 
         this.colliderActual = colliderActual; 
+
+
+        
 
         switch (colliderActual.tag)
         {
@@ -56,7 +80,9 @@ public class PlayerCollision : MonoBehaviour
                     movement.enabled = false;
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    print("finsh"); 
+
+                    
+
                     break;
                 }
 
@@ -163,10 +189,16 @@ public class PlayerCollision : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
 
-            rotate.setUpRotation(new Vector3(0,-90 ,0));
-
-
-
+            //rotate.setUpRotation(new Vector3(0,-90 ,0));
+            
+            //dolphin.GetComponent<Animation>().Play("TurnLeft");
+            StartCoroutine(turnLeftAnimation());
+            
+                
+            
+            
+            
+          
 
 
             isTriggerLeft = false;
@@ -208,6 +240,7 @@ public class PlayerCollision : MonoBehaviour
             //rotate.setUpRotation(new Vector3(-40, 0,0));
 
             awayFromMe.setUpAvoiding(transform.up, colliderActual);
+            movement.start = true;
 
 
             isTriggerObstUp = false;

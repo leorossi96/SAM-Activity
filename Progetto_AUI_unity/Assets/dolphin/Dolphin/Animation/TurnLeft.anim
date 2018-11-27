@@ -4584,8 +4584,8 @@ AnimationClip:
     path: tail_01/tail_02
   m_FloatCurves: []
   m_PPtrCurves: []
-  m_SampleRate: 2
-  m_WrapMode: 0
+  m_SampleRate: 3
+  m_WrapMode: 1
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}

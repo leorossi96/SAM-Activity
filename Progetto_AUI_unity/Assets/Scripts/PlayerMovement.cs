@@ -13,9 +13,19 @@ public class PlayerMovement : MonoBehaviour {
     public bool leftArrow;
     public bool downArrow;
     public bool upArrow;
+    public GameObject dolphin;
+    public bool start = false;
+    public bool isIdle = false;
 
 
-	private void Awake()
+    private IEnumerator AnimationSet()
+    {
+        dolphin.GetComponent<Animation>().Play("New Animation");
+        yield return new WaitForSeconds(3.5f);
+        start = true;
+    }
+
+    private void Awake()
 	{
         for (int i = 1; i < Display.displays.Length; i++)
         {
@@ -23,15 +33,25 @@ public class PlayerMovement : MonoBehaviour {
         }
 	}
 
+    void Start()
+    {
+        StartCoroutine(AnimationSet());
+    }
+  
+
 	// Update is called once per frame
 	void FixedUpdate () {
 
         
 
         rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
+        Debug.Log("Swimming");
+        if (start)
+        {
+            dolphin.GetComponent<Animation>().Play("Swimming");
+        }
 
-
-
+        
         // If use keyboard (ex. as in Unity or Standalone built)
         rightArrow = Input.GetKey(KeyCode.RightArrow);
         leftArrow = Input.GetKey(KeyCode.LeftArrow);
