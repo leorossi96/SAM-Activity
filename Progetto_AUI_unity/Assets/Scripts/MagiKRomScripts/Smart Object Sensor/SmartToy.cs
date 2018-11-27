@@ -73,10 +73,10 @@ class SmartToy: MonoBehaviour{
         //getstateofSmartToy();
     }
 
-    /// <summary>
-    /// ecode the cofiguation for each objects
-    /// </summary>
-    /// <param name="conf"></param>
+    // <summary>
+    // ecode the cofiguation for each objects
+    // </summary>
+    // <param name="conf"></param>
     public void decodeConfiguration(SmartToyConfiguration conf) {
         gameObject.name = conf.name;
         smartToyName = conf.name;
