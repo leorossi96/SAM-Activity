@@ -61,9 +61,9 @@ public class PlayerCollision : MonoBehaviour
 
 
         movement.start = false;
-        dolphin.GetComponent<Animation>().Stop("Swimming");
-       
-    
+        dolphin.GetComponent<Animation>().Play("Stopping");
+        dolphin.GetComponent<Animation>().PlayQueued("Idle"); 
+        
 
 
         this.colliderActual = colliderActual; 
@@ -81,6 +81,7 @@ public class PlayerCollision : MonoBehaviour
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+                    colliderActual.enabled = false; 
                     
 
                     break;
@@ -93,6 +94,8 @@ public class PlayerCollision : MonoBehaviour
                     movement.enabled = false;
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    colliderActual.enabled = false; 
 
                     break;
                 }
@@ -189,7 +192,7 @@ public class PlayerCollision : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
 
-            //rotate.setUpRotation(new Vector3(0,-90 ,0));
+            rotate.setUpRotation(new Vector3(0,-90 ,0));
             
             //dolphin.GetComponent<Animation>().Play("TurnLeft");
             StartCoroutine(turnLeftAnimation());

@@ -67,17 +67,12 @@ public class AvoidObstacle : MonoBehaviour {
         this.camSeq = new Vector3[3];
         this.ax = transform.right; 
 
-        this.posSequence[0] = (colliderActual.ClosestPointOnBounds(colliderActual.gameObject.transform.position) + axis * 4);
+        this.posSequence[0] = (colliderActual.ClosestPointOnBounds(colliderActual.transform.position) + axis * colliderActual.transform.localScale.);
         this.posSequence[1] = (this.posSequence[0] + transform.forward * (colliderActual.gameObject.transform.localScale.z*2 + Math.Abs(camera.transform.localPosition.z)));
         this.posSequence[2] = (this.posSequence[1] + Vector3.Reflect(this.posSequence[0] - transform.position, -axis));
 
 
-        this.rotSequence[0] = new Quaternion(); 
-        this.rotSequence[0] = Quaternion.AngleAxis(45, ax);
-        this.rotSequence[1] = new Quaternion(); 
-        this.rotSequence[1] = Quaternion.AngleAxis(0, ax); 
-        this.rotSequence[2] = new Quaternion(); 
-        this.rotSequence[2] = Quaternion.AngleAxis(-45, ax);
+
 
 
         this.camSeq[0] = new Vector3(camera.transform.localPosition.x, playerChar.transform.localPosition.y, camera.transform.localPosition.z);
