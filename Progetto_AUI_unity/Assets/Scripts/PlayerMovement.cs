@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool start = false;
     public bool isIdle = false;
 
+
     private IEnumerator AnimationSet()
     {
         dolphin.GetComponent<Animation>().Play("New Animation");
@@ -40,6 +41,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
+
+        
 
         rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
         Debug.Log("Swimming");

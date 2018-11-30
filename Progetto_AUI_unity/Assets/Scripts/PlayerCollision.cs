@@ -21,11 +21,13 @@ public class PlayerCollision : MonoBehaviour
 
     public Collider colliderActual;
 
+
     public GameObject dolphin;
 
     public bool turnLeft = false;
 
     
+
     
 
     private IEnumerator fadecolor() {
@@ -59,19 +61,18 @@ public class PlayerCollision : MonoBehaviour
 
 
         movement.start = false;
-        dolphin.GetComponent<Animation>().Stop("Swimming");
-       
-    
+        dolphin.GetComponent<Animation>().Play("Stopping");
+        dolphin.GetComponent<Animation>().PlayQueued("Idle"); 
+        
 
 
         this.colliderActual = colliderActual; 
 
 
         
+
         switch (colliderActual.tag)
         {
-            
-
             case "TurningPoint Left":
                 {
                     isTriggerLeft = true;
@@ -79,7 +80,10 @@ public class PlayerCollision : MonoBehaviour
                     movement.enabled = false;
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    colliderActual.enabled = false; 
                     
+
                     break;
                 }
 
@@ -91,18 +95,20 @@ public class PlayerCollision : MonoBehaviour
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
+                    colliderActual.enabled = false; 
+
                     break;
                 }
 
             case "Obstacle Down":
                 {
-                    
+                    print("ho colliso");
 
                     isTriggerObstDown = true;
 
                     movement.enabled = false;
 
-
+                    print("Mi sono fermato");
 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
 
@@ -111,7 +117,7 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Up":
                 {
-                    
+                    print("ho colliso");
 
                     isTriggerObstUp = true;
 
@@ -186,7 +192,7 @@ public class PlayerCollision : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
 
-            //rotate.setUpRotation(new Vector3(0,-90 ,0));
+            rotate.setUpRotation(new Vector3(0,-90 ,0));
             
             //dolphin.GetComponent<Animation>().Play("TurnLeft");
             StartCoroutine(turnLeftAnimation());

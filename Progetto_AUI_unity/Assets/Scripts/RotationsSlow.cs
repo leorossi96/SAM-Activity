@@ -33,7 +33,7 @@ public class RotationsSlow : MonoBehaviour
         //Rotate slowly towards the rotateDirection, when the rotation is over the 
         //movement is stopped and this component is deactivated
 
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, 1.0f);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, 3.0f);
         if (transform.rotation == rotateDirection)
 
         {
