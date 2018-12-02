@@ -19,7 +19,7 @@ public class PlayerMovementSearch : MonoBehaviour
     public bool tabKey;
     public bool shiftKey;
 
-    public GameObject dolphin;
+    public GameObject dolphin;  
     public bool start = false;
 
     SmartToy dolphinController;
@@ -27,13 +27,6 @@ public class PlayerMovementSearch : MonoBehaviour
     public bool moving;
 
     public bool delfinoFound = false;
-
-    private IEnumerator AnimationSet()
-    {
-        dolphin.GetComponent<Animation>().Play("New Animation");
-        yield return new WaitForSeconds(3.5f);
-        start = true;
-    }
 
     private void Awake()
     {
@@ -43,21 +36,13 @@ public class PlayerMovementSearch : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        StartCoroutine(AnimationSet());
-    }
-
-
 
 
         // Update is called once per frame
-        void FixedUpdate()
-    {
-        if (start)
-        {
-            dolphin.GetComponent<Animation>().Play("Swimming");
-        }
+    void FixedUpdate(){
+
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
 
         // If use keyboard (ex. as in Unity or Standalone built)
         rightArrow = Input.GetKey(KeyCode.RightArrow);
@@ -96,8 +81,15 @@ public class PlayerMovementSearch : MonoBehaviour
                 tf.position = position;
                 if (start)
                 {
-                    dolphin.GetComponent<Animation>().Play("Swimming");
+                    dolphin.GetComponent<Animation>().PlayQueued("Swimming");
                 }
+                else{
+
+                    dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                    start = true;
+                }
+
+                    
             }
             if (shiftKey)
             {
@@ -106,7 +98,15 @@ public class PlayerMovementSearch : MonoBehaviour
             }
         }
         else
-            dolphin.GetComponent<Animation>().Play("Idle");
+        {
+            if (start)
+            {
+                start = false;
+                dolphin.GetComponent<Animation>().Play("Stopping");
+            }
+            else
+            dolphin.GetComponent<Animation>().PlayQueued("Idle");
+        }
 
         MagicRoomLightManager.instance.sendColour(Color.black);
 

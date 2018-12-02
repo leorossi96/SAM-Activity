@@ -17,35 +17,24 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public Canvas canvas;
 
-    public RotationsSlow virtualDolpihnRotation;
+    public GameObject dolphin;
+
+    public bool magnifierUsed = false;
 
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "CollectibleArea")
-        {
-            /*          Camera[] cameras = new Camera[2];
-                        Camera.GetAllCameras(cameras);
-                        for (int i = 0; i < cameras.Length; i++)
-                            if (cameras[i].name == "Camera")
-                            {
-                                Debug.Log(cameras.ToString());
-                                Camera.SetupCurrent(cameras[i]);
-                            }
-            */
-          
+        {         
             Image[] images = canvas.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
             {
                 if (images[i].name == "Magnifier")
                 {
                     images[i].GetComponent<Image>().enabled = true;
-                    virtualDolpihnRotation.setUpRotation(new Vector3(0, -180, 0));
                 }
             }
-
         }
-
-            if (collider.tag == "Collectible")
+        if (collider.tag == "Collectible")
         {
 
             Debug.Log("Collectible found");
@@ -53,9 +42,41 @@ public class PlayerCollisionSearch : MonoBehaviour
             Vector3 newCollectiblePosition = new Vector3(collider.transform.position.x, terrain.position.y, collider.transform.position.z);
             collider.transform.SetPositionAndRotation(newCollectiblePosition, collider.transform.rotation);
 
-            counter.CollectibleFound();
+            counter.CollectibleFound(collider.gameObject);
         }
     }
+    
+    private void OnTriggerStay(Collider collider)
+    {
+        if (collider.tag == "CollectibleArea" && !magnifierUsed && Input.anyKey && Input.GetKey(KeyCode.M)) //if the user uses the Magnifier RFID
+        {
+            Image[] images = canvas.GetComponentsInChildren<Image>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                if (images[i].name == "Magnifier")
+                {
+                    images[i].GetComponent<Image>().enabled = false;
+                }
+                if (images[i].name == "SearchIllustration")
+                {
+                    images[i].GetComponent<Image>().enabled = true;
+                }
+            }
+            dolphin.GetComponent<Animation>().Stop("Idle");
+            movement.enabled = false;
+            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
+            magnifierUsed = true;
+        }
+        else if(magnifierUsed){
+            //quando trovato tutti i collezionabili --> movement.enable = true;
+            //(TODO aggiornare la classe CollectiblesCounter->CollectibleFound in 
+            //modo da dividere le funzioni del metodo e fargli restituire un booleano) 
+
+
+
+        }
+    }
+
 
     private void OnTriggerExit(Collider collider)
     {
@@ -67,9 +88,10 @@ public class PlayerCollisionSearch : MonoBehaviour
                 if (images[i].name == "Magnifier")
                 {
                     images[i].GetComponent<Image>().enabled = false;
-                    virtualDolpihnRotation.setUpRotation(new Vector3(0, -180, 0));
                 }
             }
+            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
+
         }
     }
 
