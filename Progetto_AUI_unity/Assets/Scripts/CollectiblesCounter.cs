@@ -14,22 +14,24 @@ public class CollectiblesCounter : MonoBehaviour {
     {
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("CollectibleArea").Length; i++){
             GameObject currentCollectibleArea = GameObject.FindGameObjectsWithTag("CollectibleArea")[i];
-            int[] currentCollectibles = new int[2];
+            int[] currentCollectibles = new int[3];
             currentCollectibles[0] = GetCollectibleChildCount(currentCollectibleArea.transform, "Collectible"); //UPDATE NEEDED: aggiungi filtro per contare solo i figli con un certo tag (non tutti i figli sono collezionabili utili)
             currentCollectibles[1] = 0;
+            currentCollectibles[2] = 0; //0 if there're still collectibles in the CollectibleArea, else 1
             collectiblesMap.Add(currentCollectibleArea, currentCollectibles);
         }
         totalCollectiblesFound = 0;
         nCollectibles = GameObject.FindGameObjectsWithTag("Collectible").Length;
-        Debug.Log(nCollectibles);
+        Debug.Log("Total Collectibles in the map "+ nCollectibles);
+
     }
 
     public void CollectibleFound(GameObject collider)
     {
-        int[] collectiblesCounters = collectiblesMap[collider];
+        int[] collectiblesCounters = collectiblesMap[collider.transform.parent.gameObject];
         totalCollectiblesFound ++;
         collectiblesCounters[1]++;
-        Debug.Log("In this area you found :" + collectiblesCounters[1] + " out of " + collectiblesCounters[0] + " collectibles.");
+        Debug.Log("In this area you found : " + collectiblesCounters[1] + " out of " + collectiblesCounters[0] + " collectibles.");
         if(Dolphin == null){
             Dolphin = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
         }
@@ -45,8 +47,9 @@ public class CollectiblesCounter : MonoBehaviour {
         }
         if (collectiblesCounters[1] == collectiblesCounters[0] && totalCollectiblesFound < nCollectibles)
         {
+            collectiblesCounters[2] = 1; //0 if there're still collectibles in the CollectibleArea, else 1
             MagicRoomLightManager.instance.sendColour(Color.red);
-            MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("Complimenti, hai trovato tutti gli oggetti in quest'area. Cerhhiamone altri in giro per la mappa!", voice);
+            MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("Complimenti, hai trovato tutti gli oggetti in quest'area. Cerhiamone altri in giro per la mappa!", voice);
 
         }
         else if (totalCollectiblesFound >= nCollectibles){
@@ -54,7 +57,6 @@ public class CollectiblesCounter : MonoBehaviour {
             StartCoroutine(BubbleMachine());
         }
     }
-    
 
     private int GetCollectibleChildCount(Transform parent, string _tag)
     {

@@ -380,7 +380,7 @@ Transform:
   m_LocalPosition: {x: -0.29968262, y: 1.6927457, z: -0.6903925}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
-  - {fileID: 1715740692}
+  - {fileID: 1299232058}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1137,7 +1137,7 @@ VideoPlayer:
   m_PrefabParentObject: {fileID: 328889664750734168, guid: 24864dee0d3613842a3a5b2d91b2b791,
     type: 2}
   m_PrefabInternal: {fileID: 620685889}
-  m_GameObject: {fileID: 1715740691}
+  m_GameObject: {fileID: 1299232057}
   m_Enabled: 1
   m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
@@ -1704,6 +1704,37 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1240375736}
+--- !u!1 &1299232057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1374948077393984, guid: 24864dee0d3613842a3a5b2d91b2b791,
+    type: 2}
+  m_PrefabInternal: {fileID: 620685889}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1299232058}
+  - component: {fileID: 640056688}
+  m_Layer: 0
+  m_Name: AudioVideoPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299232058
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4814754274188522, guid: 24864dee0d3613842a3a5b2d91b2b791,
+    type: 2}
+  m_PrefabInternal: {fileID: 620685889}
+  m_GameObject: {fileID: 1299232057}
+  m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
+  m_LocalPosition: {x: 0.029968262, y: -0.16927457, z: 0.06903925}
+  m_LocalScale: {x: -31.859735, y: -31.859755, z: -31.859755}
+  m_Children: []
+  m_Father: {fileID: 203269820}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1305133816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2355,37 +2386,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1701034921}
---- !u!1 &1715740691
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1374948077393984, guid: 24864dee0d3613842a3a5b2d91b2b791,
-    type: 2}
-  m_PrefabInternal: {fileID: 620685889}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1715740692}
-  - component: {fileID: 640056688}
-  m_Layer: 0
-  m_Name: AudioVideoPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1715740692
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4814754274188522, guid: 24864dee0d3613842a3a5b2d91b2b791,
-    type: 2}
-  m_PrefabInternal: {fileID: 620685889}
-  m_GameObject: {fileID: 1715740691}
-  m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 0.029968262, y: -0.16927457, z: 0.06903925}
-  m_LocalScale: {x: -31.859735, y: -31.859755, z: -31.859755}
-  m_Children: []
-  m_Father: {fileID: 203269820}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1782350249
 GameObject:
   m_ObjectHideFlags: 0

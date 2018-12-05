@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,6 +67,7 @@ public class ButtonSensor : MonoBehaviour {
     }
 }
 
+[Serializable]
 public class ButtonPoint
 {
     public string name;

@@ -37,7 +37,7 @@ public string[] listofAssociatedNames;
         else {
             GameObject.DestroyImmediate(this);
         }
-        address = "http://192.168.31.214:7070"; //localhost:7070";
+        address = "http://localhost:7070";
         
         MagicRoomLightManager_active = true;
     }
@@ -46,7 +46,6 @@ public string[] listofAssociatedNames;
     {
         Logger.addToLogNewLine("ServerHue", "Searching Light Server");
         StartCoroutine(sendConfigurationRequest());
-        sendColour("#FFFFFF", 100);
     }
 
  /// <summary>
@@ -99,7 +98,31 @@ public void sendColour(string color, int brighness) {
         Logger.addToLogNewLine("Hue_allRoom", command.Color + "," + command.Brightness);
         StartCoroutine(sendCommand());
     }
-/// <summary>
+    /// <summary>
+    /// Send the command to the iddleware to change the room color.
+    /// All the smart lights will take the color of your chose. brightness will be set to 100/255
+    /// </summary>
+    /// <param name="color">the hexadecimal value of the colour preceded by #</param>
+    public void sendColour(string color)
+    {
+        command = new LightCommand();
+        command.Action = "LightCommand";
+        if (!MagicRoomLightManager_active)
+        {
+            return;
+        }
+        color = color.ToLower();
+        if (!(checkStringColour(color)))
+        {
+            return;
+        }
+
+        command.Color = color;
+        command.Brightness = "100";
+        Logger.addToLogNewLine("Hue_allRoom", command.Color + "," + command.Brightness);
+        StartCoroutine(sendCommand());
+    }
+    /// <summary>
     /// Send the command to the iddleware to change the room color.
     /// All the smart lights will take the color of your chose.
     /// </summary>
@@ -124,13 +147,38 @@ public void sendColour(string color, int brighness) {
         Logger.addToLogNewLine("Hue_allRoom", command.Color + "," + command.Brightness);
         StartCoroutine(sendCommand());
     }
+    /// <summary>
+    /// Send the command to the iddleware to change the room color.
+    /// All the smart lights will take the color of your chose.
+    /// </summary>
+    /// <param name="colour">The color you want the lights to change alpha channel will be used to determine the brightness</param>
+    /// <param name="brighness">the intensity of the light from 0 (switch off) to 255 (maxium brightness)</param>
+    public void sendColour(Color c, int brightness)
+    {
+        command = new LightCommand();
+        command.Action = "LightCommand";
+        if (!MagicRoomLightManager_active)
+        {
+            return;
+        }
+        string color = ConvertColor(c);
+        if (!(checkStringColour(color) && checkBrightness(brightness)))
+        {
+            return;
+        }
 
- /// <summary>
+        command.Color = color;
+        command.Brightness = brightness.ToString();
+        Logger.addToLogNewLine("Hue_allRoom", command.Color + "," + command.Brightness);
+        StartCoroutine(sendCommand());
+    }
+
+    /// <summary>
     /// Convert the brightness form a color tyipe to int.
     /// </summary>
     /// <param name="c">the colur</param>
     /// <returns> the integer value of the brightness between 0 and 255</returns>    
-private int ConvertBrightness(Color c)
+    private int ConvertBrightness(Color c)
     {
         return (int)(c.a * 255);
     }
@@ -191,6 +239,33 @@ public void sendColour(string color, int brighness, string name)
         }
         string color = ConvertColor(colour);
         int brightness = ConvertBrightness(colour);
+        if (!(checkStringColour(color) && checkBrightness(brightness)))
+        {
+            return;
+        }
+
+        command.Color = color;
+        command.Brightness = brightness.ToString();
+        command.id = name;
+        Logger.addToLogNewLine("Hue_allRoom", command.Color + "," + command.Brightness);
+        StartCoroutine(sendCommand());
+    }
+
+    /// <summary>
+    /// Send the command to the iddleware to change the room color.
+    /// </summary>
+    /// <param name="colour">The color you want the lights to change alpha channel will be used to determine the brightness</param>
+    /// <param name="name">Name of the lght you want to change from the list of associated names</param>
+    /// <param name="brighness">the intensity of the light from 0 (switch off) to 255 (maxium brightness)</param>
+    public void sendColour(Color colour, int brightness, string name)
+    {
+        command = new LightCommand();
+        command.Action = "LightCommand";
+        if (!MagicRoomLightManager_active)
+        {
+            return;
+        }
+        string color = ConvertColor(colour);
         if (!(checkStringColour(color) && checkBrightness(brightness)))
         {
             return;

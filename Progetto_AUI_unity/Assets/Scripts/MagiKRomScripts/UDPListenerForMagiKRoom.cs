@@ -6,62 +6,49 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-public class UDPListenerForMagiKRoom : MonoBehaviour {
-    /// <summary>
-    /// singlton of the script
-    /// </summary>
+public class UDPListenerForMagiKRoom : MonoBehaviour
+{
+
     public static UDPListenerForMagiKRoom instance;
-    /// <summary>
-    /// address of the listener
-    /// </summary>
+
     public string address;
-    /// <summary>
-    /// port of the listener
-    /// </summary>
     public int port;
-    /// <summary>
-    /// true if the the application need to stop reading the udp stream, false otherwise
-    /// </summary>
-    private  bool _stop;
 
-    /// <summary>
-    /// the client
-    /// </summary>
+    public bool _stop;
+
+    // udpclient object
     static UdpClient client;
-    
 
-    /// <summary>
-    /// the last package received from the UPD
-    /// </summary>
+
+    // the data
     public string lastReceivedUDPPacket = "";
-    /// <summary>
-    /// true if the message has been received
-    /// </summary>
     private static bool messageReceived;
 
-    void Awake ()
+    void Awake()
     {
         instance = this;
         _stop = true;
     }
-
-    /// <summary>
-    /// start the receiver
-    /// </summary>
-    public void StartReceiver()
+    IPEndPoint endpoint;
+    UdpStates udpstate;
+    public void StartReceiver(int freq)
     {
         _stop = false;
         client = new UdpClient(port);
         messageReceived = false;
         UdpStates udpstate = new UdpStates();
-        udpstate.e = new IPEndPoint(IPAddress.Parse(address), port); ;
+        udpstate.e = new IPEndPoint(IPAddress.Parse(address), port);
         udpstate.u = client;
+        endpoint = new IPEndPoint(IPAddress.Parse(address), port);
         client.BeginReceive(new AsyncCallback(ReceiveCallback), udpstate);
+        //StartCoroutine(listeningUDP(freq));
     }
-    
+
     private void Update()
     {
-        if (!_stop) {
+
+        if (!_stop)
+        {
             if (messageReceived)
             {
                 string temp = lastReceivedUDPPacket;
@@ -79,37 +66,48 @@ public class UDPListenerForMagiKRoom : MonoBehaviour {
                     }
                     finally
                     {
-                        UdpStates udpstate = new UdpStates();
+                        /*UdpStates udpstate = new UdpStates();
                         udpstate.e = new IPEndPoint(IPAddress.Parse(address), port); ;
                         udpstate.u = client;
-                        client.BeginReceive(new AsyncCallback(ReceiveCallback), udpstate);
+                        client.BeginReceive(new AsyncCallback(ReceiveCallback), udpstate);*/
                     }
                 }
             }
         }
     }
-    /// <summary>
-    /// Function calledwhen the client has received
-    /// </summary>
-    /// <param name="ar"></param>
-    public void ReceiveCallback(IAsyncResult ar)
+
+    IEnumerator listeningUDP(int freq)
     {
-        UdpClient u = (UdpClient)((UdpStates)(ar.AsyncState)).u;
-        IPEndPoint e = (IPEndPoint)((UdpStates)(ar.AsyncState)).e;
+        while (!_stop)
+        {
+            yield return new WaitForSeconds(1 / freq);
+            byte[] data = client.Receive(ref endpoint);
+            lastReceivedUDPPacket = Encoding.ASCII.GetString(data);
+            messageReceived = true;
+        }
+    }
+
+    private void ReceiveCallback(IAsyncResult ar)
+    {
+
+        UdpClient u = client;
+        IPEndPoint e = endpoint;
         Byte[] receiveBytes = u.EndReceive(ar, ref e);
-        //if (receiveBytes.Length > 0)
-        //{
+        if (receiveBytes.Length > 0)
+        {
             string receiveString = Encoding.ASCII.GetString(receiveBytes);
 
             Debug.Log("Received: " + receiveString);
             lastReceivedUDPPacket = receiveString;
             messageReceived = true;
-        //}
+        }
+        UdpStates udpstate = new UdpStates();
+        udpstate.e = endpoint;
+        udpstate.u = client;
+        client.BeginReceive(new AsyncCallback(ReceiveCallback), udpstate);
     }
 
-    /// <summary>
-    /// stop the receiver
-    /// </summary>
+
     public void StopReceiver()
     {
         _stop = true;
@@ -119,9 +117,6 @@ public class UDPListenerForMagiKRoom : MonoBehaviour {
         }
     }
 
-    /// <summary>
-    /// what the system has to do when the gameobject is destroyed
-    /// </summary>
     private void OnDestroy()
     {
         StopReceiver();
@@ -136,25 +131,17 @@ public class tcpPackage
 }
 
 [Serializable]
-public class udpPackage {
+public class udpPackage
+{
     public string id;
-    public sensorstreamposition[] gyroscope;
-    public sensorstreamposition[] accelerometer;
+    public triplet[] gyroscope;
+    public triplet[] accelerometer;
     public float[] position;
     public UDPEvent[] state;
 }
-
 [Serializable]
-public class sensorstreamposition
+public class UDPEvent
 {
-    public string sensorId;
-    public float x;
-    public float y;
-    public float z;
-}
-
-[Serializable]
-public class UDPEvent {
     public string typ;
     public string id;
     public string val;
@@ -165,4 +152,13 @@ class UdpStates
 {
     public IPEndPoint e;
     public UdpClient u;
+}
+
+[Serializable]
+public class triplet
+{
+    public string sensorId;
+    public float x;
+    public float y;
+    public float z;
 }

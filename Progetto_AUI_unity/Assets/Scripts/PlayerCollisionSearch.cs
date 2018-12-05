@@ -21,6 +21,8 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public bool magnifierUsed = false;
 
+    public bool exitFromCompletedArea = false; //boolean to remember to execute the else if part of OnTriggerStay just one time per collectibleArea
+
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "CollectibleArea")
@@ -33,6 +35,8 @@ public class PlayerCollisionSearch : MonoBehaviour
                     images[i].GetComponent<Image>().enabled = true;
                 }
             }
+            MagicRoomLightManager.instance.sendColour("#A47C18", 255);
+            exitFromCompletedArea = false;
         }
         if (collider.tag == "Collectible")
         {
@@ -48,32 +52,46 @@ public class PlayerCollisionSearch : MonoBehaviour
     
     private void OnTriggerStay(Collider collider)
     {
-        if (collider.tag == "CollectibleArea" && !magnifierUsed && Input.anyKey && Input.GetKey(KeyCode.M)) //if the user uses the Magnifier RFID
+        if (collider.tag == "CollectibleArea")
         {
-            Image[] images = canvas.GetComponentsInChildren<Image>();
-            for (int i = 0; i < images.Length; i++)
+            int areaCompleted = counter.collectiblesMap[collider.gameObject][2];
+            if (Input.anyKey && Input.GetKey(KeyCode.M) && !magnifierUsed && areaCompleted == 0) //if the user uses the Magnifier RFID
             {
-                if (images[i].name == "Magnifier")
+                Image[] images = canvas.GetComponentsInChildren<Image>();
+                for (int i = 0; i < images.Length; i++)
                 {
-                    images[i].GetComponent<Image>().enabled = false;
+                    if (images[i].name == "Magnifier")
+                    {
+                        images[i].GetComponent<Image>().enabled = false;
+                    }
+                    if (images[i].name == "SearchIllustration")
+                    {
+                        images[i].GetComponent<Image>().enabled = true;
+                    }
                 }
-                if (images[i].name == "SearchIllustration")
-                {
-                    images[i].GetComponent<Image>().enabled = true;
-                }
+                dolphin.GetComponent<Animation>().Stop("Idle");
+                movement.enabled = false;
+                dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
+                magnifierUsed = true;
             }
-            dolphin.GetComponent<Animation>().Stop("Idle");
-            movement.enabled = false;
-            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
-            magnifierUsed = true;
-        }
-        else if(magnifierUsed){
-            //quando trovato tutti i collezionabili --> movement.enable = true;
-            //(TODO aggiornare la classe CollectiblesCounter->CollectibleFound in 
-            //modo da dividere le funzioni del metodo e fargli restituire un booleano) 
-
-
-
+            else if (magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && (areaCompleted == 1 || (Input.anyKey && Input.GetKey(KeyCode.C)))) //if the user finds all the collectibles in the area
+            { 
+                Image[] images = canvas.GetComponentsInChildren<Image>();
+                for (int i = 0; i < images.Length; i++)
+                {
+                    if (images[i].name == "Magnifier")
+                    {
+                        images[i].GetComponent<Image>().enabled = false;
+                    }
+                    if (images[i].name == "SearchIllustration")
+                    {
+                        images[i].GetComponent<Image>().enabled = false;
+                    }
+                }
+                dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
+                movement.enabled = true;
+                exitFromCompletedArea = true;
+            }
         }
     }
 
@@ -82,7 +100,7 @@ public class PlayerCollisionSearch : MonoBehaviour
     {
         if (collider.tag == "CollectibleArea")
         {
-            Image[] images = canvas.GetComponentsInChildren<Image>();
+            /*Image[] images = canvas.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
             {
                 if (images[i].name == "Magnifier")
@@ -90,8 +108,8 @@ public class PlayerCollisionSearch : MonoBehaviour
                     images[i].GetComponent<Image>().enabled = false;
                 }
             }
-            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
-
+            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");*/
+            magnifierUsed = false;
         }
     }
 

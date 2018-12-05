@@ -48,7 +48,7 @@ public class MotorController : MonoBehaviour {
         }
     }
 }
-
+[Serializable]
 public class ControllableMotor
 {
     public string name;
