@@ -37,7 +37,6 @@ public class HttpListenerForMagiKRoom : MonoBehaviour
         _requestHandlers[new Regex(@"^/smarttoyevent$")] = HandleSmartToyEventPosition;
         _requestHandlers[new Regex(@"^/kinectaudio$")] = HandleKinectAudio;
         _requestHandlers[new Regex(@"^/speachtotext$")] = HandleSpeachToText;
-        _requestHandlers[new Regex(@"^/dashboardStory$")] = HandleDashboardStory;
         _requestHandlers[new Regex(@"^/ExperienceManager$")] = HandleExperienceManager;
         _requestHandlers[new Regex(@"^/speachtotextOffline$")] = HandleSpeachToTextOffline;
         _requestHandlers[new Regex(@"^.*$")] = HandleDefault;
@@ -54,7 +53,6 @@ public class HttpListenerForMagiKRoom : MonoBehaviour
         _listener.Start();
 
         _listener.BeginGetContext(new AsyncCallback(ListenerCallback), _listener);
-        signalReadyToExperienceManager();
     }
 
     void Destroy()
@@ -99,6 +97,16 @@ public class HttpListenerForMagiKRoom : MonoBehaviour
         {
             MagicRoomSmartToyManager.instance.updateFromTCPEvent(httpcontent);
             httpcontent = "";
+        }
+        if (p != "")
+        {
+            string text = poolofsentencies[UnityEngine.Random.Range(0, poolofsentencies.Length - 1)];
+            text = text.Replace("#playername", p);
+            if (MagicRoomTextToSpeachManagerOffline.instance.MagicRoomSpeachToText_active)
+            {
+                MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText(text, MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[0]);
+            }
+            p = "";
         }
     }
     /// <summary>
@@ -197,61 +205,87 @@ public class HttpListenerForMagiKRoom : MonoBehaviour
         output.Close();
     }
 
-    private static void HandleDashboardStory(Match match, HttpListenerResponse response, string content)
-    {
-        /*StoryStructure story = JsonUtility.FromJson<StoryStructure>(content);
-        GameSettings.instance.storytobeplayed = story;*/
-        receivedconfig = true;
-
-        byte[] buffer = System.Text.Encoding.UTF8.GetBytes("Success");
-        // Get a response stream and write the response to it.
-        response.ContentLength64 = buffer.Length;
-        System.IO.Stream output = response.OutputStream;
-        output.Write(buffer, 0, buffer.Length);
-        // You must close the output stream.
-        output.Close();
-    }
-
     public static bool receivedconfig = false;
     public static bool receivedforcedCommand = false;
-    public static ForcedActions forcedcommand;
+    static string[] poolofsentencies = new string[]{
+        "#playername è il tuo turno!",
+        "#playername adesso tocca a te!",
+        "Forza #playername, giochiamo!",
+        "#playername facci vedere quanto sei bravo!",
+        "Vediamo, adesso gioca #playername"
+    };
+    public static bool pause = false;
+    public static bool skip = false;
+    public static bool next = false;
+    public static bool back = false;
+    public static bool repeat = false;
+    public static bool close = false;
+    static string p = "";
     private static void HandleExperienceManager(Match match, HttpListenerResponse response, string content)
     {
-        string messageback="c";
+        string messageback = "";
         Debug.Log(content);
-        /*try
+        try
         {
-            GameConfiguration g = JsonUtility.FromJson<GameConfiguration>(content);
-            if (g.storyname == null || g.storyname == "")
+            if (content.Contains("type"))
             {
-                MessageFromExpManager mess = JsonUtility.FromJson<MessageFromExpManager>(content);
-                if (mess.type != null && mess.type != "") {
-                    //received event
-                    if (mess.type == "key") {
-                        forcedcommand = (ForcedActions) Enum.Parse(typeof(ForcedActions), mess.payload);
-                        receivedforcedCommand = true;
-                    }
-                    messageback = "Successfully received command";
-                }
-                else
+                MessageFromExpManager m = JsonUtility.FromJson<MessageFromExpManager>(content);
+                
+                if (m.action == "commands")
                 {
-                    GameSettings.instance.storytobeplayed = JsonUtility.FromJson<StoryStructure>(content);
-                    GameSettings.instance.gameconfiguration.storyname = GameSettings.instance.storytobeplayed.title;
-                    messageback = "Successfully received story";
+                    commandmessages msg = (commandmessages)Enum.Parse(typeof(commandmessages), m.payload);
+                    Debug.Log(msg);
+                    //force command
+                    switch (msg)
+                    {
+                        case commandmessages.pause:
+                            pause = true;
+                            break;
+                        case commandmessages.play:
+                            pause = false;
+                            break;
+                        case commandmessages.next:
+                            next = true;
+                            break;
+                        case commandmessages.back:
+                            back = true;
+                            break;
+                        case commandmessages.skip:
+                            skip = true;
+                            break;
+                        case commandmessages.repeat:
+                            repeat = true;
+                            break;
+                        case commandmessages.close:
+                            close = true;
+                            break;
+                    }
+                    
                 }
+
+                if (m.action == "turn")
+                {
+                    PlayerCommand gg = JsonUtility.FromJson<PlayerCommand>(content);
+                    p = gg.phonema;
+                }
+                messageback = "Success";
             }
             else
             {
-                GameSettings.instance.gameconfiguration = g;
-                messageback = "Successfully received configuration";
+
+
+
+               //DECODE THE GAME CONFIGURATION HERE
+
+
+
+                receivedconfig = true;
             }
-            receivedconfig = true;
         }
         catch (Exception e)
         {
             messageback = e.Message;
         }
-        */
 
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(messageback);
         // Get a response stream and write the response to it.
@@ -296,11 +330,21 @@ public class HttpListenerForMagiKRoom : MonoBehaviour
 }
 
 [Serializable]
-public class MessageFromExpManager {
+public class MessageFromExpManager
+{
     public string type;
+    public string action;
     public string payload;
 }
 
-public enum ForcedActions {
-    repeat, forward, back, close
+[Serializable]
+public class PlayerCommand
+{
+    public string writtenname;
+    public string phonema;
+}
+
+public enum commandmessages
+{
+    pause, play, next, back, skip, repeat, close
 }
