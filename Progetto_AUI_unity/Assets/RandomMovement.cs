@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,22 +10,42 @@ public class RandomMovement : MonoBehaviour {
 
     public float timeForNewPath;
 
+    bool inCoroutine;
+
 	// Use this for initialization
 	void Start () {
     
 	}
 
-    public Vector3 getRandomPosition (){
+    // Update is called once per frame
+    void Update()
+    {
+        if (!inCoroutine)
+            DoSomething();
 
-        float x = Random.range(0, 490);
-        float y = Random.range(5, 10);
-        float z = Random.range(3, 490);
+    }
+
+
+
+    public Vector3 GetRandomPosition (){
+
+        float x = UnityEngine.Random.Range(0, 490);
+        float y = UnityEngine.Random.Range(5, 10);
+        float z = UnityEngine.Random.Range(3, 490);
 
         return new Vector3(x, y, z);
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    IEnumerator DoSomething(){
+        inCoroutine = true;
+        yield return new WaitForSeconds(timeForNewPath);
+        GetNewPath();
+        inCoroutine = false;
+
+    }
+
+    private void GetNewPath()
+    {
+        navMeshAgent.SetDestination(GetRandomPosition());
+    }
 }
