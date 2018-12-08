@@ -13,24 +13,30 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public CollectiblesCounter counter;
 
+    public ArrayList collectiblesFound;
+
     public Transform terrain;
 
     public Canvas canvas;
 
+    public GameObject dolphin;
+
+    public bool magnifierUsed = false;
+
+    public GameObject magnifierFocus;
+
+    public bool exitFromCompletedArea = false; //boolean to remember to execute the else if part of OnTriggerStay just one time per collectibleArea
+
+    void Start()
+    {
+        collectiblesFound = new ArrayList();
+        magnifierFocus.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "CollectibleArea")
-        {
-            /*            Camera[] cameras = new Camera[2];
-                        Camera.GetAllCameras(cameras);
-                        for (int i = 0; i < cameras.Length; i++)
-                            if (cameras[i].name == "Camera")
-                            {
-                                Debug.Log(cameras.ToString());
-                                Camera.SetupCurrent(cameras[i]);
-                            }
-            */
-
+        {         
             Image[] images = canvas.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
             {
@@ -39,21 +45,104 @@ public class PlayerCollisionSearch : MonoBehaviour
                     images[i].GetComponent<Image>().enabled = true;
                 }
             }
+            MagicRoomLightManager.instance.sendColour("#A47C18", 255);
+            exitFromCompletedArea = false;
         }
-
-            if (collider.tag == "Collectible")
+        if (collider.tag == "Collectible" && !collectiblesFound.Contains(collider))
         {
+                Debug.Log("Collectible found");
 
-            Debug.Log("Collectible found");
+                Vector3 newCollectiblePosition = new Vector3(collider.transform.position.x, terrain.position.y, collider.transform.position.z);
+                collider.transform.SetPositionAndRotation(newCollectiblePosition, collider.transform.rotation);
 
-            Vector3 newCollectiblePosition = new Vector3(collider.transform.position.x, terrain.position.y, collider.transform.position.z);
-            collider.transform.SetPositionAndRotation(newCollectiblePosition, collider.transform.rotation);
+                collectiblesFound.Add(collider);
 
-            counter.CollectibleFound();
+                counter.CollectibleFound(collider.gameObject);
+            
+        }
+    }
+    
+    private void OnTriggerStay(Collider collider)
+    {
+        if (collider.tag == "CollectibleArea")
+        {
+            int areaCompleted = counter.collectiblesMap[collider.gameObject][2]; //integer set to 1 if all the collectibles inside this area are found, 0 otherwise
+            if (Input.anyKey && Input.GetKey(KeyCode.M) && !magnifierUsed && areaCompleted == 0) //if the user uses the Magnifier RFID
+            {
+                Image[] images = canvas.GetComponentsInChildren<Image>();
+                for (int i = 0; i < images.Length; i++)
+                {
+                    if (images[i].name == "Magnifier")
+                    {
+                        images[i].GetComponent<Image>().enabled = false;
+                    }
+                    if (images[i].name == "SearchIllustration")
+                    {
+                        images[i].GetComponent<Image>().enabled = true;
+                    }
+                }
+                magnifierFocus.SetActive(true);
+                MagnifierMovement.SetSearchPhase(true); //TODO fare anche l'uscita da questa fase settando a false le due istruzioni prima
+                dolphin.GetComponent<Animation>().Stop("Idle");
+                movement.enabled = false;
+                dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
+                magnifierUsed = true;
+            }
+            else if (magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && (areaCompleted == 1 || (Input.anyKey && Input.GetKey(KeyCode.C)))) //if the user finds all the collectibles in the area
+            {
+                Image[] images = canvas.GetComponentsInChildren<Image>();
+                for (int i = 0; i < images.Length; i++)
+                {
+                    if (images[i].name == "Magnifier")
+                    {
+                        images[i].GetComponent<Image>().enabled = false;
+                    }
+                    if (images[i].name == "SearchIllustration")
+                    {
+                        images[i].GetComponent<Image>().enabled = false;
+                    }
+                }
+                dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
+                movement.enabled = true;
+                exitFromCompletedArea = true;
+            }
         }
     }
 
 
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.tag == "CollectibleArea")
+        {
+            Image[] images = canvas.GetComponentsInChildren<Image>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                if (images[i].name == "Magnifier")
+                {
+                    images[i].GetComponent<Image>().enabled = false;
+                }
+            }
+            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
+            magnifierUsed = false;
+        }
+    }
+
+   /* IEnumerator FadeTo(float aValue, float aTime)
+    {
+        float alpha = transform.renderer.material.color.a;
+        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+        {
+            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+            transform.renderer.material.color = newColor;
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeImage(Image image){
+        image.CrossFadeAlpha(1, 2.0f, false);
+
+    }
+*/
 
     void Update()
     {

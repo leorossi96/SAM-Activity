@@ -16,7 +16,9 @@ public class MagicRoomSmartToyManager : MonoBehaviour {
     /// <summary>
     /// receiving udp address for smart objectstream
     /// </summary>
-    const string receivigUDPAddress = "http://localhost:7001";
+
+    const string receivigUDPAddress = "http://192.168.31.124:7082";
+
 
     /// <summary>
     /// prefab to be replicated for each smart object found on the middleware

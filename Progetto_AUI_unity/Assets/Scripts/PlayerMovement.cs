@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public Rigidbody rb;
 
-    public float forwardForce = 2000f;
+    public float forwardForce = 2000f;      //2000f valore vero
     public float movementForce = 500f;
 
     public bool rightArrow;
@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject dolphin;
     public bool start = false;
     public bool isIdle = false;
+    
 
 
     private IEnumerator AnimationSet()
@@ -43,9 +44,10 @@ public class PlayerMovement : MonoBehaviour {
 	void FixedUpdate () {
 
         
-
+        
         rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
         Debug.Log("Swimming");
+        Debug.Log(forwardForce * Time.deltaTime);
         if (start)
         {
             dolphin.GetComponent<Animation>().Play("Swimming");
@@ -83,6 +85,9 @@ public class PlayerMovement : MonoBehaviour {
             FindObjectOfType<GameManager>().EndGame();
        }
        */
+
+
+
 
         
 

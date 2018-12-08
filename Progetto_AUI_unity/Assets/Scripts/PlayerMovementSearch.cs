@@ -19,15 +19,31 @@ public class PlayerMovementSearch : MonoBehaviour
     public bool tabKey;
     public bool shiftKey;
 
+    public GameObject dolphin;  
+    public bool start = false;
+
     SmartToy dolphinController;
 
     public bool moving;
 
     public bool delfinoFound = false;
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Awake()
     {
+        for (int i = 1; i < Display.displays.Length; i++)
+        {
+            Display.displays[i].Activate();
+        }
+    }
+
+
+
+        // Update is called once per frame
+    void FixedUpdate(){
+
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
         // If use keyboard (ex. as in Unity or Standalone built)
         rightArrow = Input.GetKey(KeyCode.RightArrow);
         leftArrow = Input.GetKey(KeyCode.LeftArrow);
@@ -63,8 +79,17 @@ public class PlayerMovementSearch : MonoBehaviour
             {
                 position = position + tf.forward * velocityApplied * Time.deltaTime;
                 tf.position = position;
-                /*moving = false;
-                StartCoroutine(MoveFromTo(position, position + tf.forward, lerpSpeed));*/
+                if (start)
+                {
+                    dolphin.GetComponent<Animation>().PlayQueued("Swimming");
+                }
+                else{
+
+                    dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                    start = true;
+                }
+
+                    
             }
             if (shiftKey)
             {
@@ -72,18 +97,34 @@ public class PlayerMovementSearch : MonoBehaviour
                 tf.position = position;
             }
         }
-        MagicRoomLightManager.instance.sendColour(Color.black);
+        else
+        {
+            if (start)
+            {
+                start = false;
+                dolphin.GetComponent<Animation>().Play("Stopping");
+            }
+            else
+            dolphin.GetComponent<Animation>().PlayQueued("Idle");
+        }
+
+        MagicRoomLightManager.instance.sendColour(Color.blue);
 
         if (!delfinoFound)
         {
-            if (GameObject.Find("Dolphin1") != null)
+            if (GameObject.Find("Dolphin3") != null)
             {
-                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
-                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
-                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin3");
+                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin3", 10f);
+                dolphinController = GameObject.Find("Dolphin3").GetComponent<SmartToy>();
+                Vector3[] gyroscope = dolphinController.objectposition.gyroscope;
+                Debug.Log("GIROSCOPIO " + gyroscope[0]);
                 StartCoroutine(waittoStartGreenLight());
                 delfinoFound = true;
             }
+        }else{
+            Vector3[] gyroscope = dolphinController.objectposition.gyroscope;
+            Debug.Log("GIROSCOPIO " + gyroscope[0] + gyroscope[1] + gyroscope[2]);
         }
     }
 
@@ -91,6 +132,9 @@ public class PlayerMovementSearch : MonoBehaviour
         yield return new WaitForSeconds(1);
         dolphinController.executeCommandLightController(Color.green, 0, "parthead");
     }
+
+
+
 
     /*private IEnumerator MoveFromTo(Vector3 start, Vector3 end, float time)
     {
