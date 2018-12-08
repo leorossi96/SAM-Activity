@@ -10,6 +10,7 @@ public class ExperienceManagerComunication : MonoBehaviour {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else {
             GameObject.DestroyImmediate(this);
@@ -50,5 +51,10 @@ public class ExperienceManagerComunication : MonoBehaviour {
         {
             Debug.Log(www.downloadHandler.text);
         }
+    }
+
+    public void SendNextPlayerRequest()
+    {
+        StartCoroutine(sendCommand("Turn"));
     }
 }

@@ -25,8 +25,9 @@ GameObject:
   - component: {fileID: 114513010930155730}
   - component: {fileID: 114232552930756980}
   - component: {fileID: 114516668455901074}
-  - component: {fileID: 114420053087228888}
   - component: {fileID: 114359456988886850}
+  - component: {fileID: 114055057215065572}
+  - component: {fileID: 114420527672264460}
   m_Layer: 0
   m_Name: Magic Room Adapter
   m_TagString: Untagged
@@ -102,24 +103,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1666862978942540
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4202773966919676}
-  - component: {fileID: 328069808645803820}
-  - component: {fileID: 82831476485869656}
-  - component: {fileID: 114897754554520746}
-  m_Layer: 0
-  m_Name: YoutubePlayerLowQuality (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4002844258358404
 Transform:
   m_ObjectHideFlags: 1
@@ -134,22 +117,8 @@ Transform:
   - {fileID: 4572900191012538}
   - {fileID: 4287522560948104}
   - {fileID: 4994983525766868}
-  - {fileID: 4202773966919676}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4202773966919676
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666862978942540}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 199.5, y: 195.7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4002844258358404}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4287522560948104
 Transform:
@@ -298,101 +267,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!82 &82831476485869656
-AudioSource:
+--- !u!114 &114055057215065572
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666862978942540}
+  m_GameObject: {fileID: 1476209112218834}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e590a60477f744688ffeb4df97f72e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MagicRoomSpeachToText_active: 0
+  listofAssociatedNames: []
+  listOfCompletedFiles: []
 --- !u!114 &114061905065616804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -405,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   address: http://localhost
-  port: 7000
+  port: 7007
 --- !u!114 &114099052990307674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,6 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   address: 127.0.0.1
   port: 7001
+  _stop: 0
   lastReceivedUDPPacket: 
 --- !u!114 &114232552930756980
 MonoBehaviour:
@@ -474,22 +363,20 @@ MonoBehaviour:
   unityVideoPlayer: {fileID: 328159531804592176}
   playOnStart: 0
   youtubeLogo: {fileID: 0}
-  starttime: 0
-  endtime: 0
---- !u!114 &114420053087228888
+--- !u!114 &114420527672264460
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1476209112218834}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06e590a60477f744688ffeb4df97f72e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bece82c91601924e99535eae7c68042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MagicRoomSpeachToText_active: 0
   listofAssociatedNames: []
-  listOfCompletedFiles: []
+  isPlaying: 0
 --- !u!114 &114513010930155730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -577,63 +464,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvases:
   - {fileID: 0}
-  playersimpleFront: {fileID: 114397183611148130}
-  playersimpleFloor: {fileID: 114897754554520746}
+  playersimpleFront: {fileID: 0}
   player: {fileID: 328159531804592176}
   cameras:
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &114897754554520746
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666862978942540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb60ff2b9496e9f409cc96167c0697bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  videoId: bc0sJvtKrRM
-  useNewUnityPlayer: 1
-  unityVideoPlayer: {fileID: 328069808645803820}
-  playOnStart: 0
-  youtubeLogo: {fileID: 0}
-  starttime: 0
-  endtime: 0
---- !u!328 &328069808645803820
-VideoPlayer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666862978942540}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 0}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 0}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: _MainTex
-  m_RenderMode: 0
-  m_AspectRatio: 2
-  m_DataSource: 1
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 1
-  m_TargetAudioSources:
-  - {fileID: 82831476485869656}
-  m_DirectAudioVolumes:
-  - 1
-  m_Url: file://C:/Users/drago/Documents/Unity/MagiK Room Story Maker/Assets/StreamingAssets/video/IMG_1524.mp4
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 0
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 0
-  m_FrameReadyEventEnabled: 0
+  deactvate: 0
 --- !u!328 &328159531804592176
 VideoPlayer:
   m_ObjectHideFlags: 1
@@ -654,14 +490,12 @@ VideoPlayer:
   m_DataSource: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 1
-  m_TargetAudioSources:
-  - {fileID: 82093827463105672}
-  m_DirectAudioVolumes:
-  - 1
-  m_Url: cLLqdhGDMTs
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: file://C:/Users/drago/Documents/Unity/MagiK Room Story Maker/Assets/StreamingAssets/video/IMG_1524.mp4
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0

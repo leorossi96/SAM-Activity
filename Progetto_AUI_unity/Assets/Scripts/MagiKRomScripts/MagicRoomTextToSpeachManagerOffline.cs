@@ -41,7 +41,7 @@ public class MagicRoomTextToSpeachManagerOffline : MonoBehaviour {
         {
             instance = this;
             MagicRoomSpeachToText_active = true;
-            address = "http://192.168.31.214:7073";
+            address = "http://localhost:7073";
         }
     }
 

@@ -75,7 +75,7 @@ public class LightController : MonoBehaviour {
         return (conf);
     }
 }
-
+[Serializable]
 public class ControllableLight
 {
     public string name;

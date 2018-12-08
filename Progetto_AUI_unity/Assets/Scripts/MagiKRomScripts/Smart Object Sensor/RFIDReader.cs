@@ -18,6 +18,8 @@ public class RFIDReader : MonoBehaviour {
     /// </summary>
     public string[] readerNames;
 
+    public string lastread;
+
     /// <summary>
     /// configure the sensor
     /// </summary>
@@ -37,6 +39,7 @@ public class RFIDReader : MonoBehaviour {
 
     internal void updateState(RFIDSerializedState rFIDstate)
     {
+        lastread = rFIDstate.code;
         sensorEnabled = rFIDstate.isEnabled;
         foreach (RFIDcard t in cardReader)
         {
@@ -51,6 +54,7 @@ public class RFIDReader : MonoBehaviour {
 
     internal void updateFromUDP(string id, string val, int duration)
     {
+        lastread = val;
         foreach (RFIDcard p in cardReader)
         {
             if (p.cardname == val)
@@ -67,7 +71,7 @@ public class RFIDReader : MonoBehaviour {
         }
     }
 }
-
+[Serializable]
 public class RFIDcard
 {
     public string readername;

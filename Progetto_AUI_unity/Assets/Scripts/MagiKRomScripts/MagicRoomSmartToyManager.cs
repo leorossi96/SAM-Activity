@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +16,7 @@ public class MagicRoomSmartToyManager : MonoBehaviour {
     /// <summary>
     /// receiving udp address for smart objectstream
     /// </summary>
-
-    const string receivigUDPAddress = "http://192.168.31.214:7082";
+    const string receivigUDPAddress = "http://localhost:7001";
 
     /// <summary>
     /// prefab to be replicated for each smart object found on the middleware
@@ -40,7 +39,7 @@ public class MagicRoomSmartToyManager : MonoBehaviour {
     void Awake()
     {
         instance = this;
-        address = "http://192.168.31.214:7081";
+        address = "http://localhost:7081";
         MagicRoomSmartToyManager_active = true;
     }
 

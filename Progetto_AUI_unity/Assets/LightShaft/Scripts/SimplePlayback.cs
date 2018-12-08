@@ -25,8 +25,6 @@ public class SimplePlayback : MonoBehaviour {
 		}
 	}
 
-    public float starttime, endtime;
-
 	public void PlayYoutubeVideo(string _videoId)
 	{
         if(youtubeLogo != null)
@@ -91,12 +89,6 @@ public class SimplePlayback : MonoBehaviour {
 			checkIfVideoArePrepared = false;
 			StartCoroutine (PreparingAudio ());
 		}
-        if (endtime > 0 && unityVideoPlayer.isPlaying) {
-            int frameend = (int)(unityVideoPlayer.frameRate * endtime);
-            if (unityVideoPlayer.frame >= frameend) {
-                unityVideoPlayer.Stop();
-            }
-        }
 	}
 
 
@@ -121,10 +113,6 @@ public class SimplePlayback : MonoBehaviour {
         unityVideoPlayer.Play();
 
         Debug.Log("Playing Video");
-        int frameinit = (int)(unityVideoPlayer.frameRate * starttime);
-        for (int i = 0; i < frameinit; i++) {
-            unityVideoPlayer.StepForward();
-        }
 		while (unityVideoPlayer.isPlaying)
 		{
 			yield return null;

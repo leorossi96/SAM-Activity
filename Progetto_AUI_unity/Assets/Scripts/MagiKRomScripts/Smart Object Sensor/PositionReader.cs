@@ -12,11 +12,13 @@ public class PositionReader : MonoBehaviour {
     /// the gyroscope of the object
     /// </summary>
     public Vector3[] gyroscope;
+    [SerializeField]
     public Dictionary<string, int> gyroscopeNames;
     /// <summary>
     /// the accelerometer fo the object
     /// </summary>
     public Vector3[] accelerometer;
+    [SerializeField]
     public Dictionary<string, int> accelerometerNames;
     /// <summary>
     /// the position of the object
@@ -35,16 +37,16 @@ public class PositionReader : MonoBehaviour {
         position = new Vector3(positionstate.position[0], positionstate.position[1], positionstate.position[2]);
     }
 
-    internal void setAccelerometer(sensorstreamposition[] sensarr)
+    internal void setAccelerometer(triplet[] sensarr)
     {
-        foreach (sensorstreamposition sens in sensarr) { 
+        foreach (triplet sens in sensarr) { 
             this.accelerometer[accelerometerNames[sens.sensorId]] = new Vector3(sens.x, sens.y, sens.z);
         }
     }
 
-    internal void setGyroscope(sensorstreamposition[] sensarr)
+    internal void setGyroscope(triplet[] sensarr)
     {
-        foreach (sensorstreamposition sens in sensarr)
+        foreach (triplet sens in sensarr)
         {
             this.gyroscope[gyroscopeNames[sens.sensorId]] = new Vector3(sens.x, sens.y, sens.z);
         }
