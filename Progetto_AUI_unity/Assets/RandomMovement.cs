@@ -14,6 +14,8 @@ public class RandomMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
     
 	}
 
@@ -22,7 +24,6 @@ public class RandomMovement : MonoBehaviour {
     {
         if (!inCoroutine)
             DoSomething();
-
     }
 
 
@@ -47,5 +48,6 @@ public class RandomMovement : MonoBehaviour {
     private void GetNewPath()
     {
         navMeshAgent.SetDestination(GetRandomPosition());
+        
     }
 }
