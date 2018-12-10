@@ -56,7 +56,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                 collider.transform.SetPositionAndRotation(newCollectiblePosition, collider.transform.rotation);
 
                 collectiblesFound.Add(collider);
-                
+
                 counter.CollectibleFound(collider.gameObject);
             
         }
@@ -64,11 +64,9 @@ public class PlayerCollisionSearch : MonoBehaviour
     
     private void OnTriggerStay(Collider collider)
     {
-        Debug.Log("ONTRIGGERSTAY");
         if (collider.tag == "CollectibleArea")
         {
-            int areaCompleted = counter.collectiblesMap[collider.gameObject][2];//integer set to 1 if all the collectibles inside this area are found, 0 otherwise
-            Debug.Log("Area Completed : " + areaCompleted);
+            int areaCompleted = counter.collectiblesMap[collider.gameObject][2]; //integer set to 1 if all the collectibles inside this area are found, 0 otherwise
             if (Input.anyKey && Input.GetKey(KeyCode.M) && !magnifierUsed && areaCompleted == 0) //if the user uses the Magnifier RFID
             {
                 Image[] images = canvas.GetComponentsInChildren<Image>();
@@ -84,8 +82,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                     }
                 }
                 magnifierFocus.SetActive(true);
-                MagnifierMovement.SetSearchPhase(true);
-                //Display.displays[1].Activate();
+                MagnifierMovement.SetSearchPhase(true); //TODO fare anche l'uscita da questa fase settando a false le due istruzioni prima
                 dolphin.GetComponent<Animation>().Stop("Idle");
                 movement.enabled = false;
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
@@ -108,9 +105,6 @@ public class PlayerCollisionSearch : MonoBehaviour
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
                 movement.enabled = true;
                 exitFromCompletedArea = true;
-                //Display.displays[0].Activate();
-                magnifierFocus.SetActive(false);
-                MagnifierMovement.SetSearchPhase(false);
             }
         }
     }
@@ -128,10 +122,8 @@ public class PlayerCollisionSearch : MonoBehaviour
                     images[i].GetComponent<Image>().enabled = false;
                 }
             }
-            //dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
+            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
             magnifierUsed = false;
-            magnifierFocus.SetActive(false);
-            MagnifierMovement.SetSearchPhase(false);
         }
     }
 
