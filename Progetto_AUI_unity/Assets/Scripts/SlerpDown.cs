@@ -15,7 +15,10 @@ public class SlerpDown : MonoBehaviour
     float width = 50;
     public PlayerMovement movement;
     int count = 0;
-    
+    public int referenceAxis;
+    public int dir;
+
+
 
 
 
@@ -27,48 +30,85 @@ public class SlerpDown : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update()                   //referenceAxis=1 asse x        referenceAxis=0 asse z
+    {                               //dir=1 direzione crescente     dir=0 direzione decrescente
 
         if (dolphin.transform.position.y <= initalPlayerPosition.y)
         {
             timeCounter += Time.deltaTime * (speed);
-
-            float x = initalPlayerPosition.x;
-            float y = -Mathf.Sin(Mathf.PI * (dolphin.transform.position.z - (initalPlayerPosition.z - 2)) / 80) * height;
-            //Debug.Log(Mathf.Sin(Mathf.PI * (dolphin.transform.position.z - (initalPlayerPosition.z - 2)) / 80) * height);
-            float z = timeCounter;
-            // Debug.Log(z);
-
-            dolphin.transform.position = new Vector3(x, initalPlayerPosition.y + y, initalPlayerPosition.z + z);
-            if (dolphin.transform.position.y > (initalPlayerPosition.y - 15) && dolphin.transform.position.z > (initalPlayerPosition.z + 40))     //z>40
+            if (referenceAxis == 0)
             {
-                movement.enabled = true;
-                Debug.Log("ho fatto player movement enable");
+                    float x = initalPlayerPosition.x;
+                    
+                    float z = timeCounter;
+
+                if (dir == 1)
+                {
+                    float y = -Mathf.Sin(Mathf.PI * (dolphin.transform.position.z - (initalPlayerPosition.z - 2)) / 80) * height;
+                    dolphin.transform.position = new Vector3(x, initalPlayerPosition.y + y, initalPlayerPosition.z + z);
+                    if (dolphin.transform.position.y > (initalPlayerPosition.y - 15) && dolphin.transform.position.z > (initalPlayerPosition.z + 40))     //z>40
+                        movement.enabled = true;
+
+                    if (dolphin.transform.position.y > initalPlayerPosition.y - 5 && dolphin.transform.position.z > initalPlayerPosition.z + 60)
+                        speed = 15f;
+
+                }
+                else if (dir == 0) {
+                                    float y = Mathf.Sin(Mathf.PI * (dolphin.transform.position.z - (initalPlayerPosition.z + 2)) / 80) * height;
+                                    dolphin.transform.position = new Vector3(x, initalPlayerPosition.y + y, initalPlayerPosition.z - z);
+                                    if (dolphin.transform.position.y > (initalPlayerPosition.y - 15) && dolphin.transform.position.z > (initalPlayerPosition.z - 40))     //z>40
+                                        movement.enabled = true;
+
+                                    if (dolphin.transform.position.y > initalPlayerPosition.y - 5 && dolphin.transform.position.z > initalPlayerPosition.z - 60)
+                                        speed = 15f;
+                                    }
+                                
+                    
+            } else if(referenceAxis==1)
+                    {
+                        float x = timeCounter;
+                        float z = initalPlayerPosition.z;
+
+
+                if (dir == 1)
+                {
+                    float y = -Mathf.Sin(Mathf.PI * (dolphin.transform.position.x - (initalPlayerPosition.x - 2)) / 80) * height;
+                    dolphin.transform.position = new Vector3(initalPlayerPosition.x + x, initalPlayerPosition.y + y, z);
+                            if (dolphin.transform.position.y > (initalPlayerPosition.y - 15) && dolphin.transform.position.x > (initalPlayerPosition.x + 40))     //z>40
+                                movement.enabled = true;
+
+                            if (dolphin.transform.position.y > initalPlayerPosition.y - 5 && dolphin.transform.position.x > initalPlayerPosition.x + 60)
+                                speed = 15f;
+
+                        }
+                        else if (dir == 0)
+                        {                         
+                            float y = Mathf.Sin(Mathf.PI * (dolphin.transform.position.x - (initalPlayerPosition.x + 2)) / 80) * height;                          
+                            dolphin.transform.position = new Vector3(initalPlayerPosition.x - x, initalPlayerPosition.y + y, z);
+                            if (dolphin.transform.position.y > (initalPlayerPosition.y - 15) && dolphin.transform.position.x > (initalPlayerPosition.x - 40))     //z>40
+                                movement.enabled = true;
+
+                            if (dolphin.transform.position.y > initalPlayerPosition.y - 5 && dolphin.transform.position.x > initalPlayerPosition.x - 60)
+                                speed = 15f;
+                        }
+
 
             }
-            if (dolphin.transform.position.y > initalPlayerPosition.y - 5 && dolphin.transform.position.z > initalPlayerPosition.z + 60)
-            {
-                Debug.Log("Reducing the speed");
-                speed = 15f;
-            }
-        }
-        else
-        {
-            Debug.Log(movement.start);
-            this.enabled = false;
-            movement.start = true;
-            Debug.Log("FINAL TIME COUNTER");
-            Debug.Log(timeCounter);
-            timeCounter = 0;
-            count += 1;
-            Debug.Log("Numero iterazione");
-            Debug.Log(count);
-        }
+
+
+
+
+        }   else
+                   {                   
+                    this.enabled = false;
+                    movement.start = true;                    
+                    timeCounter = 0;
+                    count += 1;                   
+                   }
     }
 
 
-    public void SetPlayerPosition(Vector3 playerPos)
+    public void SetPlayerPosition(Vector3 playerPos, int refAx, int direction)
     {
         initalPlayerPosition = playerPos;
         if (playerPos.y < 42)
@@ -104,9 +144,9 @@ public class SlerpDown : MonoBehaviour
             height = 35;
         }
 
-
-        Debug.Log("initialPosition");
-        Debug.Log(initalPlayerPosition);
+        referenceAxis = refAx;
+        dir = direction;
+       
     }
 }
 
