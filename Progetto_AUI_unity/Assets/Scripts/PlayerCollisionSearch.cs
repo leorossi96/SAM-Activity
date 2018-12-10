@@ -13,6 +13,8 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public CollectiblesCounter counter;
 
+    public ArrayList collectiblesFound;
+
     public Transform terrain;
 
     public Canvas canvas;
@@ -21,7 +23,15 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public bool magnifierUsed = false;
 
+    public GameObject magnifierFocus;
+
     public bool exitFromCompletedArea = false; //boolean to remember to execute the else if part of OnTriggerStay just one time per collectibleArea
+
+    void Start()
+    {
+        collectiblesFound = new ArrayList();
+        magnifierFocus.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -38,15 +48,17 @@ public class PlayerCollisionSearch : MonoBehaviour
             MagicRoomLightManager.instance.sendColour("#A47C18", 255);
             exitFromCompletedArea = false;
         }
-        if (collider.tag == "Collectible")
+        if (collider.tag == "Collectible" && !collectiblesFound.Contains(collider))
         {
+                Debug.Log("Collectible found");
 
-            Debug.Log("Collectible found");
+                Vector3 newCollectiblePosition = new Vector3(collider.transform.position.x, terrain.position.y, collider.transform.position.z);
+                collider.transform.SetPositionAndRotation(newCollectiblePosition, collider.transform.rotation);
 
-            Vector3 newCollectiblePosition = new Vector3(collider.transform.position.x, terrain.position.y, collider.transform.position.z);
-            collider.transform.SetPositionAndRotation(newCollectiblePosition, collider.transform.rotation);
+                collectiblesFound.Add(collider);
 
-            counter.CollectibleFound(collider.gameObject);
+                counter.CollectibleFound(collider.gameObject);
+            
         }
     }
     
@@ -54,7 +66,7 @@ public class PlayerCollisionSearch : MonoBehaviour
     {
         if (collider.tag == "CollectibleArea")
         {
-            int areaCompleted = counter.collectiblesMap[collider.gameObject][2];
+            int areaCompleted = counter.collectiblesMap[collider.gameObject][2]; //integer set to 1 if all the collectibles inside this area are found, 0 otherwise
             if (Input.anyKey && Input.GetKey(KeyCode.M) && !magnifierUsed && areaCompleted == 0) //if the user uses the Magnifier RFID
             {
                 Image[] images = canvas.GetComponentsInChildren<Image>();
@@ -69,13 +81,15 @@ public class PlayerCollisionSearch : MonoBehaviour
                         images[i].GetComponent<Image>().enabled = true;
                     }
                 }
+                magnifierFocus.SetActive(true);
+                MagnifierMovement.SetSearchPhase(true); //TODO fare anche l'uscita da questa fase settando a false le due istruzioni prima
                 dolphin.GetComponent<Animation>().Stop("Idle");
                 movement.enabled = false;
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
                 magnifierUsed = true;
             }
             else if (magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && (areaCompleted == 1 || (Input.anyKey && Input.GetKey(KeyCode.C)))) //if the user finds all the collectibles in the area
-            { 
+            {
                 Image[] images = canvas.GetComponentsInChildren<Image>();
                 for (int i = 0; i < images.Length; i++)
                 {
@@ -100,7 +114,7 @@ public class PlayerCollisionSearch : MonoBehaviour
     {
         if (collider.tag == "CollectibleArea")
         {
-            /*Image[] images = canvas.GetComponentsInChildren<Image>();
+            Image[] images = canvas.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
             {
                 if (images[i].name == "Magnifier")
@@ -108,7 +122,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                     images[i].GetComponent<Image>().enabled = false;
                 }
             }
-            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");*/
+            dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
             magnifierUsed = false;
         }
     }
