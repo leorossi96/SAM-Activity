@@ -17,8 +17,6 @@ public class PlayerCollision : MonoBehaviour
     public bool isTriggerObstDown = false;
 
     public bool isTriggerObstUp = false; 
-   
-    public AvoidObstacle awayFromMe;
 
     public Collider colliderActual;
 
@@ -26,7 +24,6 @@ public class PlayerCollision : MonoBehaviour
 
     public bool turnLeft = false;
 
-    public ObstacleRotate obRotate;
 
     public SlerpUp slU;
     //inizio nuove aggiunte
@@ -36,7 +33,7 @@ public class PlayerCollision : MonoBehaviour
     public Rect BoxSize = new Rect(0, 0, 200, 100);
     public GUISkin customSkin;
 
-
+   
 
 
 
@@ -55,11 +52,13 @@ public class PlayerCollision : MonoBehaviour
 
     private IEnumerator turnLeftAnimation()
     {
+         
         dolphin.GetComponent<Animation>().Play("TurnLeft");
         yield return new WaitForSeconds(1.0f);
+
         movement.start = true;
         movement.enabled = true;
-
+        print(this.transform.forward);
     }
 
    

@@ -12,25 +12,18 @@ public class RandomMovement : MonoBehaviour {
 
     bool inCoroutine;
 
-    public Vector3 newpos; 
-
 	// Use this for initialization
 	void Start () {
-        
-        navMeshAgent = GetComponent<NavMeshAgent>();
 
-        inCoroutine = false;
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    
 	}
 
     // Update is called once per frame
     void Update()
     {
-        
-        if(!inCoroutine){
-            StartCoroutine("DoSomething");
-
-        }
-            
+        if (!inCoroutine)
+            DoSomething();
     }
 
 
@@ -38,7 +31,6 @@ public class RandomMovement : MonoBehaviour {
     public Vector3 GetRandomPosition (){
 
         float x = UnityEngine.Random.Range(0, 490);
-
         float y = UnityEngine.Random.Range(5, 10);
         float z = UnityEngine.Random.Range(3, 490);
 
@@ -46,18 +38,16 @@ public class RandomMovement : MonoBehaviour {
     }
 	
     IEnumerator DoSomething(){
-        
-        this.inCoroutine = true;
+        inCoroutine = true;
         yield return new WaitForSeconds(timeForNewPath);
         GetNewPath();
-        this.inCoroutine = false;
+        inCoroutine = false;
 
     }
 
     private void GetNewPath()
-    {   
-        this.newpos = GetRandomPosition();
-        navMeshAgent.SetDestination(newpos);
+    {
+        navMeshAgent.SetDestination(GetRandomPosition());
         
     }
 }
