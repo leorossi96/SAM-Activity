@@ -9,8 +9,6 @@ public class RotationsSlow : MonoBehaviour
 
     private Quaternion rotateDirection;
 
-
-
     private void Start()
 
     {
@@ -31,12 +29,11 @@ public class RotationsSlow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         //Rotate slowly towards the rotateDirection, when the rotation is over the 
         //movement is stopped and this component is deactivated
 
-
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, 10.0f);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rotateDirection, 3.0f);
        
         if (transform.rotation == rotateDirection)
 
@@ -55,7 +52,6 @@ public class RotationsSlow : MonoBehaviour
     /// <param name="direction"></param>
     public void setUpRotation(Vector3 direction)
     {
-
         this.rotateDirection = transform.rotation * Quaternion.Euler(direction);
         //this.rotateDirection = Quaternion.AngleAxis(-90, Vector3.up);
         this.enabled = true;
