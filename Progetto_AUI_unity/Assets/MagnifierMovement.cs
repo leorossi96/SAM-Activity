@@ -8,7 +8,8 @@ public class MagnifierMovement : MonoBehaviour {
     
 
     public float velocityApplied = 10f;
-    public float rotationSpeed = 3f;
+
+    GameObject collectibleArea;
 
     static bool searchPhase = false;
 
@@ -20,9 +21,10 @@ public class MagnifierMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("SearchPhase = "+ searchPhase);
         if (searchPhase)
         {
+
             if (Input.anyKey)
             {
                 Vector3 position = transform.position;
@@ -59,6 +61,10 @@ public class MagnifierMovement : MonoBehaviour {
 
     public static void SetSearchPhase(bool value){
         searchPhase = value;
+    }
+
+    public void SetCollectibleArea(GameObject o){
+        collectibleArea = o;
     }
 
 }
