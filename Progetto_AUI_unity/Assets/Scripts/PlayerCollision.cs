@@ -216,7 +216,7 @@ public class PlayerCollision : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
             GuiOn = false;
-            rotate.setUpRotation(new Vector3(0,-90 ,0));
+            rotate.setUpRotation(new Vector3(0,-90 , 0));
             //movement.start = true;
             //movement.enabled = true;
             //dolphin.GetComponent<Animation>().Play("TurnLeft");
