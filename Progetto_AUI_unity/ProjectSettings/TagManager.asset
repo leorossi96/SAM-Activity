@@ -6,11 +6,17 @@ TagManager:
   tags:
   - TurningPoint Left
   - TurningPoint Right
-  - Obstacle Down
-  - Obstacle Up
   - Collectible
   - CollectibleArea
   - MagnifierFocus
+  - Obstacle Down X
+  - Obstacle Down mX
+  - Obstacle Down Z
+  - Obstacle Down mZ
+  - Obstacle Up X
+  - Obstacle Up mX
+  - Obstacle Up Z
+  - Obstacle Up mZ
   layers:
   - Default
   - TransparentFX

@@ -43,8 +43,8 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        
-        
+
+        //rb.AddRelativeForce(Vector3.forward);
         rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
         Debug.Log("Swimming");
         Debug.Log(forwardForce * Time.deltaTime);
@@ -65,19 +65,22 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (rightArrow)
             {
-                rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+               // rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+                rb.AddRelativeForce(Vector3.right * Time.deltaTime,  ForceMode.VelocityChange);
             }
             if (leftArrow)
             {
-                rb.AddRelativeForce(-movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+                //rb.AddRelativeForce(-movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+                rb.AddRelativeForce(-Vector3.right , ForceMode.VelocityChange);
             }
             if (downArrow)
             {
-                rb.AddRelativeForce(0, -movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
+                //rb.AddRelativeForce(0, -movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
+                rb.AddRelativeForce(-Vector3.up, ForceMode.VelocityChange);
             }
             if (upArrow)
             {
-                rb.AddRelativeForce(0, movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
+                rb.AddRelativeForce(Vector3.up , ForceMode.VelocityChange);
             }
         }
 /*       if ((rb.position.y <= -1 || rb.position.y.ToString().Equals("NaN")) && false)

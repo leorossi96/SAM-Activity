@@ -35,6 +35,8 @@ public class PlayerCollision : MonoBehaviour
     public string Text = "";
     public Rect BoxSize = new Rect(0, 0, 200, 100);
     public GUISkin customSkin;
+    public int refAx;
+    public int direction;
 
 
 
@@ -56,13 +58,21 @@ public class PlayerCollision : MonoBehaviour
     private IEnumerator turnLeftAnimation()
     {
         dolphin.GetComponent<Animation>().Play("TurnLeft");
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         movement.start = true;
         movement.enabled = true;
 
     }
 
-   
+    private IEnumerator turnRightAnimation()
+    {
+        dolphin.GetComponent<Animation>().Play("TurnRight");
+        yield return new WaitForSeconds(1.5f);
+        movement.start = true;
+        movement.enabled = true;
+
+    }
+
 
 
 
@@ -92,14 +102,9 @@ public class PlayerCollision : MonoBehaviour
                     Text = "Turn Left";
                     GuiOn = true;
                     isTriggerLeft = true;
-
                     movement.enabled = false;
-
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-                    colliderActual.enabled = false; 
-                    
-
+                    colliderActual.enabled = false;                    
                     break;
                 }
 
@@ -107,48 +112,136 @@ public class PlayerCollision : MonoBehaviour
                 {
                     Text = "Turn Right";
                     GuiOn = true;
-                    isTriggerRight = true;
-         
+                    isTriggerRight = true;        
                     movement.enabled = false;
-
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-
                     colliderActual.enabled = false; 
-
                     break;
                 }
 
-            case "Obstacle Down":
+            case "Obstacle Down X":
                 {
                     Text = "Go Down To Down The Obstacle";
                     GuiOn = true;
-                    Debug.Log("ho colliso OBUP");
-                    Debug.Log(dolphin.transform.position);
                     isTriggerObstDown = true;
                     movement.enabled = false;
+                    refAx = 1;
+                    direction = 1;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    slD.SetPlayerPosition(dolphin.transform.position);
-                    colliderActual.enabled = false;
-                    Debug.Log(slD.initalPlayerPosition);
-
+                    slD.SetPlayerPosition(dolphin.transform.position, refAx, direction);
+                    colliderActual.enabled = false;                   
                     break;
                 }
 
-            case "Obstacle Up":
+
+            case "Obstacle Down mX":
+                {
+                    Text = "Go Down To Down The Obstacle";
+                    GuiOn = true;
+                    isTriggerObstDown = true;
+                    movement.enabled = false;
+                    refAx = 1;
+                    direction = 0;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    slD.SetPlayerPosition(dolphin.transform.position, refAx, direction);
+                    Debug.Log(dolphin.transform.position);
+                    colliderActual.enabled = false;                    
+                    break;
+                }
+
+            case "Obstacle Down Z":
+                {
+                    Text = "Go Down To Down The Obstacle";
+                    GuiOn = true;                   
+                    isTriggerObstDown = true;
+                    movement.enabled = false;
+                    refAx = 0;
+                    direction = 1;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    slD.SetPlayerPosition(dolphin.transform.position, refAx, direction);
+                    colliderActual.enabled = false;                   
+                    break;
+                }
+
+
+            case "Obstacle Down mZ":
+                {
+                    Text = "Go Down To Down The Obstacle";
+                    GuiOn = true;                    
+                    isTriggerObstDown = true;
+                    movement.enabled = false;
+                    refAx = 0;
+                    direction = 0;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    slD.SetPlayerPosition(dolphin.transform.position, refAx, direction);
+                    colliderActual.enabled = false;                  
+                    break;
+                }
+
+            case "Obstacle Up X":
                 {
                     Text = "Go Up To Avoid The Obstacle";
-                    GuiOn = true;
-                    Debug.Log("ho colliso OBUP");
-                    //Debug.Log(dolphin.transform.position);
+                    GuiOn = true;                   
                     isTriggerObstUp = true;
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    slU.SetPlayerPosition(dolphin.transform.position);
+                    refAx = 1;
+                    direction = 1;
+                    slU.SetPlayerPosition(dolphin.transform.position, refAx, direction);
                     colliderActual.enabled = false;
-                    //Debug.Log(sl.initalPlayerPosition);
-                    
+                    break;
+                }
 
 
+            case "Obstacle Up mX":
+                {
+                    Text = "Go Up To Avoid The Obstacle";
+                    GuiOn = true;
+                    isTriggerObstUp = true;
+                    movement.enabled = false;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    refAx = 1;
+                    direction = 0;
+                    slU.SetPlayerPosition(dolphin.transform.position, refAx, direction);
+                    colliderActual.enabled = false;
+                    break;
+                }
+
+            case "Obstacle Up Z":
+                {
+                    Text = "Go Up To Avoid The Obstacle";
+                    GuiOn = true;                    
+                    isTriggerObstUp = true;
+                    movement.enabled = false;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    refAx = 0;
+                    direction = 1;
+                    Debug.Log("Posizione iniziale");
+                    Debug.Log(dolphin.transform.position);
+                    slU.SetPlayerPosition(dolphin.transform.position, refAx, direction);
+                    colliderActual.enabled = false;                   
+                    break;
+                }
+
+
+            case "Obstacle Up mZ":
+                {
+                    Text = "Go Up To Avoid The Obstacle";
+                    GuiOn = true;
+                    isTriggerObstUp = true;
+                    movement.enabled = false;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    refAx = 0;
+                    direction = 0;
+                    slU.SetPlayerPosition(dolphin.transform.position, refAx, direction);
+                    colliderActual.enabled = false;
+                    break;
+                }
+
+            case "Finish":
+                {
+                    Text = "Level Finish";
+                    GuiOn = true;
                     break;
                 }
 
@@ -162,73 +255,19 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-    void OnTriggerExit(Collider collider)
-    {
-        /*switch (collider.tag)
-        {
-            case "Obstacle Down":
-                {
-                    print("sto uscendo");
 
-                    movement.enabled = false;
-
-                    GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-                    rotate.setUpRotation(new Vector3(-40,0,0));
-                    
-                    break;
-
-
-                }
-
-            case "Obstacle Up":
-                {
-                    print("sto uscendo");
-
-                    movement.enabled = false;
-
-                    GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-                    rotate.setUpRotation(new Vector3(40,0,0));
-
-                    break;
-
-
-                }
-
-            default: break;
-        }
-        */
-
-
-
-    }
-
-        
-
-
-   
-
-
+  
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
             GuiOn = false;
-            rotate.setUpRotation(new Vector3(0,-90 ,0));
+            rotate.setUpRotation(new Vector3(0,-90 , 0));
             //movement.start = true;
             //movement.enabled = true;
             //dolphin.GetComponent<Animation>().Play("TurnLeft");
             StartCoroutine(turnLeftAnimation());
-
-
-
-
-
-
-
-
             isTriggerLeft = false;
         }
 
@@ -236,9 +275,9 @@ public class PlayerCollision : MonoBehaviour
 
        if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
         {
-
             GuiOn = false;
             rotate.setUpRotation(new Vector3(0,90 ,0));
+            StartCoroutine(turnRightAnimation());
             isTriggerRight = false;
         }
 
@@ -272,9 +311,6 @@ public class PlayerCollision : MonoBehaviour
 
             //awayFromMe.setUpAvoiding(transform.up, colliderActual);
            // movement.start = true;
-            
-
-
             isTriggerObstUp = false;
 
 
