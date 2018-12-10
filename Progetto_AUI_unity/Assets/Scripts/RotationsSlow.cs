@@ -55,7 +55,9 @@ public class RotationsSlow : MonoBehaviour
     /// <param name="direction"></param>
     public void setUpRotation(Vector3 direction)
     {
-        this.rotateDirection = this.transform.rotation * Quaternion.Euler(direction);
+
+        this.rotateDirection = transform.rotation * Quaternion.Euler(direction);
+        //this.rotateDirection = Quaternion.AngleAxis(-90, Vector3.up);
         this.enabled = true;
 
     }
