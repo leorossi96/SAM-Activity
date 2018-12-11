@@ -37,6 +37,7 @@ public class PlayerCollision : MonoBehaviour
     public GUISkin customSkin;
     public int refAx;
     public int direction;
+    public Canvas canvas;
 
 
 
@@ -111,18 +112,28 @@ public class PlayerCollision : MonoBehaviour
             case "TurningPoint Right":
                 {
                     Text = "Turn Right";
-                    GuiOn = true;
+                   GuiOn = true;
+
                     isTriggerRight = true;        
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    colliderActual.enabled = false; 
+                    colliderActual.enabled = false;
+                    slD.enabled = false;
                     break;
                 }
 
             case "Obstacle Down X":
                 {
-                    Text = "Go Down To Down The Obstacle";
-                    GuiOn = true;
+                    //Text = "Go Down To Down The Obstacle";
+                    //GuiOn = true;
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "DownAdvice")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerObstDown = true;
                     movement.enabled = false;
                     refAx = 1;
@@ -136,8 +147,16 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Down mX":
                 {
-                    Text = "Go Down To Down The Obstacle";
-                    GuiOn = true;
+                    //Text = "Go Down To Down The Obstacle";
+                    // GuiOn = true;
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "DownAdvice")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerObstDown = true;
                     movement.enabled = false;
                     refAx = 1;
@@ -151,8 +170,16 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Down Z":
                 {
-                    Text = "Go Down To Down The Obstacle";
-                    GuiOn = true;                   
+                    //Text = "Go Down To Down The Obstacle";
+                    //GuiOn = true;        
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "DownAdvice")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerObstDown = true;
                     movement.enabled = false;
                     refAx = 0;
@@ -166,8 +193,16 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Down mZ":
                 {
-                    Text = "Go Down To Down The Obstacle";
-                    GuiOn = true;                    
+                    //Text = "Go Down To Down The Obstacle";
+                    //GuiOn = true;   
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "DownAdvice")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerObstDown = true;
                     movement.enabled = false;
                     refAx = 0;
@@ -180,8 +215,16 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Up X":
                 {
-                    Text = "Go Up To Avoid The Obstacle";
-                    GuiOn = true;                   
+                    //Text = "Go Up To Avoid The Obstacle";
+                    //GuiOn = true;    
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "UpAdvice")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerObstUp = true;
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -195,8 +238,16 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Up mX":
                 {
-                    Text = "Go Up To Avoid The Obstacle";
-                    GuiOn = true;
+                    //Text = "Go Up To Avoid The Obstacle";
+                    //GuiOn = true;
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "UpAdvice")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerObstUp = true;
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -209,8 +260,16 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Up Z":
                 {
-                    Text = "Go Up To Avoid The Obstacle";
-                    GuiOn = true;                    
+                    //Text = "Go Up To Avoid The Obstacle";
+                    //GuiOn = true;  
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "UpAdvice")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerObstUp = true;
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -226,8 +285,16 @@ public class PlayerCollision : MonoBehaviour
 
             case "Obstacle Up mZ":
                 {
-                    Text = "Go Up To Avoid The Obstacle";
-                    GuiOn = true;
+                    //Text = "Go Up To Avoid The Obstacle";
+                    //GuiOn = true;
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "UpAdvice")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerObstUp = true;
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -242,6 +309,8 @@ public class PlayerCollision : MonoBehaviour
                 {
                     Text = "Level Finish";
                     GuiOn = true;
+                    movement.enabled = false;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
                     break;
                 }
 
@@ -285,9 +354,17 @@ public class PlayerCollision : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObstDown == true)
         {
-            GuiOn = false;
+            //GuiOn = false;
             //rotate.setUpRotation(new Vector3(40 ,0,0));
             //awayFromMe.setUpAvoiding(-transform.up, colliderActual); 
+            Image[] images = canvas.GetComponentsInChildren<Image>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                if (images[i].name == "DownAdvice")
+                {
+                    images[i].GetComponent<Image>().enabled = false;
+                }
+            }
             slD.enabled = true;
             dolphin.GetComponent<Animation>().Play("IdleAndOvercomeDown");
             dolphin.GetComponent<Animation>().Stop("Idle");
@@ -300,7 +377,15 @@ public class PlayerCollision : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) && isTriggerObstUp == true)
         {
 
-            GuiOn = false;          
+            //GuiOn = false;    
+            Image[] images = canvas.GetComponentsInChildren<Image>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                if (images[i].name == "UpAdvice")
+                {
+                    images[i].GetComponent<Image>().enabled = false;
+                }
+            }
             slU.enabled = true;
             dolphin.GetComponent<Animation>().Play("IdleAndOvercome");
             dolphin.GetComponent<Animation>().Stop("Idle");
