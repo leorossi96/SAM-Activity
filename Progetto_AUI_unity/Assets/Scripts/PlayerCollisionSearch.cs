@@ -25,6 +25,8 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public GameObject magnifierFocus;
 
+    public GameObject cameraSearch;
+
     public bool exitFromCompletedArea = false; //boolean to remember to execute the else if part of OnTriggerStay just one time per collectibleArea
 
     void Start()
@@ -83,6 +85,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                         images[i].GetComponent<Image>().enabled = true;
                     }
                 }
+                cameraSearch.transform.position = new Vector3(collider.transform.position.x, cameraSearch.transform.position.y, collider.transform.position.z);
                 magnifierFocus.SetActive(true);
                 MagnifierMovement.SetSearchPhase(true);
                 //Display.displays[1].Activate();
@@ -93,6 +96,7 @@ public class PlayerCollisionSearch : MonoBehaviour
             }
             else if (magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && (areaCompleted == 1 || (Input.anyKey && Input.GetKey(KeyCode.C)))) //if the user finds all the collectibles in the area
             {
+                Debug.Log("AIAOAOAOAOAOAOAOAO");
                 Image[] images = canvas.GetComponentsInChildren<Image>();
                 for (int i = 0; i < images.Length; i++)
                 {

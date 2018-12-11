@@ -6,7 +6,7 @@ using UnityEngine;
 public class MagnifierMovement : MonoBehaviour {
 
     public GameObject player;
-    
+
 
     public float velocityApplied = 10f;
 
@@ -26,7 +26,6 @@ public class MagnifierMovement : MonoBehaviour {
         Debug.Log("SearchPhase = "+ searchPhase);
         if (searchPhase)
         {
-
             if (Input.anyKey)
             {
                 Vector3 position = transform.position;
