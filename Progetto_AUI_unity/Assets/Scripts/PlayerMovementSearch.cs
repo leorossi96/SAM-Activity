@@ -142,12 +142,15 @@ public class PlayerMovementSearch : MonoBehaviour
                 dolphin.GetComponent<Animation>().PlayQueued("Idle");
             }*/
 
-            /*if (Input.GetKeyUp(KeyCode.DownArrow))
-            {
-                startUp = false;
-                dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
-                dolphin.GetComponent<Animation>().PlayQueued("Idle");
-            }*/
+
+                /*if (Input.GetKeyUp(KeyCode.DownArrow))
+                {
+                    startUp = false;
+                    dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
+                    dolphin.GetComponent<Animation>().PlayQueued("Idle");
+
+                }*/
+
 
 
         }

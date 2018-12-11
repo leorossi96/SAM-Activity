@@ -17,7 +17,8 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public Transform terrain;
 
-    public Canvas canvas;
+    public Canvas canvasPlayerCamera;
+    public Canvas canvasCameraSearch;
 
     public GameObject dolphin;
 
@@ -39,7 +40,7 @@ public class PlayerCollisionSearch : MonoBehaviour
     {
         if (collider.tag == "CollectibleArea" && counter.collectiblesMap[collider.gameObject][2] == 0)
         {         
-            Image[] images = canvas.GetComponentsInChildren<Image>();
+            Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
             {
                 if (images[i].name == "Magnifier")
@@ -52,7 +53,9 @@ public class PlayerCollisionSearch : MonoBehaviour
         }
         if (collider.tag == "Collectible" && !collectiblesFound.Contains(collider))
         {
-                Debug.Log("Collectible found");
+            StartCoroutine(ShowImageInterval(canvasCameraSearch, "Seastar", 3));
+
+            Debug.Log("Collectible found");
 
                 Vector3 newCollectiblePosition = new Vector3(collider.transform.position.x, terrain.position.y, collider.transform.position.z);
                 collider.transform.SetPositionAndRotation(newCollectiblePosition, collider.transform.rotation);
@@ -66,14 +69,13 @@ public class PlayerCollisionSearch : MonoBehaviour
     
     private void OnTriggerStay(Collider collider)
     {
-        Debug.Log("ONTRIGGERSTAY");
         if (collider.tag == "CollectibleArea")
         {
             int areaCompleted = counter.collectiblesMap[collider.gameObject][2];//integer set to 1 if all the collectibles inside this area are found, 0 otherwise
             Debug.Log("Area Completed : " + areaCompleted);
             if (Input.anyKey && Input.GetKey(KeyCode.M) && !magnifierUsed && areaCompleted == 0) //if the user uses the Magnifier RFID
             {
-                Image[] images = canvas.GetComponentsInChildren<Image>();
+                Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
                 for (int i = 0; i < images.Length; i++)
                 {
                     if (images[i].name == "Magnifier")
@@ -96,8 +98,7 @@ public class PlayerCollisionSearch : MonoBehaviour
             }
             else if (magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && (areaCompleted == 1 || (Input.anyKey && Input.GetKey(KeyCode.C)))) //if the user finds all the collectibles in the area
             {
-                Debug.Log("AIAOAOAOAOAOAOAOAO");
-                Image[] images = canvas.GetComponentsInChildren<Image>();
+                Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
                 for (int i = 0; i < images.Length; i++)
                 {
                     if (images[i].name == "Magnifier")
@@ -124,7 +125,7 @@ public class PlayerCollisionSearch : MonoBehaviour
     {
         if (collider.tag == "CollectibleArea")
         {
-            Image[] images = canvas.GetComponentsInChildren<Image>();
+            Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
             {
                 if (images[i].name == "Magnifier")
@@ -137,6 +138,28 @@ public class PlayerCollisionSearch : MonoBehaviour
             magnifierFocus.SetActive(false);
             MagnifierMovement.SetSearchPhase(false);
         }
+    }
+
+
+    IEnumerator ShowImageInterval(Canvas canvas, String imageName, int seconds){
+    
+        Image imageRequested = null;
+
+        Image[] images = canvas.GetComponentsInChildren<Image>();
+
+        for (int i = 0; i < images.Length; i++)
+        {
+            if (images[i].name == imageName)
+            {
+                imageRequested = images[i].GetComponent<Image>();
+            }
+        }
+
+        imageRequested.enabled = true;
+
+        yield return new WaitForSeconds(seconds);
+
+        imageRequested.enabled = false;
     }
 
    /* IEnumerator FadeTo(float aValue, float aTime)

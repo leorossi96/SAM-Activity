@@ -58,7 +58,7 @@ public class CollectiblesCounter : MonoBehaviour {
         else if (totalCollectiblesFound >= nCollectibles){
             Debug.Log("HAI VINTO");
             movement.enabled = false;
-            dolphin.GetComponent<Animation>().PlayQueued("");
+            dolphin.GetComponent<Animation>().PlayQueued("Looping");
             //StartCoroutine(BubbleMachine());
         }
     }
