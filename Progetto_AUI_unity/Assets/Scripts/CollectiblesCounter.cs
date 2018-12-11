@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CollectiblesCounter : MonoBehaviour {
 
+    public PlayerMovementSearch movement;
     public int nCollectibles;
     int totalCollectiblesFound;
+    public GameObject dolphin;
+
     SmartToy Dolphin;
 
     public Dictionary<GameObject, int[]> collectiblesMap = new Dictionary<GameObject, int[]>(); //maps the collectible are with an array of 2 integer: the first is the number of relevant collectibles inside the area while the second is the number of collectibles found in that area
@@ -54,6 +57,8 @@ public class CollectiblesCounter : MonoBehaviour {
         }
         else if (totalCollectiblesFound >= nCollectibles){
             Debug.Log("HAI VINTO");
+            movement.enabled = false;
+            dolphin.GetComponent<Animation>().PlayQueued("");
             //StartCoroutine(BubbleMachine());
         }
     }
