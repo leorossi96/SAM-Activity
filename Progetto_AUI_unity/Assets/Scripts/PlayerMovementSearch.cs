@@ -150,11 +150,6 @@ public class PlayerMovementSearch : MonoBehaviour
                 }*/
 
 
-
-
-
-
-
         }
 
 
@@ -176,7 +171,17 @@ public class PlayerMovementSearch : MonoBehaviour
                 delfinoFound = true;
             }
         }
+
+
+        if (tf.position.y > 60f)
+        {
+            tf.position = new Vector3(tf.position.x, 60f, tf.position.z);
+        }
+
     }
+
+
+
 
     /*IEnumerator waittoStartGreenLight(){
         yield return new WaitForSeconds(1);
