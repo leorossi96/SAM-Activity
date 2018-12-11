@@ -113,35 +113,39 @@ public class SlerpDown : MonoBehaviour
         initalPlayerPosition = playerPos;
         if (playerPos.y < 42)
         {
-            height = 5;
+            height = 25; //5
         }
         if (playerPos.y < 46 && playerPos.y >= 42)
         {
-            height = 7;
+            height = 30; //7
         }
         if (playerPos.y < 50 && playerPos.y >= 46)
         {
-            height = 12;
+            height = 35;    //12
         }
         if (playerPos.y < 55 && playerPos.y >= 50)
         {
-            height = 15;
-        }
+                height = 40;       //15
+            }
         if (playerPos.y < 60 && playerPos.y >= 55)
         {
-            height = 20;
+            height = 45;        //20
         }
         if (playerPos.y < 65 && playerPos.y >= 60)
         {
-            height = 25;
+            height = 50;        //25
         }
         if (playerPos.y < 70 && playerPos.y >= 65)
         {
-            height = 30;
+            height = 55;        //30
         }
-        if (playerPos.y <= 75 && playerPos.y >= 70)
+        if (playerPos.y < 75 && playerPos.y >= 70)
         {
-            height = 35;
+            height = 60;        //35
+        }
+        if (playerPos.y <= 85 && playerPos.y >= 75)
+        {
+            height = 65;        //35
         }
 
         referenceAxis = refAx;
