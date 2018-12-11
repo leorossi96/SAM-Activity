@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour {
             if (rightArrow)
             {
                // rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-                rb.AddRelativeForce(Vector3.right * Time.deltaTime,  ForceMode.VelocityChange);
+                rb.AddRelativeForce(Vector3.right,  ForceMode.VelocityChange);
             }
             if (leftArrow)
             {
