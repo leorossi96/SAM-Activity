@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditorInternal;
 
 public class PlayerMovementSearch : MonoBehaviour
 {
@@ -19,7 +20,10 @@ public class PlayerMovementSearch : MonoBehaviour
     public bool tabKey;
     public bool shiftKey;
     public bool startUp;
-    public bool startDown; 
+    public bool startDown;
+    public bool fromup;
+    public bool fromDown; 
+
 
     public GameObject dolphin;  
     public bool start = false;
@@ -75,41 +79,127 @@ public class PlayerMovementSearch : MonoBehaviour
                 position = position - tf.up * velocityApplied * Time.deltaTime;
                 tf.position = position;
 
-                /*if(!start){
+                if(!tabKey){
                     if(!startDown){
-                        dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                        dolphin.GetComponent<Animation>().Play("GoDown");
                         startDown = true; 
                     }else{
                         dolphin.GetComponent<Animation>().PlayQueued("Swimming");
                     }
-                }*/
+
+                    if (Input.GetKeyUp(KeyCode.Tab))
+                    {
+                        start = false;
+                    }
+                }else{
+                    if (Input.GetKeyDown(KeyCode.Tab))
+                    {
+                        dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
+                        start = true;
+                        startDown = false;
+                        fromDown = true; 
+                    }
+                }
             }
             if (upArrow)
             {
                 position = position + tf.up * velocityApplied * Time.deltaTime;
                 tf.position = position;
 
-                /*if(!tabKey){
+                if(!tabKey){
                     if(!startUp){
                         dolphin.GetComponent<Animation>().Play("GoUp");
+
                         startUp = true; 
                     }else{
                         dolphin.GetComponent<Animation>().PlayQueued("Swimming");
                     }
-                }*/
+
+                    if(Input.GetKeyUp(KeyCode.Tab)){
+                        start = false; 
+                    }
+                }else{
+                    if(Input.GetKeyDown(KeyCode.Tab)){
+                        dolphin.GetComponent<Animation>().Play("Stopping_from_going_up");
+                        start = true;
+                        startUp = false;
+                        fromup = true; 
+                    }
+                }
             }
             if (tabKey)
             {
                 position = position + tf.forward * velocityApplied * Time.deltaTime;
                 tf.position = position;
+
+
                 if (start)
                 {
                     dolphin.GetComponent<Animation>().PlayQueued("Swimming");
                 }
                 else{
 
-                    dolphin.GetComponent<Animation>().Play("StartSwimSearch");
-                    start = true;
+
+                    /*if (Input.GetKeyUp(KeyCode.UpArrow)||Input.GetKeyUp(KeyCode.DownArrow))
+                    {
+                        if(Input.GetKeyUp(KeyCode.UpArrow)){
+                            startUp = false;
+                            dolphin.GetComponent<Animation>().Play("Stopping_from_going_up");
+                            dolphin.GetComponent<Animation>().PlayQueued("StartSwimSearch");
+                            start = true; 
+                        }else{
+                            if (Input.GetKeyUp(KeyCode.DownArrow)){
+                                startDown = false;
+                                dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
+                                dolphin.GetComponent<Animation>().PlayQueued("StartSwimSearch");
+                                start = true; 
+                            }
+                        }
+                    
+                            
+
+                    }else{}*/
+                        
+                   
+                        if (Input.GetKeyDown(KeyCode.Tab))
+                        {
+
+                        if(fromup){
+                                dolphin.GetComponent<Animation>().Play("Stopping_from_going_up");
+                                dolphin.GetComponent<Animation>().PlayQueued("StartSwimSearch");
+                                startUp = false;
+                                fromup = false; ; 
+                            }else{
+                            if(fromDown){
+                                    dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
+                                    dolphin.GetComponent<Animation>().PlayQueued("StartSwimSearch");
+                                    startDown = false;
+                                    fromDown = false; 
+                            }else{
+                                dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                            }
+                            }
+
+
+                        start = true; 
+                            
+
+                        }
+
+                    if(start==false){
+                        dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+
+                        start = true; 
+                    }
+                        
+                          
+
+
+
+                        
+
+
+
                 }
 
 
@@ -124,7 +214,9 @@ public class PlayerMovementSearch : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyUp(KeyCode.Tab))
+            
+
+            if (Input.GetKeyUp(KeyCode.Tab) && !(Input.GetKeyUp(KeyCode.UpArrow)) && !(Input.GetKeyUp(KeyCode.DownArrow)))
             {
                 start = false;
                 dolphin.GetComponent<Animation>().Play("Stopping");
@@ -133,29 +225,29 @@ public class PlayerMovementSearch : MonoBehaviour
             }
 
 
-            /*if (Input.GetKeyUp(KeyCode.UpArrow))
+            if (Input.GetKeyUp(KeyCode.UpArrow))
             {
                 startUp = false;
                 dolphin.GetComponent<Animation>().Play("Stopping_from_going_up");
                 dolphin.GetComponent<Animation>().PlayQueued("Idle");
+                start = false; 
+            }
 
-            }*/
-
-                /*if (Input.GetKeyUp(KeyCode.DownArrow))
-                {
-                    startUp = false;
-                    dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
-                    dolphin.GetComponent<Animation>().PlayQueued("Idle");
-
-                }*/
-
-
+            if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                startDown = false;
+                dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
+                dolphin.GetComponent<Animation>().PlayQueued("Idle");
+                start = false; 
+            }
 
 
 
 
 
         }
+
+
 
 
 

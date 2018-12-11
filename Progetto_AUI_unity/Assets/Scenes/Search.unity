@@ -2903,7 +2903,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11100000, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_Animations.Array.size
-      value: 9
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 400026, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3156,7 +3156,7 @@ Prefab:
     - target: {fileID: 11100000, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_Animations.Array.data[8]
       value: 
-      objectReference: {fileID: 7400000, guid: 5f1e3f74a2ec144eb827ab60151afd7f, type: 2}
+      objectReference: {fileID: 7400000, guid: e7c26d80a8394425ea2365ad5e833daa, type: 2}
     - target: {fileID: 400006, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -13.2207
@@ -3520,19 +3520,19 @@ Prefab:
     - target: {fileID: 11100000, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_Animations.Array.data[9]
       value: 
-      objectReference: {fileID: 7400018, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
+      objectReference: {fileID: 7400000, guid: c2b69cf7be4b94c3caca9cae252cc299, type: 2}
     - target: {fileID: 11100000, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_Animations.Array.data[10]
       value: 
-      objectReference: {fileID: 7400020, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
+      objectReference: {fileID: 7400000, guid: af1443191e871479c83895ece9867760, type: 2}
     - target: {fileID: 11100000, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_Animations.Array.data[11]
       value: 
-      objectReference: {fileID: 7400022, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
+      objectReference: {fileID: 7400000, guid: 0c3535ceb7c7a4159bbd3524e74c0fb7, type: 2}
     - target: {fileID: 11100000, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_Animations.Array.data[12]
       value: 
-      objectReference: {fileID: 7400024, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
+      objectReference: {fileID: 7400000, guid: 5f1e3f74a2ec144eb827ab60151afd7f, type: 2}
     - target: {fileID: 11100000, guid: cbb203b8a773a0649a4153520107c4ef, type: 3}
       propertyPath: m_Animations.Array.data[13]
       value: 
