@@ -35,7 +35,7 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "CollectibleArea")
+        if (collider.tag == "CollectibleArea" && counter.collectiblesMap[collider.gameObject][2] == 0)
         {         
             Image[] images = canvas.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
