@@ -17,7 +17,7 @@ public class MagicRoomSmartToyManager : MonoBehaviour {
     /// receiving udp address for smart objectstream
     /// </summary>
 
-    const string receivigUDPAddress = "http://192.168.31.124:7082";
+    const string receivigUDPAddress = "http://192.168.0.185:7082";
 
 
     /// <summary>
@@ -41,7 +41,7 @@ public class MagicRoomSmartToyManager : MonoBehaviour {
     void Awake()
     {
         instance = this;
-        address = "http://localhost:7081";
+        address = "http://192.168.0.112:7081";
         MagicRoomSmartToyManager_active = true;
     }
 

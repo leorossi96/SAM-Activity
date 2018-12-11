@@ -22,6 +22,7 @@ public class PlayerMovementSearch : MonoBehaviour
     public GameObject dolphin;  
     public bool start = false;
 
+
     SmartToy dolphinController;
 
     public bool moving;
@@ -34,6 +35,8 @@ public class PlayerMovementSearch : MonoBehaviour
         {
             Display.displays[i].Activate();
         }
+
+       
     }
 
 
@@ -89,6 +92,8 @@ public class PlayerMovementSearch : MonoBehaviour
                     start = true;
                 }
 
+
+
                     
             }
             if (shiftKey)
@@ -112,26 +117,25 @@ public class PlayerMovementSearch : MonoBehaviour
 
         if (!delfinoFound)
         {
-            if (GameObject.Find("Dolphin3") != null)
+            if (GameObject.Find("Dolphin1") != null)
             {
-                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin3");
-                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin3", 10f);
-                dolphinController = GameObject.Find("Dolphin3").GetComponent<SmartToy>();
-                Vector3[] gyroscope = dolphinController.objectposition.gyroscope;
+                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+                /*Vector3[] gyroscope = dolphinController.objectposition.gyroscope;
                 Debug.Log("GIROSCOPIO " + gyroscope[0]);
-                StartCoroutine(waittoStartGreenLight());
+                StartCoroutine(waittoStartGreenLight());*/
+                dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+                Debug.Log("Light On."); 
                 delfinoFound = true;
             }
-        }else{
-            Vector3[] gyroscope = dolphinController.objectposition.gyroscope;
-            Debug.Log("GIROSCOPIO " + gyroscope[0] + gyroscope[1] + gyroscope[2]);
         }
     }
 
-    IEnumerator waittoStartGreenLight(){
+    /*IEnumerator waittoStartGreenLight(){
         yield return new WaitForSeconds(1);
         dolphinController.executeCommandLightController(Color.green, 0, "parthead");
-    }
+    }*/
 
 
 
