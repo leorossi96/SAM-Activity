@@ -18,7 +18,7 @@ public class RandomMovement : MonoBehaviour {
 	void Start () {
         
         navMeshAgent = GetComponent<NavMeshAgent>();
-
+        GetNewPath(); 
         inCoroutine = false;
 	}
 

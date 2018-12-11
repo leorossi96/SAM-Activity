@@ -11,7 +11,7 @@ public class PlayerMovementSearch : MonoBehaviour
     public float velocityApplied = 10f;
     public float rotationSpeed = 3f;
     public float lerpSpeed = 0.5f;
-     
+
     public bool rightArrow;
     public bool leftArrow;
     public bool downArrow;
@@ -19,9 +19,9 @@ public class PlayerMovementSearch : MonoBehaviour
     public bool tabKey;
     public bool shiftKey;
     public bool startUp;
-    public bool startDown; 
+    public bool startDown;
 
-    public GameObject dolphin;  
+    public GameObject dolphin;
     public bool start = false;
 
 
@@ -38,13 +38,14 @@ public class PlayerMovementSearch : MonoBehaviour
             Display.displays[i].Activate();
         }
 
-       
+
     }
 
 
 
-        // Update is called once per frame
-    void FixedUpdate(){
+    // Update is called once per frame
+    void FixedUpdate()
+    {
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -75,19 +76,47 @@ public class PlayerMovementSearch : MonoBehaviour
                 position = position - tf.up * velocityApplied * Time.deltaTime;
                 tf.position = position;
 
- 
-
+                /*if(!start){
+                    if(!startDown){
+                        dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                        startDown = true; 
+                    }else{
+                        dolphin.GetComponent<Animation>().PlayQueued("Swimming");
+                    }
+                }*/
             }
             if (upArrow)
             {
                 position = position + tf.up * velocityApplied * Time.deltaTime;
                 tf.position = position;
 
-                
+                /*if(!tabKey){
+                    if(!startUp){
+                        dolphin.GetComponent<Animation>().Play("GoUp");
+                        startUp = true; 
+                    }else{
+                        dolphin.GetComponent<Animation>().PlayQueued("Swimming");
+                    }
+                }*/
+            }
+            if (tabKey)
+            {
+                position = position + tf.forward * velocityApplied * Time.deltaTime;
+                tf.position = position;
+                if (start)
+                {
+                    dolphin.GetComponent<Animation>().PlayQueued("Swimming");
+                }
+                else
+                {
+
+                    dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                    start = true;
+                }
 
 
 
-                    
+
             }
             if (shiftKey)
             {
@@ -106,11 +135,19 @@ public class PlayerMovementSearch : MonoBehaviour
             }
 
 
-            
+            /*if (Input.GetKeyUp(KeyCode.UpArrow))
+            {
+                startUp = false;
+                dolphin.GetComponent<Animation>().Play("Stopping_from_going_up");
+                dolphin.GetComponent<Animation>().PlayQueued("Idle");
+            }*/
 
-
-
-
+            /*if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                startUp = false;
+                dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
+                dolphin.GetComponent<Animation>().PlayQueued("Idle");
+            }*/
 
 
         }
@@ -130,11 +167,21 @@ public class PlayerMovementSearch : MonoBehaviour
                 Debug.Log("GIROSCOPIO " + gyroscope[0]);
                 StartCoroutine(waittoStartGreenLight());*/
                 dolphinController.executeCommandLightController(Color.green, 100, "parthead");
-                Debug.Log("Light On."); 
+                Debug.Log("Light On.");
                 delfinoFound = true;
             }
         }
+
+
+        if (tf.position.y > 60f)
+        {
+            tf.position = new Vector3(tf.position.x, 60f, tf.position.z);
+        }
+
     }
+
+
+
 
     /*IEnumerator waittoStartGreenLight(){
         yield return new WaitForSeconds(1);
