@@ -58,7 +58,7 @@ public class PlayerCollision : MonoBehaviour
     private IEnumerator turnLeftAnimation()
     {
         dolphin.GetComponent<Animation>().Play("TurnLeft");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         movement.start = true;
         movement.enabled = true;
 
@@ -67,7 +67,7 @@ public class PlayerCollision : MonoBehaviour
     private IEnumerator turnRightAnimation()
     {
         dolphin.GetComponent<Animation>().Play("TurnRight");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         movement.start = true;
         movement.enabled = true;
 
