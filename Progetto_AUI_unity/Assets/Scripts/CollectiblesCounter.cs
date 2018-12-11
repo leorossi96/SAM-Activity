@@ -8,6 +8,7 @@ public class CollectiblesCounter : MonoBehaviour {
     public int nCollectibles;
     int totalCollectiblesFound;
     public GameObject dolphin;
+    public PlayerCollisionSearch playerCollisionSearch;
 
     SmartToy Dolphin;
 
@@ -58,6 +59,8 @@ public class CollectiblesCounter : MonoBehaviour {
         else if (totalCollectiblesFound >= nCollectibles){
             Debug.Log("HAI VINTO");
             movement.enabled = false;
+            playerCollisionSearch.enabled = false;
+            //TODO levare immagine aiuto search, e aggiungi scritta vittoria 
             dolphin.GetComponent<Animation>().PlayQueued("Looping");
             //StartCoroutine(BubbleMachine());
         }

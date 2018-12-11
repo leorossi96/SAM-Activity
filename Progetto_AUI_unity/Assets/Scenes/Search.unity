@@ -788,6 +788,7 @@ MonoBehaviour:
   movement: {fileID: 128406644}
   nCollectibles: 0
   dolphin: {fileID: 434405740}
+  playerCollisionSearch: {fileID: 0}
 --- !u!4 &140590062 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 95b25a6d3e61cd7499dcecc9b5616c9d, type: 3}
@@ -9378,7 +9379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!208 &1007290405
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -16948,7 +16949,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1338033900}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 24.7, y: 0.20000005, z: -0.1}
+  m_LocalPosition: {x: 23.4, y: 0.20000005, z: -0.59}
   m_LocalScale: {x: 0.19999999, y: 0.2000001, z: 0.2000001}
   m_Children: []
   m_Father: {fileID: 1471048252}

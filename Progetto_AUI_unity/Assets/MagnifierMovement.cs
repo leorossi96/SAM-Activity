@@ -8,7 +8,7 @@ public class MagnifierMovement : MonoBehaviour {
     public GameObject player;
 
 
-    public float velocityApplied = 10f;
+    public float velocityApplied = 0.5f;
 
     GameObject collectibleArea;
 
@@ -17,6 +17,7 @@ public class MagnifierMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         transform.position = player.transform.position;
+        transform.position = new Vector3(transform.position.x, 1, transform.position.z);
 
 	}
 
@@ -32,30 +33,32 @@ public class MagnifierMovement : MonoBehaviour {
 
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
-                    position = position + transform.forward * velocityApplied * Time.deltaTime;
-                    transform.position = position;
+                    /*position = position + transform.forward * velocityApplied * Time.deltaTime;
+                    transform.position = position;*/
+                    transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(0, 0, 1), velocityApplied);
+
                 }
                 if (Input.GetKey(KeyCode.DownArrow))
                 {
-                    position = position - transform.forward * velocityApplied * Time.deltaTime;
-                    transform.position = position;
+                    /*position = position - transform.forward * velocityApplied * Time.deltaTime;
+                    transform.position = position;*/
+                    transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(0, 0, -1), velocityApplied);
+
                 }
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    position = position - transform.right * velocityApplied * Time.deltaTime;
-                    transform.position = position;
+                    /*position = position - transform.right * velocityApplied * Time.deltaTime;
+                    transform.position = position;*/
+                    transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(-1, 0, 0), velocityApplied);
 
                 }
                 if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    position = position + transform.right * velocityApplied * Time.deltaTime;
-                    transform.position = position;
+                    /*position = position + transform.right * velocityApplied * Time.deltaTime;
+                    transform.position = position;*/
+                    transform.position = Vector3.MoveTowards(transform.position, transform.position + new Vector3(1, 0, 0), velocityApplied);
+
                 }
-            }
-            else
-            {
-                Vector3 onGroundPosition = new Vector3(0, player.transform.position.y, 0);
-                transform.position = player.transform.position - onGroundPosition;
             }
         }
     }
