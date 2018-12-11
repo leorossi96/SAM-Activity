@@ -35,12 +35,12 @@ public class CollectiblesCounter : MonoBehaviour {
         /*if(Dolphin == null){
             Dolphin = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
         }
-            Dolphin.executeCommandLightController(Color.black, 0, "parthead");
-            Debug.Log("LUCE DELFINO ACCESA");
+        Dolphin.executeCommandLightController(Color.blue, 10, "parthead");
+            Debug.Log("LUCE DELFINO ACCESA");*/
 
         //MagicRoomSmartToyManager.instance.sendCommandExecuteSmartToy("Dolphin1", "partrightfin");
 
-        VoicesOffline voice = MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[2];*/
+        //VoicesOffline voice = MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[2];*/
         if (collectiblesCounters[1] < collectiblesCounters[0])
         {
            // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("Hai trovato un collezionabile! Cerca gli altri nella mappa", voice);
