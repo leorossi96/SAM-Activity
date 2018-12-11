@@ -17,6 +17,7 @@ TagManager:
   - Obstacle Up mX
   - Obstacle Up Z
   - Obstacle Up mZ
+  - Camera Search
   layers:
   - Default
   - TransparentFX
