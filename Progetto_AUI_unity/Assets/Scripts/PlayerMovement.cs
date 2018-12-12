@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public float forwardForce = 2000f;      //2000f valore vero
     public float movementForce = 500f;
-
+    public float speed; 
     public bool rightArrow;
     public bool leftArrow;
     public bool downArrow;
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour {
 
         //rb.AddRelativeForce(Vector3.forward);
         //rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, 0.3f); 
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed); 
         Debug.Log("Swimming");
         Debug.Log(forwardForce * Time.deltaTime);
         if (start)
@@ -68,21 +68,21 @@ public class PlayerMovement : MonoBehaviour {
             {
                // rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
                 //rb.AddRelativeForce(Vector3.right,  ForceMode.VelocityChange);
-                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, 0.3f);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, speed);
             }
             if (leftArrow)
             {
                 //rb.AddRelativeForce(-movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.right, 0.3f);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.right, speed);
             }
             if (downArrow)
             {
                 //rb.AddRelativeForce(0, -movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
-                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.up, 0.3f);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.up, speed);
             }
             if (upArrow)
             {
-                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, 0.3f);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, speed);
             }
         }
 /*       if ((rb.position.y <= -1 || rb.position.y.ToString().Equals("NaN")) && false)
