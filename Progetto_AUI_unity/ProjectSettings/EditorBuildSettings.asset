@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
     guid: 8c3d132b938a08342951595470983dc1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TempleRun.unity
     guid: 3a337b7d86bd63d48af72fd1e05f02eb
   - enabled: 1

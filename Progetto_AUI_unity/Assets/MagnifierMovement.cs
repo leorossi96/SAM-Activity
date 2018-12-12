@@ -17,7 +17,7 @@ public class MagnifierMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         transform.position = player.transform.position;
-        transform.position = new Vector3(transform.position.x, 1, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 0.2f, transform.position.z);
 
 	}
 
