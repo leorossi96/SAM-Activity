@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -598,6 +598,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &73417041 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4777561545890088, guid: 648cf36f7b862493a85b2d0af2f92634,
@@ -694,6 +697,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &128406637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,6 +1391,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &200614968 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: dd62c0bc70ea0fe4288669333b8cc7c6, type: 3}
@@ -1566,6 +1575,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &220708175
 Prefab:
   m_ObjectHideFlags: 0
@@ -1839,6 +1851,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &266359502
 Prefab:
   m_ObjectHideFlags: 0
@@ -1925,6 +1940,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &266528380
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,6 +2119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &295395441
 Prefab:
   m_ObjectHideFlags: 0
@@ -2183,6 +2204,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &296432158
 Prefab:
   m_ObjectHideFlags: 0
@@ -2646,6 +2670,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &377000999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,6 +2790,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &384746154
 Prefab:
   m_ObjectHideFlags: 0
@@ -2845,6 +2875,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &387139597
 Prefab:
   m_ObjectHideFlags: 0
@@ -2931,6 +2964,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &388540324
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,6 +3118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &415798218
 Prefab:
   m_ObjectHideFlags: 0
@@ -4090,6 +4129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &440743365 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4212210853504742, guid: 2beef65af7e6344cfb424d2aef45c47c,
@@ -4320,6 +4362,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &464119135
 Prefab:
   m_ObjectHideFlags: 0
@@ -4616,6 +4661,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &510867136
 Prefab:
   m_ObjectHideFlags: 0
@@ -4956,6 +5004,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &543080449
 GameObject:
   m_ObjectHideFlags: 0
@@ -5152,6 +5203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &547910624
 GameObject:
   m_ObjectHideFlags: 0
@@ -5324,6 +5378,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &553175360
 GameObject:
   m_ObjectHideFlags: 0
@@ -5488,6 +5545,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &562299561
 Prefab:
   m_ObjectHideFlags: 0
@@ -5749,6 +5809,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &591129868
 GameObject:
   m_ObjectHideFlags: 0
@@ -6206,6 +6269,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &639900618
 Prefab:
   m_ObjectHideFlags: 0
@@ -6284,6 +6350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &640171886
 GameObject:
   m_ObjectHideFlags: 0
@@ -6435,6 +6504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &644633661 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4212210853504742, guid: 2beef65af7e6344cfb424d2aef45c47c,
@@ -6609,6 +6681,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &658157801
 Prefab:
   m_ObjectHideFlags: 0
@@ -6691,6 +6766,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &662650218
 Prefab:
   m_ObjectHideFlags: 0
@@ -6835,6 +6913,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &667819750
 GameObject:
   m_ObjectHideFlags: 0
@@ -7125,6 +7206,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &723654556
 GameObject:
   m_ObjectHideFlags: 0
@@ -7472,6 +7556,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &755772420 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 95b25a6d3e61cd7499dcecc9b5616c9d, type: 3}
@@ -7652,6 +7739,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &774009348 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: aa7bc6ed8d59e2143a4ccb40c3adfd77, type: 3}
@@ -7668,6 +7758,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &774766314 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 95b25a6d3e61cd7499dcecc9b5616c9d, type: 3}
@@ -7688,6 +7781,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &784577459 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4598227221615064, guid: 6967346aed4c54a7e80353a3bad464b1,
@@ -7897,6 +7993,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &809121689
 Prefab:
   m_ObjectHideFlags: 0
@@ -8173,6 +8272,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &871097673
 Prefab:
   m_ObjectHideFlags: 0
@@ -8460,6 +8562,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &905159532
 GameObject:
   m_ObjectHideFlags: 0
@@ -8637,6 +8742,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &942920109
 GameObject:
   m_ObjectHideFlags: 0
@@ -8740,6 +8848,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &954786513
 GameObject:
   m_ObjectHideFlags: 0
@@ -9362,6 +9473,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1002697073
 Prefab:
   m_ObjectHideFlags: 0
@@ -9611,6 +9725,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &1007290404
 GameObject:
   m_ObjectHideFlags: 0
@@ -10076,6 +10193,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1077533705
 Prefab:
   m_ObjectHideFlags: 0
@@ -10308,6 +10428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &1085695144 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: dd02eea8d907c1549951ba0914e6b1a7, type: 3}
@@ -10324,6 +10447,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1099013585
 Prefab:
   m_ObjectHideFlags: 0
@@ -10410,6 +10536,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1105614798
 Prefab:
   m_ObjectHideFlags: 0
@@ -10492,6 +10621,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &1111542944
 GameObject:
   m_ObjectHideFlags: 0
@@ -11070,6 +11202,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1160803602
 Prefab:
   m_ObjectHideFlags: 0
@@ -15844,6 +15979,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1178296993 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4777561545890088, guid: 648cf36f7b862493a85b2d0af2f92634,
@@ -15931,6 +16069,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1179805805 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: dd62c0bc70ea0fe4288669333b8cc7c6, type: 3}
@@ -16191,6 +16332,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1216388501
 Prefab:
   m_ObjectHideFlags: 0
@@ -16269,6 +16413,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1219360305
 Prefab:
   m_ObjectHideFlags: 0
@@ -16492,6 +16639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1265893929 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 2425f83c5166ee14fa4ada510840d417, type: 3}
@@ -17640,6 +17790,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1394598627 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4212210853504742, guid: 2beef65af7e6344cfb424d2aef45c47c,
@@ -17994,6 +18147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1477069273
 Prefab:
   m_ObjectHideFlags: 0
@@ -18076,6 +18232,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1487530328 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: dd62c0bc70ea0fe4288669333b8cc7c6, type: 3}
@@ -18419,6 +18578,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &1508898033
 GameObject:
   m_ObjectHideFlags: 0
@@ -19311,6 +19473,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1583445832 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4792390121500686, guid: a2636c64426524f4ba0353d4a1251dcd,
@@ -19515,6 +19680,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1603703903
 Prefab:
   m_ObjectHideFlags: 0
@@ -19726,6 +19894,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1623478481 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: dd62c0bc70ea0fe4288669333b8cc7c6, type: 3}
@@ -20128,6 +20299,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &1698562624
 GameObject:
   m_ObjectHideFlags: 0
@@ -20437,6 +20611,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1726628867 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: dd62c0bc70ea0fe4288669333b8cc7c6, type: 3}
@@ -20944,6 +21121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1808117334 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4792390121500686, guid: a2636c64426524f4ba0353d4a1251dcd,
@@ -21223,6 +21403,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1841688639
 Prefab:
   m_ObjectHideFlags: 0
@@ -21645,6 +21828,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1901641257
 Prefab:
   m_ObjectHideFlags: 0
@@ -21727,6 +21913,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &1904521925
 Prefab:
   m_ObjectHideFlags: 0
@@ -21809,6 +21998,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &1906281773 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: b571f3e49a473924998d589bb8280238, type: 3}
@@ -21825,6 +22017,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &1906864826
 GameObject:
   m_ObjectHideFlags: 0
@@ -22060,6 +22255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &1916377101 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: dd62c0bc70ea0fe4288669333b8cc7c6, type: 3}
@@ -22351,6 +22549,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &1938248914
 GameObject:
   m_ObjectHideFlags: 0
@@ -22918,6 +23119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &2003359568
 Prefab:
   m_ObjectHideFlags: 0
@@ -23194,6 +23398,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &2020799499
 Prefab:
   m_ObjectHideFlags: 0
@@ -23276,6 +23483,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &2034767912
 Prefab:
   m_ObjectHideFlags: 0
@@ -23362,6 +23572,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &2036469018
 Prefab:
   m_ObjectHideFlags: 0
@@ -23448,6 +23661,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &2037582456
 Prefab:
   m_ObjectHideFlags: 0
@@ -23534,6 +23750,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!4 &2043255564 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4598227221615064, guid: 6967346aed4c54a7e80353a3bad464b1,
@@ -23621,6 +23840,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &2054542248 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 2425f83c5166ee14fa4ada510840d417, type: 3}
@@ -23637,6 +23859,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1 &2056114013
 GameObject:
   m_ObjectHideFlags: 0
@@ -23824,6 +24049,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &2057256462
 Prefab:
   m_ObjectHideFlags: 0
@@ -23910,6 +24138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &2071641765
 Prefab:
   m_ObjectHideFlags: 0
@@ -24216,6 +24447,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0
+  range: 0
+  rangeinit: 0
+  run: 0
 --- !u!1001 &2125498080
 Prefab:
   m_ObjectHideFlags: 0

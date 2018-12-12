@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -307,10 +308,18 @@ public class PlayerCollision : MonoBehaviour
 
             case "Finish":
                 {
-                    Text = "Level Finish";
-                    GuiOn = true;
+                    //Text = "Level Finish";
+                    //GuiOn = true;
+                    TextMeshProUGUI text = canvas.GetComponentInChildren<TextMeshProUGUI>();
+                    if (text.name == "Finish Level")
+                    {
+                        text.fontSize = 50;
+                    }
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    dolphin.GetComponent<Animation>().Play("DolphinWaitingForSearchStart");
+                    dolphin.GetComponent<Animation>().PlayQueued("Clapping");
+                    colliderActual.enabled = false;
                     break;
                 }
 
