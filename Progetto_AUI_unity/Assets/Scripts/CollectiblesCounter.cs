@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +10,9 @@ public class CollectiblesCounter : MonoBehaviour {
     public int nCollectibles;
     int totalCollectiblesFound;
     public GameObject dolphin;
+    public Canvas canvasPlayerCamera;
     public PlayerCollisionSearch playerCollisionSearch;
+
 
     SmartToy Dolphin;
 
@@ -60,6 +64,23 @@ public class CollectiblesCounter : MonoBehaviour {
             Debug.Log("HAI VINTO");
             movement.enabled = false;
             playerCollisionSearch.enabled = false;
+            TextMeshProUGUI text = canvasPlayerCamera.GetComponentInChildren<TextMeshProUGUI>();
+            if (text.name == "Level Completed Text")
+            {
+                text.fontSize = 150;
+            }
+            Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                if (images[i].name == "Magnifier")
+                {
+                    images[i].GetComponent<Image>().enabled = false;
+                }
+                if (images[i].name == "SearchIllustration")
+                {
+                    images[i].GetComponent<Image>().enabled = false;
+                }
+            }
             //TODO levare immagine aiuto search, e aggiungi scritta vittoria 
             dolphin.GetComponent<Animation>().PlayQueued("Looping");
             //StartCoroutine(BubbleMachine());
@@ -87,3 +108,4 @@ public class CollectiblesCounter : MonoBehaviour {
         MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
     }
 }
+ 
