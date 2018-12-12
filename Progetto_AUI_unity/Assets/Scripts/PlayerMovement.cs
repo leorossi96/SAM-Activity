@@ -45,7 +45,8 @@ public class PlayerMovement : MonoBehaviour {
 
 
         //rb.AddRelativeForce(Vector3.forward);
-        rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
+        //rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, 0.3f); 
         Debug.Log("Swimming");
         Debug.Log(forwardForce * Time.deltaTime);
         if (start)
@@ -66,21 +67,22 @@ public class PlayerMovement : MonoBehaviour {
             if (rightArrow)
             {
                // rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-                rb.AddRelativeForce(Vector3.right,  ForceMode.VelocityChange);
+                //rb.AddRelativeForce(Vector3.right,  ForceMode.VelocityChange);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, 0.3f);
             }
             if (leftArrow)
             {
                 //rb.AddRelativeForce(-movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-                rb.AddRelativeForce(-Vector3.right , ForceMode.VelocityChange);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.right, 0.3f);
             }
             if (downArrow)
             {
                 //rb.AddRelativeForce(0, -movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
-                rb.AddRelativeForce(-Vector3.up, ForceMode.VelocityChange);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.up, 0.3f);
             }
             if (upArrow)
             {
-                rb.AddRelativeForce(Vector3.up , ForceMode.VelocityChange);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, 0.3f);
             }
         }
 /*       if ((rb.position.y <= -1 || rb.position.y.ToString().Equals("NaN")) && false)
