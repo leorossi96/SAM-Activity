@@ -329,7 +329,7 @@ public class PlayerCollision : MonoBehaviour
                     TextMeshProUGUI text = canvas.GetComponentInChildren<TextMeshProUGUI>();
                     if (text.name == "Finish Level")
                     {
-                        text.fontSize = 50;
+                        text.fontSize = 150;
                     }
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
