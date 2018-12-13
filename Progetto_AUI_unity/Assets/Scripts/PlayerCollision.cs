@@ -101,8 +101,16 @@ public class PlayerCollision : MonoBehaviour
         {
             case "TurningPoint Left":
                 {
-                    Text = "Turn Left";
-                    GuiOn = true;
+                    //Text = "Turn Left";
+                    //GuiOn = true;
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "leftFin")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
                     isTriggerLeft = true;
                     movement.enabled = false;
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -112,8 +120,16 @@ public class PlayerCollision : MonoBehaviour
 
             case "TurningPoint Right":
                 {
-                    Text = "Turn Right";
-                   GuiOn = true;
+                    //Text = "Turn Right";
+                    // GuiOn = true;
+                    Image[] images = canvas.GetComponentsInChildren<Image>();
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        if (images[i].name == "rightFin")
+                        {
+                            images[i].GetComponent<Image>().enabled = true;
+                        }
+                    }
 
                     isTriggerRight = true;        
                     movement.enabled = false;
@@ -340,7 +356,15 @@ public class PlayerCollision : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
-            GuiOn = false;
+            //GuiOn = false;
+            Image[] images = canvas.GetComponentsInChildren<Image>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                if (images[i].name == "leftFin")
+                {
+                    images[i].GetComponent<Image>().enabled = false;
+                }
+            }
             rotate.setUpRotation(new Vector3(0,-90 , 0));
             //movement.start = true;
             //movement.enabled = true;
@@ -353,7 +377,15 @@ public class PlayerCollision : MonoBehaviour
 
        if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
         {
-            GuiOn = false;
+            //GuiOn = false;
+            Image[] images = canvas.GetComponentsInChildren<Image>();
+            for (int i = 0; i < images.Length; i++)
+            {
+                if (images[i].name == "rightFin")
+                {
+                    images[i].GetComponent<Image>().enabled = false;
+                }
+            }
             rotate.setUpRotation(new Vector3(0,90 ,0));
             StartCoroutine(turnRightAnimation());
             isTriggerRight = false;
