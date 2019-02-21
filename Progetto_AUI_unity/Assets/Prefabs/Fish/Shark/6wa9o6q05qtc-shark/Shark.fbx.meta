@@ -1,0 +1,190 @@
+fileFormatVersion: 2
+guid: efd070288139542b395905ef357fdfed
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Bone.024
+    100004: Bone.025
+    100006: Bone.025_end
+    100008: Camera
+    100010: Chest
+    100012: Cube
+    100014: Dorsal
+    100016: Down Mouth Final
+    100018: Down Mouth Final_end
+    100020: Down_Tail Final
+    100022: Down_Tail Final_end
+    100024: Down_Tail Start
+    100026: DownMouth Start
+    100028: Estomach
+    100030: Estomach2
+    100032: First Dorsal Fin
+    100034: First Dorsal Fin_end
+    100036: Lamp.000
+    100038: Lamp.001
+    100040: Lamp.002
+    100042: Lamp.003
+    100044: Lamp.004
+    100046: Lamp.005
+    100048: LeftArmy2
+    100050: LeftArmyFinal
+    100052: LeftArmyFinal_end
+    100054: LeftArmyStart
+    100056: Neck
+    100058: RightArmy2
+    100060: RightArmyFinal
+    100062: RightArmyFinal_end
+    100064: RightArmyStart
+    100066: //RootNode
+    100068: Tail2
+    100070: Tail3
+    100072: TailFinal
+    100074: UP_Tail 2
+    100076: UP_Tail Final
+    100078: UP_Tail Final_end
+    100080: UP_Tail Start
+    100082: UpMouth Final
+    100084: UpMouth Final_end
+    100086: UpMouth Start
+    400000: Armature
+    400002: Bone.024
+    400004: Bone.025
+    400006: Bone.025_end
+    400008: Camera
+    400010: Chest
+    400012: Cube
+    400014: Dorsal
+    400016: Down Mouth Final
+    400018: Down Mouth Final_end
+    400020: Down_Tail Final
+    400022: Down_Tail Final_end
+    400024: Down_Tail Start
+    400026: DownMouth Start
+    400028: Estomach
+    400030: Estomach2
+    400032: First Dorsal Fin
+    400034: First Dorsal Fin_end
+    400036: Lamp.000
+    400038: Lamp.001
+    400040: Lamp.002
+    400042: Lamp.003
+    400044: Lamp.004
+    400046: Lamp.005
+    400048: LeftArmy2
+    400050: LeftArmyFinal
+    400052: LeftArmyFinal_end
+    400054: LeftArmyStart
+    400056: Neck
+    400058: RightArmy2
+    400060: RightArmyFinal
+    400062: RightArmyFinal_end
+    400064: RightArmyStart
+    400066: //RootNode
+    400068: Tail2
+    400070: Tail3
+    400072: TailFinal
+    400074: UP_Tail 2
+    400076: UP_Tail Final
+    400078: UP_Tail Final_end
+    400080: UP_Tail Start
+    400082: UpMouth Final
+    400084: UpMouth Final_end
+    400086: UpMouth Start
+    2000000: Camera
+    2100000: No Name
+    4300000: Cube
+    9500000: //RootNode
+    10800000: Lamp.000
+    10800002: Lamp.001
+    10800004: Lamp.002
+    10800006: Lamp.003
+    10800008: Lamp.004
+    10800010: Lamp.005
+    13700000: Cube
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: f63471bae4ddc4cc1b0d6dff5ca33f4d, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

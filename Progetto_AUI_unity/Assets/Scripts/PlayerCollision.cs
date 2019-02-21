@@ -292,8 +292,8 @@ public class PlayerCollision : MonoBehaviour
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
                     refAx = 0;
                     direction = 1;
-                    Debug.Log("Posizione iniziale");
-                    Debug.Log(dolphin.transform.position);
+                    //Debug.Log("Posizione iniziale");
+                    //Debug.Log(dolphin.transform.position);
                     slU.SetPlayerPosition(dolphin.transform.position, refAx, direction);
                     colliderActual.enabled = false;                   
                     break;

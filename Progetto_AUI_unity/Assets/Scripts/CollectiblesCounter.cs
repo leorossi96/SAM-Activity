@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ public class CollectiblesCounter : MonoBehaviour {
     int totalCollectiblesFound;
     public GameObject dolphin;
     public Canvas canvasPlayerCamera;
+    public Canvas canvasCameraSearch;
     public PlayerCollisionSearch playerCollisionSearch;
 
 
@@ -69,6 +71,8 @@ public class CollectiblesCounter : MonoBehaviour {
             {
                 text.fontSize = 150;
             }
+            StartCoroutine(ShowTextInterval(canvasCameraSearch, "Area Completed Text", 10));
+
             Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
             {
@@ -81,7 +85,6 @@ public class CollectiblesCounter : MonoBehaviour {
                     images[i].GetComponent<Image>().enabled = false;
                 }
             }
-            //TODO levare immagine aiuto search, e aggiungi scritta vittoria 
             dolphin.GetComponent<Animation>().PlayQueued("Looping");
             //StartCoroutine(BubbleMachine());
         }
@@ -106,6 +109,19 @@ public class CollectiblesCounter : MonoBehaviour {
         MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
         yield return new WaitForSeconds(2f);
         MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
+    }
+
+    private IEnumerator ShowTextInterval(Canvas canvas, String textName, int seconds)
+    {
+        TextMeshProUGUI text = canvas.GetComponentInChildren<TextMeshProUGUI>();
+
+        if (text.name == "Area Completed Text")
+        {
+            text.fontSize = 150;
+            yield return new WaitForSeconds(seconds);
+            text.fontSize = 0;
+
+        }
     }
 }
  

@@ -109,10 +109,7 @@ namespace UnityStandardAssets.Water
                 reflectionCamera.transform.position = newpos;
                 Vector3 euler = cam.transform.eulerAngles;
                 reflectionCamera.transform.eulerAngles = new Vector3(-euler.x, euler.y, euler.z);
-                if (reflectionCamera.rect.x != 0 && reflectionCamera.rect.y != 0)
-                {
-                    refractionCamera.Render();
-                }
+                reflectionCamera.Render();
                 reflectionCamera.transform.position = oldpos;
                 GL.invertCulling = oldCulling;
                 GetComponent<Renderer>().sharedMaterial.SetTexture("_ReflectionTex", m_ReflectionTexture);
@@ -135,10 +132,7 @@ namespace UnityStandardAssets.Water
                 refractionCamera.targetTexture = m_RefractionTexture;
                 refractionCamera.transform.position = cam.transform.position;
                 refractionCamera.transform.rotation = cam.transform.rotation;
-                if (refractionCamera.rect.x != 0 && refractionCamera.rect.y != 0)
-                {
-                    refractionCamera.Render();
-                }
+                refractionCamera.Render();
                 GetComponent<Renderer>().sharedMaterial.SetTexture("_RefractionTex", m_RefractionTexture);
             }
 

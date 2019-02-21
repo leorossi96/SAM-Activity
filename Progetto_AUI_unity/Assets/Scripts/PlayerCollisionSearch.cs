@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System;
+using TMPro;
 using UnityStandardAssets.Utility;
 using System.Net;
 using System.Security.Cryptography;
@@ -53,7 +54,7 @@ public class PlayerCollisionSearch : MonoBehaviour
         }
         if (collider.tag == "Collectible" && !collectiblesFound.Contains(collider))
         {
-            StartCoroutine(ShowImageInterval(canvasCameraSearch, "Seastar", 3));
+            StartCoroutine(ShowImageInterval(canvasCameraSearch, "Seastar", 2));
 
             Debug.Log("Collectible found");
 
@@ -63,7 +64,6 @@ public class PlayerCollisionSearch : MonoBehaviour
                 collectiblesFound.Add(collider);
                 
                 counter.CollectibleFound(collider.gameObject);
-            
         }
     }
     
@@ -88,11 +88,15 @@ public class PlayerCollisionSearch : MonoBehaviour
                     }
                 }
                 cameraSearch.transform.position = new Vector3(collider.transform.position.x, cameraSearch.transform.position.y, collider.transform.position.z);
+                SetChildActivation(collider.gameObject, "Container", true);
                 magnifierFocus.SetActive(true);
                 MagnifierMovement.SetSearchPhase(true);
                 //Display.displays[1].Activate();
                 dolphin.GetComponent<Animation>().Stop("Idle");
                 movement.enabled = false;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
                 magnifierUsed = true;
             }
@@ -110,10 +114,13 @@ public class PlayerCollisionSearch : MonoBehaviour
                         images[i].GetComponent<Image>().enabled = false;
                     }
                 }
+                StartCoroutine(ShowTextInterval(canvasCameraSearch, "Area Completed Text", 10));
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 movement.enabled = true;
                 exitFromCompletedArea = true;
                 //Display.displays[0].Activate();
+                SetChildActivation(collider.gameObject, "Container", false);
                 magnifierFocus.SetActive(false);
                 MagnifierMovement.SetSearchPhase(false);
             }
@@ -123,7 +130,7 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     private void OnTriggerExit(Collider collider)
     {
-        if (collider.tag == "CollectibleArea")
+        if (collider.tag == "CollectibleArea" && !MagnifierMovement.GetSearchPhase())
         {
             Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
             for (int i = 0; i < images.Length; i++)
@@ -135,6 +142,7 @@ public class PlayerCollisionSearch : MonoBehaviour
             }
             //dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
             magnifierUsed = false;
+            SetChildActivation(collider.gameObject, "Container", false);
             magnifierFocus.SetActive(false);
             MagnifierMovement.SetSearchPhase(false);
         }
@@ -161,6 +169,44 @@ public class PlayerCollisionSearch : MonoBehaviour
 
         imageRequested.enabled = false;
     }
+
+    private IEnumerator ShowTextInterval(Canvas canvas, String textName, int seconds)
+    {
+        TextMeshProUGUI text = canvas.GetComponentInChildren<TextMeshProUGUI>();
+
+        /*for (int i = 0; i < text.Length; i++)
+        {
+            { 
+                Debug.Log(texts[i].name + " = " + textName);
+                if (texts[i].name == textName)
+                {
+                    Debug.Log("AABABABABABAABABAB"+ texts[i].text);
+                    texts[i].fontSize = 130;
+
+                    yield return new WaitForSeconds(seconds);
+
+                    texts[i].fontSize = 0;
+                }
+            }*/
+        if (text.name == "Area Completed Text")
+        {
+            text.fontSize = 150;
+            yield return new WaitForSeconds(seconds);
+            text.fontSize = 0;
+
+        }
+    }
+
+
+    private void SetChildActivation(GameObject gameobject, string childName, bool value){
+        for (int i = 0; i < gameobject.transform.childCount; i++){
+            GameObject child = gameobject.transform.GetChild(i).gameObject;
+            if (child.name == childName){
+                child.SetActive(value);
+            }
+        }
+    }
+    
 
    /* IEnumerator FadeTo(float aValue, float aTime)
     {

@@ -113,10 +113,6 @@ public class PlayerMovementSearch : MonoBehaviour
                     dolphin.GetComponent<Animation>().Play("StartSwimSearch");
                     start = true;
                 }
-
-
-
-
             }
             if (shiftKey)
             {
