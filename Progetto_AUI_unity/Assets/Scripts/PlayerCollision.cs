@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -17,7 +18,9 @@ public class PlayerCollision : MonoBehaviour
 
     public bool isTriggerObstDown = false;
 
-    public bool isTriggerObstUp = false; 
+    public bool isTriggerObstUp = false;
+
+    public bool isTriggerMiddle = false; 
    
     public AvoidObstacle awayFromMe;
 
@@ -28,6 +31,10 @@ public class PlayerCollision : MonoBehaviour
     public bool turnLeft = false;
 
     public ObstacleRotate obRotate;
+
+    public bool notTutorial;
+
+    public bool overcame=false; 
 
     public SlerpUp slU;
     //inizio nuove aggiunte
@@ -51,7 +58,7 @@ public class PlayerCollision : MonoBehaviour
         MagicRoomLightManager.instance.sendColour(Color.blue);
        // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("La riprende vecino", MagicRoomTextToSpeachManagerOffline.instance.listofAssociatedNames[3]);
 
-        print("ciao");
+       
     
 
        // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("ciao", voice);
@@ -75,24 +82,52 @@ public class PlayerCollision : MonoBehaviour
 
     }
 
+    private IEnumerator deadResetAnimation(){
+        dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
+        yield return new WaitForSeconds(6.0f);
+        SceneManager.LoadScene("New Scene"); 
+    }
 
 
 
 
 
+	private void OnCollisionEnter(Collision collision)
+	{
+        
+        if(collision.collider.tag=="Obstacle_Reset" && !overcame)        {
+            movement.start = false;
+            movement.enabled = false;
+            dolphin.GetComponent<Animation>().Play("Stopping");
+            this.GetComponent<Rigidbody>().mass = 2.0f * this.GetComponent<Rigidbody>().mass;
+            this.GetComponent<Rigidbody>().drag = 1; 
+            this.GetComponent<Rigidbody>().AddForce(collision.collider.transform.position - this.transform.position, ForceMode.Impulse); 
 
-    private void OnTriggerEnter(Collider colliderActual)
+            StartCoroutine(deadResetAnimation());
+
+
+
+        }
+	}
+
+	private void OnTriggerEnter(Collider colliderActual)
     {
 
-        
-        movement.start = false;
-        dolphin.GetComponent<Animation>().Play("Stopping");
+
+
         //dolphin.GetComponent<Animation>().Stop("Swimming");
         //dolphin.GetComponent<Animation>().PlayQueued("Idle"); 
         
 
 
         this.colliderActual = colliderActual; 
+
+        if(this.colliderActual.tag!="NonOvercomeLimit" && this.colliderActual.tag != "ResetOvercome"){
+
+            movement.start = false;
+            dolphin.GetComponent<Animation>().Play("Stopping");
+        }
+                
 
 
         
@@ -133,6 +168,16 @@ public class PlayerCollision : MonoBehaviour
 
                     isTriggerRight = true;        
                     movement.enabled = false;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    colliderActual.enabled = false;
+                    slD.enabled = false;
+                    break;
+                }
+
+            case "TurningPoint Middle":
+                {
+                    isTriggerMiddle = true;
+                    movement.enabled = false; 
                     GetComponent<Rigidbody>().velocity = Vector3.zero;
                     colliderActual.enabled = false;
                     slD.enabled = false;
@@ -339,6 +384,29 @@ public class PlayerCollision : MonoBehaviour
                     break;
                 }
 
+            /*case "Obstacle_Reset":
+                {
+                    movement.enabled = false;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                    StartCoroutine(deadResetAnimation()); 
+
+
+                    break; 
+                }*/
+            case "NonOvercomeLimit":
+                {
+                    this.overcame = true;
+                    break;
+                }
+
+                case "ResetOvercome":
+                {
+                    this.overcame = false;
+                    break;
+                }
+            
+
             default: break;
 
                
@@ -391,6 +459,34 @@ public class PlayerCollision : MonoBehaviour
             isTriggerRight = false;
         }
 
+        if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerMiddle == true && !Input.GetKeyDown(KeyCode.LeftArrow)){
+
+            BoxCollider[] sons = colliderActual.gameObject.GetComponentsInChildren<BoxCollider>(true);
+            for (int i = 0; i < sons.Length; i++){
+                if(sons[i].gameObject.name.Equals(colliderActual.gameObject.name + "_right")){
+                    sons[i].enabled = true; 
+                }
+            }
+            rotate.setUpRotation(new Vector3(0, 90, 0));
+            StartCoroutine(turnRightAnimation());
+            isTriggerMiddle = false;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerMiddle == true && !Input.GetKeyDown(KeyCode.RightArrow)){
+
+            BoxCollider[] sons = colliderActual.gameObject.GetComponentsInChildren<BoxCollider>(true);
+            for (int i = 0; i < sons.Length; i++)
+            {
+                if (sons[i].gameObject.name.Equals(colliderActual.gameObject.name + "_left"))
+                {
+                    sons[i].enabled = true;
+                }
+            }
+            rotate.setUpRotation(new Vector3(0, -90, 0));
+            StartCoroutine(turnLeftAnimation());
+            isTriggerMiddle = false;
+        }
 
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObstDown == true)

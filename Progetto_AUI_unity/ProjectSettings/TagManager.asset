@@ -20,6 +20,10 @@ TagManager:
   - Camera Search
   - Obstacle Up
   - Obstacle Down
+  - Obstacle_Reset
+  - NonOvercomeLimit
+  - ResetOvercome
+  - TurningPoint Middle
   layers:
   - Default
   - TransparentFX
