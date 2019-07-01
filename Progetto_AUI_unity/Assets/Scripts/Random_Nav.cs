@@ -8,6 +8,8 @@ public class Random_Nav : MonoBehaviour {
     public bool turning; 
     public RotationsSlow rotate;
     public Quaternion rotateDirection;
+    private float initialX;
+    private float initialZ; 
 
     // Use this for initialization
     void Start()
@@ -16,6 +18,8 @@ public class Random_Nav : MonoBehaviour {
         float initial = Random.Range(0.0f, 50f);
 
         this.targetPos = transform.position + this.transform.forward * initial;
+        initialX = transform.position.x;
+        initialZ = transform.position.z; 
 
     }
 	
@@ -45,9 +49,9 @@ public class Random_Nav : MonoBehaviour {
         if(Vector3.Distance(transform.position, targetPos)<1.0f){
 
             float X = Random.Range(-400f, 400f);
-            float Z = Random.Range(50f, 950f);
+            float Z = Random.Range(-300f, 300f);
 
-            this.targetPos = new Vector3(X, transform.position.y, Z);
+            this.targetPos = new Vector3(X+initialX, transform.position.y, Z+initialZ);
 
             turning = true; 
 

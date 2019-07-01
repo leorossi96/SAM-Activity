@@ -46,7 +46,32 @@ ModelImporter:
     4300006: Studio_L
     4300008: Column
     10800000: Light
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: 0fc1336c404604696a4e2cb63ebf9f2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cyc Material
+    second: {fileID: 2100000, guid: 268e624f950c74f31993cf92280989a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 8c4cb3a5bcf2047bf967ab56ecf8ebcd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Softbox Texture
+    second: {fileID: 2100000, guid: c600f2da9eb734eb988842e1233f3101, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone2
+    second: {fileID: 2100000, guid: c42a87e72dc944797ad1842238029d07, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

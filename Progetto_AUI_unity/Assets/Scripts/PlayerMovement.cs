@@ -16,6 +16,11 @@ public class PlayerMovement : MonoBehaviour {
     public GameObject dolphin;
     public bool start = false;
     public bool isIdle = false;
+    public PowerUpManagerLocal manager;
+    public float multiplier; 
+    public bool indestructible = false;
+ 
+
     
 
 
@@ -32,6 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             Display.displays[i].Activate();
         }
+        multiplier = 1.0f; 
 	}
 
     void Start()
@@ -46,7 +52,7 @@ public class PlayerMovement : MonoBehaviour {
 
         //rb.AddRelativeForce(Vector3.forward);
         //rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed); 
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed*multiplier); 
         //Debug.Log("Swimming");
         //Debug.Log(forwardForce * Time.deltaTime);
         if (start)
@@ -97,4 +103,23 @@ public class PlayerMovement : MonoBehaviour {
         
 
     }
+
+    public void powerUp(string chest_name){
+        switch (chest_name)
+        {
+            case "chest_food1":
+                manager.powerUp("power_up_speed");
+                break; 
+
+            default:
+                break;
+        }
+
+    }
+
+    public void powerDown(){
+        manager.powerDown(); 
+    }
+
+
 }

@@ -24,6 +24,9 @@ TagManager:
   - NonOvercomeLimit
   - ResetOvercome
   - TurningPoint Middle
+  - chest_food1
+  - chest_food2
+  - bug_protection
   layers:
   - Default
   - TransparentFX

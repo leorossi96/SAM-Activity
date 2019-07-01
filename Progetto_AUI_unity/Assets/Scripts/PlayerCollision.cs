@@ -20,7 +20,9 @@ public class PlayerCollision : MonoBehaviour
 
     public bool isTriggerObstUp = false;
 
-    public bool isTriggerMiddle = false; 
+    public bool isTriggerMiddle = false;
+
+    public Restarting restarting; 
    
     public AvoidObstacle awayFromMe;
 
@@ -36,6 +38,8 @@ public class PlayerCollision : MonoBehaviour
 
     public bool overcame=false; 
 
+    public float fadeAmount; 
+
     public SlerpUp slU;
     //inizio nuove aggiunte
     public SlerpDown slD;
@@ -46,6 +50,8 @@ public class PlayerCollision : MonoBehaviour
     public int refAx;
     public int direction;
     public Canvas canvas;
+
+
 
 
 
@@ -83,9 +89,17 @@ public class PlayerCollision : MonoBehaviour
     }
 
     private IEnumerator deadResetAnimation(){
-        dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
-        yield return new WaitForSeconds(6.0f);
-        SceneManager.LoadScene("New Scene"); 
+        Image[] images = canvas.GetComponentsInChildren<Image>();
+        yield return new WaitForSeconds(1.0f);
+        TextMeshProUGUI[] text = canvas.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (var item in text)
+        {
+            if ((item.name == "Restart") || (item.name=="Restart1"))
+            {
+                item.fontSize = 150;
+            }
+        }
+            
     }
 
 
@@ -101,12 +115,41 @@ public class PlayerCollision : MonoBehaviour
             dolphin.GetComponent<Animation>().Play("Stopping");
             this.GetComponent<Rigidbody>().mass = 2.0f * this.GetComponent<Rigidbody>().mass;
             this.GetComponent<Rigidbody>().drag = 1; 
-            this.GetComponent<Rigidbody>().AddForce(collision.collider.transform.position - this.transform.position, ForceMode.Impulse); 
+            if(collision.rigidbody!=null)
+                this.GetComponent<Rigidbody>().AddForce((collision.collider.transform.position - this.transform.position)*collision.rigidbody.mass, ForceMode.Impulse);
+            else
+                this.GetComponent<Rigidbody>().AddForce((collision.collider.transform.position - this.transform.position), ForceMode.Impulse);
+            if (!movement.indestructible){
+                dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
+                StartCoroutine(deadResetAnimation()); 
 
-            StartCoroutine(deadResetAnimation());
+                restarting.enabled = true; 
+            }
+                
 
 
 
+        }else{
+            if (collision.collider.tag == "chest_food1")
+            {
+                movement.start = false;
+                movement.enabled = false;
+                this.GetComponent<Rigidbody>().velocity = Vector3.zero; 
+                dolphin.GetComponent<Animation>().Play("Stopping");
+                Image[] images = canvas.GetComponentsInChildren<Image>();
+                for (int i = 0; i < images.Length; i++)
+                {
+                    if (images[i].name == "chest_food1")
+                    {
+                        images[i].GetComponent<Image>().enabled = true;
+                    }
+                }
+
+               
+
+
+
+            }
         }
 	}
 
@@ -120,9 +163,10 @@ public class PlayerCollision : MonoBehaviour
         
 
 
+
         this.colliderActual = colliderActual; 
 
-        if(this.colliderActual.tag!="NonOvercomeLimit" && this.colliderActual.tag != "ResetOvercome"){
+        if(this.colliderActual.tag!="NonOvercomeLimit" && this.colliderActual.tag != "ResetOvercome" && this.colliderActual.tag != "bug_protection"){
 
             movement.start = false;
             dolphin.GetComponent<Animation>().Play("Stopping");
@@ -134,6 +178,9 @@ public class PlayerCollision : MonoBehaviour
 
         switch (colliderActual.tag)
         {
+
+           
+
             case "TurningPoint Left":
                 {
                     //Text = "Turn Left";
@@ -408,19 +455,28 @@ public class PlayerCollision : MonoBehaviour
             
 
             default: break;
-
+                
                
 
         }
                  
     }
 
+	private void OnTriggerExit(Collider other)
+	{
+        if(other.CompareTag("ResetOvercome"))
+        {
+            this.overcame = false;
+
+        }
+	}
 
 
 
-  
 
-    void Update()
+
+
+	void Update()
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {

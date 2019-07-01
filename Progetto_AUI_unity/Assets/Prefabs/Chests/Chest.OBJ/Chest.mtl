@@ -1,0 +1,21 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl _Color_002_1
+Ka 0.000000 0.000000 0.000000
+Kd 0.419608 0.345098 0.235294
+Ks 0.330000 0.330000 0.330000
+map_Kd Chest/_Color_002_1.jpg
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 0.882353 0.882353 0.784314
+Ks 0.330000 0.330000 0.330000
+
+newmtl Color_001
+Ka 0.000000 0.000000 0.000000
+Kd 0.384314 0.180392 0.050980
+Ks 0.330000 0.330000 0.330000
+map_Kd Chest/Color_001.jpg
+
