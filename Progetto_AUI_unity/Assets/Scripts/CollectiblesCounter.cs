@@ -14,6 +14,7 @@ public class CollectiblesCounter : MonoBehaviour {
     public Canvas canvasPlayerCamera;
     public Canvas canvasCameraSearch;
     public PlayerCollisionSearch playerCollisionSearch;
+    public SessionParameters sessionParameters;
 
 
     SmartToy Dolphin;
@@ -21,7 +22,7 @@ public class CollectiblesCounter : MonoBehaviour {
     public Dictionary<GameObject, int[]> collectiblesMap = new Dictionary<GameObject, int[]>(); //maps the collectible are with an array of 2 integer: the first is the number of relevant collectibles inside the area while the second is the number of collectibles found in that area
 
     public void Start()
-    {
+    {  
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("CollectibleArea").Length; i++){
             GameObject currentCollectibleArea = GameObject.FindGameObjectsWithTag("CollectibleArea")[i];
             int[] currentCollectibles = new int[3];
@@ -66,6 +67,8 @@ public class CollectiblesCounter : MonoBehaviour {
             Debug.Log("HAI VINTO");
             movement.enabled = false;
             playerCollisionSearch.enabled = false;
+            sessionParameters.SetStopChrono(true);
+            Debug.Log("TEMPO FINALE " + sessionParameters.GetChrono());
             TextMeshProUGUI text = canvasPlayerCamera.GetComponentInChildren<TextMeshProUGUI>();
             if (text.name == "Level Completed Text")
             {
