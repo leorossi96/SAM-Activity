@@ -4,11 +4,14 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Runtime.Remoting.Lifetime;
 
 public class PlayerCollision : MonoBehaviour
 {
 
     public PlayerMovement movement;
+
+    public int lifeCount;  
 
     public RotationsSlow rotate; 
 
@@ -54,11 +57,22 @@ public class PlayerCollision : MonoBehaviour
 
 
 
+	public void Start()
+	{
+        TextMeshProUGUI[] text = canvas.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (var item in text)
+        {
+            if ((item.name == "LifeCount") )
+            {
+                item.fontSize = 75;
+                item.text = "Lives x" + lifeCount; 
+            }
+        }
+	}
 
 
 
-
-    private IEnumerator fadecolor() {
+	private IEnumerator fadecolor() {
         MagicRoomLightManager.instance.sendColour("#000088", 100);
         yield return new WaitForSeconds(1f);
         MagicRoomLightManager.instance.sendColour(Color.blue);
@@ -102,6 +116,27 @@ public class PlayerCollision : MonoBehaviour
             
     }
 
+    private IEnumerator reduceLife()
+    {
+
+        lifeCount--; 
+        TextMeshProUGUI[] text = canvas.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (var item in text)
+        {
+            if ((item.name == "LifeCount"))
+            {
+                item.fontSize = 75;
+                item.text = "Lives x" + lifeCount;
+            }
+        }
+
+        yield return new WaitForSeconds(2.0f);
+        movement.powerUp("hit"); 
+        movement.start = true;
+        movement.enabled = true;
+
+    }
+
 
 
 
@@ -110,22 +145,38 @@ public class PlayerCollision : MonoBehaviour
 	{
         
         if(collision.collider.tag=="Obstacle_Reset" && !overcame)        {
-            movement.start = false;
-            movement.enabled = false;
-            dolphin.GetComponent<Animation>().Play("Stopping");
-            this.GetComponent<Rigidbody>().mass = 2.0f * this.GetComponent<Rigidbody>().mass;
-            this.GetComponent<Rigidbody>().drag = 1; 
-            if(collision.rigidbody!=null)
-                this.GetComponent<Rigidbody>().AddForce((collision.collider.transform.position - this.transform.position)*collision.rigidbody.mass, ForceMode.Impulse);
-            else
-                this.GetComponent<Rigidbody>().AddForce((collision.collider.transform.position - this.transform.position), ForceMode.Impulse);
-            if (!movement.indestructible){
-                dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
-                StartCoroutine(deadResetAnimation()); 
 
-                restarting.enabled = true; 
+            if(!movement.indestructible){
+                movement.start = false;
+                movement.enabled = false;
+                dolphin.GetComponent<Animation>().Play("Stopping");
+                this.GetComponent<Rigidbody>().mass = 2.0f * this.GetComponent<Rigidbody>().mass;
+                this.GetComponent<Rigidbody>().drag = 1;
+                if (collision.rigidbody != null)
+                    this.GetComponent<Rigidbody>().AddForce((collision.collider.transform.position - this.transform.position) * collision.rigidbody.mass, ForceMode.Impulse);
+                else
+                    this.GetComponent<Rigidbody>().AddForce((collision.collider.transform.position - this.transform.position), ForceMode.Impulse);
+
+
+                if (lifeCount == 0)
+                {
+                    dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
+                    StartCoroutine(deadResetAnimation());
+
+                    restarting.enabled = true;
+                }
+                if (lifeCount > 0)
+                {
+                    StartCoroutine(reduceLife());
+
+                } 
             }
-                
+
+                 
+
+             
+
+
 
 
 

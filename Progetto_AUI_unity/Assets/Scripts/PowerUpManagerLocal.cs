@@ -23,10 +23,10 @@ public class PowerUpManagerLocal : MonoBehaviour {
 	
     public void powerUp(string power){
         powerUps[power].enableEmission=true;
-        active = powerUps[power]; 
+
     }
 
-    public void powerDown(){
-        active.enableEmission = false; 
+    public void powerDown(string power){
+        powerUps[power].enableEmission = false; 
     }
 }

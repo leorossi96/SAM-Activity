@@ -109,16 +109,60 @@ public class PlayerMovement : MonoBehaviour {
         {
             case "chest_food1":
                 manager.powerUp("power_up_speed");
+                StartCoroutine(powerDown("power_up_speed")); 
+                multiplier = 2.0f;
                 break; 
+
+            case "chest_food2":
+                manager.powerUp("power_up_ind");
+                StartCoroutine(powerDown("power_up_ind")); 
+                indestructible = true; 
+                break;
+
+            case "hit":
+                manager.powerUp("power_up_ind");
+                StartCoroutine(powerDownAfterHit("power_up_ind"));
+                indestructible = true;
+                break;
 
             default:
                 break;
         }
 
+
     }
 
-    public void powerDown(){
-        manager.powerDown(); 
+    private IEnumerator powerDown(string power)
+    {
+        yield return new WaitForSeconds(20.0f);
+
+        if(power.Equals("power_up_ind")){
+            indestructible = false;
+             
+        }
+
+        if (power.Equals("power_up_speed"))
+        {
+            multiplier = 1.0f;
+        }
+
+        manager.powerDown(power);
+
+        
+    }
+
+    private IEnumerator powerDownAfterHit(string power){
+
+        yield return new WaitForSeconds(3.0f);
+
+        if (power.Equals("power_up_ind"))
+        {
+            indestructible = false;
+
+        }
+
+        manager.powerDown(power);
+
     }
 
 

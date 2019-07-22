@@ -23,22 +23,16 @@ public class activateParticle : MonoBehaviour {
                 images[i].GetComponent<Image>().enabled = false;
             }
         }
-        movement.multiplier = 2.0f;
+
         movement.powerUp("chest_food1");
-        StartCoroutine(powerDown()); 
+
         movement.start = true;
         movement.enabled = true; 
         this.enabled = false; 
 
     }
 
-    private IEnumerator powerDown()
-    {
-        yield return new WaitForSeconds(20.0f);
-        movement.multiplier = 1.0f;
-        movement.indestructible = false;
-        movement.powerDown();
-    }
+
 
 	private void Start()
 
