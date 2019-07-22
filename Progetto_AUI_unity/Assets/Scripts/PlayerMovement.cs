@@ -19,9 +19,12 @@ public class PlayerMovement : MonoBehaviour {
     public PowerUpManagerLocal manager;
     public float multiplier; 
     public bool indestructible = false;
- 
 
-    
+
+    public bool delfinoFound = false;
+    SmartToy dolphinController;
+
+
 
 
     private IEnumerator AnimationSet()
@@ -91,16 +94,30 @@ public class PlayerMovement : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, speed);
             }
         }
-/*       if ((rb.position.y <= -1 || rb.position.y.ToString().Equals("NaN")) && false)
+        /*       if ((rb.position.y <= -1 || rb.position.y.ToString().Equals("NaN")) && false)
+                {
+                    FindObjectOfType<GameManager>().EndGame();
+               }
+               */
+
+        if (!delfinoFound)
         {
-            FindObjectOfType<GameManager>().EndGame();
-       }
-       */
+            if (GameObject.Find("Dolphin1") != null)
+            {
+                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+                Vector3[] gyroscope = dolphinController.objectposition.gyroscope;
+                Debug.Log("GIROSCOPIO " + gyroscope[0]);
+                // StartCoroutine(waittoStartGreenLight());*/
+                //dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+                Debug.Log("Light On.");
+                delfinoFound = true;
+            }
+        }
 
 
 
-
-        
 
     }
 

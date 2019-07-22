@@ -157,8 +157,10 @@ public class PlayerMovementSearch : MonoBehaviour
 
         if (!delfinoFound)
         {
+            Debug.Log("AAAAAA");
             if (GameObject.Find("Dolphin1") != null)
             {
+                Debug.Log("AAAAAA");
                 MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
                 MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
                 dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
