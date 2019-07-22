@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + patient.therapist.image_file) }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2">Patient</a>
+        </div>
+        <h2><a class="article-title">{{ patient.last_name }} {{ patient.first_name }}</a></h2>
+        <table class="table">
+            <tbody>
+            <tr><th>Date of Birth</th><td>{{ patient.date_of_birth }}</td></tr>
+            <tr><th>Disability</th><td>{{ patient.type_of_disability }}</td></tr>
+            <tr><th>Comment</th><td>{{ patient.comment }}</td></tr>
+            </tbody>
+        </table>
+        {% for lr in lev_run %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <h2><a class="mr-2">Levels Run</a></h2>
+                </div>
+                <table class="table">
+                    <tbody>
+                    <tr><th>Level name</th><td>{{ lr.name }}</td></tr>
+                    <tr><th>Static Obstacle</th><td>{{ lr.static_obstacle }}</td></tr>
+                    <tr><th>Power Up</th><td>{{ lr.power_up }}</td></tr>
+                    <tr><th>Dynamic Obstacle</th><td>{{ lr.dynamic_obstacle }}</td></tr>
+                    <tr><th>Max Time</th><td>{{ lr.max_time }}</td></tr>
+                    <tr><th>Lives</th><td>{{ lr.lives }}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        {% endfor %}
+        {% for ls in lev_search %}
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <h2><a class="mr-2">Levels Search</a></h2>
+                </div>
+                <table class="table">
+                    <tbody>
+                    <tr><th>Level name</th><td>{{ ls.name }}</td></tr>
+                    <tr><th>Static Obstacle</th><td>{{ ls.static_obstacle }}</td></tr>
+                    <tr><th>Power Up</th><td>{{ ls.power_up }}</td></tr>
+                    <tr><th>Dynamic Obstacle</th><td>{{ ls.dynamic_obstacle }}</td></tr>
+                    <tr><th>Max Time</th><td>{{ ls.max_time }}</td></tr>
+                    <tr><th>Lives</th><td>{{ ls.lives }}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</article>
+{% endblock content %}
