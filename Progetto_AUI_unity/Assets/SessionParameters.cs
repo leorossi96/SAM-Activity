@@ -16,6 +16,13 @@ public class SessionParameters : MonoBehaviour {
     public float interval;
     public float timer = 0;
 
+    //stop collecting parameters
+    public bool endGame = false;
+    public int heatmapCount = 1; //per evitare che l'update faccia calolare l'heatmap più di una volta
+
+    //marker per la posizione
+    public GameObject prefab;
+
 	// Use this for initialization
 	void Start () {
         sec = 0;
@@ -25,21 +32,44 @@ public class SessionParameters : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (!stopChrono)
-            UpdateChrono();
-
-        timer += Time.deltaTime;
-        if (timer >= interval)
+        //update del bool endGame
+        if (Input.anyKey && Input.GetKey(KeyCode.E) && !endGame)
         {
-            posArray = StorePosition();
-            timer = 0;
+            endGame = true;
+            SetStopChrono(true);
+        }
+        if(!endGame)
+        {
+            if (!stopChrono)
+                UpdateChrono();
+
+            timer += Time.deltaTime;
+            if (timer >= interval)
+            {
+                posArray = StorePosition();
+                timer = 0;
+            }
+        }
+        else //se è stato premuto E
+        {
+            if (heatmapCount == 1){
+                heatmapCount -= 1;
+                GenerateHeatmap(posArray);
+            }
         }
 	}
+
+    void GenerateHeatmap(ArrayList a){
+        foreach(Vector2 v in a){
+            Instantiate(prefab, new Vector3(v.x, 90f, v.y), Quaternion.identity);
+        }
+    }
 
     ArrayList StorePosition(){
         pos = new Vector2(this.transform.position.x, this.transform.position.z);
         posArray.Add(pos);
-        Debug.Log(posArray);
+        Debug.Log("Adding :" + pos.ToString());
+        Debug.Log(posArray.Count);
         return posArray;
     }
     
