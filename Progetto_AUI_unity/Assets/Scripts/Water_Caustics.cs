@@ -25,6 +25,5 @@ public class Water_Caustics : MonoBehaviour {
         projector.material.SetTexture("_ShadowTex", frames[frameindex]);
 
         frameindex = (frameindex + 1) % frames.Length;
-        Debug.Log(frameindex); 
 	}
 }

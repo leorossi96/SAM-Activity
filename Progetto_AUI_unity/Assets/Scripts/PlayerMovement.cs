@@ -46,6 +46,21 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
         StartCoroutine(AnimationSet());
+        if (!delfinoFound)
+        {
+            if (GameObject.Find("Dolphin1") != null)
+            {
+                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+                Vector3[] gyroscope = dolphinController.objectposition.gyroscope;
+                Debug.Log("GIROSCOPIO " + gyroscope[0]);
+                // StartCoroutine(waittoStartGreenLight());*/
+                //dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+                Debug.Log("Light On.");
+                delfinoFound = true;
+            }
+        }
     }
   
 

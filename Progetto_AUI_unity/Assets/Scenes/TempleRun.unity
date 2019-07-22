@@ -18500,6 +18500,10 @@ MonoBehaviour:
   dolphin: {fileID: 103248595}
   start: 0
   isIdle: 0
+  manager: {fileID: 0}
+  multiplier: 0
+  indestructible: 0
+  delfinoFound: 0
 --- !u!54 &761870482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18527,16 +18531,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 761870480}
+  lifeCount: 0
   rotate: {fileID: 761870484}
   isTriggerLeft: 0
   isTriggerRight: 0
   isTriggerObstDown: 0
   isTriggerObstUp: 0
+  isTriggerMiddle: 0
+  restarting: {fileID: 0}
   awayFromMe: {fileID: 0}
   colliderActual: {fileID: 0}
   dolphin: {fileID: 103248595}
   turnLeft: 0
   obRotate: {fileID: 0}
+  notTutorial: 0
+  overcame: 0
+  fadeAmount: 0
   slU: {fileID: 761870486}
   slD: {fileID: 761870487}
   GuiOn: 0
@@ -33505,6 +33515,11 @@ Prefab:
     - target: {fileID: 4002844258358404, guid: 50a6b60aea17c5d42b136bc7d32aa701, type: 2}
       propertyPath: m_RootOrder
       value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 114099052990307674, guid: 50a6b60aea17c5d42b136bc7d32aa701,
+        type: 2}
+      propertyPath: port
+      value: 7081
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114420053087228888, guid: 50a6b60aea17c5d42b136bc7d32aa701, type: 2}
