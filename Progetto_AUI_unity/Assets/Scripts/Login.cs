@@ -19,8 +19,16 @@ public class Login : MonoBehaviour
     public LoginData loginData;
     public GameObject loginMenu;
     public GameObject show;
+    public GameObject patientMenu;
     public PatientData[] patientData;
-    public ShowPatient showPatient = new ShowPatient();
+   // public ShowPatient showPatient = new ShowPatient();
+    public GameObject buttonPrefab;
+    //public GameObject panelToAttach;
+    public ScrollRect scrollView;
+    public GameObject scrollContent;
+    public PatientData selectedPatient = new PatientData();
+
+    
     
    
 
@@ -43,11 +51,42 @@ public class Login : MonoBehaviour
         //yield return request.Send();
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (email.GetComponent<InputField>().isFocused)
+            {
+                password.GetComponent<InputField>().Select();
+            }
+            if (password.GetComponent<InputField>().isFocused)
+            {
+                email.GetComponent<InputField>().Select();
+            }
+        }
         loginData.email = email.GetComponent<InputField>().text;
         loginData.password = password.GetComponent<InputField>().text;
+
+    }
+
+
+    void ClickAction(int i)
+    {
+        Debug.Log("sono dentro click action");
+        PatientData selected = patientData[i];
+        show.SetActive(false);
+        patientMenu.SetActive(true);
+        selectedPatient.last_name = selected.last_name;
+        selectedPatient.first_name = selected.first_name;
+        selectedPatient.date_of_birth = selected.date_of_birth;
+        selectedPatient.comment = selected.comment;
+        selectedPatient.id = selected.id;
+        selectedPatient.type_of_disability = selected.type_of_disability;
+        selectedPatient.user_id = selected.user_id;
+
 
     }
 
@@ -85,6 +124,17 @@ public class Login : MonoBehaviour
         Debug.Log(patientData.Length);
         loginMenu.SetActive(false);
         show.SetActive(true);
+
+        GameObject[] button = new GameObject[patientData.Length];
+
+        for (int i = 0; i < patientData.Length; i++)
+        {
+            int temp = i;
+            button[i] = Instantiate(buttonPrefab);
+            button[i].transform.SetParent(scrollContent.transform, false);//Setting button parent
+            button[i].GetComponent<Button>().onClick.AddListener(() => ClickAction(temp));//Setting what button does when clicked                                                   //Next line assumes button has child with text as first gameobject like button created from GameObject->UI->Button
+            button[i].transform.GetChild(0).GetComponent<Text>().text = patientData[i].last_name + ' ' + patientData[i].first_name;
+        }
         //showPatient.setButton();
         /*for (int i = 0; i < patientData.Length; i++)
         {
