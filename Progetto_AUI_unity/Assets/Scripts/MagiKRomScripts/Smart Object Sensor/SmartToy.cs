@@ -338,14 +338,14 @@ class SmartToy: MonoBehaviour{
 
     internal void updateStateFromUDP(udpPackage pack)
     {
-        if (pack.accelerometer != null  && pack.accelerometer.Length == 3) {
+        if (pack.accelerometer != null) {
             objectposition.setAccelerometer(pack.accelerometer);
         }
-        if (pack.gyroscope != null && pack.gyroscope.Length == 3)
+        if (pack.gyroscope != null)
         {
             objectposition.setGyroscope(pack.gyroscope);
         }
-        if (pack.position != null && pack.position.Length == 3)
+        if (pack.position != null)
         {
             objectposition.setPosition(pack.position);
         }

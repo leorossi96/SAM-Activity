@@ -24,12 +24,20 @@ public class PlayerMovementSearch : MonoBehaviour
     public GameObject dolphin;
     public bool start = false;
 
+    public bool start_with_dolphin = false; 
 
+
+
+
+    public bool delfinoFound = false;
     SmartToy dolphinController;
+    Vector3 accelerometer;
+    public double angle_x = 0;
+    public double angle_y = 0;
 
     public bool moving;
 
-    public bool delfinoFound = false;
+    
 
     private void Awake()
     {
@@ -46,20 +54,51 @@ public class PlayerMovementSearch : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!delfinoFound)
+        {
+            if (GameObject.Find("Dolphin1") != null)
+            {
+                UDPListenerForMagiKRoom.instance.StartReceiver(10);
+                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+                accelerometer = dolphinController.objectposition.accelerometer[0];
+                // StartCoroutine(waittoStartGreenLight());*/
+                //dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+                Debug.Log("Light On.");
+                delfinoFound = true;
+            }
+        }
+        if (dolphinController != null)
+        {
+
+            accelerometer = dolphinController.objectposition.accelerometer[0];
+            angle_x = (Mathf.Atan2(accelerometer.y, accelerometer.z) * 180.0f) / Mathf.PI;
+            angle_y = -(Mathf.Atan2(accelerometer.x, Mathf.Sqrt(accelerometer.y * accelerometer.y + accelerometer.z * accelerometer.z)) * 180.0f) / Mathf.PI;
+            Debug.Log("ANGLE_X: " + angle_x + "ANGLE_Y: " + angle_y);
+
+
+        }
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
         // If use keyboard (ex. as in Unity or Standalone built)
-        rightArrow = Input.GetKey(KeyCode.RightArrow);
+        /*rightArrow = Input.GetKey(KeyCode.RightArrow);
         leftArrow = Input.GetKey(KeyCode.LeftArrow);
         downArrow = Input.GetKey(KeyCode.DownArrow);
         upArrow = Input.GetKey(KeyCode.UpArrow);
         tabKey = Input.GetKey(KeyCode.Tab);
+        shiftKey = Input.GetKey(KeyCode.LeftShift);*/
+        rightArrow = angle_y < -24.0f;
+        leftArrow = angle_y > 15.0f;
+        downArrow = angle_x > 24.0f;
+        upArrow = angle_x < -20.0f;
+        tabKey = dolphinController.touchsensor.touchpoints[1].touched && dolphinController.touchsensor.touchpoints[2].touched;
         shiftKey = Input.GetKey(KeyCode.LeftShift);
 
 
-        if (Input.anyKey)
+        if (true)
         {
             Vector3 position = tf.position;
 
@@ -101,6 +140,7 @@ public class PlayerMovementSearch : MonoBehaviour
             }
             if (tabKey)
             {
+                start_with_dolphin = false; 
                 position = position + tf.forward * velocityApplied * Time.deltaTime;
                 tf.position = position;
                 if (start)
@@ -113,6 +153,20 @@ public class PlayerMovementSearch : MonoBehaviour
                     dolphin.GetComponent<Animation>().Play("StartSwimSearch");
                     start = true;
                 }
+            }else
+            {
+               
+                    start = false;
+
+                    if (!start_with_dolphin)
+                    {
+                        dolphin.GetComponent<Animation>().Play("Stopping");
+                        start_with_dolphin = true;
+                    }
+
+
+                    dolphin.GetComponent<Animation>().PlayQueued("Idle");
+                
             }
             if (shiftKey)
             {
@@ -122,13 +176,7 @@ public class PlayerMovementSearch : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyUp(KeyCode.Tab))
-            {
-                start = false;
-                dolphin.GetComponent<Animation>().Play("Stopping");
-
-                dolphin.GetComponent<Animation>().PlayQueued("Idle");
-            }
+           
 
 
             /*if (Input.GetKeyUp(KeyCode.UpArrow))

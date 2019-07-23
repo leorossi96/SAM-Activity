@@ -40,7 +40,7 @@ public class PositionReader : MonoBehaviour {
     internal void setAccelerometer(triplet[] sensarr)
     {
         foreach (triplet sens in sensarr) { 
-            this.accelerometer[accelerometerNames[sens.sensorId]] = new Vector3(sens.x, sens.y, sens.z);
+            this.accelerometer[0] = new Vector3(sens.x, sens.y, sens.z);
         }
     }
 
@@ -48,7 +48,7 @@ public class PositionReader : MonoBehaviour {
     {
         foreach (triplet sens in sensarr)
         {
-            this.gyroscope[gyroscopeNames[sens.sensorId]] = new Vector3(sens.x, sens.y, sens.z);
+            this.gyroscope[0] = new Vector3(sens.x, sens.y, sens.z);
         }
     }
 
