@@ -23146,6 +23146,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 761870479}
+  - component: {fileID: 761870481}
   - component: {fileID: 761870480}
   - component: {fileID: 761870482}
   - component: {fileID: 761870483}
@@ -23207,6 +23208,21 @@ MonoBehaviour:
   delfinoFound: 0
   angle_x: 0
   angle_y: 0
+--- !u!114 &761870481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 761870478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b81759b4956e7cb4b9a681254f115384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finish: 1
+  light: 0
+  count: 100
+  temp: 100
 --- !u!54 &761870482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23246,6 +23262,7 @@ MonoBehaviour:
   touchedDown: 0
   touchedUp: 0
   angle_x: 0
+  angle_y: 0
   restarting: {fileID: 0}
   awayFromMe: {fileID: 0}
   colliderActual: {fileID: 0}
