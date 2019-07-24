@@ -25,6 +25,17 @@ public class PlayerCollision : MonoBehaviour
 
     public bool isTriggerMiddle = false;
 
+    public bool touchedRight = false; 
+
+    public bool touchedLeft = false; 
+
+    public bool touchedDown = false; 
+
+    public bool touchedUp = false; 
+
+    Vector3 accelerometer;
+    public double angle_x = 0;
+
     public Restarting restarting; 
    
     public AvoidObstacle awayFromMe;
@@ -544,7 +555,25 @@ public class PlayerCollision : MonoBehaviour
                 delfinoFound = true;
             }
         } //Input.GetKeyDown(KeyCode.LeftArrow)
-        if (dolphinController.touchsensor.touchpoints[2].touched && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
+
+        if(dolphinController!=null){
+
+
+
+
+            touchedDown = movement.angle_x > 24.0f;
+            touchedUp = movement.angle_x < -20.0f;
+            touchedLeft = dolphinController.touchsensor.touchpoints[2].touched;
+            touchedRight = dolphinController.touchsensor.touchpoints[1].touched; 
+
+        }else {
+            touchedLeft = Input.GetKeyDown(KeyCode.LeftArrow);
+            touchedRight = Input.GetKeyDown(KeyCode.RightArrow);
+            touchedDown = Input.GetKeyDown(KeyCode.DownArrow);
+            touchedUp = Input.GetKeyDown(KeyCode.UpArrow); 
+        }
+
+        if (touchedLeft && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
             //GuiOn = false;
             Image[] images = canvas.GetComponentsInChildren<Image>();
@@ -565,7 +594,7 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-       if (dolphinController.touchsensor.touchpoints[1].touched && isTriggerRight == true)
+        if (touchedRight && isTriggerRight == true)
         {
             //GuiOn = false;
             Image[] images = canvas.GetComponentsInChildren<Image>();
@@ -581,7 +610,7 @@ public class PlayerCollision : MonoBehaviour
             isTriggerRight = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerMiddle == true && !Input.GetKeyDown(KeyCode.LeftArrow)){
+        if (touchedRight && isTriggerMiddle == true && !touchedLeft){
 
             BoxCollider[] sons = colliderActual.gameObject.GetComponentsInChildren<BoxCollider>(true);
             for (int i = 0; i < sons.Length; i++){
@@ -595,7 +624,7 @@ public class PlayerCollision : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerMiddle == true && !Input.GetKeyDown(KeyCode.RightArrow)){
+        if (touchedLeft && isTriggerMiddle == true && !touchedRight){
 
             BoxCollider[] sons = colliderActual.gameObject.GetComponentsInChildren<BoxCollider>(true);
             for (int i = 0; i < sons.Length; i++)
@@ -611,7 +640,7 @@ public class PlayerCollision : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) && isTriggerObstDown == true)
+        if (touchedDown && isTriggerObstDown == true)
         {
             //GuiOn = false;
             //rotate.setUpRotation(new Vector3(40 ,0,0));
@@ -633,7 +662,7 @@ public class PlayerCollision : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isTriggerObstUp == true)
+        if (touchedUp && isTriggerObstUp == true)
         {
 
             //GuiOn = false;    

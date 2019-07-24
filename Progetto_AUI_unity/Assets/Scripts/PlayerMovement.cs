@@ -93,7 +93,15 @@ public class PlayerMovement : MonoBehaviour {
             angle_y = -(Mathf.Atan2(accelerometer.x, Mathf.Sqrt(accelerometer.y * accelerometer.y + accelerometer.z * accelerometer.z)) * 180.0f) / Mathf.PI;
             Debug.Log("ANGLE_X: " + angle_x + "ANGLE_Y: "+ angle_y);
 
-
+            rightArrow = angle_y < -24.0f;
+            leftArrow = angle_y > 15.0f;
+            downArrow = angle_x > 24.0f;
+            upArrow = angle_x < -20.0f;
+        }else {
+            rightArrow = Input.GetKey(KeyCode.RightArrow);
+            leftArrow = Input.GetKey(KeyCode.LeftArrow);
+            downArrow = Input.GetKey(KeyCode.DownArrow);
+            upArrow = Input.GetKey(KeyCode.UpArrow);
         }
         //rb.AddRelativeForce(Vector3.forward);
         //rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
@@ -112,38 +120,34 @@ public class PlayerMovement : MonoBehaviour {
         downArrow = Input.GetKey(KeyCode.DownArrow);
         upArrow = Input.GetKey(KeyCode.UpArrow);*/
 
-        rightArrow = angle_y<-24.0f;
-        leftArrow = angle_y>15.0f;
-        downArrow = angle_x>24.0f;
-        upArrow = angle_x<-20.0f;
+
 
         //int x, y, z;                        //three axis acceleration data
         //double roll = 0.00, pitch = 0.00;       //Roll & Pitch are the angles which rotate by the axis X and y
 
 
-        if (true)
+
+        if (rightArrow)
         {
-            if (rightArrow)
-            {
-               // rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-                //rb.AddRelativeForce(Vector3.right,  ForceMode.VelocityChange);
-                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, speed);
-            }
-            if (leftArrow)
-            {
-                //rb.AddRelativeForce(-movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.right, speed);
-            }
-            if (downArrow)
-            {
-                //rb.AddRelativeForce(0, -movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
-                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.up, speed);
-            }
-            if (upArrow)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, speed);
-            }
+           // rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            //rb.AddRelativeForce(Vector3.right,  ForceMode.VelocityChange);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, speed);
         }
+        if (leftArrow)
+        {
+            //rb.AddRelativeForce(-movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.right, speed);
+        }
+        if (downArrow)
+        {
+            //rb.AddRelativeForce(0, -movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
+            transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.up, speed);
+        }
+        if (upArrow)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, speed);
+        }
+
         /*       if ((rb.position.y <= -1 || rb.position.y.ToString().Equals("NaN")) && false)
                 {
                     FindObjectOfType<GameManager>().EndGame();
