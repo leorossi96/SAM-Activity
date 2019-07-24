@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool delfinoFound = false;
     SmartToy dolphinController;
+    Vector3 accelerometer;
+    public double angle_x = 0;
+    public double angle_y = 0;
 
 
 
@@ -46,13 +49,52 @@ public class PlayerMovement : MonoBehaviour {
     void Start()
     {
         StartCoroutine(AnimationSet());
+        if (!delfinoFound)
+        {
+            if (GameObject.Find("Dolphin1") != null)
+            {
+                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+                accelerometer = dolphinController.objectposition.accelerometer[0];
+                Debug.Log("ACCELEROMETRO " + accelerometer);
+                // StartCoroutine(waittoStartGreenLight());*/
+                //dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+                Debug.Log("Light On.");
+                delfinoFound = true;
+            }
+        }
     }
   
 
 	// Update is called once per frame
 	void FixedUpdate () {
 
+        if (!delfinoFound)
+        {
+            if (GameObject.Find("Dolphin1") != null)
+            {
+                UDPListenerForMagiKRoom.instance.StartReceiver(10);
+                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+                accelerometer = dolphinController.objectposition.accelerometer[0];
+                // StartCoroutine(waittoStartGreenLight());*/
+                //dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+                Debug.Log("Light On.");
+                delfinoFound = true;
+            }
+        }
+        if (dolphinController != null)
+        {
 
+            accelerometer = dolphinController.objectposition.accelerometer[0];
+            angle_x = (Mathf.Atan2(accelerometer.y, accelerometer.z) * 180.0f) / Mathf.PI;
+            angle_y = -(Mathf.Atan2(accelerometer.x, Mathf.Sqrt(accelerometer.y * accelerometer.y + accelerometer.z * accelerometer.z)) * 180.0f) / Mathf.PI;
+            Debug.Log("ANGLE_X: " + angle_x + "ANGLE_Y: "+ angle_y);
+
+
+        }
         //rb.AddRelativeForce(Vector3.forward);
         //rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
         transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed*multiplier); 
@@ -63,15 +105,23 @@ public class PlayerMovement : MonoBehaviour {
             dolphin.GetComponent<Animation>().Play("Swimming");
         }
 
-        
+
         // If use keyboard (ex. as in Unity or Standalone built)
-        rightArrow = Input.GetKey(KeyCode.RightArrow);
+        /*rightArrow = Input.GetKey(KeyCode.RightArrow);
         leftArrow = Input.GetKey(KeyCode.LeftArrow);
         downArrow = Input.GetKey(KeyCode.DownArrow);
-        upArrow = Input.GetKey(KeyCode.UpArrow);
+        upArrow = Input.GetKey(KeyCode.UpArrow);*/
+
+        rightArrow = angle_y<-24.0f;
+        leftArrow = angle_y>15.0f;
+        downArrow = angle_x>24.0f;
+        upArrow = angle_x<-20.0f;
+
+        //int x, y, z;                        //three axis acceleration data
+        //double roll = 0.00, pitch = 0.00;       //Roll & Pitch are the angles which rotate by the axis X and y
 
 
-        if (Input.anyKey)
+        if (true)
         {
             if (rightArrow)
             {
@@ -100,25 +150,9 @@ public class PlayerMovement : MonoBehaviour {
                }
                */
 
-        if (!delfinoFound)
-        {
-            if (GameObject.Find("Dolphin1") != null)
-            {
-                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
-                MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
-                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
-                Vector3[] gyroscope = dolphinController.objectposition.gyroscope;
-                Debug.Log("GIROSCOPIO " + gyroscope[0]);
-                // StartCoroutine(waittoStartGreenLight());*/
-                //dolphinController.executeCommandLightController(Color.green, 100, "parthead");
-                Debug.Log("Light On.");
-                delfinoFound = true;
-            }
-        }
-
-
-
-
+        
+        
+        
     }
 
     public void powerUp(string chest_name){

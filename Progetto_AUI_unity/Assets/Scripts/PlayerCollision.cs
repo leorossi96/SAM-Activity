@@ -39,7 +39,8 @@ public class PlayerCollision : MonoBehaviour
 
     public bool notTutorial;
 
-    public bool overcame=false; 
+    public bool overcame=false;
+    public bool delfinoFound = false;
 
     public float fadeAmount; 
 
@@ -53,6 +54,7 @@ public class PlayerCollision : MonoBehaviour
     public int refAx;
     public int direction;
     public Canvas canvas;
+    SmartToy dolphinController;
 
 
 
@@ -529,7 +531,20 @@ public class PlayerCollision : MonoBehaviour
 
 	void Update()
     {
-        if(Input.GetKeyDown(KeyCode.LeftArrow) && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
+        if (!delfinoFound)
+        {
+            if (GameObject.Find("Dolphin1") != null)
+            {
+                
+                dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+               
+                // StartCoroutine(waittoStartGreenLight());*/
+                //dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+               
+                delfinoFound = true;
+            }
+        } //Input.GetKeyDown(KeyCode.LeftArrow)
+        if (dolphinController.touchsensor.touchpoints[2].touched && isTriggerLeft == true)    //check if the corner trigger (Left) is active and wait for the input by the user
         {
             //GuiOn = false;
             Image[] images = canvas.GetComponentsInChildren<Image>();
@@ -550,7 +565,7 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-       if (Input.GetKeyDown(KeyCode.RightArrow) && isTriggerRight == true)
+       if (dolphinController.touchsensor.touchpoints[1].touched && isTriggerRight == true)
         {
             //GuiOn = false;
             Image[] images = canvas.GetComponentsInChildren<Image>();

@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+{% for patient in patients %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + patient.therapist.image_file) }}">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2">Patients</a>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('patient', id_p=patient.id) }}}">{{ patient.first_name }} {{ patient.last_name }}</a></h2>
+            <p class="article-content">{{ patient.date_of_birth }}</p>
+            <p class="article-content">{{ patient.comment }}</p>
+        </div>
+    </article>
+{% endfor %}
+{% endblock content %}
