@@ -164,18 +164,25 @@ public class PlayerMovement : MonoBehaviour {
         {
             case "chest_food1":
                 manager.powerUp("power_up_speed");
+                if(dolphinController!=null)
+                    dolphinController.executeCommandLightController(Color.yellow, 100, "parthead");
                 StartCoroutine(powerDown("power_up_speed")); 
                 multiplier = 2.0f;
                 break; 
 
             case "chest_food2":
                 manager.powerUp("power_up_ind");
+                if (dolphinController != null)
+                    dolphinController.executeCommandLightController(Color.green, 100, "parthead");
                 StartCoroutine(powerDown("power_up_ind")); 
+
                 indestructible = true; 
                 break;
 
             case "hit":
                 manager.powerUp("power_up_ind");
+                if (dolphinController != null)
+                    dolphinController.executeCommandLightController(Color.green, 100, "parthead");
                 StartCoroutine(powerDownAfterHit("power_up_ind"));
                 indestructible = true;
                 break;
@@ -202,6 +209,8 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         manager.powerDown(power);
+        if (dolphinController != null)
+            dolphinController.executeCommandLightController(Color.black, 0, "parthead");
 
         
     }
@@ -217,8 +226,11 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         manager.powerDown(power);
+        if (dolphinController != null)
+            dolphinController.executeCommandLightController(Color.black, 0, "parthead");
 
     }
+
 
 
 }

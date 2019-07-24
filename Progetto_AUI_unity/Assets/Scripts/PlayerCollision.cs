@@ -33,8 +33,11 @@ public class PlayerCollision : MonoBehaviour
 
     public bool touchedUp = false; 
 
+   
+
     Vector3 accelerometer;
     public double angle_x = 0;
+    public double angle_y = 0;
 
     public Restarting restarting; 
    
@@ -559,7 +562,9 @@ public class PlayerCollision : MonoBehaviour
         if(dolphinController!=null){
 
 
-
+            accelerometer = dolphinController.objectposition.accelerometer[0];
+            angle_x = (Mathf.Atan2(accelerometer.y, accelerometer.z) * 180.0f) / Mathf.PI;
+            angle_y = -(Mathf.Atan2(accelerometer.x, Mathf.Sqrt(accelerometer.y * accelerometer.y + accelerometer.z * accelerometer.z)) * 180.0f) / Mathf.PI;
 
             touchedDown = movement.angle_x > 24.0f;
             touchedUp = movement.angle_x < -20.0f;

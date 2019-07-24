@@ -6,7 +6,11 @@ public class Fading : MonoBehaviour {
 
     public bool fading;
     public float fadingRate;
-    private Animator animator; 
+    private Animator animator;
+
+    SmartToy dolphinController; 
+
+    public bool chest_food1_act = false; 
 
 
 
@@ -20,14 +24,31 @@ public class Fading : MonoBehaviour {
 
         if (fading)
         {
+            
+
             switch (this.tag)
             {
                 case "chest_food1":
-                    if (Input.GetKeyDown(KeyCode.I))
-                    {
-                        animator.SetTrigger("eaten"); 
+                    if (GameObject.Find("Dolphin1") != null){
+                        if (GameObject.Find("Dolphin1").GetComponent<SmartToy>().rfidsensor.cardReader[3].read)
+                        {
+                            
+                            animator.SetTrigger("eaten");
+                            this.enabled = false;
+
+                                
+                        }
+                        break; 
+                    }else {
+                        if (Input.GetKeyDown(KeyCode.I))
+                        {
+                            animator.SetTrigger("eaten");
+                            this.enabled = false; 
+                        }
+                        break; 
                     }
-                    break; 
+
+
             }
         }
 	}
