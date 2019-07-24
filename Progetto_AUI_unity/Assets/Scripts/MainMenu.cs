@@ -10,9 +10,14 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene("Search");
     }
 
-    public void PlayGameTemple()
+    public void PlayGameRunFirstLevel()
     {
         SceneManager.LoadScene("TempleRun");
+    }
+
+    public void PlayGameRunSecondLevel()
+    {
+        SceneManager.LoadScene("New Scene");
     }
 
 
