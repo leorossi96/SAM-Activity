@@ -12,19 +12,18 @@ public class PlayerMovementSearch : MonoBehaviour
     public float rotationSpeed = 3f;
     public float lerpSpeed = 0.5f;
 
-    public bool rightArrow;
-    public bool leftArrow;
-    public bool downArrow;
-    public bool upArrow;
-    public bool tabKey;
-    public bool shiftKey;
+    public bool turnRight;
+    public bool turnLeft;
+    public bool goDown;
+    public bool goUp;
+    public bool goForward;
+    public bool goBackward;
     public bool startUp;
     public bool startDown;
 
     public GameObject dolphin;
     public bool start = false;
-
-    public bool start_with_dolphin = false; 
+    public bool stop = false;
 
 
 
@@ -84,36 +83,45 @@ public class PlayerMovementSearch : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
 
         // If use keyboard (ex. as in Unity or Standalone built)
-        /*rightArrow = Input.GetKey(KeyCode.RightArrow);
-        leftArrow = Input.GetKey(KeyCode.LeftArrow);
-        downArrow = Input.GetKey(KeyCode.DownArrow);
-        upArrow = Input.GetKey(KeyCode.UpArrow);
-        tabKey = Input.GetKey(KeyCode.Tab);
-        shiftKey = Input.GetKey(KeyCode.LeftShift);*/
-        rightArrow = angle_y < -24.0f;
-        leftArrow = angle_y > 15.0f;
-        downArrow = angle_x > 24.0f;
-        upArrow = angle_x < -20.0f;
-        tabKey = dolphinController.touchsensor.touchpoints[1].touched && dolphinController.touchsensor.touchpoints[2].touched;
-        shiftKey = Input.GetKey(KeyCode.LeftShift);
+        turnRight = Input.GetKey(KeyCode.RightArrow);
+        turnLeft = Input.GetKey(KeyCode.LeftArrow);
+        goDown = Input.GetKey(KeyCode.DownArrow);
+        goUp = Input.GetKey(KeyCode.UpArrow);
+        goForward = Input.GetKey(KeyCode.Tab);
+        goBackward = Input.GetKey(KeyCode.LeftShift);
+        /*turnRight = angle_y < -24.0f;
+        turnLeft = angle_y > 15.0f;
+        goDown = angle_x > 24.0f;
+        goUp = angle_x < -20.0f;
+        goForward = dolphinController.touchsensor.touchpoints[1].touched && dolphinController.touchsensor.touchpoints[2].touched;
+        goBackward = Input.GetKey(KeyCode.LeftShift);*/
 
 
-        if (true)
-        {
+
             Vector3 position = tf.position;
 
-            if (rightArrow)
+            if (turnRight)
             {
                 tf.Rotate(0, rotationSpeed * Time.deltaTime, 0);
             }
-            if (leftArrow)
+            if (turnLeft)
             {
                 tf.Rotate(0, -rotationSpeed * Time.deltaTime, 0); //Usa quaternioni
             }
-            if (downArrow)
+            if (goDown)
             {
                 position = position - tf.up * velocityApplied * Time.deltaTime;
                 tf.position = position;
+                if (start)
+                {
+                    dolphin.GetComponent<Animation>().PlayQueued("Swimming");
+                }
+                else
+                {
+                    dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                    start = true;
+                }
+            stop = true;
 
                 /*if(!start){
                     if(!startDown){
@@ -124,23 +132,33 @@ public class PlayerMovementSearch : MonoBehaviour
                     }
                 }*/
             }
-            if (upArrow)
+            if (goUp)
             {
                 position = position + tf.up * velocityApplied * Time.deltaTime;
                 tf.position = position;
+                if (start == true)
+                {
+                    dolphin.GetComponent<Animation>().PlayQueued("Swimming");
+                }
+                else
+                {
+                    dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                    start = true;
+                }
+            stop = true;
 
-                /*if(!tabKey){
-                    if(!startUp){
-                        dolphin.GetComponent<Animation>().Play("GoUp");
-                        startUp = true; 
-                    }else{
-                        dolphin.GetComponent<Animation>().PlayQueued("Swimming");
-                    }
-                }*/
-            }
-            if (tabKey)
+
+            /*if(!tabKey){
+                if(!startUp){
+                    dolphin.GetComponent<Animation>().Play("GoUp");
+                    startUp = true; 
+                }else{
+                    dolphin.GetComponent<Animation>().PlayQueued("Swimming");
+                }
+            }*/
+        }
+        if (goForward)
             {
-                start_with_dolphin = false; 
                 position = position + tf.forward * velocityApplied * Time.deltaTime;
                 tf.position = position;
                 if (start)
@@ -149,34 +167,44 @@ public class PlayerMovementSearch : MonoBehaviour
                 }
                 else
                 {
-
                     dolphin.GetComponent<Animation>().Play("StartSwimSearch");
                     start = true;
                 }
-            }else
-            {
-               
-                    start = false;
+            stop = true;
 
-                    if (!start_with_dolphin)
-                    {
-                        dolphin.GetComponent<Animation>().Play("Stopping");
-                        start_with_dolphin = true;
-                    }
-
-
-                    dolphin.GetComponent<Animation>().PlayQueued("Idle");
-                
-            }
-            if (shiftKey)
+        }
+        if (goBackward)
             {
                 position = position - tf.forward * velocityApplied * Time.deltaTime;
                 tf.position = position;
+                if (start)
+                {
+                    dolphin.GetComponent<Animation>().PlayQueued("Swimming");
+                }
+                else
+                {
+                    dolphin.GetComponent<Animation>().Play("StartSwimSearch");
+                    start = true;
+                }
+            stop = true;
+
+        }
+
+        if (!goUp && !goDown && !goForward && !goBackward)
+        {
+            start = false;
+            dolphin.GetComponent<Animation>().PlayQueued("Idle");
+            if(stop){
+                dolphin.GetComponent<Animation>().Play("Stopping");
+                stop = false;
             }
         }
-        else
-        {
-           
+
+
+            
+
+        
+
 
 
             /*if (Input.GetKeyUp(KeyCode.UpArrow))
@@ -187,17 +215,17 @@ public class PlayerMovementSearch : MonoBehaviour
             }*/
 
 
-                /*if (Input.GetKeyUp(KeyCode.DownArrow))
-                {
-                    startUp = false;
-                    dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
-                    dolphin.GetComponent<Animation>().PlayQueued("Idle");
+            /*if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                startUp = false;
+                dolphin.GetComponent<Animation>().Play("stopping_from_going_down");
+                dolphin.GetComponent<Animation>().PlayQueued("Idle");
 
-                }*/
+            }*/
 
 
 
-        }
+        
 
 
 
@@ -205,10 +233,8 @@ public class PlayerMovementSearch : MonoBehaviour
 
         if (!delfinoFound)
         {
-            Debug.Log("AAAAAA");
             if (GameObject.Find("Dolphin1") != null)
             {
-                Debug.Log("AAAAAA");
                 MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
                 MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
                 dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
@@ -225,6 +251,9 @@ public class PlayerMovementSearch : MonoBehaviour
         if (tf.position.y > 60f)
         {
             tf.position = new Vector3(tf.position.x, 60f, tf.position.z);
+        }
+        if(tf.position.y < 6f){
+            tf.position = new Vector3(tf.position.x, 6f, tf.position.z);
         }
 
     }
