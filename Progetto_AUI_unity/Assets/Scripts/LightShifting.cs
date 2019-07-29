@@ -8,11 +8,12 @@ public class LightShifting : MonoBehaviour {
     public bool light = false;
     public int count = 100;
     public int temp = 100;
-    int sign = 1; 
+    int sign = 1;
+    public bool pause;
 
 	// Use this for initialization
 	void Start () {
-		
+        pause = false;	
 	}
 
     private IEnumerator fadecolor()
@@ -30,16 +31,21 @@ public class LightShifting : MonoBehaviour {
             light = false;
         }*/
         yield return new WaitForSeconds(1.0f);
-        MagicRoomLightManager.instance.sendColour(Color.blue, count);
-        temp = count + 50*sign;
-        if (temp > 150 || temp < 100)
+        Debug.Log("PAUSE = " + pause);
+        if (!pause)
         {
-            sign = -sign;
+            MagicRoomLightManager.instance.sendColour(Color.blue, count);
             temp = count + 50 * sign;
+            if (temp > 150 || temp < 100)
+            {
+                sign = -sign;
+                temp = count + 50 * sign;
+            }
+            count = temp;
+
         }
-        count = temp; 
-        
-        StartCoroutine(fadecolor()); 
+        StartCoroutine(fadecolor());
+
     }
 
     // Update is called once per frame

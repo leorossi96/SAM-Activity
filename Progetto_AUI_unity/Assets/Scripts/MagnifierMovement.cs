@@ -24,7 +24,9 @@ public class MagnifierMovement : MonoBehaviour {
     float room_max_z = 0.8f;
     float game_max_z = 17.0f;
 
-    public float prva; 
+
+    public float prva;
+    public float offset_z;
 
     static bool searchPhase = false;
 
@@ -83,7 +85,7 @@ public class MagnifierMovement : MonoBehaviour {
 
 
 
-            transform.position = new Vector3((float)cameraSearch.transform.position.x+kinect_x*prva, 0.2f, (float)cameraSearch.transform.position.z+(kinect_z-kinect_roomcenter_z)*(-prva));
+            transform.position = new Vector3((float)cameraSearch.transform.position.x+kinect_x*prva, 0.2f, (float)cameraSearch.transform.position.z+(kinect_z-kinect_roomcenter_z)*(-prva)+offset_z);
 
             //transform.position = new_pos + player.transform.position; 
 

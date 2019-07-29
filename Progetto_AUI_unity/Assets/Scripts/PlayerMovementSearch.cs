@@ -187,7 +187,7 @@ public class PlayerMovementSearch : MonoBehaviour
                     start = true;
                 }
             stop = true;
-
+            
         }
 
         if (!goUp && !goDown && !goForward && !goBackward)
@@ -198,6 +198,8 @@ public class PlayerMovementSearch : MonoBehaviour
                 dolphin.GetComponent<Animation>().Play("Stopping");
                 stop = false;
             }
+
+            //MagicRoomLightManager.instance.sendColour(Colo.blue);
         }
 
 
@@ -229,7 +231,7 @@ public class PlayerMovementSearch : MonoBehaviour
 
 
 
-        MagicRoomLightManager.instance.sendColour(Color.blue);
+        
 
         if (!delfinoFound)
         {

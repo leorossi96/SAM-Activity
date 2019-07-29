@@ -16,6 +16,8 @@ public class PlayerCollisionSearch : MonoBehaviour
 
     public ArrayList collectiblesFound;
 
+    public LightShifting light_Shift;
+
     public Transform terrain;
 
     public Canvas canvasPlayerCamera;
@@ -28,6 +30,7 @@ public class PlayerCollisionSearch : MonoBehaviour
     public GameObject magnifierFocus;
 
     public GameObject cameraSearch;
+
 
     public bool exitFromCompletedArea = false; //boolean to remember to execute the else if part of OnTriggerStay just one time per collectibleArea
 
@@ -49,7 +52,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                     images[i].GetComponent<Image>().enabled = true;
                 }
             }
-            MagicRoomLightManager.instance.sendColour("#A47C18", 255);
+            MagicRoomLightManager.instance.sendColour("#FFC2AAFA", 255);
             exitFromCompletedArea = false;
         }
         if (collider.tag == "Collectible" && !collectiblesFound.Contains(collider))
@@ -115,6 +118,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                     }
                 }
                 StartCoroutine(ShowTextInterval(canvasCameraSearch, "Area Completed Text", 10));
+                StartCoroutine(rewardLightInterval("#00c300", 4));
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
                 GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 movement.enabled = true;
@@ -168,6 +172,21 @@ public class PlayerCollisionSearch : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         imageRequested.enabled = false;
+    }
+
+    IEnumerator rewardLightInterval(String color, int seconds)
+    {
+        light_Shift.pause = true;
+        MagicRoomLightManager.instance.sendColour("#00c300", 255);
+        Debug.Log("OOOOOOOOOOOOO");
+
+        yield return new WaitForSeconds(seconds);
+
+        Debug.Log("AAAAAAAAAAAAAAA");
+
+
+        light_Shift.pause = false;
+
     }
 
     private IEnumerator ShowTextInterval(Canvas canvas, String textName, int seconds)
