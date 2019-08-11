@@ -52,15 +52,22 @@ class LevelRun(db.Model):
 class LevelSearch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False, default='default')
-    static_obstacle = db.Column(db.Integer, nullable=False, default=10)
-    power_up = db.Column(db.Integer, nullable=False, default=10)
-    dynamic_obstacle = db.Column(db.Integer, nullable=False, default=10)
-    max_time = db.Column(db.Float, nullable=False, default=100.0)
-    lives = db.Column(db.Integer, nullable=False, default=10)
+    number_search_zone = db.Column(db.Integer, nullable=False, default=1)
+    #static_obstacle = db.Column(db.Integer, nullable=False, default=10)
+    #power_up = db.Column(db.Integer, nullable=False, default=10)
+    #dynamic_obstacle = db.Column(db.Integer, nullable=False, default=10)
+    #max_time = db.Column(db.Float, nullable=False, default=100.0)
+    #lives = db.Column(db.Integer, nullable=False, default=10)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
 
     def __repr__(self):
-        return f"User('{self.name}', '{self.static_obstacle}', '{self.power_up}', '{self.dynamic_obstacle}', " \
-            f"'{self.max_time}', '{self.lives}')"
+        return f"User('{self.name}', '{self.number_search_zone}', '{self.power_up}')"
 
+'''    
+class ZoneLevelSearch(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    number_stars_per_zone = db.Columns(db.Integer, nullable=False, default=1)
 
+    
+
+'''
