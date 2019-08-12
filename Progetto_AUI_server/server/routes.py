@@ -5,8 +5,8 @@ import requests
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from server import app, db, bcrypt
-from server.form import RegistrationForm, LoginForm, UpdateAccountForm, PatientForm
-from server.models import User, Patient, LevelRun
+from server.form import RegistrationForm, LoginForm, UpdateAccountForm, PatientForm, UpdatePatientForm, UpdateLevelRunForm
+from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -201,6 +201,19 @@ def new_patient():
                           comment=form.comment.data, therapist=current_user)
         db.session.add(patient)
         db.session.commit()
+        patient_id = current_user.patients
+        level_run_1 = LevelRun(name='Level Run 1', patient_id=patient_id[-1].id)
+        level_run_2 = LevelRun(name='Level Run 2', patient_id=patient_id[-1].id)
+        level_search = LevelSearch(name='Level Search', patient_id=patient_id[-1].id)
+        db.session.add(level_run_1)
+        db.session.add(level_run_2)
+        db.session.add(level_search)
+        db.session.commit()
+        level_search_id = patient_id[-1].levels_search
+        number_zone = len(level_search_id[-1].zone_levels) + 1
+        zone_level_search = ZoneLevelSearch(number=number_zone, number_stars_per_zone=3, level_search_id=level_search_id[-1].id)
+        db.session.add(zone_level_search)
+        db.session.commit()
         flash('successful', 'success')
         return redirect(url_for('home'))
     return render_template('new_patient.html', title='Add New Patient', form=form)
@@ -220,11 +233,72 @@ def patient(id_p):
                 pat = p
         levels_run = pat.levels_run
         levels_search = pat.levels_search
-        return render_template('patient.html', patient=pat, lev_run=levels_run, lev_search=levels_search)
+        zone_level_search = levels_search[-1].zone_levels
+        return render_template('patient.html', patient=pat, lev_run=levels_run, lev_search=levels_search, zone_search=zone_level_search)
 
 
+# route decoder to navigate our web application. In this case the slash / is simply the root
+@app.route("/patientup/<id_p>", methods=['GET', 'POST'])
+@login_required
+def patientup(id_p):
+    if current_user.is_authenticated:
+        id_reg = id_p.replace('}', '')
+        id_int = int(id_reg)
+        #patients = current_user.patients
+        for p in range(0, len(current_user.patients)):
+            if current_user.patients[p].id == id_int:
+                index = p
+        form = UpdatePatientForm()
+        if form.validate_on_submit():
+            current_user.patients[index].last_name = form.last_name.data
+            current_user.patients[index].first_name = form.first_name.data
+            current_user.patients[index].date_of_birth = form.date_of_birth.data
+            current_user.patients[index].type_of_disability = form.type_of_disability.data
+            current_user.patients[index].comment = form.comment.data
+            db.session.commit()
+            flash('The patient account has been Updated!', 'success')
+            return redirect(url_for('home'))
+        elif request.method == 'GET':
+            form.last_name.data = current_user.patients[index].last_name
+            form.first_name.data = current_user.patients[index].first_name
+            form.date_of_birth.data = current_user.patients[index].date_of_birth
+            form.type_of_disability.data = current_user.patients[index].type_of_disability
+            form.comment.data = current_user.patients[index].comment
+        return render_template('patient_update.html', title='Patient_Update', form=form)
 
 
-
-
+# route decoder to navigate our web application. In this case the slash / is simply the root
+@app.route("/patientlevrun/<id_p>-<id_lr>", methods=['GET', 'POST'])
+@login_required
+def patientlevrun(id_p, id_lr):
+    print('sono in patient lev run')
+    if current_user.is_authenticated:
+        id_reg = id_p.replace('}', '')
+        id_int = int(id_reg)
+        lr_int = int(id_lr)
+        #patients = current_user.patients
+        for p in range(0, len(current_user.patients)):
+            if current_user.patients[p].id == id_int:
+                index = p
+        for i in range(0, 2):
+            print('i: {}'.format(i))
+            if current_user.patients[index].levels_run[i].id == lr_int:
+                index_lr = i
+        form = UpdateLevelRunForm()
+        if form.validate_on_submit():
+            current_user.patients[index].levels_run[index_lr].static_obstacle = form.static_obstacle.data
+            current_user.patients[index].levels_run[index_lr].power_up = form.power_up.data
+            current_user.patients[index].levels_run[index_lr].dynamic_obstacle = form.dynamic_obstacle.data
+            current_user.patients[index].levels_run[index_lr].max_time = form.max_time.data
+            current_user.patients[index].levels_run[index_lr].lives = form.lives.data
+            db.session.commit()
+            flash('The patient account has been Updated!', 'success')
+            return redirect(url_for('home'))
+        elif request.method == 'GET':
+            form.static_obstacle.data = current_user.patients[index].levels_run[index_lr].static_obstacle
+            form.power_up.data = current_user.patients[index].levels_run[index_lr].power_up
+            form.dynamic_obstacle.data = current_user.patients[index].levels_run[index_lr].dynamic_obstacle
+            form.max_time.data = current_user.patients[index].levels_run[index_lr].max_time
+            form.lives.data = current_user.patients[index].levels_run[index_lr].lives
+        return render_template('level_run_update.html', title='Patient_Update', form=form)
 
