@@ -5,7 +5,9 @@ using UnityEngine;
 public class SessionParameters : MonoBehaviour {
 
     //parameters to detect execution time
-    public float sec;
+    public float secCount;
+    public int mil;
+    public int sec;
     public int min;
     public int hrs;
     public bool stopChrono;
@@ -43,8 +45,6 @@ public class SessionParameters : MonoBehaviour {
 
         for (int i = 0; i < zoneCount; i++){
             int ran = (int)Random.Range(0, 9);
-            Debug.Log("LEVEL GENERATION ran : " + ran);
-            Debug.Log("Già uscito : "+ zonePositionIndexes.Contains(ran));
             if (zonePositionIndexes.Contains(ran)){
                 i--;
             }
@@ -101,23 +101,25 @@ public class SessionParameters : MonoBehaviour {
     
 
     void UpdateChrono(){
-        sec += Time.deltaTime;
-        sec = (float)decimal.Round((decimal)sec, 2);
-        if (sec >= 60)
+        secCount += Time.deltaTime;
+        //sec = (float)decimal.Round((decimal)sec, 2);
+        if (secCount >= 60)
         {
             min++;
-            sec = 0;
+            secCount = 0;
         }
         if (min >= 60)
         {
             hrs++;
             min = 0;
         }
-        //Debug.Log("CHRONO " + hrs.ToString() + " : " + min.ToString() + " : " + sec.ToString());
+        sec = (int)secCount;
+        mil = (int)((secCount - sec) * 1000000);
+        //Debug.Log("CHRONO " + hrs.ToString() + " : " + min.ToString() + " : " + sec.ToString() + "." + mil.ToString());
     }
 
     public string GetChrono(){
-        string chrono =  hrs.ToString() + " : " + min.ToString() + " : " + sec.ToString();
+        string chrono =  hrs.ToString() + " : " + min.ToString() + " : " + secCount.ToString();
         return chrono;
     }
 
