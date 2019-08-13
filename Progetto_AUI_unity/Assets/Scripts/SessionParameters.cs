@@ -23,12 +23,39 @@ public class SessionParameters : MonoBehaviour {
     //marker per la posizione
     public GameObject prefab;
 
+    //Array delle possibili posizioni delle zone di search
+    public int zoneCount;
+    public int collectiblesPerZoneCount;
+
+    public GameObject collectiblePrefab;
+    public GameObject zonePrefab;
+
+    public Vector3[] zonePositions = new[] { new Vector3(241.1f, 3.110005f, 156.4f), new Vector3(160.3f, 3.110005f, 121.4f), new Vector3(408.3f, 3.110005f, 127.4f), new Vector3(121.7f, 3.110005f, 367.7f), new Vector3(121.7f, 3.110005f, 213.7f), new Vector3(313.1f, 3.110005f, 125f), new Vector3(300.7f, 3.110005f, 267.7f), new Vector3(241.7f, 3.110005f, 374.7f), new Vector3(136.6f, 3.110005f, 295.2f), new Vector3(154.8f, 3.110005f, 114.7f) };
+    public HashSet<int> zonePositionIndexes;
+
 	// Use this for initialization
 	void Start () {
         sec = 0;
         stopChrono = false;
         posArray = new ArrayList();
-	}
+
+        zonePositionIndexes = new HashSet<int>();
+
+        for (int i = 0; i < zoneCount; i++){
+            int ran = (int)Random.Range(0, 9);
+            Debug.Log("LEVEL GENERATION ran : " + ran);
+            Debug.Log("Già uscito : "+ zonePositionIndexes.Contains(ran));
+            if (zonePositionIndexes.Contains(ran)){
+                i--;
+            }
+            else{
+                Vector3 position = zonePositions[ran];
+                GameObject zoneInstantiated = Instantiate(zonePrefab, position, Quaternion.identity);
+                PopulateZone(zoneInstantiated, collectiblesPerZoneCount);
+            }
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -97,4 +124,17 @@ public class SessionParameters : MonoBehaviour {
     public void SetStopChrono(bool b){
         stopChrono = b;
     }
+
+    private void PopulateZone(GameObject zone, int nCollectibles){
+        for (int i = 0; i < nCollectibles; i++)
+        {
+            float randomX = Random.Range(-25f, 25f);
+            float randomZ = Random.Range(-25f, 25f);
+            GameObject collectibleInstantiated = Instantiate(collectiblePrefab, new Vector3(0f, -4.2f, 0f), Quaternion.identity, zone.transform);
+            collectibleInstantiated.transform.SetParent(zone.transform);
+            collectibleInstantiated.transform.localPosition = new Vector3(randomX, -4.2f, randomZ);
+            collectibleInstantiated.transform.Rotate(-90f, 0, 0, Space.World);
+        }
+    }
+
 }
