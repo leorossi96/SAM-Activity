@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateField, IntegerField, FloatField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateField, IntegerField, FloatField, FieldList
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from server.models import User
 
@@ -55,9 +55,9 @@ class UpdateAccountForm(FlaskForm):
 class PatientForm(FlaskForm):
     last_name = StringField('Last Name', validators=[DataRequired()])
     first_name = StringField('First Name', validators=[DataRequired()])
-    date_of_birth = DateField('Date of Birth', validators=[DataRequired()])
+    date_of_birth = DateField('Date of Birth (YYYY-MM-DD)', validators=[DataRequired()])
     type_of_disability = StringField('Type of Disability', validators=[DataRequired()])
-    comment = TextAreaField('Comment', validators=[DataRequired(), Length(min=0, max=250)])
+    comment = TextAreaField('Comment', validators=[Length(min=0, max=250)])
     submit = SubmitField('Add Patient')
 
 
@@ -67,6 +67,7 @@ class UpdatePatientForm(FlaskForm):
     date_of_birth = DateField('Date of Birth', validators=[DataRequired()])
     type_of_disability = StringField('Type of Disability', validators=[DataRequired()])
     comment = TextAreaField('Comment', validators=[DataRequired(), Length(min=0, max=250)])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])]) # we can add also other extension
     submit = SubmitField('Update Patient')
 
 
@@ -77,4 +78,11 @@ class UpdateLevelRunForm(FlaskForm):
     max_time = FloatField('Max Time', validators=[DataRequired()])
     lives = IntegerField('Lives', validators=[DataRequired()])
     submit = SubmitField('Update Level Run')
+
+
+class UpdateLevelSearchForm(FlaskForm):
+    number_stars_per_zone = FieldList(IntegerField('Number of stars for Collectible Area', validators=[DataRequired()]),
+                                      min_entries=2, max_entries=20)
+    submit = SubmitField('Update Level Search')
+
 

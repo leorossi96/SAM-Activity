@@ -1,5 +1,6 @@
 from server import db, login_manager
 from flask_login import UserMixin
+from datetime import time
 
 
 @login_manager.user_loader
@@ -26,6 +27,7 @@ class Patient(db.Model):
     date_of_birth = db.Column(db.Date, nullable=False)
     type_of_disability = db.Column(db.String(50), nullable=False)
     comment = db.Column(db.String(250))
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     levels_run = db.relationship('LevelRun', lazy=True)
     levels_search = db.relationship('LevelSearch', lazy=True)
@@ -52,6 +54,7 @@ class LevelRun(db.Model):
 class LevelSearch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, default='default')
+    level_time = db.Column(db.Time, nullable=False, default=time(0,0,0,0))
     #number_search_zone = db.Column(db.Integer, nullable=False, default=1)
     #static_obstacle = db.Column(db.Integer, nullable=False, default=10)
     #power_up = db.Column(db.Integer, nullable=False, default=10)

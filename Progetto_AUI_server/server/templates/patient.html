@@ -45,11 +45,11 @@
                     <tbody>
                     <tr><th>Level name</th><td>{{ ls.name }}</td></tr>
                     {% for zn in zone_search %}
-                    <tr><th>Collectible Area {{ zn.number }} </th><td>{{ zn.number_stars_per_zone }}</td></tr>
+                    <tr><th>Collectible Area {{ zn.number }} - Number of stars</th><td>{{ zn.number_stars_per_zone }}</td></tr>
                     {% endfor %}
                     </tbody>
                 </table>
-                <a href="{{ url_for('patientup', id_p=patient.id) }}"><button type="button" style="margin-bottom: 5px">Update Level Search Parameter</button></a>
+                <a href="{{ url_for('patientlevsearch', id_p=patient.id, num_z=lz.number) }}"><button type="button" style="margin-bottom: 5px">Update Level Search Parameter</button></a>
             </div>
         </article>
         {% endfor %}
