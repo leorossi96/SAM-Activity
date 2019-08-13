@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, DateField, IntegerField, FloatField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from server.models import User
 
@@ -61,4 +61,20 @@ class PatientForm(FlaskForm):
     submit = SubmitField('Add Patient')
 
 
+class UpdatePatientForm(FlaskForm):
+    last_name = StringField('Last Name', validators=[DataRequired()])
+    first_name = StringField('First Name', validators=[DataRequired()])
+    date_of_birth = DateField('Date of Birth', validators=[DataRequired()])
+    type_of_disability = StringField('Type of Disability', validators=[DataRequired()])
+    comment = TextAreaField('Comment', validators=[DataRequired(), Length(min=0, max=250)])
+    submit = SubmitField('Update Patient')
+
+
+class UpdateLevelRunForm(FlaskForm):
+    static_obstacle = IntegerField('Static Obstacle', validators=[DataRequired()])
+    power_up = IntegerField('Power Up', validators=[DataRequired()])
+    dynamic_obstacle = IntegerField('Dynamic Obstacle', validators=[DataRequired()])
+    max_time = FloatField('Max Time', validators=[DataRequired()])
+    lives = IntegerField('Lives', validators=[DataRequired()])
+    submit = SubmitField('Update Level Run')
 
