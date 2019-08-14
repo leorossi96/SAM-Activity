@@ -313,8 +313,8 @@ def patientlevrun(id_p, id_lr):
 # route decoder to navigate our web application. In this case the slash / is simply the root
 @app.route("/patientlevsearch/<id_p>-<num_z>", methods=['GET', 'POST'])
 @login_required
-def patientlevsearch(id_p, num_z):
-    print('sono in patient lev search')
+def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dinamica, non viene salvato in modo persistente
+    print('sono in patient lev search') # quindi ogni volta che eseguo la get, in base allla lunghezza delle mie zone, dovrai andare a fare l'append delle entries in piu'. Questo per ogni volta che eseguo questa funzione.
     print('this is the num_z: {}'.format(num_z))
     print(type(num_z))
     #print(current_user.patients[0].levels_search[0].zone_levels[0].number_stars_per_zone)
