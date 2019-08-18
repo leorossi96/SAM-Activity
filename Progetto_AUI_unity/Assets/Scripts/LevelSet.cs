@@ -8,6 +8,7 @@ public class LevelSet : MonoBehaviour {
 
     public LevelRun[] levelRun;
     public LevelSearch levelSearch;
+    public ZoneLevelSearch[] zoneLevelSearch;
 
 
     public void StartCoroutine(Login login)

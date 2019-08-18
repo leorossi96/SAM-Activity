@@ -12,7 +12,7 @@ public class PatientShowSearch : MonoBehaviour {
 
 
 
-
+    /*
 
     // Update is called once per frame
     void Update()
@@ -52,5 +52,5 @@ public class PatientShowSearch : MonoBehaviour {
 
 
 
-    }
+    }*/
 }

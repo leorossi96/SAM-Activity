@@ -63,6 +63,19 @@ def prova_levels_search():
     return json.dumps(ls_list, default=str)
 
 
+@app.route("/prova/levels/search/zones", methods=['GET', 'POST'])
+def prova_zone_levels_search():
+    ls_data = request.get_json()
+    level_search = LevelSearch.query.get(ls_data['id'])
+    zones_level_search = level_search.zone_levels
+    zls_list = []
+    for zls in zones_level_search:
+        zlss = zls.__dict__
+        del zlss['_sa_instance_state']
+        zls_list.append(zlss)
+    return json.dumps(zls_list, default=str)
+
+
 @app.route("/prova/save/run", methods=['GET', 'POST'])
 def prova_save_data():
     save_data = request.get_json()
@@ -341,7 +354,9 @@ def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dina
                 zone_level_search = ZoneLevelSearch(number=number_zone, number_stars_per_zone=3, level_search_id=current_user.patients[index].levels_search[0].id)
                 db.session.add(zone_level_search)
                 db.session.commit()
-                form.number_stars_per_zone.append_entry(current_user.patients[index].levels_search[0].zone_levels[-1].number_stars_per_zone)
+            if len(current_user.patients[index].levels_search[0].zone_levels) > 2:
+                for i in range(0, len(current_user.patients[index].levels_search[0].zone_levels) - 2):
+                    form.number_stars_per_zone.append_entry(current_user.patients[index].levels_search[0].zone_levels[2+i].number_stars_per_zone)
                 print(len(current_user.patients[index].levels_search[0].zone_levels))
             for nz in range(0, len(current_user.patients[index].levels_search[0].zone_levels)):
                 form.number_stars_per_zone[nz].data = current_user.patients[index].levels_search[0].zone_levels[nz].number_stars_per_zone

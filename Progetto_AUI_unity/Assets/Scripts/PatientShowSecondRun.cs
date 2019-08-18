@@ -17,7 +17,7 @@ public class PatientShowSecondRun : MonoBehaviour {
         textPatient.text = login.selectedPatient.last_name + " " + login.selectedPatient.first_name;
         // textPatient.GetComponent<GUIText>().text = login.selectedPatient.last_name + " " + login.selectedPatient.first_name;
         inpfields = patientShow.GetComponentsInChildren<InputField>();
-        Debug.Log("UPDATE PATIENT SHOW SEARCH POWERUP: " + levelSet.levelSearch.power_up);
+        //Debug.Log("UPDATE PATIENT SHOW SEARCH POWERUP: " + levelSet.levelSearch.power_up);
         for (int i = 0; i < inpfields.Length; i++)
         {
             if (inpfields[i].name == "StaticObstacle")

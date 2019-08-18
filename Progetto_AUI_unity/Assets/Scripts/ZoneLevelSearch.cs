@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class LevelSearch {
+public class ZoneLevelSearch {
 
     public int id;
-    public string name;
-    public string level_time;
-    public int patient_id;
+    public int number;
+    public int number_stars_per_zone;
+    public int level_search_id;
+
 }
