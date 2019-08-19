@@ -9,7 +9,9 @@ public class LevelSet : MonoBehaviour {
     public LevelRun[] levelRun;
     public LevelSearch[] levelSearch;
     public ZoneLevelSearch[] zoneLevelSearch;
-    
+    public List<ZoneLevelSearch> zoneLevelSearchList;
+
+
 
     public void StartCoroutine(Login login)
     {
@@ -92,7 +94,9 @@ public class LevelSet : MonoBehaviour {
 
         string jsonString = request.downloadHandler.text;
         zoneLevelSearch = JsonHelper.getJsonArray<ZoneLevelSearch>(jsonString);
-        Debug.Log(zoneLevelSearch[0].number);
+        zoneLevelSearchList = new List<ZoneLevelSearch>(zoneLevelSearch);
+        //Debug.Log(zoneLevelSearch[0].number);
+        Debug.Log("ARRAYLIST ELEM 0: " + zoneLevelSearchList[0].number);
     }
 
 
