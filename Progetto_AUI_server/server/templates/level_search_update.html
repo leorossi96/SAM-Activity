@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Level Search Update</legend>
+            {% for i in form.number_stars_per_zone %}
+            <div class="form-group">
+                {{ i.label(class="form-control-label") }}
+                {% if i.errors %}
+                {{ i(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in i.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ i(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </fieldset>
+
+        <a href="{{ url_for('patientlevsearch', id_p=patient.id, num_z=100) }}"><button type="button" style="margin-bottom: 5px" class="btn btn-outline-info">Update Level Search Parameter</button></a>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+{% endblock content %}

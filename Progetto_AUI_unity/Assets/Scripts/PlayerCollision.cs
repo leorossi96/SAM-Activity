@@ -88,7 +88,7 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-	private IEnumerator fadecolor() {
+	/*private IEnumerator fadecolor() {
         MagicRoomLightManager.instance.sendColour("#000088", 100);
         yield return new WaitForSeconds(1f);
         MagicRoomLightManager.instance.sendColour(Color.blue);
@@ -98,7 +98,7 @@ public class PlayerCollision : MonoBehaviour
     
 
        // MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("ciao", voice);
-    }
+    }*/
 
     private IEnumerator turnLeftAnimation()
     {

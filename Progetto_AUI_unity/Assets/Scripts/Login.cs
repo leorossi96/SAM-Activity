@@ -21,16 +21,19 @@ public class Login : MonoBehaviour
     public GameObject show;
     public GameObject patientMenu;
     public PatientData[] patientData;
-   // public ShowPatient showPatient = new ShowPatient();
+    // public ShowPatient showPatient = new ShowPatient();
     public GameObject buttonPrefab;
     //public GameObject panelToAttach;
     public ScrollRect scrollView;
     public GameObject scrollContent;
     public PatientData selectedPatient = new PatientData();
-
-    
-    
+    public GameObject playGameMenu;
+    public LevelSet levelSet = new LevelSet();
    
+
+
+
+
 
 
     // Use this for initialization
@@ -44,7 +47,7 @@ public class Login : MonoBehaviour
     public void TaskOnClick()
     {
         string json = JsonUtility.ToJson(loginData);
-        Debug.Log(json);
+        Debug.Log("TaskOnClick: -> " + json);
         StartCoroutine(SendPost(json));
         //UnityWebRequest request = UnityWebRequest.Put(url, jsonString);
         //request.SetRequestHeader("Content-Type", "application/json");
@@ -56,7 +59,7 @@ public class Login : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (email.GetComponent<InputField>().isFocused)
             {
@@ -75,10 +78,9 @@ public class Login : MonoBehaviour
 
     void ClickAction(int i)
     {
-        Debug.Log("sono dentro click action");
+
         PatientData selected = patientData[i];
-        show.SetActive(false);
-        patientMenu.SetActive(true);
+        //
         selectedPatient.last_name = selected.last_name;
         selectedPatient.first_name = selected.first_name;
         selectedPatient.date_of_birth = selected.date_of_birth;
@@ -86,7 +88,10 @@ public class Login : MonoBehaviour
         selectedPatient.id = selected.id;
         selectedPatient.type_of_disability = selected.type_of_disability;
         selectedPatient.user_id = selected.user_id;
-
+        Debug.Log("sono dentro click action" + selectedPatient.id);
+        levelSet.StartCoroutine(this);
+        show.SetActive(false);
+        playGameMenu.SetActive(true);
 
     }
 
@@ -116,12 +121,12 @@ public class Login : MonoBehaviour
         string last_name = data[0]["last_name"].Value;
         
     Debug.Log(last_name);*/
-        Debug.Log("prima di utility");
+        //Debug.Log("prima di utility");
         patientData = JsonHelper.getJsonArray<PatientData>(jsonString);
-        Debug.Log("Dopo Utility");
+        //Debug.Log("Dopo Utility");
 
-        Debug.Log(patientData[0].last_name);
-        Debug.Log(patientData.Length);
+        //Debug.Log(patientData[0].last_name);
+        //Debug.Log(patientData.Length);
         loginMenu.SetActive(false);
         show.SetActive(true);
 
@@ -145,30 +150,13 @@ public class Login : MonoBehaviour
         }*/
 
 
-        /*
-        Debug.Log("prima di utility");
-        pat = JsonUtility.FromJson<Patients>(jsonString);
-        Debug.Log("questa è pat: " + pat);
-        Debug.Log("Dopo Utility");
-
-        Debug.Log(pat);
-        */
-
-
-        /*UnityWebRequest www = UnityWebRequest.Put("http://127.0.0.1:5000/login/unity", json);
-        www.SetRequestHeader("Content-Type", "application/json");
-        yield return www.SendWebRequest();
-        if (www.isNetworkError || www.isHttpError)
-        {
-            Debug.Log(www.error);
-        }
-        else
-        {
-            // Show results as text
-            Debug.Log("Risposta da Flask" + www.downloadHandler.text);
-
-            // Or retrieve results as binary data
-            byte[] results = www.downloadHandler.data;*/
-
     }
+
+
+
+   
+
+
+   
+
 }

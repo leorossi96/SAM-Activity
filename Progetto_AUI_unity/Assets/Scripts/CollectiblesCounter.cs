@@ -65,6 +65,7 @@ public class CollectiblesCounter : MonoBehaviour {
         }
         else if (totalCollectiblesFound >= nCollectibles){
             Debug.Log("HAI VINTO");
+            StartCoroutine(BubbleMachine());
             movement.enabled = false;
             playerCollisionSearch.enabled = false;
             sessionParameters.SetStopChrono(true);
@@ -89,7 +90,7 @@ public class CollectiblesCounter : MonoBehaviour {
                 }
             }
             dolphin.GetComponent<Animation>().PlayQueued("Looping");
-            //StartCoroutine(BubbleMachine());
+            
         }
     }
 
@@ -110,7 +111,7 @@ public class CollectiblesCounter : MonoBehaviour {
 
     private IEnumerator BubbleMachine(){
         MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
     }
 

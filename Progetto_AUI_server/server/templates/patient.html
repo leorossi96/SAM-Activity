@@ -14,6 +14,7 @@
             <tr><th>Comment</th><td>{{ patient.comment }}</td></tr>
             </tbody>
         </table>
+        <a href="{{ url_for('patientup', id_p=patient.id) }}"><button type="button" style="margin-bottom: 35px">Update Patient Info</button></a>
         {% for lr in lev_run %}
         <article class="media content-section">
             <div class="media-body">
@@ -30,6 +31,7 @@
                     <tr><th>Lives</th><td>{{ lr.lives }}</td></tr>
                     </tbody>
                 </table>
+                <a href="{{ url_for('patientlevrun', id_p=patient.id, id_lr=lr.id) }}"><button type="button" style="margin-bottom: 5px">Update Level Run Parameters</button></a>
             </div>
         </article>
         {% endfor %}
@@ -42,13 +44,12 @@
                 <table class="table">
                     <tbody>
                     <tr><th>Level name</th><td>{{ ls.name }}</td></tr>
-                    <tr><th>Static Obstacle</th><td>{{ ls.static_obstacle }}</td></tr>
-                    <tr><th>Power Up</th><td>{{ ls.power_up }}</td></tr>
-                    <tr><th>Dynamic Obstacle</th><td>{{ ls.dynamic_obstacle }}</td></tr>
-                    <tr><th>Max Time</th><td>{{ ls.max_time }}</td></tr>
-                    <tr><th>Lives</th><td>{{ ls.lives }}</td></tr>
+                    {% for zn in zone_search %}
+                    <tr><th>Collectible Area {{ zn.number }} - Number of stars</th><td>{{ zn.number_stars_per_zone }}</td></tr>
+                    {% endfor %}
                     </tbody>
                 </table>
+                <a href="{{ url_for('patientlevsearch', id_p=patient.id, num_z=lz.number) }}"><button type="button" style="margin-bottom: 5px">Update Level Search Parameter</button></a>
             </div>
         </article>
         {% endfor %}
