@@ -1609,6 +1609,7 @@ GameObject:
   - component: {fileID: 128145824}
   - component: {fileID: 128145823}
   - component: {fileID: 128145822}
+  - component: {fileID: 128145825}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -1670,6 +1671,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &128145825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128145821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e67ebcad9c4c4053b74850730540371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {x: 0, y: 0, z: 0}
+  turning: 0
+  rotate: {fileID: 0}
+  rotateDirection: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &131588928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,6 +1777,7 @@ MonoBehaviour:
   touchedDown: 0
   touchedUp: 0
   angle_x: 0
+  angle_y: 0
   restarting: {fileID: 131588937}
   awayFromMe: {fileID: 0}
   colliderActual: {fileID: 0}
@@ -7318,6 +7335,46 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
   m_IsPrefabParent: 0
@@ -11578,6 +11635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fading: 0
   fadingRate: 2
+  chest_food1_act: 0
 --- !u!136 &1085523773
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -17090,6 +17148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fading: 0
   fadingRate: 2
+  chest_food1_act: 0
 --- !u!95 &1538476200
 Animator:
   serializedVersion: 3
@@ -19638,7 +19697,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.3803922, g: 0.4039216, b: 0.454902, a: 1}
+      maxColor: {r: 0.38039216, g: 0.40392157, b: 0.45490196, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
