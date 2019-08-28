@@ -40,10 +40,14 @@ public class SessionParameters : MonoBehaviour {
 
     private void Awake()
     {
-        LevelSet levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
+        levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
         Debug.Log("PRESOOSOOSOSOSOSOOSOSOSO");
         zoneCount = levelSet.GetZoneLevelSearchList().Count;
         Debug.Log("Zone count = " + zoneCount);
+        for(int x = 0; x < zoneCount; x++)
+        {
+            Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
+        }
     }
 
     // Use this for initialization
