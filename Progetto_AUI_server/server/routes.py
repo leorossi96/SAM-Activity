@@ -287,6 +287,27 @@ def patientup(id_p):
         return render_template('patient_update.html', title='Patient_Update', image_file=image_file, form=form)
 
 
+@app.route("/deletepatient/<id_p>", methods=['GET', 'POST'])
+@login_required
+def deletepatient(id_p):
+    if current_user.is_authenticated:
+        id_reg = id_p.replace('}', '')
+        id_int = int(id_reg)
+        patient = Patient.query.get(id_int)
+        levels_run = patient.levels_run
+        level_search = patient.levels_search
+        zone_level_search = level_search[0].zone_levels
+        for i in range (0, len(zone_level_search)):
+            db.session.delete(zone_level_search[i])
+        db.session.delete(level_search[0])
+        db.session.delete(levels_run[0])
+        db.session.delete(levels_run[1])
+        db.session.delete(patient)
+        db.session.commit()
+        flash('The patient has been updated!', 'success')
+    return redirect(url_for('home'))
+
+
 # route decoder to navigate our web application. In this case the slash / is simply the root
 @app.route("/patientlevrun/<id_p>-<id_lr>", methods=['GET', 'POST'])
 @login_required
