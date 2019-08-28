@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System.IO;
 using UnityEngine.Networking;
 using SimpleJSON;
+using TMPro;
 
 
 public class Login : MonoBehaviour
@@ -29,6 +30,8 @@ public class Login : MonoBehaviour
     public PatientData selectedPatient = new PatientData();
     public GameObject playGameMenu;
     public LevelSet levelSet = new LevelSet();
+    public TextMeshProUGUI error;
+   
    
 
 
@@ -110,46 +113,51 @@ public class Login : MonoBehaviour
         Debug.Log(request.downloadHandler.text);
 
 
-        if (request.isHttpError || request.isNetworkError)
+        if (request.isHttpError || request.isNetworkError || request.downloadHandler.text.Equals("login_unsuccessful!"))
         {
-            Debug.Log("questo e' l'errore" + request.error);
+            Debug.Log("questo e' l'errore");
+            error.gameObject.SetActive(true);
+
         }
 
-
-        string jsonString = request.downloadHandler.text;
-        /* data = JSON.Parse(jsonString);
-        string last_name = data[0]["last_name"].Value;
-        
-    Debug.Log(last_name);*/
-        //Debug.Log("prima di utility");
-        patientData = JsonHelper.getJsonArray<PatientData>(jsonString);
-        //Debug.Log("Dopo Utility");
-
-        //Debug.Log(patientData[0].last_name);
-        //Debug.Log(patientData.Length);
-        loginMenu.SetActive(false);
-        show.SetActive(true);
-
-        GameObject[] button = new GameObject[patientData.Length];
-
-        for (int i = 0; i < patientData.Length; i++)
+        else
         {
-            int temp = i;
-            button[i] = Instantiate(buttonPrefab);
-            button[i].transform.SetParent(scrollContent.transform, false);//Setting button parent
-            button[i].GetComponent<Button>().onClick.AddListener(() => ClickAction(temp));//Setting what button does when clicked                                                   //Next line assumes button has child with text as first gameobject like button created from GameObject->UI->Button
-            button[i].transform.GetChild(0).GetComponent<Text>().text = patientData[i].last_name + ' ' + patientData[i].first_name;
+
+
+            string jsonString = request.downloadHandler.text;
+            /* data = JSON.Parse(jsonString);
+            string last_name = data[0]["last_name"].Value;
+
+        Debug.Log(last_name);*/
+            //Debug.Log("prima di utility");
+            patientData = JsonHelper.getJsonArray<PatientData>(jsonString);
+            //Debug.Log("Dopo Utility");
+
+            //Debug.Log(patientData[0].last_name);
+            //Debug.Log(patientData.Length);
+            loginMenu.SetActive(false);
+            show.SetActive(true);
+
+            GameObject[] button = new GameObject[patientData.Length];
+
+            for (int i = 0; i < patientData.Length; i++)
+            {
+                int temp = i;
+                button[i] = Instantiate(buttonPrefab);
+                button[i].transform.SetParent(scrollContent.transform, false);//Setting button parent
+                button[i].GetComponent<Button>().onClick.AddListener(() => ClickAction(temp));//Setting what button does when clicked                                                   //Next line assumes button has child with text as first gameobject like button created from GameObject->UI->Button
+                button[i].transform.GetChild(0).GetComponent<Text>().text = patientData[i].last_name + ' ' + patientData[i].first_name;
+            }
+            //showPatient.setButton();
+            /*for (int i = 0; i < patientData.Length; i++)
+            {
+                patientLastName.text = patientData[i].last_name;
+                patientFirstName.text = patientData[i].first_name;
+
+                Debug.Log("sono nel for " + patientLastName.text + patientFirstName);
+            }*/
+
         }
-        //showPatient.setButton();
-        /*for (int i = 0; i < patientData.Length; i++)
-        {
-            patientLastName.text = patientData[i].last_name;
-            patientFirstName.text = patientData[i].first_name;
-            
-            Debug.Log("sono nel for " + patientLastName.text + patientFirstName);
-        }*/
-
-
     }
 
 
