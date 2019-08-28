@@ -106,5 +106,9 @@ public class LevelSet : MonoBehaviour {
         Debug.Log("ARRAYLIST ELEM 0: " + zoneLevelSearchList[0].number);
     }
 
+    public List<ZoneLevelSearch> GetZoneLevelSearchList(){
+        return zoneLevelSearchList;
+    }
+
 
 }

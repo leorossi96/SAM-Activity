@@ -29,14 +29,26 @@ public class SessionParameters : MonoBehaviour {
     public int zoneCount;
     public int collectiblesPerZoneCount;
 
+    public LevelSet levelSet = null;
+
+
     public GameObject collectiblePrefab;
     public GameObject zonePrefab;
 
     public Vector3[] zonePositions = new[] { new Vector3(241.1f, 3.110005f, 156.4f), new Vector3(160.3f, 3.110005f, 121.4f), new Vector3(408.3f, 3.110005f, 127.4f), new Vector3(121.7f, 3.110005f, 367.7f), new Vector3(121.7f, 3.110005f, 213.7f), new Vector3(313.1f, 3.110005f, 125f), new Vector3(300.7f, 3.110005f, 267.7f), new Vector3(241.7f, 3.110005f, 374.7f), new Vector3(136.6f, 3.110005f, 295.2f), new Vector3(154.8f, 3.110005f, 114.7f) };
     public HashSet<int> zonePositionIndexes;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        LevelSet levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
+        Debug.Log("PRESOOSOOSOSOSOSOOSOSOSO");
+        zoneCount = levelSet.GetZoneLevelSearchList().Count;
+        Debug.Log("Zone count = " + zoneCount);
+    }
+
+    // Use this for initialization
+    void Start () {
+
         sec = 0;
         stopChrono = false;
         posArray = new ArrayList();
@@ -51,6 +63,8 @@ public class SessionParameters : MonoBehaviour {
             else{
                 Vector3 position = zonePositions[ran];
                 GameObject zoneInstantiated = Instantiate(zonePrefab, position, Quaternion.identity);
+                collectiblesPerZoneCount = levelSet.GetZoneLevelSearchList()[i].number_stars_per_zone;
+                Debug.Log("Stelle nella zona = " + collectiblesPerZoneCount);
                 PopulateZone(zoneInstantiated, collectiblesPerZoneCount);
             }
         }
