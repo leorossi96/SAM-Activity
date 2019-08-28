@@ -11,6 +11,13 @@ public class LevelSet : MonoBehaviour {
     public ZoneLevelSearch[] zoneLevelSearch;
     public List<ZoneLevelSearch> zoneLevelSearchList;
 
+    void Awake()
+    {
+       
+        DontDestroyOnLoad(this.gameObject);
+        Debug.Log("ho fatto il DONT DESTROY");
+    }
+
 
 
     public void StartCoroutine(Login login)
