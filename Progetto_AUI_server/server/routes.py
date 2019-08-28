@@ -23,6 +23,11 @@ def home():
     return render_template('home.html')
 
 
+@app.route("/newhtml")  # route decoder to navigate our web application. In this case the slash / is simply the root
+def newhtml():
+    return render_template('index.html')
+
+
 @app.route("/prova", methods=['GET', 'POST'])
 def prova():
     if current_user.is_authenticated:
