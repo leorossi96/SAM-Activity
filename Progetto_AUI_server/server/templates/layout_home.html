@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-                    <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+                    <a class="nav-item nav-link" href="#about">About</a>
                 </div>
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
@@ -54,7 +54,29 @@
         </figure>
 
     </div>
+<div class="clearfix"> </div>
 
+<div class="about" id="about">
+    <div class="container">
+        <h2>About Us</h2>
+        <div class="about-bottom">
+            <p>Pellentesque aliquet sit amet purus gravida pulvinar. Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc id est ac nulla venenatis luctus vulputate sit amet libero. Praesent et aliquam leo. In aliquet felis orci, in dapibus nisi ullamcorper sed. Praesent congue ante sed dui sodales, vitae pharetra risus semper. Aliquam malesuada non ex quis mollis. Etiam non felis id lorem sodales posuere. Ut est nisl, viverra id nisi et, maximus pellentesque elit. Etiam luctus nulla at semper congue.</p>
+            <p>Maecenas metus purus, lacinia auctor dignissim in, dapibus vitae elit. Sed facilisis interdum est, a vulputate risus dictum ut. In ex erat, placerat eget nunc vitae, accumsan euismod sem. Duis scelerisque a dui a mattis. Praesent et tellus vitae neque ultrices malesuada.</p>
+            <div class="about-btm">
+                <div class="col-md-6 about-left">
+                    <img src="{{ url_for('static', filename='images/g5.jpg') }}" alt="" />
+                </div>
+                <div class="col-md-6 about-right">
+                    <img src="{{ url_for('static', filename='images/g6.jpg') }}" alt="" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="copy">
+    <p>&copy; 2015 Acuario. All Rights Reserved | Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
