@@ -222,8 +222,12 @@ a.article-title:hover {
     text-decoration:underline;
 }
 
+
+
+
 .copy-layout {
-    position: absolute;
+    clear: both;
+    position: relative;
     bottom: 0;
     left: 0;
     right: 0;
@@ -239,5 +243,32 @@ a.article-title:hover {
     color:#fff;
 }
 .copy-layout p a:hover{
+    text-decoration:underline;
+}
+
+
+
+
+
+
+
+
+.copy-layout-fixed {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: #5f788a;
+    padding: 1em 1em;
+}
+.copy-layout-fixed p {
+    color: #fff;
+    font-size:0.9em;
+}
+.copy-layout-fixed p a {
+    color:#fff;
+}
+.copy-layout-fixed p a:hover{
     text-decoration:underline;
 }
