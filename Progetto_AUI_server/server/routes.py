@@ -20,7 +20,7 @@ def home():
                 print('patient_id {}'.format(p.id))
                 print(type(p.id))
             return render_template('home.html', patients=patients)
-    return render_template('home.html')
+    return render_template('layout_home.html')
 
 
 @app.route("/newhtml")  # route decoder to navigate our web application. In this case the slash / is simply the root
