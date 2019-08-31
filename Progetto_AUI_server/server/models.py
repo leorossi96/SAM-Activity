@@ -31,6 +31,7 @@ class Patient(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     levels_run = db.relationship('LevelRun', lazy=True)
     levels_search = db.relationship('LevelSearch', lazy=True)
+    #sessions = db.relationship('Session', lazy=True)
 
     def __repr__(self):
         return f"Patient('{self.last_name}', '{self.first_name}', '{self.date_of_birth}', '{self.type_of_disability}')"
@@ -55,12 +56,6 @@ class LevelSearch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, default='default')
     level_time = db.Column(db.Time, nullable=False, default=time(0,0,0,0))
-    #number_search_zone = db.Column(db.Integer, nullable=False, default=1)
-    #static_obstacle = db.Column(db.Integer, nullable=False, default=10)
-    #power_up = db.Column(db.Integer, nullable=False, default=10)
-    #dynamic_obstacle = db.Column(db.Integer, nullable=False, default=10)
-    #max_time = db.Column(db.Float, nullable=False, default=100.0)
-    #lives = db.Column(db.Integer, nullable=False, default=10)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
     zone_levels = db.relationship('ZoneLevelSearch', lazy=True)
 
@@ -77,4 +72,13 @@ class ZoneLevelSearch(db.Model):
     def __repr__(self):
         return f"Zone_Level_Search('{self.number_stars_per_zone}', '{self.number_stars_per_zone}')"
 
+
+#class Session(db.Model):
+ #   id = db.Column(db.Integer, primary_key=True)
+#    number = db.Column(db.Integer, nullable=False, default=1)
+#    number_stars_per_zone = db.Column(db.Integer, nullable=False, default=1)
+#    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
+#
+#    def __repr__(self):
+#        return f"Zone_Level_Search('{self.number_stars_per_zone}', '{self.number_stars_per_zone}')"
 
