@@ -14,6 +14,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-header .navbar-nav .nav-link {
     color: #cbd5db;
+    font-size: 20pt;
+
 }
 
 .site-header .navbar-nav .nav-link:hover {
@@ -23,6 +25,12 @@ h1, h2, h3, h4, h5, h6 {
 .site-header .navbar-nav .nav-link.active {
     font-weight: 500;
 }
+
+.site-header .navbar-brand{
+    font-size: 20pt;
+    font-weight: 300;
+    }
+
 
 .content-section {
     background: #ffffff;
@@ -81,4 +89,186 @@ a.article-title:hover {
 
 .table {
     padding: 10px;
+}
+
+
+.banner-img{
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    max-width: 1000%;
+    width: auto;
+}
+
+#slideshow {
+    margin: 80px auto;
+    position: relative;
+    width: 240px;
+    height: 240px;
+    padding: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+#slideshow > div {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+}
+
+#slider {
+    overflow: hidden;
+}
+
+#slider figure{
+    position: relative;
+    width: 500%;
+    margin: 0;
+    left: 0;
+    animation: 50s slider infinite;
+
+}
+
+#slider figure img{
+    width: 20%;
+    float: left;
+}
+
+@keyframes slider {
+    0% {
+        left: 0;
+    }
+    20%{
+        left: 0;
+    }
+    25%{
+        left: -100%;
+    }
+    45%{
+        left: -100%;
+    }
+    50%{
+        left: -200%;
+    }
+    70%{
+        left: -200%;
+    }
+    75%{
+        left: -300%;
+    }
+    95%{
+        left: -300%;
+    }
+    100%{
+        left: -400%;
+    }
+}
+
+.col-md-6{
+    width: 50%;
+    float: left;
+}
+
+.about{
+    padding: 5em 0;
+    text-align:center;
+}
+.about-bottom{
+    margin-top:1%;
+    text-align:center;
+}
+.about-top{
+    text-align:center;
+}
+.about-bottom p{
+    line-height: 1.9em;
+    color: #777;
+    font-size:0.9em;
+}
+.about-bottom p:nth-child(2){
+    width:90%;
+    margin:1% auto 0;
+}
+.about-btm{
+    margin-top:4%;
+}
+.about-left{
+    text-align:right;
+}
+.about-right{
+    text-align:left;
+}
+.about-btm img {
+    width: 100%;
+}
+#about h2 {
+    font-size: 3.5em;
+    color: #404359;
+}
+
+.copy {
+     text-align: center;
+     background: #5f788a;
+     padding: 1em 1em;
+ }
+.copy p {
+    color: #fff;
+    font-size:0.9em;
+}
+.copy p a {
+    color:#fff;
+}
+.copy p a:hover{
+    text-decoration:underline;
+}
+
+
+
+
+.copy-layout {
+    clear: both;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: #5f788a;
+    padding: 1em 1em;
+}
+.copy-layout p {
+    color: #fff;
+    font-size:0.9em;
+}
+.copy-layout p a {
+    color:#fff;
+}
+.copy-layout p a:hover{
+    text-decoration:underline;
+}
+
+
+
+
+
+
+
+
+.copy-layout-fixed {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: #5f788a;
+    padding: 1em 1em;
+}
+.copy-layout-fixed p {
+    color: #fff;
+    font-size:0.9em;
+}
+.copy-layout-fixed p a {
+    color:#fff;
+}
+.copy-layout-fixed p a:hover{
+    text-decoration:underline;
 }

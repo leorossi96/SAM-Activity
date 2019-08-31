@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    {% if title %}
+    <title>Flask Blog - {{ title }}</title>
+    {% else %}
+    <title>Dolphin Sam</title>
+    {% endif %}
+</head>
+<body>
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="padding-bottom: 17px;">
+        <div class="container">
+            <a class="navbar-brand mr-4" href="/">Dolphin Sam</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+                    <a class="nav-item nav-link" href="#about">About</a>
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                    {% if current_user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{{ url_for('new_patient') }}">Add New Patient</a>
+                    <a class="nav-item nav-link" href="{{ url_for('account') }}">Account</a>
+                    <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    {% else %}
+                    <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+                    <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+    <div id="slider">
+        <figure>
+            <img src="{{ url_for('static', filename='images/1.jpg') }}">
+            <img src="{{ url_for('static', filename='images/3.jpg') }}">
+            <img src="{{ url_for('static', filename='images/1.jpg') }}">
+            <img src="{{ url_for('static', filename='images/3.jpg') }}">
+            <img src="{{ url_for('static', filename='images/1.jpg') }}">
+        </figure>
+
+    </div>
+<div class="clearfix"> </div>
+
+<div class="about" id="about">
+    <div class="container">
+        <h2>About Us</h2>
+        <div class="about-bottom">
+            <p>Pellentesque aliquet sit amet purus gravida pulvinar. Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc id est ac nulla venenatis luctus vulputate sit amet libero. Praesent et aliquam leo. In aliquet felis orci, in dapibus nisi ullamcorper sed. Praesent congue ante sed dui sodales, vitae pharetra risus semper. Aliquam malesuada non ex quis mollis. Etiam non felis id lorem sodales posuere. Ut est nisl, viverra id nisi et, maximus pellentesque elit. Etiam luctus nulla at semper congue.</p>
+            <p>Maecenas metus purus, lacinia auctor dignissim in, dapibus vitae elit. Sed facilisis interdum est, a vulputate risus dictum ut. In ex erat, placerat eget nunc vitae, accumsan euismod sem. Duis scelerisque a dui a mattis. Praesent et tellus vitae neque ultrices malesuada.</p>
+            <div class="about-btm">
+                <div class="col-md-6 about-left">
+                    <img src="{{ url_for('static', filename='images/g5.jpg') }}" alt="" />
+                </div>
+                <div class="col-md-6 about-right">
+                    <img src="{{ url_for('static', filename='images/g6.jpg') }}" alt="" />
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="copy">
+    <p>&copy; 2015 Acuario. All Rights Reserved | Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

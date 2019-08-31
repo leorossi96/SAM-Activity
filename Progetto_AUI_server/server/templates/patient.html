@@ -15,6 +15,7 @@
             </tbody>
         </table>
         <a href="{{ url_for('patientup', id_p=patient.id) }}"><button type="button" style="margin-bottom: 35px">Update Patient Info</button></a>
+        <a href="{{ url_for('deletepatient', id_p=patient.id) }}"><button type="button" style="margin-left: 25px">Delete Patient</button></a>
         {% for lr in lev_run %}
         <article class="media content-section">
             <div class="media-body">

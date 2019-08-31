@@ -11,6 +11,13 @@ public class LevelSet : MonoBehaviour {
     public ZoneLevelSearch[] zoneLevelSearch;
     public List<ZoneLevelSearch> zoneLevelSearchList;
 
+    void Awake()
+    {
+       
+        DontDestroyOnLoad(this.gameObject);
+        Debug.Log("ho fatto il DONT DESTROY");
+    }
+
 
 
     public void StartCoroutine(Login login)
@@ -97,6 +104,10 @@ public class LevelSet : MonoBehaviour {
         zoneLevelSearchList = new List<ZoneLevelSearch>(zoneLevelSearch);
         //Debug.Log(zoneLevelSearch[0].number);
         Debug.Log("ARRAYLIST ELEM 0: " + zoneLevelSearchList[0].number);
+    }
+
+    public List<ZoneLevelSearch> GetZoneLevelSearchList(){
+        return zoneLevelSearchList;
     }
 
 

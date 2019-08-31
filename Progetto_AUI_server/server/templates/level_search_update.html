@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout_wo_footer.html" %}
 {% block content %}
 <div class="content-section">
     <form method="POST" action="" enctype="multipart/form-data">
@@ -22,7 +22,7 @@
             {% endfor %}
         </fieldset>
 
-        <a href="{{ url_for('patientlevsearch', id_p=patient.id, num_z=100) }}"><button type="button" style="margin-bottom: 5px" class="btn btn-outline-info">Update Level Search Parameter</button></a>
+        <a href="{{ url_for('patientlevsearch', id_p=patient.id, num_z=100) }}"><button type="button" style="margin-bottom: 5px" class="btn btn-outline-info">Add new Collectible Zone</button></a>
 
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}

@@ -1,0 +1,631 @@
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Acuario a Animals & Pets Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Acuario Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="applijewelleryion/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
+<!-- Custom Theme files -->
+	<link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/style.css') }}"/>
+	<link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/style3.css') }}"/>
+<script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/move-top.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/easing.js') }}"></script>
+<!--/script-->
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
+				});
+			});
+</script>
+<script src="{{ url_for('static', filename='js/easyResponsiveTabs.js') }}"></script>
+				<script type="text/javascript">
+					$(document).ready(function () {
+						$('#horizontalTab').easyResponsiveTabs({
+							type: 'default', //Types: default, vertical, accordion           
+							width: 'auto', //auto or any width like 600px
+							fit: true   // 100% fit in a container
+						});
+					});
+				   </script>
+
+
+	<!--script-->
+	<script src="{{ url_for('static', filename='js/modernizr.custom.97074.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.chocolat.js') }}"></script>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/chocolat.css') }}" type="text/css" media="screen">
+		<!--light-box-files-->
+		<script type="text/javascript">
+		$(function() {
+			$('.gallery-grids a').Chocolat();
+		});
+		</script>
+
+</head>
+<body>
+	<!--header-->
+	<div class="header-section" id="home">
+		<div class="header-top">
+			<!--logo-->
+			   <div class="logo">
+                  <a href="index.html"><h1>Dolphin Sam</h1></a>
+				</div>
+				<div class="header-right">
+						 <p class="col-md-3 location"><i class="glyphicon glyphicon-map-marker"></i>i3 Lab</p>
+						 <p class="col-md-3 phone"><i class="glyphicon glyphicon-phone"></i> 7758 2068 892</p>
+						 <p class="col-md-3 mail"><i class="glyphicon glyphicon-envelope"></i><a href="mailto:info@example.com">mail@example.com</a></p>
+						<div class="col-md-3 search">
+							<form>
+								<input type="submit" value="">
+								<input type="text" value="Search " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+							</form>
+						</div>
+				    <div class="clearfix"> </div>
+				       <div class="top-nav">
+					     <span class="menu"> </span>
+					        <ul class="cl-effect-16">
+						      <li><a class="active scroll" href="#home" data-hover="Home">Home</a></li>
+								<li><a class="scroll" href="#about" data-hover="Patients">Patients</a></li>
+								<li><a class="scroll" href="#service" data-hover="Services">Account></li>
+								<li><a class="scroll" href="#team" data-hover="Team">Add New Patient</a></li>
+								<li><a class="scroll" href="#news" data-hover="News">Login</a></li>
+								<li><a class="scroll" href="#gallery" data-hover="Gallery">Register</a></li>
+								<li><a class="scroll" href="#contact" data-hover="Contact">Contact</a></li>
+					      </ul>
+					
+				 </div>
+			</div>
+			<!--top-nav-->
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+				<div class="clearfix"> </div>
+		<!-- script-for-menu -->
+				<script>
+					$(document).ready(function(){
+						$("span.menu").click(function(){
+							$(".top-nav ul").slideToggle(200);
+						});
+					});
+				</script>
+			<div class="clearfix"> </div>
+		<!--banner-->
+	    <div class="banner">
+			 <!-- Slider-starts-Here -->
+			  <script src="{{ url_for('static', filename='js/responsiveslides.min.js') }}"></script>
+				<script>
+				    // You can also use "$(window).load(function() {"
+				    $(function () {
+				      // Slideshow 4
+				      $("#slider4").responsiveSlides({
+				        auto: true,
+				        pager:true,
+				        nav:false,
+				        speed: 500,
+				        namespace: "callbacks",
+				        before: function () {
+				          $('.events').append("<li>before event fired.</li>");
+				        },
+				        after: function () {
+				          $('.events').append("<li>after event fired.</li>");
+				        }
+				      });
+				
+				    });
+				  </script>
+			<!--//End-slider-script -->
+			<div class="callbacks_container">
+				<ul class="rslides" id="slider4">
+					<li>
+						<div class="banner-img">
+							<img src="{{ url_for('static', filename='images/1.jpg') }}" class="img-responsive" alt="" />
+						</div>
+
+					</li>
+					<li>
+						<div class="banner-img">
+							<img src="{{ url_for('static', filename='images/3.jpg') }}" class="img-responsive" alt="" />
+						</div>
+
+					</li>
+					<li>
+						<div class="banner-img">
+							<img src="{{ url_for('static', filename='images/1.jpg') }}" class="img-responsive" alt="" />
+						</div>
+
+					</li>
+				</ul>
+			</div>
+			
+			</div>
+   <div class="clearfix"> </div>
+   <!--start-about-->
+			<div class="about" id="about">
+				<div class="container">
+						<h2>About Us</h2>
+					<div class="about-bottom">
+						<p>Pellentesque aliquet sit amet purus gravida pulvinar. Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc id est ac nulla venenatis luctus vulputate sit amet libero. Praesent et aliquam leo. In aliquet felis orci, in dapibus nisi ullamcorper sed. Praesent congue ante sed dui sodales, vitae pharetra risus semper. Aliquam malesuada non ex quis mollis. Etiam non felis id lorem sodales posuere. Ut est nisl, viverra id nisi et, maximus pellentesque elit. Etiam luctus nulla at semper congue.</p>
+						<p>Maecenas metus purus, lacinia auctor dignissim in, dapibus vitae elit. Sed facilisis interdum est, a vulputate risus dictum ut. In ex erat, placerat eget nunc vitae, accumsan euismod sem. Duis scelerisque a dui a mattis. Praesent et tellus vitae neque ultrices malesuada.</p>
+						<div class="about-btm">
+							<div class="col-md-6 about-left">
+								<img src="{{ url_for('static', filename='images/g5.jpg') }}" alt="" />
+							</div>
+							<div class="col-md-6 about-right">
+								<img src="{{ url_for('static', filename='images/g6.jpg') }}" alt="" />
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+	<!--end-about-->
+		<!--/services-->
+	  <div class="services" id="service">
+	      <div class="container">
+		   <h3 class="tittle">Our Services</h3>
+		      <div class="serve-top">
+				 <div class="col-md-6 serve-icons">
+					<div class="s-sub">
+						<div class="col-md-2 icon">
+						  <i class="glyphicon glyphicon-globe"></i>
+						</div>
+						<div class="col-md-10 serve-text">
+						 <p> Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus. </p>
+						</div>
+					     <div class="clearfix"> </div>	
+					 </div>
+					 <div class="s-sub">
+						<div class="col-md-2 icon">
+						  <i class="glyphicon glyphicon-send"></i>
+						</div>
+						<div class="col-md-10 serve-text">
+						 <p> Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus.</p>
+						</div>
+					     <div class="clearfix"> </div>	
+					 </div>
+					 <div class="s-sub">
+						<div class="col-md-2 icon">
+						  <i class="glyphicon glyphicon-briefcase"></i>
+						</div>
+						<div class="col-md-10 serve-text">
+						 <p> Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus.</p>
+						</div>
+					     <div class="clearfix"> </div>	
+					 </div>
+				 </div>
+				 <div class="col-md-6 serve-icons">
+					<div class="s-sub">
+						<div class="col-md-2 icon">
+						  <i class="glyphicon glyphicon-screenshot"></i>
+						</div>
+						<div class="col-md-10 serve-text">
+						 <p> Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus. </p>
+						</div>
+					     <div class="clearfix"> </div>	
+					 </div>
+					 <div class="s-sub">
+						<div class="col-md-2 icon">
+						  <i class="glyphicon glyphicon-edit"></i>
+						</div>
+						<div class="col-md-10 serve-text">
+						 <p> Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus.</p>
+						</div>
+					     <div class="clearfix"> </div>	
+					 </div><div class="s-sub">
+						<div class="col-md-2 icon">
+						  <i class="glyphicon glyphicon-certificate"></i>
+						</div>
+						<div class="col-md-10 serve-text">
+						 <p> Duis quis risus a nunc ultricies varius. Aenean aliquam pellentesque magna consectetur hendrerit. Cum sociis natoque penatibus.</p>
+						</div>
+					     <div class="clearfix"> </div>	
+					 </div>
+				 </div>
+				 <div class="clearfix"> </div>		
+	          </div>	
+	      </div>	
+	  </div>
+
+<!--start-latest-->
+		<div class="fishes">
+			<div class="container">
+			        <h3 class="tittle">Different Fishes</h3>
+			      <div class="grid">
+					<div class="col-md-6 l-grids">
+						<figure class="effect-bubba">
+							<img src="images/g1.jpg" alt=""/>
+							<figcaption>
+								<h4>Acuario</h4>
+								<p>In sit amet sapien eros Integer in tincidunt labore et dolore magna aliqua</p>
+								<div class="icon-links">
+									<a href="#"><i class="glyphicon glyphicon-paperclip"></i></a>
+									<a href="#"><i class="glyphicon glyphicon-eye-open"></i></a>
+									<a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a>
+								</div>								
+							</figcaption>			
+						</figure>		
+					</div>
+					<div class="col-md-6 l-grids">
+						<figure class="effect-bubba">
+							<img src="images/g3.jpg" alt=""/>
+							<figcaption>
+								<h4>Acuario</h4>
+								<p>In sit amet sapien eros Integer in tincidunt labore et dolore magna aliqua</p>
+								<div class="icon-links">
+									<a href="#"><i class="glyphicon glyphicon-paperclip"></i></a>
+									<a href="#"><i class="glyphicon glyphicon-eye-open"></i></a>
+									<a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a>
+								</div>								
+							</figcaption>			
+						</figure>		
+					</div>
+					 <div class="col-md-6 l-grids">
+						<figure class="effect-bubba">
+							<img src="images/g4.jpg" alt=""/>
+							<figcaption>
+								<h4>Acuario</h4>
+								<p>In sit amet sapien eros Integer in tincidunt labore et dolore magna aliqua</p>
+								<div class="icon-links">
+									<a href="#"><i class="glyphicon glyphicon-paperclip"></i></a>
+									<a href="#"><i class="glyphicon glyphicon-eye-open"></i></a>
+									<a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a>
+								</div>								
+							</figcaption>			
+						</figure>		
+					</div>
+					 <div class="col-md-6 l-grids">
+						<figure class="effect-bubba">
+							<img src="images/g2.jpg" alt=""/>
+							<figcaption>
+								<h4>Acuario</h4>
+								<p>In sit amet sapien eros Integer in tincidunt labore et dolore magna aliqua</p>
+								<div class="icon-links">
+									<a href="#"><i class="glyphicon glyphicon-paperclip"></i></a>
+									<a href="#"><i class="glyphicon glyphicon-eye-open"></i></a>
+									<a href="#"><i class="glyphicon glyphicon-heart-empty"></i></a>
+								</div>								
+							</figcaption>			
+						</figure>		
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+		<!-- team -->
+   <div class="team" id="team">
+	  <div class="container">
+			<h3 class="tittle">Our Team</h3>
+		<div class="team-grids">
+			<div class="col-md-3 team-grid text-center">
+				<div class="team-img">
+					<img src="images/t2.jpg" alt=""/>
+					<h3>Federica</h3>
+					<p>Nam libero tempore, cum soluta nobis
+					est eligendi optio cumque nihil impedit
+					quo minus</p>
+					<ul>
+						<li><a class="fb" href="#"></a></li>
+						<li><a class="twitt" href="#"></a></li>
+						<li><a class="goog" href="#"></a></li>
+						<li><a class="drib" href="#"></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 team-grid text-center">
+				<div class="team-img">
+					<img src="images/t1.jpg" alt=""/>
+					<h3>Patrick</h3>
+					<p>Nam libero tempore, cum soluta nobis
+					est eligendi optio cumque nihil impedit
+					quo minus</p>
+					<ul>
+						<li><a class="fb" href="#"></a></li>
+						<li><a class="twitt" href="#"></a></li>
+						<li><a class="goog" href="#"></a></li>
+						<li><a class="drib" href="#"></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 team-grid text-center">
+				<div class="team-img">
+				<img src="images/t3.jpg" alt=""/>
+					<h3>Thompson</h3>
+					<p>Nam libero tempore, cum soluta nobis
+					est eligendi optio cumque nihil impedit
+					quo minus</p>
+					<ul>
+						<li><a class="fb" href="#"></a></li>
+						<li><a class="twitt" href="#"></a></li>
+						<li><a class="goog" href="#"></a></li>
+						<li><a class="drib" href="#"></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3 team-grid text-center">
+				<div class="team-img">
+				<img src="images/t4.jpg" alt=""/>
+					<h3>Victoria</h3>
+					<p>Nam libero tempore, cum soluta nobis
+					est eligendi optio cumque nihil impedit
+					quo minus</p>
+					<ul>
+						<li><a class="fb" href="#"></a></li>
+						<li><a class="twitt" href="#"></a></li>
+						<li><a class="goog" href="#"></a></li>
+						<li><a class="drib" href="#"></a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+<!-- team -->
+	<!--gallery-starts-->
+	<div class="gallery" id="gallery">
+		<div class="container">
+			<div class="gallery-top heading">
+				<h3 class="tittle">Our Gallery</h3>
+			</div>
+			<div class="gallery-bottom">
+				<div class="gallery-grids">
+					<div class="col-md-3 gallery-left">
+						<div class="g-1">	
+							<a class="example-image-link" href="images/g5.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g-2.jpg" alt=""/></a>						
+						</div>
+						<div class="g-2">	
+							<a class="example-image-link" href="images/g7.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g-7.jpg" alt=""/></a>
+						</div>
+					</div>
+					<div class="col-md-6 gallery-left">
+						<a class="example-image-link" href="images/g6.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g-1.jpg" alt=""/></a>
+						<div class="g-5">	
+							<div class="col-md-6 g-3">	
+								<a class="example-image-link" href="images/g3.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g-5.jpg" alt=""/></a>
+							</div>
+							<div class="col-md-6 g-4">	
+								<a class="example-image-link" href="images/g4.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g-6.jpg" alt=""/></a>
+							</div>
+							<div class="clearfix"></div>							
+						</div>
+						<a class="example-image-link" href="images/g8.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g-8.jpg" alt=""/></a>
+					</div>
+					<div class="col-md-3 gallery-left">
+						<a class="example-image-link" href="images/g1.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g-3.jpg" alt=""/></a>
+						<div class="g-6">	
+							<a class="example-image-link" href="images/g2.jpg" data-lightbox="example-set" data-title=""><img class="example-image" src="images/g-4.jpg" alt=""/></a>
+						</div>
+					</div>
+					<div class="clearfix"> </div>					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--gallery-end-->
+<!--/news-->
+	<div class="news" id="news">
+	   <div class="container">
+		         <h3 class="tittle">Our News</h3>
+		  <section class="cr-container">				
+				<input id="select-img-1" name="radio-set-1" type="radio" class="cr-selector-img-1" checked/>
+				<label for="select-img-1" class="cr-label-img-1">1</label>
+				
+				<input id="select-img-2" name="radio-set-1" type="radio" class="cr-selector-img-2" />
+				<label for="select-img-2" class="cr-label-img-2">2</label>
+				
+				<input id="select-img-3" name="radio-set-1" type="radio" class="cr-selector-img-3" />
+				<label for="select-img-3" class="cr-label-img-3">3</label>
+				
+				<input id="select-img-4" name="radio-set-1" type="radio" class="cr-selector-img-4" />
+				<label for="select-img-4" class="cr-label-img-4">4</label>
+				
+				<div class="clearfix"></div>	
+				<div class="cr-bgimg">
+					<div>
+						<span>Slice 1 - Image 1</span>
+						<span>Slice 1 - Image 2</span>
+						<span>Slice 1 - Image 3</span>
+						<span>Slice 1 - Image 4</span>
+					</div>
+					<div>
+						<span>Slice 2 - Image 1</span>
+						<span>Slice 2 - Image 2</span>
+						<span>Slice 2 - Image 3</span>
+						<span>Slice 2 - Image 4</span>
+					</div>
+					<div>
+						<span>Slice 3 - Image 1</span>
+						<span>Slice 3 - Image 2</span>
+						<span>Slice 3 - Image 3</span>
+						<span>Slice 3 - Image 4</span>
+					</div>
+					<div>
+						<span>Slice 4 - Image 1</span>
+						<span>Slice 4 - Image 2</span>
+						<span>Slice 4 - Image 3</span>
+						<span>Slice 4 - Image 4</span>
+					</div>
+				</div>
+				<div class="cr-titles">
+					<h3><span><a href="#">New Post With Image For Fishers</a> <br><p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus,cum soluta nobis est eligendi optio cumque nihil</p><br><div class="bog_post_info infoPost">
+					   <span class="datePost"><a href="#" class="post_date">Aug 30, 2015</a></span>
+					   <p class="commentPost"><a class="icon-comment-1" title="Comments - 2" href="#"><i class="glyphicon glyphicon-comment"></i>2</a></p>
+					   <p class="likePost"><i class="glyphicon glyphicon-heart"></i><a class="icon-heart" title="Likes - 4" href="#">4</a></p><div class="clearfix"></div>
+					</div></span><span><br>What you've been dreaming of</span></h3>
+					<h3><span><a href="#">Lorem Post With Image For Fishers</a> <br><p>Lorem libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus,cum soluta nobis est eligendi optio cumque nihil</p><br><div class="bog_post_info infoPost">
+					   <span class="datePost"><a href="#" class="post_date">Sep 20, 2015</a></span>
+					   <p class="commentPost"><a class="icon-comment-1" title="Comments - 2" href="#"><i class="glyphicon glyphicon-comment"></i>2</a></p>
+					   <p class="likePost"><i class="glyphicon glyphicon-heart"></i><a class="icon-heart" title="Likes - 4" href="#">7</a></p><div class="clearfix"></div>
+					</div></span><span>You've been dreaming of</span><span class="tol">Marine</span></h3>
+					<h3><span><a href="#">Amazing Post With Image For Fishers</a> <br><p>Amet libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus,cum soluta nobis est eligendi optio cumque nihil</p><br><div class="bog_post_info infoPost">
+					   <span class="datePost"><a href="#" class="post_date">Sep 29, 2015</a></span>
+					   <p class="commentPost"><a class="icon-comment-1" title="Comments - 2" href="#"><i class="glyphicon glyphicon-comment"></i>2</a></p>
+					   <p class="likePost"><i class="glyphicon glyphicon-heart"></i><a class="icon-heart" title="Likes - 4" href="#">6</a></p><div class="clearfix"></div>
+					</div></span><span>Do you've been dreaming of</span><span class="tol">Shack</span></h3>
+					<h3><span><a href="#">New Post With Image For Fishers</a> <br><p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus,cum soluta nobis est eligendi optio cumque nihil</p><br><div class="bog_post_info infoPost">
+					   <span class="datePost"><a href="#" class="post_date">Oct 30, 2015</a></span>
+					   <p class="commentPost"><a class="icon-comment-1" title="Comments - 2" href="#"><i class="glyphicon glyphicon-comment"></i>2</a></p>
+					   <p class="likePost"><i class="glyphicon glyphicon-heart"></i><a class="icon-heart" title="Likes - 4" href="#">4</a></p><div class="clearfix"></div>
+					</div></span><span>You've been dreaming of</span><span class="tol">Adventure</span></h3>
+					
+				
+			</section>
+			
+			</div>
+       </div>
+	   
+	     <!--/testimonials-->
+  		  <div class="testimonials-section">
+			<div class="container">
+			   <h3 class="tittle test">Testimonials</h3>
+				<div class="members">
+					<div class="slide-test">
+						<div id="top" class="callbacks_container">
+						<ul class="rslides callbacks callbacks1" id="slider3">
+							<li id="callbacks1_s0" class="callbacks1_on" style="display: block; float: left; position: relative; opacity: 1; z-index: 2; transition: opacity 500ms ease-in-out;">
+								<div class="text-info">
+									<img src="images/client.jpg" alt="" />
+								 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+								</div>
+							</li>
+							<li id="callbacks1_s1" class="" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;">
+								<div class="text-info">
+									<img src="images/client2.jpg" alt="" />
+								 <p>Consectetur adipisicing elitLorem ipsum dolor sit amet,Dolor amet , sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+								</div>
+							</li>
+							<li id="callbacks1_s2" class="" style="display: block; float: none; position: absolute; opacity: 0; z-index: 1; transition: opacity 500ms ease-in-out;">
+								<div class="text-info">
+									<img src="images/client.jpg" alt="" />
+								 <p>Dolor amet, Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+								</div>
+							</li>
+						</ul>
+						</div>
+						<!--banner-Slider-->
+						<script src="js/responsiveslides.min.js"></script>
+						 <script>
+						// You can also use "$(window).load(function() {"
+						$(function () {
+						  // Slideshow 4
+						  $("#slider3").responsiveSlides({
+						auto: true,
+						pager:false,
+						nav: true,
+						speed: 500,
+						namespace: "callbacks",
+						before: function () {
+						  $('.events').append("<li>before event fired.</li>");
+						},
+						after: function () {
+						  $('.events').append("<li>after event fired.</li>");
+						}
+						  });
+
+						});
+						  </script>
+
+					</div>
+		       </div>
+			</div>
+        </div>
+
+ <!--start-contact-->
+	 <div class="contact_desc" id="contact">
+		        <div class="container">
+		        	<h3 class="tittle">Contact Us</h3>
+			         <div class="contact-form">
+				  	   <form class="left_form">
+					    	<div>
+						    	<span><label>NAME</label></span>
+						    	<span><input name="userName" type="text" class="textbox"></span>
+						    </div>
+						    <div>
+						    	<span><label>E-MAIL</label></span>
+						    	<span><input name="userEmail" type="text" class="textbox"></span>
+						    </div>
+						    <div>
+						     	<span><label>Fax</label></span>
+						    	<span><input name="userPhone" type="text" class="textbox"></span>
+						    </div>
+					    </form>
+					    <form class="right_form">
+					        <div>					    	
+						    	<span><label>SUBJECT</label></span>
+						    	<span><textarea name="userMsg"> </textarea></span>
+						    </div>
+						   <div>
+						   		<input type="submit" value="Submit " />
+						  </div>
+					    </form>
+					    <div class="clearfix"></div>
+				  </div>
+				  </div>
+			</div>
+
+		   <div class="contact">
+		         <div class="col-md-6 contact-top">
+				     	<div class="point"> <i class="glyphicon glyphicon-map-marker"></i></div>
+					  <h3 class="tittle two">Find Us</h3>
+				      <h4>For Any questions, Please feel free to Contact us by mail.</h4>
+					     <div class="contact-ad">
+								<p>Address : Newyork Still Road.756 gt globel Place.<p>
+								<p>Phone : Newyork Still Road.756 gt globel Place.<p>
+								<p>E-mail :<a href="mailto:info@example.com">mail@example.com</a></p>
+
+					     </div>
+			      </div>
+				  <div class="col-md-6 map">
+						<iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Purwokerto,+Central+Java,+Indonesia&amp;aq=0&amp;oq=purwo&amp;sll=37.0625,-95.677068&amp;sspn=50.291089,104.238281&amp;ie=UTF8&amp;hq=&amp;hnear=Purwokerto,+Banyumas,+Central+Java,+Indonesia&amp;ll=-7.431391,109.24783&amp;spn=0.031022,0.050898&amp;t=m&amp;z=14&amp;output=embed"></iframe>
+						<div class="black"> 
+						  <div class="map-l"> <i class="glyphicon glyphicon-map-marker"></i></div>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+	       </div>
+	<!--//contact-->
+
+	   <div class="copy">
+		   <p>&copy; 2015 Acuario. All Rights Reserved | Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+	   </div>
+	<!--start-smooth-scrolling-->
+			<script type="text/javascript">
+								jQuery(document).ready(function($) {
+									$(".scroll").click(function(event){		
+										event.preventDefault();
+										$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+									});
+								});
+								</script>
+							<!--start-smoth-scrolling-->
+						<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+								</script>
+		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+</body>
+</html>
