@@ -74,7 +74,7 @@ class ZoneLevelSearch(db.Model):
 
 
 #class Session(db.Model):
- #   id = db.Column(db.Integer, primary_key=True)
+#    id = db.Column(db.Integer, primary_key=True)
 #    number = db.Column(db.Integer, nullable=False, default=1)
 #    number_stars_per_zone = db.Column(db.Integer, nullable=False, default=1)
 #    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)

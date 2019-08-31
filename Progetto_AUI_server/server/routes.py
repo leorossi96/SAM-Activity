@@ -107,7 +107,57 @@ def prova_save_data():
     return 'speriamo bene'
 
 
-
+@app.route("/unity/save", methods=['GET', 'POST'])
+def unity_save_data():
+    save_data = request.get_json()
+    lr1 = (LevelRun.query.filter_by(id=save_data['levelRun'][0]['id']).first())
+    lr1.static_obstacle = save_data['levelRun'][0]['static_obstacle']
+    lr1.dynamic_obstacle = save_data['levelRun'][0]['dynamic_obstacle']
+    lr1.power_up = save_data['levelRun'][0]['power_up']
+    lr1.max_time = save_data['levelRun'][0]['max_time']
+    lr1.lives = save_data['levelRun'][0]['lives']
+    db.session.commit()
+    lr2 = (LevelRun.query.filter_by(id=save_data['levelRun'][1]['id']).first())
+    lr2.static_obstacle = save_data['levelRun'][1]['static_obstacle']
+    lr2.dynamic_obstacle = save_data['levelRun'][1]['dynamic_obstacle']
+    lr2.power_up = save_data['levelRun'][1]['power_up']
+    lr2.max_time = save_data['levelRun'][1]['max_time']
+    lr2.lives = save_data['levelRun'][1]['lives']
+    print(lr1.static_obstacle)
+    db.session.commit()
+    ls = (LevelSearch.query.filter_by(id=save_data['levelSearch'][0]['id']).first())
+    for i in range(0, len(ls.zone_levels)):
+        zone_search = (ZoneLevelSearch.query.filter_by(id=save_data['zoneLevelSearchList'][i]['id']).first())
+        zone_search.number_stars_per_zone = save_data['zoneLevelSearchList'][i]['number_stars_per_zone']
+        db.session.commit()
+        print('ciclo ' + str(i))
+    for j in range(len(ls.zone_levels), len(save_data['zoneLevelSearchList'])):
+        zone_level_search = ZoneLevelSearch(number=save_data['zoneLevelSearchList'][j]['number'], number_stars_per_zone=save_data['zoneLevelSearchList'][j]['number_stars_per_zone'],
+                                            level_search_id=save_data['zoneLevelSearchList'][0]['level_search_id'])
+        db.session.add(zone_level_search)
+        db.session.commit()
+    #print('NB: ' + str(len(save_data['zoneLevelSearchList'])))
+    #lr = (LevelRun.query.filter_by(id=save_data['id']).first())
+    #print(lr)
+    #lr.lives = save_data['lives']
+    #print(lr)
+    #db.session.commit()
+    #print(Patient.query.get(save_data['patient_id']).levels_run)
+    #lr = Patient.query.get(save_data['patient_id']).levels_run
+    #for l in lr:
+    #    if l.id == save_data['id']:
+    #        l.lives = save_data['lives']
+    #lr.get(save_data['id']).lives = save_data['lives']
+    #db.session.commit()
+    #print(Patient.query.get(save_data['patient_id']).levels_run)
+    #patient = Patient.query.get(save_data['patient_id'])
+    #lev_runs = patient.levels_run
+    #for lr in lev_runs:
+    #    if lr.id == save_data['id']:
+    #        lr.lives = save_data['lives']
+    #        db.session.commit()
+    #print(patient.levels_run)
+    return 'speriamo bene'
 
 
 @app.route("/about")  # route decoder to navigate our web application. In this case the slash / is simply the root

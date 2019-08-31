@@ -96,7 +96,7 @@ public class PatientShowSearch : MonoBehaviour {
         {
             string json = JsonUtility.ToJson(levelSet);
             Debug.Log("JSON DA INVIARE PER SALVATAGGIO: " + json);
-            //StartCoroutine(SendPost(json));
+            StartCoroutine(SendPost(json));
         }
 
 
@@ -119,7 +119,7 @@ public class PatientShowSearch : MonoBehaviour {
     IEnumerator SendPost(string json)
     {
         Debug.Log("entro nella coroutine");
-        var request = new UnityWebRequest("http://127.0.0.1:5000/login/unity", "POST");
+        var request = new UnityWebRequest("http://127.0.0.1:5000/unity/save", "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
