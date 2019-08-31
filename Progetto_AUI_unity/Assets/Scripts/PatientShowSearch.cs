@@ -77,14 +77,18 @@ public class PatientShowSearch : MonoBehaviour {
 
     public void TaskOnClick()
     {
-        int old_num_zones = numberOfZones;
-        Debug.Log("SONO DENTRO ADD BUTTON");
-        ZoneLevelSearch new_zone = new ZoneLevelSearch();
-        new_zone.number = numberOfZones + 1;
-        new_zone.number_stars_per_zone = 3;
-        levelSet.zoneLevelSearchList.Add(new_zone);
-        inpfields[old_num_zones].gameObject.SetActive(true);
-        inpfields[old_num_zones].text = new_zone.number_stars_per_zone.ToString();
+        if(levelSet.zoneLevelSearchList.Count < 10)
+        {
+            int old_num_zones = numberOfZones;
+            Debug.Log("SONO DENTRO ADD BUTTON");
+            ZoneLevelSearch new_zone = new ZoneLevelSearch();
+            new_zone.number = numberOfZones + 1;
+            new_zone.number_stars_per_zone = 3;
+            levelSet.zoneLevelSearchList.Add(new_zone);
+            inpfields[old_num_zones].gameObject.SetActive(true);
+            inpfields[old_num_zones].text = new_zone.number_stars_per_zone.ToString();
+        }
+        
 
         //int new_size = numberOfZones + 1;
         //Array.Resize(ref levelSet.zoneLevelSearch, new_size);
@@ -94,8 +98,11 @@ public class PatientShowSearch : MonoBehaviour {
 
     public void TaskOnClickDelete()
     {
-
-        levelSet.zoneLevelSearchList.RemoveAt(levelSet.zoneLevelSearchList.Count - 1);
+        if(levelSet.zoneLevelSearchList.Count > 1)
+        {
+            levelSet.zoneLevelSearchList.RemoveAt(levelSet.zoneLevelSearchList.Count - 1);
+        }
+        
     }
 
 }
