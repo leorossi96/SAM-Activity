@@ -30,6 +30,12 @@ public class Restarting : MonoBehaviour
             if (Input.GetKey(KeyCode.R))
             {
                 SceneManager.LoadScene(sceneName);
+
+            }
+
+            if (Input.GetKey(KeyCode.E))
+            {
+                SceneManager.LoadScene("Menu");
             }
         }
 

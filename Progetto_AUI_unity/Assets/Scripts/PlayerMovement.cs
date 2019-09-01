@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
     public PowerUpManagerLocal manager;
     public float multiplier; 
     public bool indestructible = false;
+    public int activated_powerups = 0;
 
 
     public bool delfinoFound = false;
@@ -160,9 +161,11 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void powerUp(string chest_name){
+
         switch (chest_name)
         {
             case "chest_food1":
+                activated_powerups++;
                 manager.powerUp("power_up_speed");
                 if(dolphinController!=null)
                     dolphinController.executeCommandLightController(Color.yellow, 100, "parthead");
@@ -171,6 +174,7 @@ public class PlayerMovement : MonoBehaviour {
                 break; 
 
             case "chest_food2":
+                activated_powerups++;
                 manager.powerUp("power_up_ind");
                 if (dolphinController != null)
                     dolphinController.executeCommandLightController(Color.green, 100, "parthead");

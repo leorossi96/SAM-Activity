@@ -31,10 +31,16 @@ public class PlayerCollision : MonoBehaviour
 
     public bool touchedDown = false; 
 
-    public bool touchedUp = false; 
+    public bool touchedUp = false;
+
+    public float max_time;
+
+    public SessionParametersRun param;
+
+
 
    
-
+    private bool clock_stop = false;
     Vector3 accelerometer;
     public double angle_x = 0;
     public double angle_y = 0;
@@ -70,6 +76,8 @@ public class PlayerCollision : MonoBehaviour
     public Canvas canvas;
     SmartToy dolphinController;
 
+    private TextMeshProUGUI timeMesh;
+
 
 
 
@@ -83,8 +91,23 @@ public class PlayerCollision : MonoBehaviour
                 item.fontSize = 75;
                 item.text = "Lives x" + lifeCount; 
             }
+            if ((item.name == "Time"))
+            {
+                timeMesh = item;
+                item.fontSize = 75;
+                item.text = ((int)Time.timeSinceLevelLoad)/60 + ":" + (((int) Time.timeSinceLevelLoad)%60);
+            }
         }
+
+
+
+
 	}
+
+    private IEnumerator ReturnToMenu(){
+        yield return new WaitForSeconds(4.0f);
+        SceneManager.LoadScene("Menu");
+    }
 
 
 
@@ -495,6 +518,7 @@ public class PlayerCollision : MonoBehaviour
                     dolphin.GetComponent<Animation>().Play("DolphinWaitingForSearchStart");
                     dolphin.GetComponent<Animation>().PlayQueued("Clapping");
                     colliderActual.enabled = false;
+                    StartCoroutine(ReturnToMenu());
                     break;
                 }
 
@@ -543,8 +567,33 @@ public class PlayerCollision : MonoBehaviour
 
 
 
+
+
 	void Update()
     {
+        if(Time.timeSinceLevelLoad < max_time+1){
+            
+            timeMesh.text = ((int)Time.timeSinceLevelLoad) / 60 + ":" + (((int)Time.timeSinceLevelLoad) % 60);
+
+        }
+
+
+        if(Time.timeSinceLevelLoad>max_time && !clock_stop){
+            clock_stop = true;
+            movement.start = false;
+            movement.enabled = false;
+            if(!dolphin.GetComponent<Animation>().IsPlaying("Idle") || !dolphin.GetComponent<Animation>().isPlaying)
+                dolphin.GetComponent<Animation>().Play("Stopping");
+
+            movement.start = false;
+            movement.enabled = false;
+            dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
+            StartCoroutine(deadResetAnimation());
+
+            restarting.enabled = true;
+        
+
+        }
         if (!delfinoFound)
         {
             if (GameObject.Find("Dolphin1") != null)

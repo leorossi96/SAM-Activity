@@ -23147,6 +23147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 761870479}
   - component: {fileID: 761870481}
+  - component: {fileID: 761870485}
   - component: {fileID: 761870480}
   - component: {fileID: 761870482}
   - component: {fileID: 761870483}
@@ -23205,6 +23206,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   multiplier: 0
   indestructible: 0
+  activated_powerups: 0
   delfinoFound: 0
   angle_x: 0
   angle_y: 0
@@ -23223,6 +23225,7 @@ MonoBehaviour:
   light: 0
   count: 100
   temp: 100
+  pause: 0
 --- !u!54 &761870482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23261,6 +23264,8 @@ MonoBehaviour:
   touchedLeft: 0
   touchedDown: 0
   touchedUp: 0
+  max_time: 1e+11
+  param: {fileID: 761870485}
   angle_x: 0
   angle_y: 0
   restarting: {fileID: 0}
@@ -23299,6 +23304,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 761870480}
+--- !u!114 &761870485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 761870478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b78ebeae9ebb4e13b9991af2574e289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticObs:
+  - {fileID: 1315321105}
+  - {fileID: 15178707}
+  - {fileID: 63763964}
+  - {fileID: 1507506779}
+  dynObs: []
+  powerUps: []
+  lifes: {fileID: 761870483}
+  movement: {fileID: 761870480}
+  actualLevel: 0
 --- !u!114 &761870486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32599,6 +32625,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25e938d8eb9f1d54f90b2e82279683df, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &1315321105 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 25e938d8eb9f1d54f90b2e82279683df, type: 3}
+  m_PrefabInternal: {fileID: 1315321104}
 --- !u!1 &1316488765
 GameObject:
   m_ObjectHideFlags: 0
@@ -36880,6 +36910,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25e938d8eb9f1d54f90b2e82279683df, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &1507506779 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 25e938d8eb9f1d54f90b2e82279683df, type: 3}
+  m_PrefabInternal: {fileID: 1507506778}
 --- !u!1 &1510836683
 GameObject:
   m_ObjectHideFlags: 0
