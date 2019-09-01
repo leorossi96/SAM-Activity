@@ -40,11 +40,11 @@ class Patient(db.Model):
 class LevelRun(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, default='default')
-    static_obstacle = db.Column(db.Integer, nullable=False, default=10)
-    power_up = db.Column(db.Integer, nullable=False, default=10)
-    dynamic_obstacle = db.Column(db.Integer, nullable=False, default=10)
-    max_time = db.Column(db.Float, nullable=False, default=100.0)
-    lives = db.Column(db.Integer, nullable=False, default=10)
+    static_obstacle = db.Column(db.Integer, nullable=False, default=5)
+    power_up = db.Column(db.Integer, nullable=False, default=1)
+    dynamic_obstacle = db.Column(db.Integer, nullable=False, default=2)
+    max_time = db.Column(db.Float, nullable=False, default=60.0)
+    lives = db.Column(db.Integer, nullable=False, default=2)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
 
     def __repr__(self):
