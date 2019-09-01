@@ -64,6 +64,7 @@ public class CollectiblesCounter : MonoBehaviour {
 
         }
         else if (totalCollectiblesFound >= nCollectibles){
+            sessionParameters.endGame = true;
             Debug.Log("HAI VINTO");
             StartCoroutine(BubbleMachine());
             movement.enabled = false;

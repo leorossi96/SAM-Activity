@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.Networking;
+using System.Text;
 
 public class SessionParameters : MonoBehaviour {
 
@@ -11,10 +14,12 @@ public class SessionParameters : MonoBehaviour {
     public int min;
     public int hrs;
     public bool stopChrono;
+    public TimerSerializable ts = new TimerSerializable();
 
     //parameters to compute heatmap
-    public Vector2 pos;
-    public ArrayList posArray;
+    public Vector2 pos; 
+    public PosArraySerializable posArraySer = new PosArraySerializable();
+    public List<Vector2> posArray;
     public float interval;
     public float timer = 0;
 
@@ -41,26 +46,25 @@ public class SessionParameters : MonoBehaviour {
     private void Awake()
     {
         levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
-        Debug.Log("PRESOOSOOSOSOSOSOOSOSOSO");
         zoneCount = levelSet.GetZoneLevelSearchList().Count;
+        zoneCount = 3;
         Debug.Log("Zone count = " + zoneCount);
         for(int x = 0; x < zoneCount; x++)
         {
             Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
         }
+        ts.patient_id = levelSet.GetLevelSearch().patient_id;
     }
 
     // Use this for initialization
     void Start () {
-
-        sec = 0;
         stopChrono = false;
-        posArray = new ArrayList();
+        posArraySer.posArray = new List<Vector2>();
 
         zonePositionIndexes = new HashSet<int>();
 
         for (int i = 0; i < zoneCount; i++){
-            int ran = (int)Random.Range(0, 9);
+            int ran = (int)UnityEngine.Random.Range(0, 9);
             if (zonePositionIndexes.Contains(ran)){
                 i--;
             }
@@ -68,11 +72,11 @@ public class SessionParameters : MonoBehaviour {
                 Vector3 position = zonePositions[ran];
                 GameObject zoneInstantiated = Instantiate(zonePrefab, position, Quaternion.identity);
                 collectiblesPerZoneCount = levelSet.GetZoneLevelSearchList()[i].number_stars_per_zone;
+                collectiblesPerZoneCount = 4;
                 Debug.Log("Stelle nella zona = " + collectiblesPerZoneCount);
                 PopulateZone(zoneInstantiated, collectiblesPerZoneCount);
             }
         }
-
     }
 	
 	// Update is called once per frame
@@ -91,30 +95,37 @@ public class SessionParameters : MonoBehaviour {
             timer += Time.deltaTime;
             if (timer >= interval)
             {
-                posArray = StorePosition();
+                posArraySer.posArray = StorePosition();
                 timer = 0;
             }
         }
-        else //se è stato premuto E
+        else //se è stato premuto E o è finito il gioco
         {
             if (heatmapCount == 1){
                 heatmapCount -= 1;
-                GenerateHeatmap(posArray);
+                GenerateHeatmap(posArraySer.posArray);
+                string jsonPos = JsonUtility.ToJson(posArraySer);
+                Debug.Log("POS ARRAY JSON " + jsonPos);
+                StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
+                string jsonTime = JsonUtility.ToJson(ts);
+                StartCoroutine(SendPost(jsonTime, "http://127.0.0.1:5000/save/search"));
+                string jsonLevelSet = JsonUtility.ToJson(levelSet);
+                StartCoroutine(SendPost(jsonLevelSet, "http://127.0.0.1:5000/unity/save"));
             }
         }
 	}
 
-    void GenerateHeatmap(ArrayList a){
+    void GenerateHeatmap(List<Vector2> a){
         foreach(Vector2 v in a){
             Instantiate(prefab, new Vector3(v.x, 90f, v.y), Quaternion.identity);
         }
     }
 
-    ArrayList StorePosition(){
-        pos = new Vector2(this.transform.position.x, this.transform.position.z);
-        posArray.Add(pos);
+    List<Vector2> StorePosition(){
+        pos = new Vector2(this.transform.position.x - 15.68478f, this.transform.position.z - 39.47354f);
+        posArraySer.posArray.Add(pos);
         Debug.Log("Adding :" + pos.ToString());
-        return posArray;
+        return posArraySer.posArray;
     }
     
 
@@ -123,16 +134,16 @@ public class SessionParameters : MonoBehaviour {
         //sec = (float)decimal.Round((decimal)sec, 2);
         if (secCount >= 60)
         {
-            min++;
+            ts.min++;
             secCount = 0;
         }
-        if (min >= 60)
+        if (ts.min >= 60)
         {
-            hrs++;
-            min = 0;
+            ts.hrs++;
+            ts.min = 0;
         }
-        sec = (int)secCount;
-        mil = (int)((secCount - sec) * 1000000);
+        ts.sec = (int)secCount;
+        ts.mil = (int)((secCount - ts.sec) * 1000000);
         //Debug.Log("CHRONO " + hrs.ToString() + " : " + min.ToString() + " : " + sec.ToString() + "." + mil.ToString());
     }
 
@@ -148,8 +159,8 @@ public class SessionParameters : MonoBehaviour {
     private void PopulateZone(GameObject zone, int nCollectibles){
         for (int i = 0; i < nCollectibles; i++)
         {
-            float randomX = Random.Range(-25f, 25f);
-            float randomZ = Random.Range(-25f, 25f);
+            float randomX = UnityEngine.Random.Range(-25f, 25f);
+            float randomZ = UnityEngine.Random.Range(-25f, 25f);
             GameObject collectibleInstantiated = Instantiate(collectiblePrefab, new Vector3(0f, -4.2f, 0f), Quaternion.identity, zone.transform);
             collectibleInstantiated.transform.SetParent(zone.transform);
             collectibleInstantiated.transform.localPosition = new Vector3(randomX, -4.2f, randomZ);
@@ -157,4 +168,22 @@ public class SessionParameters : MonoBehaviour {
         }
     }
 
+    IEnumerator SendPost(string json, string url)
+    {
+        Debug.Log("entro nella coroutine");
+        var request = new UnityWebRequest(url, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.SendWebRequest();
+
+        Debug.Log(request.downloadHandler.text);
+
+
+        if (request.isHttpError || request.isNetworkError)
+        {
+            Debug.Log("questo e' l'errore");
+        }
+    }
 }

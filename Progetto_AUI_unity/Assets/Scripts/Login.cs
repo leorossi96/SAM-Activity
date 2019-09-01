@@ -37,7 +37,10 @@ public class Login : MonoBehaviour
 
 
 
-
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     // Use this for initialization
     void Start()
@@ -146,7 +149,7 @@ public class Login : MonoBehaviour
                 button[i] = Instantiate(buttonPrefab);
                 button[i].transform.SetParent(scrollContent.transform, false);//Setting button parent
                 button[i].GetComponent<Button>().onClick.AddListener(() => ClickAction(temp));//Setting what button does when clicked                                                   //Next line assumes button has child with text as first gameobject like button created from GameObject->UI->Button
-                button[i].transform.GetChild(0).GetComponent<Text>().text = patientData[i].last_name + ' ' + patientData[i].first_name;
+                button[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = patientData[i].last_name + ' ' + patientData[i].first_name;
                 Debug.Log("PATIENT " + i + ": LAST_NAME: " + patientData[i].last_name + ": FIRST_NAME: " + patientData[i].first_name);
             }
             //showPatient.setButton();

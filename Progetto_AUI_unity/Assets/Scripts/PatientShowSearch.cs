@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Networking;
+using System.Collections;
+using System.Text;
 
 public class PatientShowSearch : MonoBehaviour {
 
@@ -77,14 +80,25 @@ public class PatientShowSearch : MonoBehaviour {
 
     public void TaskOnClick()
     {
-        int old_num_zones = numberOfZones;
-        Debug.Log("SONO DENTRO ADD BUTTON");
-        ZoneLevelSearch new_zone = new ZoneLevelSearch();
-        new_zone.number = numberOfZones + 1;
-        new_zone.number_stars_per_zone = 3;
-        levelSet.zoneLevelSearchList.Add(new_zone);
-        inpfields[old_num_zones].gameObject.SetActive(true);
-        inpfields[old_num_zones].text = new_zone.number_stars_per_zone.ToString();
+        if(levelSet.zoneLevelSearchList.Count < 10)
+        {
+            int old_num_zones = numberOfZones;
+            Debug.Log("SONO DENTRO ADD BUTTON");
+            ZoneLevelSearch new_zone = new ZoneLevelSearch();
+            new_zone.number = numberOfZones + 1;
+            new_zone.number_stars_per_zone = 3;
+            levelSet.zoneLevelSearchList.Add(new_zone);
+            inpfields[old_num_zones].gameObject.SetActive(true);
+            inpfields[old_num_zones].text = new_zone.number_stars_per_zone.ToString();
+        }
+
+        //if (levelSet.zoneLevelSearchList.Count >= 10)
+        //{
+        //    string json = JsonUtility.ToJson(levelSet);
+        //    Debug.Log("JSON DA INVIARE PER SALVATAGGIO: " + json);
+        //    StartCoroutine(SendPost(json));
+        //}
+
 
         //int new_size = numberOfZones + 1;
         //Array.Resize(ref levelSet.zoneLevelSearch, new_size);
@@ -94,8 +108,38 @@ public class PatientShowSearch : MonoBehaviour {
 
     public void TaskOnClickDelete()
     {
+        if(levelSet.zoneLevelSearchList.Count > 1)
+        {
+            levelSet.zoneLevelSearchList.RemoveAt(levelSet.zoneLevelSearchList.Count - 1);
+        }
+        
+    }
 
-        levelSet.zoneLevelSearchList.RemoveAt(levelSet.zoneLevelSearchList.Count - 1);
+
+    IEnumerator SendPost(string json)
+    {
+        Debug.Log("entro nella coroutine");
+        var request = new UnityWebRequest("http://127.0.0.1:5000/unity/save", "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.SendWebRequest();
+
+        Debug.Log(request.downloadHandler.text);
+
+
+        if (request.isHttpError || request.isNetworkError || request.downloadHandler.text.Equals("login_unsuccessful!"))
+        {
+            Debug.Log("questo e' l'errore");
+           
+
+        }
+
+        else
+        {
+
+        }
     }
 
 }

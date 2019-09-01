@@ -6,8 +6,11 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from server import app, db, bcrypt
 from server.form import RegistrationForm, LoginForm, UpdateAccountForm, PatientForm, UpdatePatientForm, UpdateLevelRunForm, UpdateLevelSearchForm
-from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch
+from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch, Session, SessionSearch
 from flask_login import login_user, current_user, logout_user, login_required
+import matplotlib.pyplot as plt
+import numpy as np
+from datetime import time
 
 
 @app.route("/")
@@ -107,7 +110,57 @@ def prova_save_data():
     return 'speriamo bene'
 
 
-
+@app.route("/unity/save", methods=['GET', 'POST'])
+def unity_save_data():
+    save_data = request.get_json()
+    lr1 = (LevelRun.query.filter_by(id=save_data['levelRun'][0]['id']).first())
+    lr1.static_obstacle = save_data['levelRun'][0]['static_obstacle']
+    lr1.dynamic_obstacle = save_data['levelRun'][0]['dynamic_obstacle']
+    lr1.power_up = save_data['levelRun'][0]['power_up']
+    lr1.max_time = save_data['levelRun'][0]['max_time']
+    lr1.lives = save_data['levelRun'][0]['lives']
+    db.session.commit()
+    lr2 = (LevelRun.query.filter_by(id=save_data['levelRun'][1]['id']).first())
+    lr2.static_obstacle = save_data['levelRun'][1]['static_obstacle']
+    lr2.dynamic_obstacle = save_data['levelRun'][1]['dynamic_obstacle']
+    lr2.power_up = save_data['levelRun'][1]['power_up']
+    lr2.max_time = save_data['levelRun'][1]['max_time']
+    lr2.lives = save_data['levelRun'][1]['lives']
+    print(lr1.static_obstacle)
+    db.session.commit()
+    ls = (LevelSearch.query.filter_by(id=save_data['levelSearch'][0]['id']).first())
+    for i in range(0, len(ls.zone_levels)):
+        zone_search = (ZoneLevelSearch.query.filter_by(id=save_data['zoneLevelSearchList'][i]['id']).first())
+        zone_search.number_stars_per_zone = save_data['zoneLevelSearchList'][i]['number_stars_per_zone']
+        db.session.commit()
+        print('ciclo ' + str(i))
+    for j in range(len(ls.zone_levels), len(save_data['zoneLevelSearchList'])):
+        zone_level_search = ZoneLevelSearch(number=save_data['zoneLevelSearchList'][j]['number'], number_stars_per_zone=save_data['zoneLevelSearchList'][j]['number_stars_per_zone'],
+                                            level_search_id=save_data['zoneLevelSearchList'][0]['level_search_id'])
+        db.session.add(zone_level_search)
+        db.session.commit()
+    #print('NB: ' + str(len(save_data['zoneLevelSearchList'])))
+    #lr = (LevelRun.query.filter_by(id=save_data['id']).first())
+    #print(lr)
+    #lr.lives = save_data['lives']
+    #print(lr)
+    #db.session.commit()
+    #print(Patient.query.get(save_data['patient_id']).levels_run)
+    #lr = Patient.query.get(save_data['patient_id']).levels_run
+    #for l in lr:
+    #    if l.id == save_data['id']:
+    #        l.lives = save_data['lives']
+    #lr.get(save_data['id']).lives = save_data['lives']
+    #db.session.commit()
+    #print(Patient.query.get(save_data['patient_id']).levels_run)
+    #patient = Patient.query.get(save_data['patient_id'])
+    #lev_runs = patient.levels_run
+    #for lr in lev_runs:
+    #    if lr.id == save_data['id']:
+    #        lr.lives = save_data['lives']
+    #        db.session.commit()
+    #print(patient.levels_run)
+    return 'speriamo bene'
 
 
 @app.route("/about")  # route decoder to navigate our web application. In this case the slash / is simply the root
@@ -397,3 +450,49 @@ def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dina
                                )
 
 
+@app.route("/graph", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
+def graph():
+    heat_map = request.get_json()
+    x_l = []
+    y_l = []
+    print(len(heat_map['posArray']))
+    for i in range(0, len(heat_map['posArray'])):
+        x_l.append(heat_map['posArray'][i]['x'])
+        y_l.append(heat_map['posArray'][i]['y'])
+    x = np.array(x_l)
+    y = np.array(y_l)
+    print(x)
+    print(x.shape)
+    #print('PRIMA X: ' + str(heat_map['posArray'][0]['x']))
+    #print('PRIMA Y: ' + str(heat_map['posArray'][0]['y']))
+    #x = np.random.rayleigh(50, size=5000)
+    #y = np.random.rayleigh(50, size=5000)
+    #print(x.shape)
+    #print(type(x))
+    #print(x)
+    #l = [40.63172593, 94.62401747, 79.49326453]
+    #array_l = np.array(l)
+    #print(array_l)
+    #print(array_l.shape)
+    #print(type(array_l))
+    plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
+    #fig = plt.figure()
+    #fig.sa
+    plt.show()
+    return 'ok'
+
+
+@app.route("/save/search", methods=['GET', 'POST'])
+def unity_save_data_search():
+    save_data = request.get_json()
+    session = Session(patient_id=save_data['patient_id'])
+    db.session.add(session)
+    db.session.commit()
+    session_id = Patient.query.get(save_data['patient_id']).sessions[-1].id
+    time_sess = time(save_data['hrs'], save_data['min'], save_data['sec'], save_data['mil'])
+    print(session_id)
+    print(time_sess)
+    session_search = SessionSearch(level_time=time_sess ,session_id=session_id)
+    db.session.add(session_search)
+    db.session.commit()
+    return 'speriamo bene'

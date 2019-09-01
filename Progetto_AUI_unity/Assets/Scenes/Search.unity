@@ -1552,6 +1552,8 @@ GameObject:
   - component: {fileID: 128406641}
   - component: {fileID: 128406642}
   - component: {fileID: 128406648}
+  - component: {fileID: 128406649}
+  - component: {fileID: 128406650}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1623,11 +1625,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d27dff6a61cb4381b5c48463f147286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  secCount: 0
+  mil: 0
   sec: 0
   min: 0
   hrs: 0
   stopChrono: 0
+  ts:
+    mil: 0
+    sec: 0
+    min: 0
+    hrs: 0
   pos: {x: 0, y: 0}
+  posArraySer:
+    posArray: []
+  posArray: []
   interval: 1
   timer: 0
   endGame: 0
@@ -1635,6 +1647,7 @@ MonoBehaviour:
   prefab: {fileID: 1722274042225750, guid: 6433529ddd84a499a942c387efb6f057, type: 2}
   zoneCount: 3
   collectiblesPerZoneCount: 4
+  levelSet: {fileID: 0}
   collectiblePrefab: {fileID: 1350440740576432, guid: af0c9641a61674ad6b7c06de7fc65c80,
     type: 2}
   zonePrefab: {fileID: 1798481175547934, guid: c0ecfdb557a0547f3a84d58bc95957c2, type: 2}
@@ -1767,6 +1780,29 @@ MonoBehaviour:
   count: 100
   temp: 100
   pause: 0
+--- !u!114 &128406649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128406637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1689233150629404886c5e5202ba92c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &128406650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128406637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a62fc4e8f5d4f80949955d3d203a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sec: 0
 --- !u!1 &140266349
 GameObject:
   m_ObjectHideFlags: 0
