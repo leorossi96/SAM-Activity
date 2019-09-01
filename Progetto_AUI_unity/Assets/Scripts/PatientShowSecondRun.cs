@@ -58,7 +58,7 @@ public class PatientShowSecondRun : MonoBehaviour {
             if (inpfields[i].name == "StaticObstacle")
             {
                 levelSet.levelRun[1].static_obstacle = int.Parse(inpfields[i].text);
-                Debug.Log("UPDATE PATIENT SHOW SEARCH POWERUP: " + levelSet.levelRun[0].static_obstacle);
+                
             }
 
             if (inpfields[i].name == "DynamicObstacle")
@@ -69,6 +69,7 @@ public class PatientShowSecondRun : MonoBehaviour {
             if (inpfields[i].name == "MaxTime")
             {
                 levelSet.levelRun[1].max_time = int.Parse(inpfields[i].text);
+                Debug.Log("MAX TIME AGGIORNATO: " + levelSet.levelRun[1].max_time);
 
                 if (inpfields[i].name == "PowerUp")
                 {

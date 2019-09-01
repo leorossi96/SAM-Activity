@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bdf2ea55-12fd-42d8-8e03-490e551fb8a3" name="Default Changelist" comment="" />
+    <list default="true" id="bdf2ea55-12fd-42d8-8e03-490e551fb8a3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Scripts/PatientShowSecondRun.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Scripts/PatientShowSecondRun.cs" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +33,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5140">
+            <state relative-caret-position="8180">
               <caret line="497" column="26" lean-forward="true" selection-start-line="497" selection-start-column="26" selection-end-line="497" selection-end-column="26" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -40,10 +42,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/templates/sessions.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
+            <state relative-caret-position="1020">
               <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
               <folding>
                 <element signature="n#style#0;n#button#0;n#a#0;n#div#0;n#article#0;n#!!top" expanded="true" />
@@ -65,7 +67,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="208">
@@ -626,12 +628,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pr.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pr.py" />
     <entry file="file://$PROJECT_DIR$/server/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5140">
+        <state relative-caret-position="8180">
           <caret line="497" column="26" lean-forward="true" selection-start-line="497" selection-start-column="26" selection-end-line="497" selection-end-column="26" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -651,7 +651,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/templates/sessions.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
+        <state relative-caret-position="1020">
           <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
           <folding>
             <element signature="n#style#0;n#button#0;n#a#0;n#div#0;n#article#0;n#!!top" expanded="true" />
