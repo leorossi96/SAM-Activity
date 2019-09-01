@@ -92,12 +92,12 @@ public class PatientShowSearch : MonoBehaviour {
             inpfields[old_num_zones].text = new_zone.number_stars_per_zone.ToString();
         }
 
-        if (levelSet.zoneLevelSearchList.Count >= 10)
-        {
-            string json = JsonUtility.ToJson(levelSet);
-            Debug.Log("JSON DA INVIARE PER SALVATAGGIO: " + json);
-            StartCoroutine(SendPost(json));
-        }
+        //if (levelSet.zoneLevelSearchList.Count >= 10)
+        //{
+        //    string json = JsonUtility.ToJson(levelSet);
+        //    Debug.Log("JSON DA INVIARE PER SALVATAGGIO: " + json);
+        //    StartCoroutine(SendPost(json));
+        //}
 
 
         //int new_size = numberOfZones + 1;

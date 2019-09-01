@@ -31,7 +31,7 @@ class Patient(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     levels_run = db.relationship('LevelRun', lazy=True)
     levels_search = db.relationship('LevelSearch', lazy=True)
-    #sessions = db.relationship('Session', lazy=True)
+    sessions = db.relationship('Session', lazy=True)
 
     def __repr__(self):
         return f"Patient('{self.last_name}', '{self.first_name}', '{self.date_of_birth}', '{self.type_of_disability}')"
@@ -73,12 +73,29 @@ class ZoneLevelSearch(db.Model):
         return f"Zone_Level_Search('{self.number_stars_per_zone}', '{self.number_stars_per_zone}')"
 
 
-#class Session(db.Model):
-#    id = db.Column(db.Integer, primary_key=True)
-#    number = db.Column(db.Integer, nullable=False, default=1)
-#    number_stars_per_zone = db.Column(db.Integer, nullable=False, default=1)
-#    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
-#
-#    def __repr__(self):
-#        return f"Zone_Level_Search('{self.number_stars_per_zone}', '{self.number_stars_per_zone}')"
+class Session(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
+    session_runs = db.relationship('SessionRun', lazy=True)
+    session_searches = db.relationship('SessionSearch', lazy=True)
 
+    def __repr__(self):
+        return f"Session('{self.id}', '{self.patient_id}')"
+
+
+class SessionSearch(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    level_time = db.Column(db.Time, nullable=False, default=time(0,0,0,0))
+    #image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    session_id = db.Column(db.Integer, db.ForeignKey('session.id'), nullable=False)
+
+    def __repr__(self):
+        return f"SessionSearch('{self.id}', '{self.level_time}', '{self.session_id}')"
+
+
+class SessionRun(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    level_time = db.Column(db.Time, nullable=False, default=time(0,0,0,0))
+    life_remaining = db.Column(db.Integer, nullable=False, default=0)
+    activated_power_up = db.Column(db.Integer, nullable=False, default=0)
+    session_id = db.Column(db.Integer, db.ForeignKey('session.id'), nullable=False)

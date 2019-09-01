@@ -6,8 +6,11 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from server import app, db, bcrypt
 from server.form import RegistrationForm, LoginForm, UpdateAccountForm, PatientForm, UpdatePatientForm, UpdateLevelRunForm, UpdateLevelSearchForm
-from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch
+from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch, Session, SessionSearch
 from flask_login import login_user, current_user, logout_user, login_required
+import matplotlib.pyplot as plt
+import numpy as np
+from datetime import time
 
 
 @app.route("/")
@@ -447,3 +450,49 @@ def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dina
                                )
 
 
+@app.route("/graph", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
+def graph():
+    heat_map = request.get_json()
+    x_l = []
+    y_l = []
+    print(len(heat_map['posArray']))
+    for i in range(0, len(heat_map['posArray'])):
+        x_l.append(heat_map['posArray'][i]['x'])
+        y_l.append(heat_map['posArray'][i]['y'])
+    x = np.array(x_l)
+    y = np.array(y_l)
+    print(x)
+    print(x.shape)
+    #print('PRIMA X: ' + str(heat_map['posArray'][0]['x']))
+    #print('PRIMA Y: ' + str(heat_map['posArray'][0]['y']))
+    #x = np.random.rayleigh(50, size=5000)
+    #y = np.random.rayleigh(50, size=5000)
+    #print(x.shape)
+    #print(type(x))
+    #print(x)
+    #l = [40.63172593, 94.62401747, 79.49326453]
+    #array_l = np.array(l)
+    #print(array_l)
+    #print(array_l.shape)
+    #print(type(array_l))
+    plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
+    #fig = plt.figure()
+    #fig.sa
+    plt.show()
+    return 'ok'
+
+
+@app.route("/save/search", methods=['GET', 'POST'])
+def unity_save_data_search():
+    save_data = request.get_json()
+    session = Session(patient_id=save_data['patient_id'])
+    db.session.add(session)
+    db.session.commit()
+    session_id = Patient.query.get(save_data['patient_id']).sessions[-1].id
+    time_sess = time(save_data['hrs'], save_data['min'], save_data['sec'], save_data['mil'])
+    print(session_id)
+    print(time_sess)
+    session_search = SessionSearch(level_time=time_sess ,session_id=session_id)
+    db.session.add(session_search)
+    db.session.commit()
+    return 'speriamo bene'

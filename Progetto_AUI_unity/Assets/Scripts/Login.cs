@@ -37,7 +37,10 @@ public class Login : MonoBehaviour
 
 
 
-
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     // Use this for initialization
     void Start()

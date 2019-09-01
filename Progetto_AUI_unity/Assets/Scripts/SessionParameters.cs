@@ -53,18 +53,11 @@ public class SessionParameters : MonoBehaviour {
         {
             Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
         }
+        ts.patient_id = levelSet.GetLevelSearch().patient_id;
     }
 
     // Use this for initialization
     void Start () {
-        posArraySer.posArray = new List<Vector2>();
-        posArraySer.posArray.Add(new Vector2(123f, 123f));
-        posArraySer.posArray.Add(new Vector2(3f, 3f));
-        posArraySer.posArray.Add(new Vector2(3434f, 3434f));
-        string json = JsonUtility.ToJson(posArraySer);
-        Debug.Log("POSARRAYSER POS ARRAY JSON " + json);
-
-        ts.sec = 0;
         stopChrono = false;
         posArraySer.posArray = new List<Vector2>();
 

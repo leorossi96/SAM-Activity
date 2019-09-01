@@ -110,5 +110,12 @@ public class LevelSet : MonoBehaviour {
         return zoneLevelSearchList;
     }
 
+    public LevelSearch GetLevelSearch()
+    {
+        return levelSearch[0];
+    }
+
+
+
 
 }
