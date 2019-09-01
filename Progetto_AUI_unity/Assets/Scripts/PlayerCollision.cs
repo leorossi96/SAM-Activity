@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Runtime.Remoting.Lifetime;
+using UnityEngine.Networking;
+using System.Text;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -37,7 +39,7 @@ public class PlayerCollision : MonoBehaviour
 
     public SessionParametersRun param;
 
-
+    public RunDataSerializable dataSerializable = new RunDataSerializable();
 
    
     private bool clock_stop = false;
@@ -107,6 +109,25 @@ public class PlayerCollision : MonoBehaviour
     private IEnumerator ReturnToMenu(){
         yield return new WaitForSeconds(4.0f);
         SceneManager.LoadScene("Menu");
+    }
+
+    private IEnumerator SendPost(string json, string url)
+    {
+        Debug.Log("entro nella coroutine");
+        var request = new UnityWebRequest(url, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.SendWebRequest();
+
+        Debug.Log(request.downloadHandler.text);
+
+
+        if (request.isHttpError || request.isNetworkError)
+        {
+            Debug.Log("questo e' l'errore");
+        }
     }
 
 
@@ -201,6 +222,15 @@ public class PlayerCollision : MonoBehaviour
                 {
                     dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
                     StartCoroutine(deadResetAnimation());
+
+                    dataSerializable.activated_power_up = movement.activated_powerups;
+                    dataSerializable.min = (int)Time.timeSinceLevelLoad / 60;
+                    dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
+                    dataSerializable.seconds = lifeCount;
+                    dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
+
+                    string json = JsonUtility.ToJson(dataSerializable);
+                    Debug.Log(json);
 
                     restarting.enabled = true;
                 }
@@ -589,6 +619,15 @@ public class PlayerCollision : MonoBehaviour
             movement.enabled = false;
             dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
             StartCoroutine(deadResetAnimation());
+
+            dataSerializable.activated_power_up = movement.activated_powerups;
+            dataSerializable.min = (int)Time.timeSinceLevelLoad / 60;
+            dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
+            dataSerializable.seconds = lifeCount;
+            dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
+
+            string json = JsonUtility.ToJson(dataSerializable);
+            Debug.Log(json);
 
             restarting.enabled = true;
         

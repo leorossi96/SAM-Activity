@@ -26,7 +26,7 @@ public class SessionParametersRun : MonoBehaviour {
 
             int toDisable = staticObs.Length - levelSet.levelRun[actualLevel].static_obstacle;
             if(toDisable>=0){
-                for (int i = 0; i < levelSet.levelRun[actualLevel].static_obstacle; i++){
+                for (int i = 0; i < toDisable; i++){
 
                     ran = Random.Range(0, staticObs.Length);
 
@@ -44,7 +44,7 @@ public class SessionParametersRun : MonoBehaviour {
             toDisable = dynObs.Length - levelSet.levelRun[actualLevel].dynamic_obstacle;
             if (toDisable >= 0)
             {
-                for (int i = 0; i < levelSet.levelRun[actualLevel].dynamic_obstacle; i++)
+                for (int i = 0; i < toDisable; i++)
                 {
 
                     ran = Random.Range(0, dynObs.Length);
@@ -66,7 +66,7 @@ public class SessionParametersRun : MonoBehaviour {
             toDisable = powerUps.Length - levelSet.levelRun[actualLevel].power_up;
             if (toDisable >= 0)
             {
-                for (int i = 0; i < levelSet.levelRun[actualLevel].power_up; i++)
+                for (int i = 0; i < toDisable; i++)
                 {
 
                     ran = Random.Range(0, powerUps.Length);
