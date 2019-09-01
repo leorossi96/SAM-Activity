@@ -13,8 +13,9 @@ public class SessionParameters : MonoBehaviour {
     public bool stopChrono;
 
     //parameters to compute heatmap
-    public Vector2 pos;
-    public ArrayList posArray;
+    public Vector2 pos; 
+    public PosArraySerializable posArraySer = new PosArraySerializable();
+    public List<Vector2> posArray;
     public float interval;
     public float timer = 0;
 
@@ -40,22 +41,28 @@ public class SessionParameters : MonoBehaviour {
 
     private void Awake()
     {
-        levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
-        Debug.Log("PRESOOSOOSOSOSOSOOSOSOSO");
-        zoneCount = levelSet.GetZoneLevelSearchList().Count;
+        //levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
+        //zoneCount = levelSet.GetZoneLevelSearchList().Count;
+        zoneCount = 3;
         Debug.Log("Zone count = " + zoneCount);
         for(int x = 0; x < zoneCount; x++)
         {
-            Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
+            //Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
         }
     }
 
     // Use this for initialization
     void Start () {
+        posArraySer.posArray = new List<Vector2>();
+        posArraySer.posArray.Add(new Vector2(123f, 123f));
+        posArraySer.posArray.Add(new Vector2(3f, 3f));
+        posArraySer.posArray.Add(new Vector2(3434f, 3434f));
+        string json = JsonUtility.ToJson(posArraySer);
+        Debug.Log("POSARRAYSER POS ARRAY JSON " + json);
 
         sec = 0;
         stopChrono = false;
-        posArray = new ArrayList();
+        posArraySer.posArray = new List<Vector2>();
 
         zonePositionIndexes = new HashSet<int>();
 
@@ -67,7 +74,8 @@ public class SessionParameters : MonoBehaviour {
             else{
                 Vector3 position = zonePositions[ran];
                 GameObject zoneInstantiated = Instantiate(zonePrefab, position, Quaternion.identity);
-                collectiblesPerZoneCount = levelSet.GetZoneLevelSearchList()[i].number_stars_per_zone;
+                //collectiblesPerZoneCount = levelSet.GetZoneLevelSearchList()[i].number_stars_per_zone;
+                collectiblesPerZoneCount = 4;
                 Debug.Log("Stelle nella zona = " + collectiblesPerZoneCount);
                 PopulateZone(zoneInstantiated, collectiblesPerZoneCount);
             }
@@ -91,7 +99,7 @@ public class SessionParameters : MonoBehaviour {
             timer += Time.deltaTime;
             if (timer >= interval)
             {
-                posArray = StorePosition();
+                posArraySer.posArray = StorePosition();
                 timer = 0;
             }
         }
@@ -99,22 +107,24 @@ public class SessionParameters : MonoBehaviour {
         {
             if (heatmapCount == 1){
                 heatmapCount -= 1;
-                GenerateHeatmap(posArray);
+                GenerateHeatmap(posArraySer.posArray);
+                string json = JsonUtility.ToJson(posArraySer);
+                Debug.Log("POS ARRAY JSON " + json);
             }
         }
 	}
 
-    void GenerateHeatmap(ArrayList a){
+    void GenerateHeatmap(List<Vector2> a){
         foreach(Vector2 v in a){
             Instantiate(prefab, new Vector3(v.x, 90f, v.y), Quaternion.identity);
         }
     }
 
-    ArrayList StorePosition(){
+    List<Vector2> StorePosition(){
         pos = new Vector2(this.transform.position.x, this.transform.position.z);
-        posArray.Add(pos);
+        posArraySer.posArray.Add(pos);
         Debug.Log("Adding :" + pos.ToString());
-        return posArray;
+        return posArraySer.posArray;
     }
     
 
