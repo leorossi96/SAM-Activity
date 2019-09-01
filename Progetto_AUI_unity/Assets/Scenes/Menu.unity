@@ -1207,7 +1207,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1469213607}
-        m_MethodName: PlayGameRunFirstLevel
+        m_MethodName: PlayGameRunSecondLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
