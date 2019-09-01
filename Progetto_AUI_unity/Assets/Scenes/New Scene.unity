@@ -1904,9 +1904,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSet: {fileID: 0}
-  staticObs: []
-  dynObs: []
-  powerUps: []
+  staticObs:
+  - {fileID: 2051493157}
+  - {fileID: 848250634}
+  - {fileID: 1767881000}
+  - {fileID: 1584845494}
+  - {fileID: 200457977}
+  dynObs:
+  - {fileID: 1697112311}
+  - {fileID: 2002448461}
+  powerUps:
+  - {fileID: 1538476198}
   lifes: {fileID: 131588932}
   movement: {fileID: 131588934}
   actualLevel: 1
@@ -7342,6 +7350,10 @@ Prefab:
     - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
       propertyPath: ShapeModule.radiusThickness
       value: 1,0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 805df92cec033ed4f8591ada0f5d7687, type: 2}
       propertyPath: ShapeModule.radiusThickness
@@ -25156,6 +25168,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25e938d8eb9f1d54f90b2e82279683df, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &1767881000 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 25e938d8eb9f1d54f90b2e82279683df, type: 3}
+  m_PrefabInternal: {fileID: 1767880999}
 --- !u!1 &1783366558
 GameObject:
   m_ObjectHideFlags: 0
@@ -27960,6 +27976,10 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 25e938d8eb9f1d54f90b2e82279683df, type: 3}
+--- !u!1 &2051493157 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100002, guid: 25e938d8eb9f1d54f90b2e82279683df, type: 3}
+  m_PrefabInternal: {fileID: 2051493153}
 --- !u!1001 &2052245773
 Prefab:
   m_ObjectHideFlags: 0
