@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using UnityEngine.Networking;
+using System.Text;
 
 public class SessionParameters : MonoBehaviour {
 
@@ -11,6 +14,7 @@ public class SessionParameters : MonoBehaviour {
     public int min;
     public int hrs;
     public bool stopChrono;
+    public TimerSerializable ts = new TimerSerializable();
 
     //parameters to compute heatmap
     public Vector2 pos; 
@@ -41,13 +45,13 @@ public class SessionParameters : MonoBehaviour {
 
     private void Awake()
     {
-        //levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
-        //zoneCount = levelSet.GetZoneLevelSearchList().Count;
+        levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
+        zoneCount = levelSet.GetZoneLevelSearchList().Count;
         zoneCount = 3;
         Debug.Log("Zone count = " + zoneCount);
         for(int x = 0; x < zoneCount; x++)
         {
-            //Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
+            Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
         }
     }
 
@@ -60,21 +64,21 @@ public class SessionParameters : MonoBehaviour {
         string json = JsonUtility.ToJson(posArraySer);
         Debug.Log("POSARRAYSER POS ARRAY JSON " + json);
 
-        sec = 0;
+        ts.sec = 0;
         stopChrono = false;
         posArraySer.posArray = new List<Vector2>();
 
         zonePositionIndexes = new HashSet<int>();
 
         for (int i = 0; i < zoneCount; i++){
-            int ran = (int)Random.Range(0, 9);
+            int ran = (int)UnityEngine.Random.Range(0, 9);
             if (zonePositionIndexes.Contains(ran)){
                 i--;
             }
             else{
                 Vector3 position = zonePositions[ran];
                 GameObject zoneInstantiated = Instantiate(zonePrefab, position, Quaternion.identity);
-                //collectiblesPerZoneCount = levelSet.GetZoneLevelSearchList()[i].number_stars_per_zone;
+                collectiblesPerZoneCount = levelSet.GetZoneLevelSearchList()[i].number_stars_per_zone;
                 collectiblesPerZoneCount = 4;
                 Debug.Log("Stelle nella zona = " + collectiblesPerZoneCount);
                 PopulateZone(zoneInstantiated, collectiblesPerZoneCount);
@@ -102,13 +106,18 @@ public class SessionParameters : MonoBehaviour {
                 timer = 0;
             }
         }
-        else //se è stato premuto E
+        else //se è stato premuto E o è finito il gioco
         {
             if (heatmapCount == 1){
                 heatmapCount -= 1;
                 GenerateHeatmap(posArraySer.posArray);
-                string json = JsonUtility.ToJson(posArraySer);
-                Debug.Log("POS ARRAY JSON " + json);
+                string jsonPos = JsonUtility.ToJson(posArraySer);
+                Debug.Log("POS ARRAY JSON " + jsonPos);
+                StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
+                string jsonTime = JsonUtility.ToJson(ts);
+                StartCoroutine(SendPost(jsonTime, "http://127.0.0.1:5000/save/search"));
+                string jsonLevelSet = JsonUtility.ToJson(levelSet);
+                StartCoroutine(SendPost(jsonLevelSet, "http://127.0.0.1:5000/unity/save"));
             }
         }
 	}
@@ -132,16 +141,16 @@ public class SessionParameters : MonoBehaviour {
         //sec = (float)decimal.Round((decimal)sec, 2);
         if (secCount >= 60)
         {
-            min++;
+            ts.min++;
             secCount = 0;
         }
-        if (min >= 60)
+        if (ts.min >= 60)
         {
-            hrs++;
-            min = 0;
+            ts.hrs++;
+            ts.min = 0;
         }
-        sec = (int)secCount;
-        mil = (int)((secCount - sec) * 1000000);
+        ts.sec = (int)secCount;
+        ts.mil = (int)((secCount - ts.sec) * 1000000);
         //Debug.Log("CHRONO " + hrs.ToString() + " : " + min.ToString() + " : " + sec.ToString() + "." + mil.ToString());
     }
 
@@ -157,8 +166,8 @@ public class SessionParameters : MonoBehaviour {
     private void PopulateZone(GameObject zone, int nCollectibles){
         for (int i = 0; i < nCollectibles; i++)
         {
-            float randomX = Random.Range(-25f, 25f);
-            float randomZ = Random.Range(-25f, 25f);
+            float randomX = UnityEngine.Random.Range(-25f, 25f);
+            float randomZ = UnityEngine.Random.Range(-25f, 25f);
             GameObject collectibleInstantiated = Instantiate(collectiblePrefab, new Vector3(0f, -4.2f, 0f), Quaternion.identity, zone.transform);
             collectibleInstantiated.transform.SetParent(zone.transform);
             collectibleInstantiated.transform.localPosition = new Vector3(randomX, -4.2f, randomZ);
@@ -166,4 +175,22 @@ public class SessionParameters : MonoBehaviour {
         }
     }
 
+    IEnumerator SendPost(string json, string url)
+    {
+        Debug.Log("entro nella coroutine");
+        var request = new UnityWebRequest(url, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.SendWebRequest();
+
+        Debug.Log(request.downloadHandler.text);
+
+
+        if (request.isHttpError || request.isNetworkError)
+        {
+            Debug.Log("questo e' l'errore");
+        }
+    }
 }

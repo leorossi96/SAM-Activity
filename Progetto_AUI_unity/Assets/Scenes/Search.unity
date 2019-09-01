@@ -1553,6 +1553,7 @@ GameObject:
   - component: {fileID: 128406642}
   - component: {fileID: 128406648}
   - component: {fileID: 128406649}
+  - component: {fileID: 128406650}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1630,6 +1631,11 @@ MonoBehaviour:
   min: 0
   hrs: 0
   stopChrono: 0
+  ts:
+    mil: 0
+    sec: 0
+    min: 0
+    hrs: 0
   pos: {x: 0, y: 0}
   posArraySer:
     posArray: []
@@ -1785,6 +1791,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1689233150629404886c5e5202ba92c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &128406650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 128406637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a62fc4e8f5d4f80949955d3d203a40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sec: 0
 --- !u!1 &140266349
 GameObject:
   m_ObjectHideFlags: 0
