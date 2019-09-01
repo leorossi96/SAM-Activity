@@ -1633,6 +1633,7 @@ MonoBehaviour:
   pos: {x: 0, y: 0}
   posArraySer:
     posArray: []
+  posArray: []
   interval: 1
   timer: 0
   endGame: 0

@@ -80,7 +80,6 @@ public class SessionParameters : MonoBehaviour {
                 PopulateZone(zoneInstantiated, collectiblesPerZoneCount);
             }
         }
-
     }
 	
 	// Update is called once per frame
@@ -121,7 +120,7 @@ public class SessionParameters : MonoBehaviour {
     }
 
     List<Vector2> StorePosition(){
-        pos = new Vector2(this.transform.position.x, this.transform.position.z);
+        pos = new Vector2(this.transform.position.x - 15.68478f, this.transform.position.z - 39.47354f);
         posArraySer.posArray.Add(pos);
         Debug.Log("Adding :" + pos.ToString());
         return posArraySer.posArray;
