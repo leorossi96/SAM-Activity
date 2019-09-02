@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     public float multiplier; 
     public bool indestructible = false;
     public int activated_powerups = 0;
-
+    public PlayerCollision collision;
 
     public bool delfinoFound = false;
     SmartToy dolphinController;
@@ -106,7 +106,8 @@ public class PlayerMovement : MonoBehaviour {
         }
         //rb.AddRelativeForce(Vector3.forward);
         //rb.AddRelativeForce(0, 0, forwardForce * Time.deltaTime);
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed*multiplier); 
+        if (!(collision.clock_stop))    
+            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.forward, speed*multiplier); 
         //Debug.Log("Swimming");
         //Debug.Log(forwardForce * Time.deltaTime);
         if (start)
@@ -127,27 +128,30 @@ public class PlayerMovement : MonoBehaviour {
         //double roll = 0.00, pitch = 0.00;       //Roll & Pitch are the angles which rotate by the axis X and y
 
 
+        if(!(collision.clock_stop)){
 
-        if (rightArrow)
-        {
-           // rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-            //rb.AddRelativeForce(Vector3.right,  ForceMode.VelocityChange);
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, speed);
+            if (rightArrow)
+            {
+                // rb.AddRelativeForce(movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+                //rb.AddRelativeForce(Vector3.right,  ForceMode.VelocityChange);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.right, speed);
+            }
+            if (leftArrow)
+            {
+                //rb.AddRelativeForce(-movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.right, speed);
+            }
+            if (downArrow)
+            {
+                //rb.AddRelativeForce(0, -movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
+                transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.up, speed);
+            }
+            if (upArrow)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, speed);
+            }
         }
-        if (leftArrow)
-        {
-            //rb.AddRelativeForce(-movementForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-            transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.right, speed);
-        }
-        if (downArrow)
-        {
-            //rb.AddRelativeForce(0, -movementForce * Time.deltaTime, 0, ForceMode.VelocityChange);
-            transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.up, speed);
-        }
-        if (upArrow)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, speed);
-        }
+            
 
         /*       if ((rb.position.y <= -1 || rb.position.y.ToString().Equals("NaN")) && false)
                 {

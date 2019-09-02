@@ -42,7 +42,7 @@ public class PlayerCollision : MonoBehaviour
     public RunDataSerializable dataSerializable = new RunDataSerializable();
 
    
-    private bool clock_stop = false;
+    public bool clock_stop = false;
     Vector3 accelerometer;
     public double angle_x = 0;
     public double angle_y = 0;
@@ -108,7 +108,7 @@ public class PlayerCollision : MonoBehaviour
 
     private IEnumerator ReturnToMenu(){
         yield return new WaitForSeconds(4.0f);
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu2");
     }
 
     private IEnumerator SendPost(string json, string url)
@@ -148,8 +148,16 @@ public class PlayerCollision : MonoBehaviour
     {
         dolphin.GetComponent<Animation>().Play("TurnLeft");
         yield return new WaitForSeconds(1.0f);
-        movement.start = true;
-        movement.enabled = true;
+        if(!clock_stop){
+            movement.start = true;
+            movement.enabled = true;
+        }else{
+            movement.start = false;
+            movement.enabled = false;
+                
+        }
+
+
 
     }
 
@@ -157,9 +165,16 @@ public class PlayerCollision : MonoBehaviour
     {
         dolphin.GetComponent<Animation>().Play("TurnRight");
         yield return new WaitForSeconds(1.0f);
-        movement.start = true;
-        movement.enabled = true;
+        if(!clock_stop){
+            movement.start = true;
+            movement.enabled = true;
 
+        }else
+        {
+            movement.start = false;
+            movement.enabled = false;
+
+        }
     }
 
     private IEnumerator deadResetAnimation(){
@@ -192,8 +207,16 @@ public class PlayerCollision : MonoBehaviour
 
         yield return new WaitForSeconds(2.0f);
         movement.powerUp("hit"); 
-        movement.start = true;
-        movement.enabled = true;
+        if(!clock_stop){
+            movement.start = true;
+            movement.enabled = true;
+
+        }else
+        {
+            movement.start = false;
+            movement.enabled = false;
+
+        }
 
     }
 
@@ -220,6 +243,7 @@ public class PlayerCollision : MonoBehaviour
 
                 if (lifeCount == 0)
                 {
+                    clock_stop = true;
                     dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
                     StartCoroutine(deadResetAnimation());
 
@@ -599,26 +623,26 @@ public class PlayerCollision : MonoBehaviour
 
 
 
-
+	
 
 	void Update()
     {
-        if(Time.timeSinceLevelLoad < max_time+1){
-            
+
+        if (Time.timeSinceLevelLoad < max_time + 1)
+        {
+
             timeMesh.text = ((int)Time.timeSinceLevelLoad) / 60 + ":" + (((int)Time.timeSinceLevelLoad) % 60);
 
         }
 
 
-        if(Time.timeSinceLevelLoad>max_time && !clock_stop){
+        if (Time.timeSinceLevelLoad > max_time && !clock_stop)
+        {
             clock_stop = true;
             movement.start = false;
             movement.enabled = false;
-            if(!dolphin.GetComponent<Animation>().IsPlaying("Idle") || !dolphin.GetComponent<Animation>().isPlaying)
-                dolphin.GetComponent<Animation>().Play("Stopping");
 
-            movement.start = false;
-            movement.enabled = false;
+            dolphin.GetComponent<Animation>().Play("Stopping");
             dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
             StartCoroutine(deadResetAnimation());
 
@@ -632,9 +656,10 @@ public class PlayerCollision : MonoBehaviour
             StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
 
             restarting.enabled = true;
-        
+
 
         }
+        
         if (!delfinoFound)
         {
             if (GameObject.Find("Dolphin1") != null)
