@@ -104,13 +104,13 @@ public class SessionParameters : MonoBehaviour {
             if (heatmapCount == 1){
                 heatmapCount -= 1;
                 GenerateHeatmap(posArraySer.posArray);
-                string jsonPos = JsonUtility.ToJson(posArraySer);
-                Debug.Log("POS ARRAY JSON " + jsonPos);
-                StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
                 string jsonTime = JsonUtility.ToJson(ts);
                 StartCoroutine(SendPost(jsonTime, "http://127.0.0.1:5000/save/search"));
                 string jsonLevelSet = JsonUtility.ToJson(levelSet);
                 StartCoroutine(SendPost(jsonLevelSet, "http://127.0.0.1:5000/unity/save"));
+                string jsonPos = JsonUtility.ToJson(posArraySer);
+                Debug.Log("POS ARRAY JSON " + jsonPos);
+                StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
             }
         }
 	}

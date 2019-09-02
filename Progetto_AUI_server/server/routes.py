@@ -10,7 +10,7 @@ from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch,
 from flask_login import login_user, current_user, logout_user, login_required
 import matplotlib.pyplot as plt
 import numpy as np
-from datetime import time
+from datetime import time, datetime
 
 
 @app.route("/")
@@ -239,12 +239,24 @@ def save_picture(form_picture):         #create a random name for the image in o
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = app.root_path + os.sep + 'static' + os.sep + 'profile_pics'+ os.sep + picture_fn
+    picture_path = app.root_path + os.sep + 'static' + os.sep + 'profile_pics' + os.sep + picture_fn
     output_size = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
     return picture_fn
+
+
+#def save_picture_heatmap():         #create a random name for the image in order to avoid to collide with image already present
+#    random_hex = secrets.token_hex(8)
+#    _, f_ext = os.path.splitext(form_picture.filename)
+#    picture_fn = random_hex + f_ext
+#    picture_path = app.root_path + os.sep + 'static' + os.sep + 'profile_pics' + os.sep + picture_fn
+#    output_size = (125, 125)
+#    i = Image.open(form_picture)
+#    i.thumbnail(output_size)
+#    i.save(picture_path)
+#    return picture_fn
 
 
 # route decoder to navigate our web application. In this case the slash / is simply the root
@@ -479,13 +491,16 @@ def graph():
     #fig = plt.figure()
     #fig.sa
     plt.show()
+    #plt.savefig('server/static/images/heatmap.png')
+    session_search = SessionSearch.query.all()
+    print(len(session_search))
     return 'ok'
 
 
 @app.route("/save/search", methods=['GET', 'POST'])
 def unity_save_data_search():
     save_data = request.get_json()
-    session = Session(patient_id=save_data['patient_id'])
+    session = Session(patient_id=save_data['patient_id'], datetime=datetime.now())
     db.session.add(session)
     db.session.commit()
     session_id = Patient.query.get(save_data['patient_id']).sessions[-1].id
@@ -516,14 +531,45 @@ def unity_save_data_run():
     return 'speriamo bene'
 
 
+@app.route("/session/<id_p>", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
+def session(id_p):
+    id_reg = int(id_p)
+    pat = Patient.query.get(id_reg)
+    sessions = pat.sessions
+    print('LEN SESSIONS {}'.format(len(sessions)))
+    if(len(sessions)) == 0:
+        return render_template('no_sessions.html')
+    else:
+        #sessions_run = sessions.session_runs
+        #sessions_search = sessions.session_searches
+        return render_template('sessions.html', patient=pat, sessions=sessions)
+    #return 'ok'
+    #if current_user.is_authenticated:
+    #    if len(current_user.patients) > 0:
+    #        patients = current_user.patients
+    #        for p in patients:
+    #           print('patient_id {}'.format(p.id))
+    #           print(type(p.id))
+    #       return render_template('home.html', patients=patients)
+    #return render_template('layout_home.html')
 
-@app.route("/patientlevrun/<id_p>", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
-def session():
-    if current_user.is_authenticated:
-        if len(current_user.patients) > 0:
-            patients = current_user.patients
-            for p in patients:
-                print('patient_id {}'.format(p.id))
-                print(type(p.id))
-            return render_template('home.html', patients=patients)
-    return render_template('layout_home.html')
+
+@app.route("/sessiongame/<id_ss>", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
+def sessiongame(id_ss):
+    id_reg = int(id_ss)
+    session = Session.query.get(id_reg)
+    pat = Patient.query.get(session.patient_id)
+    session_runs = session.session_runs
+    session_searches = session.session_searches
+    #sessions_run = sessions.session_runs
+    #sessions_search = sessions.session_searches
+    return render_template('session_game.html', patient=pat, ss_runs=session_runs, ss_searches=session_searches)
+    #return 'ok'
+    #if current_user.is_authenticated:
+    #    if len(current_user.patients) > 0:
+    #        patients = current_user.patients
+    #        for p in patients:
+    #           print('patient_id {}'.format(p.id))
+    #           print(type(p.id))
+    #       return render_template('home.html', patients=patients)
+    #return render_template('layout_home.html')

@@ -1,6 +1,6 @@
 from server import db, login_manager
 from flask_login import UserMixin
-from datetime import time
+from datetime import time, datetime
 
 
 @login_manager.user_loader
@@ -76,6 +76,7 @@ class ZoneLevelSearch(db.Model):
 class Session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
+    datetime = db.Column(db.DateTime, nullable=False, default=datetime(2019, 9, 28, 23, 55, 59, 342380))
     session_runs = db.relationship('SessionRun', lazy=True)
     session_searches = db.relationship('SessionSearch', lazy=True)
 
@@ -86,7 +87,7 @@ class Session(db.Model):
 class SessionSearch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     level_time = db.Column(db.Time, nullable=False, default=time(0,0,0,0))
-    #image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     session_id = db.Column(db.Integer, db.ForeignKey('session.id'), nullable=False)
 
     def __repr__(self):
