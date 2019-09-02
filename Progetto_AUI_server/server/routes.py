@@ -514,3 +514,16 @@ def unity_save_data_run():
     db.session.add(session_run)
     db.session.commit()
     return 'speriamo bene'
+
+
+
+@app.route("/patientlevrun/<id_p>", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
+def session():
+    if current_user.is_authenticated:
+        if len(current_user.patients) > 0:
+            patients = current_user.patients
+            for p in patients:
+                print('patient_id {}'.format(p.id))
+                print(type(p.id))
+            return render_template('home.html', patients=patients)
+    return render_template('layout_home.html')

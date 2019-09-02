@@ -6,6 +6,8 @@ using System.Text;
 
 public class LevelSet : MonoBehaviour {
 
+    public string patient_first_name;
+    public string patient_last_name;
     public LevelRun[] levelRun;
     public LevelSearch[] levelSearch;
     public ZoneLevelSearch[] zoneLevelSearch;
