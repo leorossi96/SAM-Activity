@@ -226,13 +226,13 @@ public class PlayerCollision : MonoBehaviour
                     dataSerializable.activated_power_up = movement.activated_powerups;
                     dataSerializable.min = (int)Time.timeSinceLevelLoad / 60;
                     dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
-                    dataSerializable.seconds = lifeCount;
+                    dataSerializable.life_remaining = lifeCount;
                     dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
 
 
 
                     string json = JsonUtility.ToJson(dataSerializable);
-                    Debug.Log(json);
+                    StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
 
                     restarting.enabled = true;
                 }
@@ -625,11 +625,11 @@ public class PlayerCollision : MonoBehaviour
             dataSerializable.activated_power_up = movement.activated_powerups;
             dataSerializable.min = (int)Time.timeSinceLevelLoad / 60;
             dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
-            dataSerializable.seconds = lifeCount;
+            dataSerializable.life_remaining = lifeCount;
             dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
 
             string json = JsonUtility.ToJson(dataSerializable);
-            Debug.Log(json);
+            StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
 
             restarting.enabled = true;
         

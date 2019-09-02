@@ -6,7 +6,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, jsonify
 from server import app, db, bcrypt
 from server.form import RegistrationForm, LoginForm, UpdateAccountForm, PatientForm, UpdatePatientForm, UpdateLevelRunForm, UpdateLevelSearchForm
-from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch, Session, SessionSearch
+from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch, Session, SessionSearch, SessionRun
 from flask_login import login_user, current_user, logout_user, login_required
 import matplotlib.pyplot as plt
 import numpy as np
@@ -494,5 +494,23 @@ def unity_save_data_search():
     print(time_sess)
     session_search = SessionSearch(level_time=time_sess ,session_id=session_id)
     db.session.add(session_search)
+    db.session.commit()
+    return 'speriamo bene'
+
+
+@app.route("/save/run", methods=['GET', 'POST'])
+def unity_save_data_run():
+    save_data = request.get_json()
+    session = Session(patient_id=save_data['patient_id'])
+    db.session.add(session)
+    db.session.commit()
+    session_id = Patient.query.get(save_data['patient_id']).sessions[-1].id
+    time_sess = time(0, save_data['min'], save_data['seconds'], 0)
+
+    print(session_id)
+    print(time_sess)
+    session_run = SessionRun(level_time=time_sess, life_remaining=save_data['life_remaining'],
+                                   activated_power_up=save_data['activated_power_up'], session_id=session_id)
+    db.session.add(session_run)
     db.session.commit()
     return 'speriamo bene'

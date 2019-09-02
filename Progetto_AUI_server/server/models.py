@@ -99,3 +99,7 @@ class SessionRun(db.Model):
     life_remaining = db.Column(db.Integer, nullable=False, default=0)
     activated_power_up = db.Column(db.Integer, nullable=False, default=0)
     session_id = db.Column(db.Integer, db.ForeignKey('session.id'), nullable=False)
+
+    def __repr__(self):
+        return f"SessionSearch('{self.id}', '{self.level_time}', '{self.life_remaining}', " \
+            f"'{self.activated_power_up}', '{self.session_id}')"
