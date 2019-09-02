@@ -229,6 +229,8 @@ public class PlayerCollision : MonoBehaviour
                     dataSerializable.seconds = lifeCount;
                     dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
 
+
+
                     string json = JsonUtility.ToJson(dataSerializable);
                     Debug.Log(json);
 
