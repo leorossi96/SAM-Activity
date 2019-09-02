@@ -258,6 +258,9 @@ public class PlayerCollision : MonoBehaviour
                     string json = JsonUtility.ToJson(dataSerializable);
                     StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
 
+                    string json2 = JsonUtility.ToJson(param.levelSet);
+                    StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));
+
                     restarting.enabled = true;
                 }
                 if (lifeCount > 0)
@@ -654,6 +657,9 @@ public class PlayerCollision : MonoBehaviour
 
             string json = JsonUtility.ToJson(dataSerializable);
             StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
+
+            string json2 = JsonUtility.ToJson(param.levelSet);
+            StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));
 
             restarting.enabled = true;
 
