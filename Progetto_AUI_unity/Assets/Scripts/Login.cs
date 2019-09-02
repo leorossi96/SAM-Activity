@@ -95,6 +95,8 @@ public class Login : MonoBehaviour
         selectedPatient.type_of_disability = selected.type_of_disability;
         selectedPatient.user_id = selected.user_id;
         Debug.Log("sono dentro click action" + selectedPatient.id);
+        levelSet.patient_last_name = selected.last_name;
+        levelSet.patient_first_name = selected.first_name;
         levelSet.StartCoroutine(this);
         show.SetActive(false);
         playGameMenu.SetActive(true);
