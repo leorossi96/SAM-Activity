@@ -23,7 +23,7 @@
         </fieldset>
 
         <a href="{{ url_for('patientlevsearch', id_p=patient.id, num_z=100) }}"><button type="button" style="margin-bottom: 5px" class="btn btn-outline-info">Add new Collectible Zone</button></a>
-
+        <a href="{{ url_for('patientlevsearch', id_p=patient.id, num_z=10000) }}"><button type="button" style="margin-bottom: 5px" class="btn btn-outline-info">Delete Collectible Zone</button></a>
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
         </div>

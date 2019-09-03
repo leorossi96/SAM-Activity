@@ -462,9 +462,13 @@ def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dina
                 zone_level_search = ZoneLevelSearch(number=number_zone, number_stars_per_zone=3, level_search_id=current_user.patients[index].levels_search[0].id)
                 db.session.add(zone_level_search)
                 db.session.commit()
-            if len(current_user.patients[index].levels_search[0].zone_levels) > 2:
-                for i in range(0, len(current_user.patients[index].levels_search[0].zone_levels) - 2):
-                    form.number_stars_per_zone.append_entry(current_user.patients[index].levels_search[0].zone_levels[2+i].number_stars_per_zone)
+            if add_new == 10000:
+                if len(current_user.patients[index].levels_search[0].zone_levels) > 2:
+                    db.session.delete(current_user.patients[index].levels_search[0].zone_levels[-1])
+                    db.session.commit()
+            if len(current_user.patients[index].levels_search[0].zone_levels) > 2: # 2
+                for i in range(0, len(current_user.patients[index].levels_search[0].zone_levels) - 2): # 2
+                    form.number_stars_per_zone.append_entry(current_user.patients[index].levels_search[0].zone_levels[2+i].number_stars_per_zone) # 2
                 print(len(current_user.patients[index].levels_search[0].zone_levels))
             for nz in range(0, len(current_user.patients[index].levels_search[0].zone_levels)):
                 form.number_stars_per_zone[nz].data = current_user.patients[index].levels_search[0].zone_levels[nz].number_stars_per_zone
@@ -508,9 +512,10 @@ def graph():
     #fig.sa
     #plt.show()
     session_search = SessionSearch.query.all()
-    session_id = session_search[-1].session_id
-    session = Session.query.get(session_id)
 
+    session_id = session_search[-1].session_id
+    print('Session search [-1]: '.format(session_id))
+    session = Session.query.get(session_id)
     #path = app.root_path + os.sep + 'static' + os.sep + 'heatmap_pics' + os.sep + str(session.patient_id) + 'pat' + os.sep + str(session_search[-1].id) + 'ssc.png'
     #print('PATH: {}'.format(path))
     target2 = os.path.join(target1, 'pat' + str(session.patient_id) + 'ssc' + str(datetime.now().year)
@@ -532,11 +537,73 @@ def unity_save_data_search():
     time_sess = time(save_data['hrs'], save_data['min'], save_data['sec'], save_data['mil'])
     print(session_id)
     print(time_sess)
-    session_search = SessionSearch(level_time=time_sess ,session_id=session_id)
+    session_search = SessionSearch(level_time=time_sess, session_id=session_id)
     db.session.add(session_search)
     db.session.commit()
+    #session_search_graph = Session.query.get(session_id).session_searches[-1]
+    session_search_graph = Session.query.get(session_id).session_searches[0]
+
+
+    #heat_map = request.get_json()
+    #print(len(heat_map['posArray']))
+    #for i in range(0, len(heat_map['posArray'])):
+    #    x_l.append(heat_map['posArray'][i]['x'])
+    #    y_l.append(heat_map['posArray'][i]['y'])
+
+    #print(x)
+    #print(x.shape)
+    #print('PRIMA X: ' + str(heat_map['posArray'][0]['x']))
+    #print('PRIMA Y: ' + str(heat_map['posArray'][0]['y']))
+    #x = np.random.rayleigh(50, size=5000)
+    #y = np.random.rayleigh(50, size=5000)
+    #print(x.shape)
+    #print(type(x))
+    #print(x)
+    #l = [40.63172593, 94.62401747, 79.49326453]
+    #array_l = np.array(l)
+    #print(array_l)
+    #print(array_l.shape)
+    #print(type(array_l))
+
+    #fig = plt.figure()
+    #fig.sa
+    #plt.show()
+    #session_search = SessionSearch.query.all()
+    #session_id = session_search[-1].session_id
+    #print('Session search [-1]: '.format(session_id))
+    #session = Session.query.get(session_id)
+    #path = app.root_path + os.sep + 'static' + os.sep + 'heatmap_pics' + os.sep + str(session.patient_id) + 'pat' + os.sep + str(session_search[-1].id) + 'ssc.png'
+    #print('PATH: {}'.format(path))
+    f_name = make_graph(save_data, session_search_graph.id)
+    print('SESSION SEARCH {}'.format(session_search_graph.image_file))
+    session_search_graph.image_file = f_name
+    print('SESSION SEARCH {}'.format(session_search_graph.image_file))
+    #session_search = SessionSearch(level_time=time_sess, image_file=target2, session_id=session_id)
+    #db.session.add(session_search)
+    db.session.commit()
+
     return 'speriamo bene'
 
+def make_graph(save_data, ssc_id):
+    APP_ROUTE = os.path.dirname(os.path.abspath(__file__))
+    print('APP_ROUTE: {}'.format(APP_ROUTE))
+    target = os.path.join(APP_ROUTE, 'static')
+    target1 = os.path.join(target, 'heatmap_pics')
+    x_l = []
+    y_l = []
+    for i in range(0, len(save_data['posArray'])):
+        x_l.append(save_data['posArray'][i]['x'])
+        y_l.append(save_data['posArray'][i]['y'])
+    x = np.array(x_l)
+    y = np.array(y_l)
+    plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
+    target3 = os.path.join(target1, 'pat' + str(save_data['patient_id']) + 'ssc' + str(datetime.now().year)
+                           + str(datetime.now().month) + str(datetime.now().day) + str(datetime.now().time().hour)
+                           + str(datetime.now().time().minute) + str(datetime.now().time().second) + '.jpg')
+    target2 = os.path.join(target1, 'pat' + str(save_data['patient_id']) + 'ssc' +str(ssc_id) + '.jpeg')
+    plt.savefig(target2)
+    f_name = 'pat' + str(save_data['patient_id']) + 'ssc' +str(ssc_id) + '.jpeg'
+    return f_name
 
 @app.route("/save/run", methods=['GET', 'POST'])
 def unity_save_data_run():
@@ -588,6 +655,7 @@ def sessiongame(id_ss):
     session_searches = session.session_searches
     #sessions_run = sessions.session_runs
     #sessions_search = sessions.session_searches
+    print('IMGDDDDDDD: {}'.format(session_searches[0].image_file))
     return render_template('session_game.html', patient=pat, ss_runs=session_runs, ss_searches=session_searches)
     #return 'ok'
     #if current_user.is_authenticated:

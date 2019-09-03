@@ -18,7 +18,7 @@ public class SessionParameters : MonoBehaviour {
 
     //parameters to compute heatmap
     public Vector2 pos; 
-    public PosArraySerializable posArraySer = new PosArraySerializable();
+    //public PosArraySerializable posArraySer = new PosArraySerializable();
     public List<Vector2> posArray;
     public float interval;
     public float timer = 0;
@@ -47,7 +47,6 @@ public class SessionParameters : MonoBehaviour {
     {
         levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
         zoneCount = levelSet.GetZoneLevelSearchList().Count;
-        zoneCount = 3;
         Debug.Log("Zone count = " + zoneCount);
         for(int x = 0; x < zoneCount; x++)
         {
@@ -59,7 +58,8 @@ public class SessionParameters : MonoBehaviour {
     // Use this for initialization
     void Start () {
         stopChrono = false;
-        posArraySer.posArray = new List<Vector2>();
+        //posArraySer.posArray = new List<Vector2>();
+        ts.posArray = new List<Vector2>();
 
         zonePositionIndexes = new HashSet<int>();
 
@@ -95,7 +95,8 @@ public class SessionParameters : MonoBehaviour {
             timer += Time.deltaTime;
             if (timer >= interval)
             {
-                posArraySer.posArray = StorePosition();
+                //posArraySer.posArray = StorePosition();
+                ts.posArray = StorePosition();
                 timer = 0;
             }
         }
@@ -103,17 +104,32 @@ public class SessionParameters : MonoBehaviour {
         {
             if (heatmapCount == 1){
                 heatmapCount -= 1;
-                GenerateHeatmap(posArraySer.posArray);
+                //GenerateHeatmap(posArraySer.posArray);
+                GenerateHeatmap(ts.posArray);
                 string jsonTime = JsonUtility.ToJson(ts);
+                Debug.Log("POS ARRAY JSON ts" + jsonTime);
                 StartCoroutine(SendPost(jsonTime, "http://127.0.0.1:5000/save/search"));
+                //StartCoroutine(SendData());
                 string jsonLevelSet = JsonUtility.ToJson(levelSet);
                 StartCoroutine(SendPost(jsonLevelSet, "http://127.0.0.1:5000/unity/save"));
-                string jsonPos = JsonUtility.ToJson(posArraySer);
-                Debug.Log("POS ARRAY JSON " + jsonPos);
-                StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
+                //string jsonPos = JsonUtility.ToJson(posArraySer);
+                //Debug.Log("POS ARRAY JSON " + jsonPos);
+                //StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
             }
         }
 	}
+
+    private IEnumerator SendData()
+    {
+        string jsonTime = JsonUtility.ToJson(ts);
+        StartCoroutine(SendPost(jsonTime, "http://127.0.0.1:5000/save/search"));
+        yield return new WaitForSeconds(5f);
+        //string jsonPos = JsonUtility.ToJson(posArraySer);
+        string jsonPos = JsonUtility.ToJson(ts);
+        Debug.Log("POS ARRAY JSON " + jsonPos);
+        StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
+
+    }
 
     void GenerateHeatmap(List<Vector2> a){
         foreach(Vector2 v in a){
@@ -123,9 +139,11 @@ public class SessionParameters : MonoBehaviour {
 
     List<Vector2> StorePosition(){
         pos = new Vector2(this.transform.position.x - 15.68478f, this.transform.position.z - 39.47354f);
-        posArraySer.posArray.Add(pos);
+        //posArraySer.posArray.Add(pos);
+        ts.posArray.Add(pos);
         Debug.Log("Adding :" + pos.ToString());
-        return posArraySer.posArray;
+        //return posArraySer.posArray;
+        return ts.posArray;
     }
     
 

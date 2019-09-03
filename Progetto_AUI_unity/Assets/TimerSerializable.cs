@@ -10,5 +10,6 @@ public class TimerSerializable {
     public int sec;
     public int min;
     public int hrs;
+    public List<Vector2> posArray;
 
 }
