@@ -87,11 +87,11 @@ class Session(db.Model):
 class SessionSearch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     level_time = db.Column(db.Time, nullable=False, default=time(0,0,0,0))
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_file = db.Column(db.String(150), nullable=False, default='default.jpg')
     session_id = db.Column(db.Integer, db.ForeignKey('session.id'), nullable=False)
 
     def __repr__(self):
-        return f"SessionSearch('{self.id}', '{self.level_time}', '{self.session_id}')"
+        return f"SessionSearch('{self.id}', '{self.level_time}', '{self.session_id}',  '{self.image_file}')"
 
 
 class SessionRun(db.Model):

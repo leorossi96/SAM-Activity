@@ -373,7 +373,18 @@ def deletepatient(id_p):
         levels_run = patient.levels_run
         level_search = patient.levels_search
         zone_level_search = level_search[0].zone_levels
-        for i in range (0, len(zone_level_search)):
+        sessions = patient.sessions
+        for x in range(0, len(sessions)):
+            session_search = sessions[x].session_searches
+            if len(session_search) > 0:
+                db.session.delete(session_search[0])
+            session_run = sessions[x].session_runs
+            if len(session_run) > 0:
+                db.session.delete(session_run[0])
+            db.session.delete(sessions[x])
+        #for j in range(0, len(sessions)):
+        #    db.session.delete(sessions[x])
+        for i in range(0, len(zone_level_search)):
             db.session.delete(zone_level_search[i])
         db.session.delete(level_search[0])
         db.session.delete(levels_run[0])
@@ -464,6 +475,11 @@ def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dina
 
 @app.route("/graph", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
 def graph():
+    APP_ROUTE = os.path.dirname(os.path.abspath(__file__))
+    print('APP_ROUTE: {}'.format(APP_ROUTE))
+    target = os.path.join(APP_ROUTE, 'static')
+    target1 = os.path.join(target, 'heatmap_pics')
+    target2 = os.path.join(target1, 'file.png')
     heat_map = request.get_json()
     x_l = []
     y_l = []
@@ -490,10 +506,19 @@ def graph():
     plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
     #fig = plt.figure()
     #fig.sa
-    plt.show()
-    #plt.savefig('server/static/images/heatmap.png')
+    #plt.show()
     session_search = SessionSearch.query.all()
-    print(len(session_search))
+    session_id = session_search[-1].session_id
+    session = Session.query.get(session_id)
+
+    #path = app.root_path + os.sep + 'static' + os.sep + 'heatmap_pics' + os.sep + str(session.patient_id) + 'pat' + os.sep + str(session_search[-1].id) + 'ssc.png'
+    #print('PATH: {}'.format(path))
+    target2 = os.path.join(target1, 'pat' + str(session.patient_id) + 'ssc' + str(datetime.now().year)
+                           + str(datetime.now().month) + str(datetime.now().day) + str(datetime.now().time().hour)
+                           + str(datetime.now().time().minute) + str(datetime.now().time().second) + '.jpg')
+    plt.savefig(target2)
+    session_search[-1].image_file = target2
+    db.session.commit()
     return 'ok'
 
 
@@ -573,3 +598,14 @@ def sessiongame(id_ss):
     #           print(type(p.id))
     #       return render_template('home.html', patients=patients)
     #return render_template('layout_home.html')
+
+
+@app.route("/diocane", methods=['GET', 'POST'])
+def dio():
+    APP_ROUTE = os.path.dirname(os.path.abspath(__file__))
+    print('APP_ROUTE: {}'.format(APP_ROUTE))
+    target = os.path.join(APP_ROUTE, 'static')
+    target1 = os.path.join(target, 'heatmap_pics')
+    target2 = os.path.join(target1, 'file.png')
+    print('TRAGET: {}'.format(target2))
+    return 'ok'

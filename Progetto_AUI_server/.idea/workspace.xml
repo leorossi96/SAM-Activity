@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdf2ea55-12fd-42d8-8e03-490e551fb8a3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Meshes.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Scenes/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Scenes/Menu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Scenes/Menu2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Scenes/Menu2.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Standard Assets/Effects/Projectors/Materials/LightProjector.mat" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/Standard Assets/Effects/Projectors/Materials/LightProjector.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/TropicalFish_Unity3d.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/com/heparo/terrain/toolkit/original/TerrainToolkit_1_0_2.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/Assets/food.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Progetto_AUI_unity/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../Progetto_AUI_unity/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,7 +15,7 @@
     <SUITE FILE_PATH="coverage/flask_server$server.coverage" NAME="server Coverage Results" MODIFIED="1560080006266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask_server$prova__1_.coverage" NAME="prova (1) Coverage Results" MODIFIED="1560369059586" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask_server$run.coverage" NAME="run Coverage Results" MODIFIED="1563820056377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Progetto_AUI_server$run.coverage" NAME="run Coverage Results" MODIFIED="1567461533261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Progetto_AUI_server$run.coverage" NAME="run Coverage Results" MODIFIED="1567541405681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Progetto_AUI_server$prova__1_.coverage" NAME="prova (1) Coverage Results" MODIFIED="1566049449511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask_server$prova.coverage" NAME="prova Coverage Results" MODIFIED="1560275564260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/server" />
   </component>
@@ -31,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="249" column="25" selection-start-line="249" selection-start-column="25" selection-end-line="249" selection-end-column="25" />
+            <state relative-caret-position="304">
+              <caret line="517" column="97" selection-start-line="517" selection-start-column="97" selection-end-line="517" selection-end-column="97" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -41,13 +34,50 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/static/profile_pics/9dea2e493e399a99.jpeg">
+        <entry file="file://$PROJECT_DIR$/server/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1780">
+              <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/static/profile_pics/e5098a231ce6258b.jpg">
           <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/static/profile_pics/881c90fe20f80f13.jpg">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/server/templates/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="140">
+              <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/run.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -69,7 +99,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/templates/session_game.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
+            <state relative-caret-position="419">
               <caret line="37" column="18" lean-forward="true" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
               <folding>
                 <element signature="n#style#0;n#article#0;n#div#0;n#article#0;n#!!top" expanded="true" />
@@ -139,17 +169,17 @@
         <option value="$PROJECT_DIR$/pr.py" />
         <option value="$PROJECT_DIR$/server/templates/patient.html" />
         <option value="$PROJECT_DIR$/server/templates/sessions.html" />
-        <option value="$PROJECT_DIR$/server/models.py" />
         <option value="$PROJECT_DIR$/server/templates/no_sessions.html" />
         <option value="$PROJECT_DIR$/server/templates/session_game.html" />
+        <option value="$PROJECT_DIR$/server/models.py" />
         <option value="$PROJECT_DIR$/server/routes.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="430" />
-    <option name="width" value="1498" />
-    <option name="height" value="1088" />
+    <option name="width" value="1499" />
+    <option name="height" value="1089" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -181,6 +211,27 @@
               <item name="Progetto_AUI_server" type="b2602c69:ProjectViewProjectNode" />
               <item name="Progetto_AUI_server" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="heatmap_pics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Progetto_AUI_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Progetto_AUI_server" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Progetto_AUI_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Progetto_AUI_server" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="profile_pics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Progetto_AUI_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Progetto_AUI_server" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -193,7 +244,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567462413212" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567541458659" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -203,13 +254,14 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/server/static/profile_pics" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/server/static" />
       <recent name="$PROJECT_DIR$/server" />
       <recent name="C:\Users\marco\IdeaProjects\flask_server\server" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\marco\Documents\GitHub\SAM-Activity\Progetto_AUI_server\server\static\heatmap_pics" />
+      <recent name="$PROJECT_DIR$/server/static/profile_pics" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -358,11 +410,12 @@
       <workItem from="1567239333055" duration="8754000" />
       <workItem from="1567335948602" duration="13750000" />
       <workItem from="1567452474145" duration="228000" />
+      <workItem from="1567534636630" duration="7029000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184126000" />
+    <option name="totallyTimeSpent" value="191402000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -377,7 +430,7 @@
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16644295" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21275167" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -386,7 +439,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3297587" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49861112" visible="true" weight="0.424933" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49861112" visible="true" weight="0.2680965" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -405,7 +458,7 @@
       <window_info anchor="right" id="Maven" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="SciView" order="8" weight="0.3453427" />
+      <window_info anchor="right" id="SciView" order="8" weight="0.34496644" />
       <window_info anchor="right" id="Database" order="9" />
     </layout>
   </component>
@@ -420,16 +473,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="3" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -546,20 +589,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/templates/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/templates/account.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -591,13 +620,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/models.py">
+    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/default.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/dbcdd87ce8e69217.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/d63c7cbaa03d1385.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/0281051c4d81f997.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/50488ce6cda889d7.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/9dea2e493e399a99.jpeg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/881c90fe20f80f13.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="89" column="80" lean-forward="true" selection-start-line="89" selection-start-column="80" selection-end-line="89" selection-end-column="80" />
+        <state relative-caret-position="440">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
-            <element signature="e#0#36#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
@@ -615,30 +672,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/9dea2e493e399a99.jpeg">
+    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/e5098a231ce6258b.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/default.jpg">
+    <entry file="file://$PROJECT_DIR$/server/static/heatmap_pics/pat2ssc10.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/dbcdd87ce8e69217.jpeg">
+    <entry file="file://$PROJECT_DIR$/server/static/heatmap_pics/pat2ssc11.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/d63c7cbaa03d1385.jpeg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/server/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+        </state>
+      </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/0281051c4d81f997.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/50488ce6cda889d7.jpeg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/static/profile_pics/881c90fe20f80f13.jpg">
+    <entry file="file://$PROJECT_DIR$/server/static/heatmap_pics/pat1ssc3.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/server/templates/session_game.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
+        <state relative-caret-position="419">
           <caret line="37" column="18" lean-forward="true" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
           <folding>
             <element signature="n#style#0;n#article#0;n#div#0;n#article#0;n#!!top" expanded="true" />
@@ -647,10 +702,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1780">
+          <caret line="89" column="40" selection-start-line="89" selection-start-column="40" selection-end-line="89" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="249" column="25" selection-start-line="249" selection-start-column="25" selection-end-line="249" selection-end-column="25" />
+        <state relative-caret-position="304">
+          <caret line="517" column="97" selection-start-line="517" selection-start-column="97" selection-end-line="517" selection-end-column="97" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
