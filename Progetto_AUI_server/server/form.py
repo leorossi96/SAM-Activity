@@ -82,7 +82,7 @@ class UpdateLevelRunForm(FlaskForm):
 
 class UpdateLevelSearchForm(FlaskForm):
     number_stars_per_zone = FieldList(IntegerField('Number of stars for Collectible Area', validators=[DataRequired()]),
-                                      min_entries=2, max_entries=10)
+                                      min_entries=1, max_entries=10)
     submit = SubmitField('Update Level Search')
 
 

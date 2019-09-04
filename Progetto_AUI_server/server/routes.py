@@ -374,10 +374,18 @@ def deletepatient(id_p):
         level_search = patient.levels_search
         zone_level_search = level_search[0].zone_levels
         sessions = patient.sessions
+        APP_ROUTE = os.path.dirname(os.path.abspath(__file__))
+        #print('APP_ROUTE: {}'.format(APP_ROUTE))
+        target = os.path.join(APP_ROUTE, 'static')
+        target1 = os.path.join(target, 'heatmap_pics')
         for x in range(0, len(sessions)):
             session_search = sessions[x].session_searches
             if len(session_search) > 0:
+                heat_map_path = session_search[0].image_file
                 db.session.delete(session_search[0])
+                if 'default' not in heat_map_path:
+                    target2 = os.path.join(target1, heat_map_path)
+                    os.remove(target2)
             session_run = sessions[x].session_runs
             if len(session_run) > 0:
                 db.session.delete(session_run[0])
@@ -458,17 +466,18 @@ def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dina
             return redirect(url_for('home'))
         elif request.method == 'GET':
             if add_new == 100:
-                number_zone = len(current_user.patients[index].levels_search[0].zone_levels) + 1
-                zone_level_search = ZoneLevelSearch(number=number_zone, number_stars_per_zone=3, level_search_id=current_user.patients[index].levels_search[0].id)
-                db.session.add(zone_level_search)
-                db.session.commit()
+                if len(current_user.patients[index].levels_search[0].zone_levels) < 10:
+                    number_zone = len(current_user.patients[index].levels_search[0].zone_levels) + 1
+                    zone_level_search = ZoneLevelSearch(number=number_zone, number_stars_per_zone=3, level_search_id=current_user.patients[index].levels_search[0].id)
+                    db.session.add(zone_level_search)
+                    db.session.commit()
             if add_new == 10000:
-                if len(current_user.patients[index].levels_search[0].zone_levels) > 2:
+                if len(current_user.patients[index].levels_search[0].zone_levels) > 1:  # NB: 2
                     db.session.delete(current_user.patients[index].levels_search[0].zone_levels[-1])
                     db.session.commit()
-            if len(current_user.patients[index].levels_search[0].zone_levels) > 2: # 2
-                for i in range(0, len(current_user.patients[index].levels_search[0].zone_levels) - 2): # 2
-                    form.number_stars_per_zone.append_entry(current_user.patients[index].levels_search[0].zone_levels[2+i].number_stars_per_zone) # 2
+            if len(current_user.patients[index].levels_search[0].zone_levels) > 1: # 2
+                for i in range(0, len(current_user.patients[index].levels_search[0].zone_levels) - 1): # 2
+                    form.number_stars_per_zone.append_entry(current_user.patients[index].levels_search[0].zone_levels[1+i].number_stars_per_zone) # 2
                 print(len(current_user.patients[index].levels_search[0].zone_levels))
             for nz in range(0, len(current_user.patients[index].levels_search[0].zone_levels)):
                 form.number_stars_per_zone[nz].data = current_user.patients[index].levels_search[0].zone_levels[nz].number_stars_per_zone
@@ -507,7 +516,7 @@ def graph():
     #print(array_l)
     #print(array_l.shape)
     #print(type(array_l))
-    plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
+    #plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
     #fig = plt.figure()
     #fig.sa
     #plt.show()
@@ -521,7 +530,7 @@ def graph():
     target2 = os.path.join(target1, 'pat' + str(session.patient_id) + 'ssc' + str(datetime.now().year)
                            + str(datetime.now().month) + str(datetime.now().day) + str(datetime.now().time().hour)
                            + str(datetime.now().time().minute) + str(datetime.now().time().second) + '.jpg')
-    plt.savefig(target2)
+    #plt.savefig(target2)
     session_search[-1].image_file = target2
     db.session.commit()
     return 'ok'
