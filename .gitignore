@@ -34,3 +34,12 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+/doc/*.aux
+/doc/*.log
+/doc/*.gz
+/doc/*.toc
+/doc/*.lof
+/doc/*.pdf
+/doc/*.bbl
+/doc/*.blg
