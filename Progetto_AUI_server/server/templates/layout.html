@@ -27,7 +27,6 @@
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-                    <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
                 </div>
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
@@ -64,7 +63,7 @@
                 <p class='text-muted'>Summary Board
                 <ul class="list-group">
                     {% if current_user.is_authenticated %}
-                    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}">
+                    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + current_user.image_file) }}" style="margin-bottom: 20px">
                     <li class="list-group-item list-group-item-light"> {{ current_user.username }} </li>
                     <li class="list-group-item list-group-item-light"> {{ current_user.email }} </li>
                     {% else %}

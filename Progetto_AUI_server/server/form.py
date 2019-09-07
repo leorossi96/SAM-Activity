@@ -66,7 +66,7 @@ class UpdatePatientForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired()])
     date_of_birth = DateField('Date of Birth', validators=[DataRequired()])
     type_of_disability = StringField('Type of Disability', validators=[DataRequired()])
-    comment = TextAreaField('Comment', validators=[DataRequired(), Length(min=0, max=250)])
+    comment = TextAreaField('Comment', validators=[Length(min=0, max=250)])
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])]) # we can add also other extension
     submit = SubmitField('Update Patient')
 
@@ -82,7 +82,7 @@ class UpdateLevelRunForm(FlaskForm):
 
 class UpdateLevelSearchForm(FlaskForm):
     number_stars_per_zone = FieldList(IntegerField('Number of stars for Collectible Area', validators=[DataRequired()]),
-                                      min_entries=2, max_entries=20)
+                                      min_entries=1, max_entries=10)
     submit = SubmitField('Update Level Search')
 
 

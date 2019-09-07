@@ -1,0 +1,43 @@
+{% extends "layout_fixed.html" %}
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + patient.therapist.image_file) }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2">Patient</a>
+        </div>
+        <h2><a class="article-title">{{ patient.last_name }} {{ patient.first_name }}</a></h2>
+        {% for sr in ss_runs %}
+        <article class="media content-section" style="margin-top: 30px">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <h2><a class="mr-2">Session Run</a></h2>
+                </div>
+                <table class="table">
+                    <tbody>
+                    <tr><th>Level Time</th><td>{{ sr.level_time }}</td></tr>
+                    <tr><th>Life Remaining</th><td>{{ sr.life_remaining }}</td></tr>
+                    <tr><th>Activated Power Up</th><td>{{ sr.activated_power_up }}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </article>
+        {% endfor %}
+        {% for ssc in ss_searches %}
+        <article class="media content-section" style="margin-top: 30px">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <h2><a class="mr-2">Session Search</a></h2>
+                </div>
+                <table class="table">
+                    <tbody>
+                    <tr><th>Level Time</th><td>{{ ssc.level_time }}</td></tr>
+                    </tbody>
+                </table>
+                <img src="{{ url_for('static', filename='heatmap_pics/' + ssc.image_file) }}" width="500" height="400">
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</article>
+{% endblock content %}

@@ -10,7 +10,7 @@ from server.models import User, Patient, LevelRun, LevelSearch, ZoneLevelSearch,
 from flask_login import login_user, current_user, logout_user, login_required
 import matplotlib.pyplot as plt
 import numpy as np
-from datetime import time
+from datetime import time, datetime
 
 
 @app.route("/")
@@ -239,12 +239,24 @@ def save_picture(form_picture):         #create a random name for the image in o
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = app.root_path + os.sep + 'static' + os.sep + 'profile_pics'+ os.sep + picture_fn
+    picture_path = app.root_path + os.sep + 'static' + os.sep + 'profile_pics' + os.sep + picture_fn
     output_size = (125, 125)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
     return picture_fn
+
+
+#def save_picture_heatmap():         #create a random name for the image in order to avoid to collide with image already present
+#    random_hex = secrets.token_hex(8)
+#    _, f_ext = os.path.splitext(form_picture.filename)
+#    picture_fn = random_hex + f_ext
+#    picture_path = app.root_path + os.sep + 'static' + os.sep + 'profile_pics' + os.sep + picture_fn
+#    output_size = (125, 125)
+#    i = Image.open(form_picture)
+#    i.thumbnail(output_size)
+#    i.save(picture_path)
+#    return picture_fn
 
 
 # route decoder to navigate our web application. In this case the slash / is simply the root
@@ -361,7 +373,26 @@ def deletepatient(id_p):
         levels_run = patient.levels_run
         level_search = patient.levels_search
         zone_level_search = level_search[0].zone_levels
-        for i in range (0, len(zone_level_search)):
+        sessions = patient.sessions
+        APP_ROUTE = os.path.dirname(os.path.abspath(__file__))
+        #print('APP_ROUTE: {}'.format(APP_ROUTE))
+        target = os.path.join(APP_ROUTE, 'static')
+        target1 = os.path.join(target, 'heatmap_pics')
+        for x in range(0, len(sessions)):
+            session_search = sessions[x].session_searches
+            if len(session_search) > 0:
+                heat_map_path = session_search[0].image_file
+                db.session.delete(session_search[0])
+                if 'default' not in heat_map_path:
+                    target2 = os.path.join(target1, heat_map_path)
+                    os.remove(target2)
+            session_run = sessions[x].session_runs
+            if len(session_run) > 0:
+                db.session.delete(session_run[0])
+            db.session.delete(sessions[x])
+        #for j in range(0, len(sessions)):
+        #    db.session.delete(sessions[x])
+        for i in range(0, len(zone_level_search)):
             db.session.delete(zone_level_search[i])
         db.session.delete(level_search[0])
         db.session.delete(levels_run[0])
@@ -435,13 +466,18 @@ def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dina
             return redirect(url_for('home'))
         elif request.method == 'GET':
             if add_new == 100:
-                number_zone = len(current_user.patients[index].levels_search[0].zone_levels) + 1
-                zone_level_search = ZoneLevelSearch(number=number_zone, number_stars_per_zone=3, level_search_id=current_user.patients[index].levels_search[0].id)
-                db.session.add(zone_level_search)
-                db.session.commit()
-            if len(current_user.patients[index].levels_search[0].zone_levels) > 2:
-                for i in range(0, len(current_user.patients[index].levels_search[0].zone_levels) - 2):
-                    form.number_stars_per_zone.append_entry(current_user.patients[index].levels_search[0].zone_levels[2+i].number_stars_per_zone)
+                if len(current_user.patients[index].levels_search[0].zone_levels) < 10:
+                    number_zone = len(current_user.patients[index].levels_search[0].zone_levels) + 1
+                    zone_level_search = ZoneLevelSearch(number=number_zone, number_stars_per_zone=3, level_search_id=current_user.patients[index].levels_search[0].id)
+                    db.session.add(zone_level_search)
+                    db.session.commit()
+            if add_new == 10000:
+                if len(current_user.patients[index].levels_search[0].zone_levels) > 1:  # NB: 2
+                    db.session.delete(current_user.patients[index].levels_search[0].zone_levels[-1])
+                    db.session.commit()
+            if len(current_user.patients[index].levels_search[0].zone_levels) > 1: # 2
+                for i in range(0, len(current_user.patients[index].levels_search[0].zone_levels) - 1): # 2
+                    form.number_stars_per_zone.append_entry(current_user.patients[index].levels_search[0].zone_levels[1+i].number_stars_per_zone) # 2
                 print(len(current_user.patients[index].levels_search[0].zone_levels))
             for nz in range(0, len(current_user.patients[index].levels_search[0].zone_levels)):
                 form.number_stars_per_zone[nz].data = current_user.patients[index].levels_search[0].zone_levels[nz].number_stars_per_zone
@@ -452,6 +488,11 @@ def patientlevsearch(id_p, num_z):   # l'aggiunta di una entries in maniera dina
 
 @app.route("/graph", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
 def graph():
+    APP_ROUTE = os.path.dirname(os.path.abspath(__file__))
+    print('APP_ROUTE: {}'.format(APP_ROUTE))
+    target = os.path.join(APP_ROUTE, 'static')
+    target1 = os.path.join(target, 'heatmap_pics')
+    target2 = os.path.join(target1, 'file.png')
     heat_map = request.get_json()
     x_l = []
     y_l = []
@@ -475,28 +516,103 @@ def graph():
     #print(array_l)
     #print(array_l.shape)
     #print(type(array_l))
-    plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
+    #plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
     #fig = plt.figure()
     #fig.sa
-    plt.show()
+    #plt.show()
+    session_search = SessionSearch.query.all()
+
+    session_id = session_search[-1].session_id
+    print('Session search [-1]: '.format(session_id))
+    session = Session.query.get(session_id)
+    #path = app.root_path + os.sep + 'static' + os.sep + 'heatmap_pics' + os.sep + str(session.patient_id) + 'pat' + os.sep + str(session_search[-1].id) + 'ssc.png'
+    #print('PATH: {}'.format(path))
+    target2 = os.path.join(target1, 'pat' + str(session.patient_id) + 'ssc' + str(datetime.now().year)
+                           + str(datetime.now().month) + str(datetime.now().day) + str(datetime.now().time().hour)
+                           + str(datetime.now().time().minute) + str(datetime.now().time().second) + '.jpg')
+    #plt.savefig(target2)
+    session_search[-1].image_file = target2
+    db.session.commit()
     return 'ok'
 
 
 @app.route("/save/search", methods=['GET', 'POST'])
 def unity_save_data_search():
     save_data = request.get_json()
-    session = Session(patient_id=save_data['patient_id'])
+    session = Session(patient_id=save_data['patient_id'], datetime=datetime.now())
     db.session.add(session)
     db.session.commit()
     session_id = Patient.query.get(save_data['patient_id']).sessions[-1].id
     time_sess = time(save_data['hrs'], save_data['min'], save_data['sec'], save_data['mil'])
     print(session_id)
     print(time_sess)
-    session_search = SessionSearch(level_time=time_sess ,session_id=session_id)
+    session_search = SessionSearch(level_time=time_sess, session_id=session_id)
     db.session.add(session_search)
     db.session.commit()
+    #session_search_graph = Session.query.get(session_id).session_searches[-1]
+    session_search_graph = Session.query.get(session_id).session_searches[0]
+
+
+    #heat_map = request.get_json()
+    #print(len(heat_map['posArray']))
+    #for i in range(0, len(heat_map['posArray'])):
+    #    x_l.append(heat_map['posArray'][i]['x'])
+    #    y_l.append(heat_map['posArray'][i]['y'])
+
+    #print(x)
+    #print(x.shape)
+    #print('PRIMA X: ' + str(heat_map['posArray'][0]['x']))
+    #print('PRIMA Y: ' + str(heat_map['posArray'][0]['y']))
+    #x = np.random.rayleigh(50, size=5000)
+    #y = np.random.rayleigh(50, size=5000)
+    #print(x.shape)
+    #print(type(x))
+    #print(x)
+    #l = [40.63172593, 94.62401747, 79.49326453]
+    #array_l = np.array(l)
+    #print(array_l)
+    #print(array_l.shape)
+    #print(type(array_l))
+
+    #fig = plt.figure()
+    #fig.sa
+    #plt.show()
+    #session_search = SessionSearch.query.all()
+    #session_id = session_search[-1].session_id
+    #print('Session search [-1]: '.format(session_id))
+    #session = Session.query.get(session_id)
+    #path = app.root_path + os.sep + 'static' + os.sep + 'heatmap_pics' + os.sep + str(session.patient_id) + 'pat' + os.sep + str(session_search[-1].id) + 'ssc.png'
+    #print('PATH: {}'.format(path))
+    f_name = make_graph(save_data, session_search_graph.id)
+    print('SESSION SEARCH {}'.format(session_search_graph.image_file))
+    session_search_graph.image_file = f_name
+    print('SESSION SEARCH {}'.format(session_search_graph.image_file))
+    #session_search = SessionSearch(level_time=time_sess, image_file=target2, session_id=session_id)
+    #db.session.add(session_search)
+    db.session.commit()
+
     return 'speriamo bene'
 
+def make_graph(save_data, ssc_id):
+    APP_ROUTE = os.path.dirname(os.path.abspath(__file__))
+    print('APP_ROUTE: {}'.format(APP_ROUTE))
+    target = os.path.join(APP_ROUTE, 'static')
+    target1 = os.path.join(target, 'heatmap_pics')
+    x_l = []
+    y_l = []
+    for i in range(0, len(save_data['posArray'])):
+        x_l.append(save_data['posArray'][i]['x'])
+        y_l.append(save_data['posArray'][i]['y'])
+    x = np.array(x_l)
+    y = np.array(y_l)
+    plt.hist2d(x, y, bins=[np.arange(0,410,7),np.arange(0,410,7)])
+    target3 = os.path.join(target1, 'pat' + str(save_data['patient_id']) + 'ssc' + str(datetime.now().year)
+                           + str(datetime.now().month) + str(datetime.now().day) + str(datetime.now().time().hour)
+                           + str(datetime.now().time().minute) + str(datetime.now().time().second) + '.jpg')
+    target2 = os.path.join(target1, 'pat' + str(save_data['patient_id']) + 'ssc' +str(ssc_id) + '.jpeg')
+    plt.savefig(target2)
+    f_name = 'pat' + str(save_data['patient_id']) + 'ssc' +str(ssc_id) + '.jpeg'
+    return f_name
 
 @app.route("/save/run", methods=['GET', 'POST'])
 def unity_save_data_run():
@@ -516,14 +632,57 @@ def unity_save_data_run():
     return 'speriamo bene'
 
 
+@app.route("/session/<id_p>", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
+def session(id_p):
+    id_reg = int(id_p)
+    pat = Patient.query.get(id_reg)
+    sessions = pat.sessions
+    print('LEN SESSIONS {}'.format(len(sessions)))
+    if(len(sessions)) == 0:
+        return render_template('no_sessions.html')
+    else:
+        #sessions_run = sessions.session_runs
+        #sessions_search = sessions.session_searches
+        return render_template('sessions.html', patient=pat, sessions=sessions)
+    #return 'ok'
+    #if current_user.is_authenticated:
+    #    if len(current_user.patients) > 0:
+    #        patients = current_user.patients
+    #        for p in patients:
+    #           print('patient_id {}'.format(p.id))
+    #           print(type(p.id))
+    #       return render_template('home.html', patients=patients)
+    #return render_template('layout_home.html')
 
-@app.route("/patientlevrun/<id_p>", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
-def session():
-    if current_user.is_authenticated:
-        if len(current_user.patients) > 0:
-            patients = current_user.patients
-            for p in patients:
-                print('patient_id {}'.format(p.id))
-                print(type(p.id))
-            return render_template('home.html', patients=patients)
-    return render_template('layout_home.html')
+
+@app.route("/sessiongame/<id_ss>", methods=['GET', 'POST'])  # route decoder to navigate our web application. In this case the slash / is simply the root
+def sessiongame(id_ss):
+    id_reg = int(id_ss)
+    session = Session.query.get(id_reg)
+    pat = Patient.query.get(session.patient_id)
+    session_runs = session.session_runs
+    session_searches = session.session_searches
+    #sessions_run = sessions.session_runs
+    #sessions_search = sessions.session_searches
+    print('IMGDDDDDDD: {}'.format(session_searches[0].image_file))
+    return render_template('session_game.html', patient=pat, ss_runs=session_runs, ss_searches=session_searches)
+    #return 'ok'
+    #if current_user.is_authenticated:
+    #    if len(current_user.patients) > 0:
+    #        patients = current_user.patients
+    #        for p in patients:
+    #           print('patient_id {}'.format(p.id))
+    #           print(type(p.id))
+    #       return render_template('home.html', patients=patients)
+    #return render_template('layout_home.html')
+
+
+@app.route("/diocane", methods=['GET', 'POST'])
+def dio():
+    APP_ROUTE = os.path.dirname(os.path.abspath(__file__))
+    print('APP_ROUTE: {}'.format(APP_ROUTE))
+    target = os.path.join(APP_ROUTE, 'static')
+    target1 = os.path.join(target, 'heatmap_pics')
+    target2 = os.path.join(target1, 'file.png')
+    print('TRAGET: {}'.format(target2))
+    return 'ok'

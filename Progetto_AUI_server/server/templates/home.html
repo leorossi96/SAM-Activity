@@ -9,7 +9,6 @@
             </div>
             <h2><a class="article-title" href="{{ url_for('patient', id_p=patient.id) }}">{{ patient.first_name }} {{ patient.last_name }}</a></h2>
             <p class="article-content">{{ patient.date_of_birth }}</p>
-            <p class="article-content">{{ patient.comment }}</p>
         </div>
     </article>
 {% endfor %}
