@@ -99,6 +99,7 @@ class SessionRun(db.Model):
     level_time = db.Column(db.Time, nullable=False, default=time(0,0,0,0))
     life_remaining = db.Column(db.Integer, nullable=False, default=0)
     activated_power_up = db.Column(db.Integer, nullable=False, default=0)
+    level_completed = db.Column(db.String(20), nullable=False)
     session_id = db.Column(db.Integer, db.ForeignKey('session.id'), nullable=False)
 
     def __repr__(self):

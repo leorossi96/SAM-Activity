@@ -646,7 +646,7 @@ def make_graph(save_data, ssc_id):
 @app.route("/save/run", methods=['GET', 'POST'])
 def unity_save_data_run():
     save_data = request.get_json()
-    session = Session(patient_id=save_data['patient_id'])
+    session = Session(patient_id=save_data['patient_id'], datetime=datetime.now())
     db.session.add(session)
     db.session.commit()
     session_id = Patient.query.get(save_data['patient_id']).sessions[-1].id
@@ -655,7 +655,7 @@ def unity_save_data_run():
     print(session_id)
     print(time_sess)
     session_run = SessionRun(level_time=time_sess, life_remaining=save_data['life_remaining'],
-                                   activated_power_up=save_data['activated_power_up'], session_id=session_id)
+                                   activated_power_up=save_data['activated_power_up'], level_completed=save_data['level_completed'] ,session_id=session_id)
     db.session.add(session_run)
     db.session.commit()
     return 'speriamo bene'
@@ -693,7 +693,6 @@ def sessiongame(id_ss):
     session_searches = session.session_searches
     #sessions_run = sessions.session_runs
     #sessions_search = sessions.session_searches
-    print('IMGDDDDDDD: {}'.format(session_searches[0].image_file))
     return render_template('session_game.html', patient=pat, ss_runs=session_runs, ss_searches=session_searches)
     #return 'ok'
     #if current_user.is_authenticated:
