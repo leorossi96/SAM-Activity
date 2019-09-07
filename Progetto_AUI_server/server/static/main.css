@@ -272,3 +272,9 @@ a.article-title:hover {
 .copy-layout-fixed p a:hover{
     text-decoration:underline;
 }
+
+.class-td{
+    max-width: 40px;
+    overflow: auto;
+    white-space: nowrap;
+}

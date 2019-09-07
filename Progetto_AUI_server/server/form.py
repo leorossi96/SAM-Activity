@@ -65,7 +65,7 @@ class UpdatePatientForm(FlaskForm):
     last_name = StringField('Last Name', validators=[DataRequired()])
     first_name = StringField('First Name', validators=[DataRequired()])
     date_of_birth = DateField('Date of Birth', validators=[DataRequired()])
-    type_of_disability = StringField('Type of Disability', validators=[DataRequired()])
+    type_of_disability = StringField('Type of Disability', validators=[DataRequired(), Length(min=1, max=50)])
     comment = TextAreaField('Comment', validators=[Length(min=0, max=250)])
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])]) # we can add also other extension
     submit = SubmitField('Update Patient')

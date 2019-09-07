@@ -10,8 +10,8 @@
         <table class="table">
             <tbody>
             <tr><th>Date of Birth</th><td>{{ patient.date_of_birth }}</td></tr>
-            <tr><th>Disability</th><td>{{ patient.type_of_disability }}</td></tr>
-            <tr><th>Comment</th><td>{{ patient.comment }}</td></tr>
+            <tr><th>Disability</th><td class="class-td">{{ patient.type_of_disability }}</td></tr>
+            <tr><th>Comment</th><td class="class-td">{{ patient.comment }}</td></tr>
             </tbody>
         </table>
         <a href="{{ url_for('patientup', id_p=patient.id) }}"><button type="button" style="margin-bottom: 35px">Update Patient Info</button></a>
