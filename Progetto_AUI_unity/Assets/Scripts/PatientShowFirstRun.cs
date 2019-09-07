@@ -72,17 +72,18 @@ public class PatientShowFirstRun : MonoBehaviour
             if (inpfields[i].name == "MaxTime")
             {
                 levelSet.levelRun[0].max_time = int.Parse(inpfields[i].text);
-
-                if (inpfields[i].name == "PowerUp")
-                {
-                    levelSet.levelRun[0].power_up = int.Parse(inpfields[i].text);
-                }
-
-                if (inpfields[i].name == "Lives")
-                {
-                    levelSet.levelRun[0].lives = int.Parse(inpfields[i].text);
-                }
             }
+
+            if (inpfields[i].name == "PowerUp")
+            {
+                levelSet.levelRun[0].power_up = int.Parse(inpfields[i].text);
+            }
+
+            if (inpfields[i].name == "Lives")
+            {
+                levelSet.levelRun[0].lives = int.Parse(inpfields[i].text);
+            }
+            
 
         }
 
