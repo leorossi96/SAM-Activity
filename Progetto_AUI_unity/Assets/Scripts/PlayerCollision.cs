@@ -41,6 +41,8 @@ public class PlayerCollision : MonoBehaviour
 
     public RunDataSerializable dataSerializable = new RunDataSerializable();
 
+    public bool tutorial=false;
+
    
     public bool clock_stop = false;
     Vector3 accelerometer;
@@ -631,7 +633,7 @@ public class PlayerCollision : MonoBehaviour
 	void Update()
     {
 
-        if (Time.timeSinceLevelLoad < max_time + 1)
+        if ((Time.timeSinceLevelLoad < max_time + 1) || tutorial)
         {
 
             timeMesh.text = ((int)Time.timeSinceLevelLoad) / 60 + ":" + (((int)Time.timeSinceLevelLoad) % 60);
@@ -639,7 +641,7 @@ public class PlayerCollision : MonoBehaviour
         }
 
 
-        if (Time.timeSinceLevelLoad > max_time && !clock_stop)
+        if (Time.timeSinceLevelLoad > max_time && !clock_stop && !tutorial)
         {
             clock_stop = true;
             movement.start = false;
