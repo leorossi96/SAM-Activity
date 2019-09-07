@@ -109,6 +109,20 @@ public class PlayerCollision : MonoBehaviour
 	}
 
     private IEnumerator ReturnToMenu(){
+
+        dataSerializable.activated_power_up = movement.activated_powerups;
+        dataSerializable.min = (int)Time.timeSinceLevelLoad / 60;
+        dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
+        dataSerializable.life_remaining = lifeCount;
+        dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
+        dataSerializable.level_completed = "Yes";
+
+
+        string json = JsonUtility.ToJson(dataSerializable);
+        StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
+
+        string json2 = JsonUtility.ToJson(param.levelSet);
+        StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));
         yield return new WaitForSeconds(4.0f);
         SceneManager.LoadScene("Menu2");
     }
@@ -254,7 +268,7 @@ public class PlayerCollision : MonoBehaviour
                     dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
                     dataSerializable.life_remaining = lifeCount;
                     dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
-
+                    dataSerializable.level_completed = "No";
 
 
                     string json = JsonUtility.ToJson(dataSerializable);
@@ -656,6 +670,7 @@ public class PlayerCollision : MonoBehaviour
             dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
             dataSerializable.life_remaining = lifeCount;
             dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
+            dataSerializable.level_completed = "No";
 
             string json = JsonUtility.ToJson(dataSerializable);
             StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));

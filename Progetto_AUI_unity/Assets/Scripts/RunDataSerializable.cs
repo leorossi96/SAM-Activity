@@ -9,4 +9,5 @@ public class RunDataSerializable
     public int activated_power_up;
     public int min;
     public int seconds;
+    public string level_completed;
 }
