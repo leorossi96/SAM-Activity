@@ -111,6 +111,7 @@ public class SessionParameters : MonoBehaviour {
                 StartCoroutine(SendPost(jsonTime, "http://127.0.0.1:5000/save/search"));
                 //StartCoroutine(SendData());
                 string jsonLevelSet = JsonUtility.ToJson(levelSet);
+                Debug.Log("LEVLESET " + jsonLevelSet);
                 StartCoroutine(SendPost(jsonLevelSet, "http://127.0.0.1:5000/unity/save"));
                 //string jsonPos = JsonUtility.ToJson(posArraySer);
                 //Debug.Log("POS ARRAY JSON " + jsonPos);

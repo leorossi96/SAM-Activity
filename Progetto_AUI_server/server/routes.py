@@ -129,16 +129,45 @@ def unity_save_data():
     print(lr1.static_obstacle)
     db.session.commit()
     ls = (LevelSearch.query.filter_by(id=save_data['levelSearch'][0]['id']).first())
-    for i in range(0, len(ls.zone_levels)):
-        zone_search = (ZoneLevelSearch.query.filter_by(id=save_data['zoneLevelSearchList'][i]['id']).first())
-        zone_search.number_stars_per_zone = save_data['zoneLevelSearchList'][i]['number_stars_per_zone']
+    print('LEN ZONE LEVELS: {}'.format(len(ls.zone_levels)))
+    print('LEN ZONE LEVELS SAVE: {}'.format(len(save_data['zoneLevelSearchList'])))
+    if len(ls.zone_levels) < len(save_data['zoneLevelSearchList']):
+        for i in range(0, len(ls.zone_levels)):
+            zone_search = (ZoneLevelSearch.query.filter_by(id=save_data['zoneLevelSearchList'][i]['id']).first())
+            zone_search.number_stars_per_zone = save_data['zoneLevelSearchList'][i]['number_stars_per_zone']
+            db.session.commit()
+        for j in range(len(ls.zone_levels), len(save_data['zoneLevelSearchList'])):
+            zone_level_search = ZoneLevelSearch(number=save_data['zoneLevelSearchList'][j]['number'], number_stars_per_zone=save_data['zoneLevelSearchList'][j]['number_stars_per_zone'],
+                                                level_search_id=save_data['zoneLevelSearchList'][0]['level_search_id'])
+            db.session.add(zone_level_search)
+            db.session.commit()
+    else:
+        for i in range(0, len(save_data['zoneLevelSearchList'])):
+            zone_search = (ZoneLevelSearch.query.filter_by(id=save_data['zoneLevelSearchList'][i]['id']).first())
+            zone_search.number_stars_per_zone = save_data['zoneLevelSearchList'][i]['number_stars_per_zone']
+            db.session.commit()
+        for y in range(len(save_data['zoneLevelSearchList']), len(ls.zone_levels)):
+            db.session.delete(ls.zone_levels[y])
+            print('LEN ZONE LEVELS AFTER DELETE[0]: {}'.format(len(ls.zone_levels)))
         db.session.commit()
-        print('ciclo ' + str(i))
-    for j in range(len(ls.zone_levels), len(save_data['zoneLevelSearchList'])):
-        zone_level_search = ZoneLevelSearch(number=save_data['zoneLevelSearchList'][j]['number'], number_stars_per_zone=save_data['zoneLevelSearchList'][j]['number_stars_per_zone'],
-                                            level_search_id=save_data['zoneLevelSearchList'][0]['level_search_id'])
-        db.session.add(zone_level_search)
-        db.session.commit()
+
+
+
+
+
+
+
+
+    #for i in range(0, len(ls.zone_levels)):
+        #    zone_search = (ZoneLevelSearch.query.filter_by(id=save_data['zoneLevelSearchList'][i]['id']).first())
+        #zone_search.number_stars_per_zone = save_data['zoneLevelSearchList'][i]['number_stars_per_zone']
+        #db.session.commit()
+    #print('ciclo ' + str(i))
+        #for j in range(len(ls.zone_levels), len(save_data['zoneLevelSearchList'])):
+        #zone_level_search = ZoneLevelSearch(number=save_data['zoneLevelSearchList'][j]['number'], number_stars_per_zone=save_data['zoneLevelSearchList'][j]['number_stars_per_zone'],
+        #                                    level_search_id=save_data['zoneLevelSearchList'][0]['level_search_id'])
+        #db.session.add(zone_level_search)
+    #db.session.commit()
     #print('NB: ' + str(len(save_data['zoneLevelSearchList'])))
     #lr = (LevelRun.query.filter_by(id=save_data['id']).first())
     #print(lr)

@@ -27,7 +27,7 @@ class Patient(db.Model):
     date_of_birth = db.Column(db.Date, nullable=False)
     type_of_disability = db.Column(db.String(50), nullable=False)
     comment = db.Column(db.String(250))
-    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    image_file = db.Column(db.String(20), nullable=False, default='default_user.jpg')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     levels_run = db.relationship('LevelRun', lazy=True)
     levels_search = db.relationship('LevelSearch', lazy=True)
