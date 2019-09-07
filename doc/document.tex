@@ -1,0 +1,68 @@
+
+\documentclass[11pt,a4paper,twoside,openright]{report}
+
+\usepackage{graphicx}
+
+\begin{document}
+	
+	
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.30\textwidth]{images/logopm.png}\par\vspace{1cm}
+	{\scshape\LARGE Politecnico di Milano \par}
+	\vspace{1cm}
+	{\scshape\Large AUI Project, group 2\par}
+	\vspace{1.5cm}
+	{\huge\bfseries SAM Activities\par}
+	\vspace{0.3cm}
+	{\Large Subtitle\par}
+	
+	\vspace{2cm}
+	
+
+	{\Large\itshape Leonardo Rossi, Marco Minelli\par}
+	{\Large\itshape and Samuele Langhi}
+
+	\vfill
+
+	supervised by\par
+	\textsc{Mattia Giannotti}
+	
+	\vfill
+	
+	% Bottom of the page
+	{\Large \today\par}
+	
+	\newpage
+	
+	\begin{abstract}
+		Tua Madre
+	\end{abstract}
+\end{titlepage}
+	
+	\tableofcontents
+	
+	%NOTE: .tex extension not included in the import of the files
+	
+	\include{abstract}
+	\include{chapter1}
+	\include{chapter2}
+	\include{chapter3}
+	\include{chapter4}
+	\include{chapter5}
+	\include{chapter6}
+	\include{chapter7}
+	
+	\cleardoublepage
+	% ---- Bibliography ----
+	\addcontentsline{toc}{chapter}{Bibliografia}
+	\bibliographystyle{plain}
+	\bibliography{auibiblio}
+	%\nocite{*}
+	
+\end{document}
+
+
+
+
+
