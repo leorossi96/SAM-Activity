@@ -178,11 +178,8 @@ public class PlayerCollisionSearch : MonoBehaviour
     {
         light_Shift.pause = true;
         MagicRoomLightManager.instance.sendColour("#00c300", 255);
-        Debug.Log("OOOOOOOOOOOOO");
 
         yield return new WaitForSeconds(seconds);
-
-        Debug.Log("AAAAAAAAAAAAAAA");
 
 
         light_Shift.pause = false;

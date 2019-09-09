@@ -44,8 +44,6 @@ public class PlayerMovementSearch : MonoBehaviour
         {
             Display.displays[i].Activate();
         }
-
-
     }
 
 
@@ -83,18 +81,18 @@ public class PlayerMovementSearch : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
 
         // If use keyboard (ex. as in Unity or Standalone built)
-        turnRight = Input.GetKey(KeyCode.RightArrow);
+        /*turnRight = Input.GetKey(KeyCode.RightArrow);
         turnLeft = Input.GetKey(KeyCode.LeftArrow);
         goDown = Input.GetKey(KeyCode.DownArrow);
         goUp = Input.GetKey(KeyCode.UpArrow);
         goForward = Input.GetKey(KeyCode.Tab);
-        goBackward = Input.GetKey(KeyCode.LeftShift);
-        /*turnRight = angle_y < -24.0f;
+        goBackward = Input.GetKey(KeyCode.LeftShift);*/
+        turnRight = angle_y < -24.0f;
         turnLeft = angle_y > 15.0f;
         goDown = angle_x > 24.0f;
         goUp = angle_x < -20.0f;
         goForward = dolphinController.touchsensor.touchpoints[1].touched && dolphinController.touchsensor.touchpoints[2].touched;
-        goBackward = Input.GetKey(KeyCode.LeftShift);*/
+        //goBackward = Input.GetKey(KeyCode.LeftShift);
 
 
 
