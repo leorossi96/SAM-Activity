@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using System.Text;
 
@@ -72,7 +73,6 @@ public class SessionParameters : MonoBehaviour {
                 Vector3 position = zonePositions[ran];
                 GameObject zoneInstantiated = Instantiate(zonePrefab, position, Quaternion.identity);
                 collectiblesPerZoneCount = levelSet.GetZoneLevelSearchList()[i].number_stars_per_zone;
-                collectiblesPerZoneCount = 4;
                 Debug.Log("Stelle nella zona = " + collectiblesPerZoneCount);
                 PopulateZone(zoneInstantiated, collectiblesPerZoneCount);
             }
@@ -116,6 +116,7 @@ public class SessionParameters : MonoBehaviour {
                 //string jsonPos = JsonUtility.ToJson(posArraySer);
                 //Debug.Log("POS ARRAY JSON " + jsonPos);
                 //StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
+                SceneManager.LoadScene("Menu2");
             }
         }
 	}
