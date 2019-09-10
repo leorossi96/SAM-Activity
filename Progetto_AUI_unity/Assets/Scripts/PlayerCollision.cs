@@ -110,7 +110,7 @@ public class PlayerCollision : MonoBehaviour
 
     private IEnumerator ReturnToMenu(){
 
-        dataSerializable.activated_power_up = movement.activated_powerups;
+        /*dataSerializable.activated_power_up = movement.activated_powerups;
         dataSerializable.min = (int)Time.timeSinceLevelLoad / 60;
         dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
         dataSerializable.life_remaining = lifeCount;
@@ -122,7 +122,7 @@ public class PlayerCollision : MonoBehaviour
         StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
 
         string json2 = JsonUtility.ToJson(param.levelSet);
-        StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));
+        StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));*/
         yield return new WaitForSeconds(4.0f);
         SceneManager.LoadScene("Menu2");
     }
