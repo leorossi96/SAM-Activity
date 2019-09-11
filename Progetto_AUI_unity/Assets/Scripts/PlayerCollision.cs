@@ -110,7 +110,7 @@ public class PlayerCollision : MonoBehaviour
 
     private IEnumerator ReturnToMenu(){
 
-        dataSerializable.activated_power_up = movement.activated_powerups;
+        /*dataSerializable.activated_power_up = movement.activated_powerups;
         dataSerializable.min = (int)Time.timeSinceLevelLoad / 60;
         dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
         dataSerializable.life_remaining = lifeCount;
@@ -122,7 +122,7 @@ public class PlayerCollision : MonoBehaviour
         StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
 
         string json2 = JsonUtility.ToJson(param.levelSet);
-        StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));
+        StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));*/
         yield return new WaitForSeconds(4.0f);
         SceneManager.LoadScene("Menu2");
     }
@@ -704,8 +704,8 @@ public class PlayerCollision : MonoBehaviour
             angle_x = (Mathf.Atan2(accelerometer.y, accelerometer.z) * 180.0f) / Mathf.PI;
             angle_y = -(Mathf.Atan2(accelerometer.x, Mathf.Sqrt(accelerometer.y * accelerometer.y + accelerometer.z * accelerometer.z)) * 180.0f) / Mathf.PI;
 
-            touchedDown = movement.angle_x > 24.0f;
-            touchedUp = movement.angle_x < -20.0f;
+            touchedDown = angle_x > 24.0f;
+            touchedUp = angle_x < -20.0f;
             touchedLeft = dolphinController.touchsensor.touchpoints[2].touched;
             touchedRight = dolphinController.touchsensor.touchpoints[1].touched; 
 
