@@ -76,7 +76,7 @@ public class PlayerCollisionSearch : MonoBehaviour
         {
             int areaCompleted = counter.collectiblesMap[collider.gameObject][2];//integer set to 1 if all the collectibles inside this area are found, 0 otherwise
             Debug.Log("Area Completed : " + areaCompleted);
-            if (Input.anyKey && Input.GetKey(KeyCode.M) && !magnifierUsed && areaCompleted == 0) //if the user uses the Magnifier RFID
+            if ((Input.anyKey && Input.GetKey(KeyCode.M) || GameObject.Find("Dolphin1").GetComponent<SmartToy>().rfidsensor.cardReader[7].read) && !magnifierUsed && areaCompleted == 0) //if the user uses the Magnifier RFID
             {
                 Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
                 for (int i = 0; i < images.Length; i++)
@@ -103,7 +103,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
                 magnifierUsed = true;
             }
-            else if (magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && (areaCompleted == 1 || (Input.anyKey && Input.GetKey(KeyCode.C)))) //if the user finds all the collectibles in the area
+            else if (magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && areaCompleted == 1 ) //if the user finds all the collectibles in the area
             {
                 Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
                 for (int i = 0; i < images.Length; i++)
