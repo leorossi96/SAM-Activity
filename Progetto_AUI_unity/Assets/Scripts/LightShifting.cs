@@ -30,7 +30,7 @@ public class LightShifting : MonoBehaviour {
             MagicRoomLightManager.instance.sendColour("#A5C1E5", 50);
             light = false;
         }*/
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         Debug.Log("PAUSE = " + pause);
         if (!pause)
         {

@@ -85,7 +85,7 @@ public class MagnifierMovement : MonoBehaviour {
 
 
 
-            transform.position = new Vector3((float)cameraSearch.transform.position.x+kinect_x*prva, 0.2f, (float)cameraSearch.transform.position.z+(kinect_z-kinect_roomcenter_z)*(-prva)+offset_z);
+            transform.position = new Vector3((float)cameraSearch.transform.position.x+kinect_x*prva, 0.1f, (float)cameraSearch.transform.position.z+(kinect_z-kinect_roomcenter_z)*(-prva)+offset_z);
 
             //transform.position = new_pos + player.transform.position; 
 

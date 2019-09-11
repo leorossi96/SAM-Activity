@@ -30,6 +30,7 @@ public class PlayerCollisionSearch : MonoBehaviour
     public GameObject magnifierFocus;
 
     public GameObject cameraSearch;
+    public GameObject cameraMain2;
 
 
     public bool exitFromCompletedArea = false; //boolean to remember to execute the else if part of OnTriggerStay just one time per collectibleArea
@@ -90,6 +91,8 @@ public class PlayerCollisionSearch : MonoBehaviour
                         images[i].GetComponent<Image>().enabled = true;
                     }
                 }
+                cameraMain2.SetActive(false);
+                cameraSearch.SetActive(true);
                 cameraSearch.transform.position = new Vector3(collider.transform.position.x, cameraSearch.transform.position.y, collider.transform.position.z);
                 SetChildActivation(collider.gameObject, "Container", true);
                 magnifierFocus.SetActive(true);
@@ -117,8 +120,9 @@ public class PlayerCollisionSearch : MonoBehaviour
                         images[i].GetComponent<Image>().enabled = false;
                     }
                 }
-                StartCoroutine(ShowTextInterval(canvasCameraSearch, "Area Completed Text", 10));
+                StartCoroutine(ShowTextInterval(canvasPlayerCamera, "Area Completed Text", 5));
                 StartCoroutine(rewardLightInterval("#00c300", 4));
+                StartCoroutine(CameraSwitch(cameraSearch, cameraMain2, 3));
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
                 GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 movement.enabled = true;
@@ -181,35 +185,34 @@ public class PlayerCollisionSearch : MonoBehaviour
 
         yield return new WaitForSeconds(seconds);
 
-
         light_Shift.pause = false;
 
     }
 
     private IEnumerator ShowTextInterval(Canvas canvas, String textName, int seconds)
     {
-        TextMeshProUGUI text = canvas.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI[] texts = canvas.GetComponentsInChildren<TextMeshProUGUI>();
 
-        /*for (int i = 0; i < text.Length; i++)
+        for (int i = 0; i < texts.Length; i++)
         {
-            { 
                 Debug.Log(texts[i].name + " = " + textName);
                 if (texts[i].name == textName)
                 {
-                    Debug.Log("AABABABABABAABABAB"+ texts[i].text);
-                    texts[i].fontSize = 130;
+                    texts[i].fontSize = 150;
 
                     yield return new WaitForSeconds(seconds);
 
                     texts[i].fontSize = 0;
                 }
-            }*/
-        if (text.name == "Area Completed Text")
-        {
-            text.fontSize = 150;
-            yield return new WaitForSeconds(seconds);
-            text.fontSize = 0;
+           /*
+           if (text.name == "Area Completed Text")
+           {
+               text.fontSize = 150;
+               yield return new WaitForSeconds(seconds);
+               text.fontSize = 0;
 
+           }
+           */
         }
     }
 
@@ -221,6 +224,14 @@ public class PlayerCollisionSearch : MonoBehaviour
                 child.SetActive(value);
             }
         }
+    }
+
+    private IEnumerator CameraSwitch(GameObject cameraOut, GameObject cameraIn, int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        cameraSearch.SetActive(false);
+        cameraMain2.SetActive(true);
     }
     
 

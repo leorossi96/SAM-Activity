@@ -21,6 +21,11 @@ public class CollectiblesCounter : MonoBehaviour {
 
     public Dictionary<GameObject, int[]> collectiblesMap = new Dictionary<GameObject, int[]>(); //maps the collectible are with an array of 2 integer: the first is the number of relevant collectibles inside the area while the second is the number of collectibles found in that area
 
+    public void Awake()
+    {
+        //sessionParameters.enabled = true;
+    }
+
     public void Start()
     {  
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("CollectibleArea").Length; i++){
@@ -64,7 +69,6 @@ public class CollectiblesCounter : MonoBehaviour {
 
         }
         else if (totalCollectiblesFound >= nCollectibles){
-            sessionParameters.endGame = true;
             Debug.Log("HAI VINTO");
             StartCoroutine(BubbleMachine());
             movement.enabled = false;
@@ -76,9 +80,10 @@ public class CollectiblesCounter : MonoBehaviour {
             {
                 text.fontSize = 150;
             }
-            StartCoroutine(ShowTextInterval(canvasCameraSearch, "Area Completed Text", 10));
+            //StartCoroutine(ShowTextInterval(canvasCameraSearch, "Area Completed Text", 10));
 
             Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
+           // Debug.Log("fFGHDHDHFHFJG");
             for (int i = 0; i < images.Length; i++)
             {
                 if (images[i].name == "Magnifier")
@@ -91,7 +96,7 @@ public class CollectiblesCounter : MonoBehaviour {
                 }
             }
             dolphin.GetComponent<Animation>().PlayQueued("Looping");
-            
+            sessionParameters.endGame = true;
         }
     }
 

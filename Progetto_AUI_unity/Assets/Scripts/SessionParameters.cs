@@ -46,15 +46,19 @@ public class SessionParameters : MonoBehaviour {
 
     private void Awake()
     {
-        levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
-        zoneCount = levelSet.GetZoneLevelSearchList().Count;
-        Debug.Log("Zone count = " + zoneCount);
-        for(int x = 0; x < zoneCount; x++)
+        try
         {
-            Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
+            levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
+            zoneCount = levelSet.GetZoneLevelSearchList().Count;
+            Debug.Log("Zone count = " + zoneCount);
+            for (int x = 0; x < zoneCount; x++)
+            {
+                Debug.Log("NUMERO STELLE ZONE " + x + ": " + levelSet.GetZoneLevelSearchList()[x].number_stars_per_zone);
+            }
+            ts.patient_id = levelSet.GetLevelSearch().patient_id;
         }
-        ts.patient_id = levelSet.GetLevelSearch().patient_id;
-    }
+        catch { }
+        }
 
     // Use this for initialization
     void Start () {
@@ -102,6 +106,8 @@ public class SessionParameters : MonoBehaviour {
         }
         else //se è stato premuto E o è finito il gioco
         {
+
+            SceneManager.LoadScene("Menu2");
             if (heatmapCount == 1){
                 heatmapCount -= 1;
                 //GenerateHeatmap(posArraySer.posArray);
@@ -116,8 +122,10 @@ public class SessionParameters : MonoBehaviour {
                 //string jsonPos = JsonUtility.ToJson(posArraySer);
                 //Debug.Log("POS ARRAY JSON " + jsonPos);
                 //StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
+                Debug.Log("IJAFBEDBFWEIUBFIUWEHIFUBWEIUBFIWEUBGFIUWEBIFBWEIUBFWEIUB");
                 SceneManager.LoadScene("Menu2");
             }
+            
         }
 	}
 
@@ -179,8 +187,8 @@ public class SessionParameters : MonoBehaviour {
     private void PopulateZone(GameObject zone, int nCollectibles){
         for (int i = 0; i < nCollectibles; i++)
         {
-            float randomX = UnityEngine.Random.Range(-25f, 25f);
-            float randomZ = UnityEngine.Random.Range(-25f, 25f);
+            float randomX = UnityEngine.Random.Range(-20f, 20f);
+            float randomZ = UnityEngine.Random.Range(-20f, 20f);
             GameObject collectibleInstantiated = Instantiate(collectiblePrefab, new Vector3(0f, -4.2f, 0f), Quaternion.identity, zone.transform);
             collectibleInstantiated.transform.SetParent(zone.transform);
             collectibleInstantiated.transform.localPosition = new Vector3(randomX, -4.2f, randomZ);
