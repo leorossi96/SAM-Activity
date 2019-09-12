@@ -56,12 +56,13 @@ public class PatientShowSearchMenu2 : MonoBehaviour {
     {
         numberOfZones = levelSet.zoneLevelSearchList.Count;
         Debug.Log("THE ARRAY OF ZONE HAS A LENGHT OF: " + numberOfZones);
-        for (int i = numberOfZones; i < inpfields.Length; i++)
+        for (int i = 0; i < inpfields.Length; i++)
         {
+            bool hasToBeActivated = i < numberOfZones;
             string str_i = i.ToString();
             if (inpfields[i].name == ("Zone_Search_" + str_i)) ;
             {
-                inpfields[i].gameObject.SetActive(false);
+                inpfields[i].gameObject.SetActive(hasToBeActivated);
             }
         }
 
@@ -70,12 +71,13 @@ public class PatientShowSearchMenu2 : MonoBehaviour {
         {
             if (inpfields[i].name == "Zone_Search_" + i.ToString())
             {
-                //inpfields[i].text = levelSet.zoneLevelSearchList[i].number_stars_per_zone.ToString();
-                levelSet.zoneLevelSearchList[i].number_stars_per_zone = int.Parse(inpfields[i].text);
+                if (!(string.IsNullOrEmpty(inpfields[i].text)))
+                {
+                    //inpfields[i].text = levelSet.zoneLevelSearchList[i].number_stars_per_zone.ToString();
+                    levelSet.zoneLevelSearchList[i].number_stars_per_zone = int.Parse(inpfields[i].text);
+                }
             }
-
         }
-
     }
 
 

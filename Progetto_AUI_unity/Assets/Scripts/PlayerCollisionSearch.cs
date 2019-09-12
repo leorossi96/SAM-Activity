@@ -181,7 +181,7 @@ public class PlayerCollisionSearch : MonoBehaviour
     IEnumerator rewardLightInterval(String color, int seconds)
     {
         light_Shift.pause = true;
-        MagicRoomLightManager.instance.sendColour("#00c300", 255);
+        MagicRoomLightManager.instance.sendColour("#00c300", 60);
 
         yield return new WaitForSeconds(seconds);
 

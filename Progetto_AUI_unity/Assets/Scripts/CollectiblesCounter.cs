@@ -15,6 +15,7 @@ public class CollectiblesCounter : MonoBehaviour {
     public Canvas canvasCameraSearch;
     public PlayerCollisionSearch playerCollisionSearch;
     public SessionParameters sessionParameters;
+    public LightShifting lightShifting;
 
 
     SmartToy Dolphin;
@@ -64,6 +65,7 @@ public class CollectiblesCounter : MonoBehaviour {
         if (collectiblesCounters[1] == collectiblesCounters[0] && totalCollectiblesFound < nCollectibles)
         {
             collectiblesCounters[2] = 1; //0 if there're still collectibles in the CollectibleArea, else 1
+            //StartCoroutine(LightReward(lightShifting, Color.red, 3));
             //MagicRoomLightManager.instance.sendColour(Color.red);
             //MagicRoomTextToSpeachManagerOffline.instance.generateAudioFromText("Complimenti, hai trovato tutti gli oggetti in quest'area. Cerhiamone altri in giro per la mappa!", voice);
 
@@ -133,5 +135,13 @@ public class CollectiblesCounter : MonoBehaviour {
 
         }
     }
+
+   /* private IEnumerator LightReward(LightShifting ls, Color color, int seconds)
+    {
+        ls.enabled = false;
+        MagicRoomLightManager.instance.sendColour(color, 10);
+        yield return new WaitForSeconds(seconds);
+        ls.enabled = true;
+    }*/
 }
  

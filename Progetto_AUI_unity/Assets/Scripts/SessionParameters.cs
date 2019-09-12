@@ -122,7 +122,6 @@ public class SessionParameters : MonoBehaviour {
                 //string jsonPos = JsonUtility.ToJson(posArraySer);
                 //Debug.Log("POS ARRAY JSON " + jsonPos);
                 //StartCoroutine(SendPost(jsonPos, "http://127.0.0.1:5000/graph"));
-                Debug.Log("IJAFBEDBFWEIUBFIUWEHIFUBWEIUBFIWEUBGFIUWEBIFBWEIUBFWEIUB");
                 SceneManager.LoadScene("Menu2");
             }
             
@@ -187,8 +186,8 @@ public class SessionParameters : MonoBehaviour {
     private void PopulateZone(GameObject zone, int nCollectibles){
         for (int i = 0; i < nCollectibles; i++)
         {
-            float randomX = UnityEngine.Random.Range(-20f, 20f);
-            float randomZ = UnityEngine.Random.Range(-20f, 20f);
+            float randomX = UnityEngine.Random.Range(-23f, 23f);
+            float randomZ = UnityEngine.Random.Range(-23f, 23f);
             GameObject collectibleInstantiated = Instantiate(collectiblePrefab, new Vector3(0f, -4.2f, 0f), Quaternion.identity, zone.transform);
             collectibleInstantiated.transform.SetParent(zone.transform);
             collectibleInstantiated.transform.localPosition = new Vector3(randomX, -4.2f, randomZ);

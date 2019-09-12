@@ -16,7 +16,6 @@ public class PatientShowSearch : MonoBehaviour {
     public Button deleteButton;
     public int numberOfZones;
 
-
     void Awake()
     {
         addButton.onClick.AddListener(TaskOnClick);
@@ -55,26 +54,28 @@ public class PatientShowSearch : MonoBehaviour {
     {
         numberOfZones = levelSet.zoneLevelSearchList.Count;
         Debug.Log("THE ARRAY OF ZONE HAS A LENGHT OF: " + numberOfZones);
-        for (int i = numberOfZones; i < inpfields.Length; i++)
-        {
-            string str_i = i.ToString();
-            if (inpfields[i].name == ("Zone_Search_" + str_i));
+            for (int i = 0; i < inpfields.Length; i++)
             {
-                inpfields[i].gameObject.SetActive(false);
-            }
-        }
-
-
-        for (int i = 0; i < numberOfZones; i++)
-        {
-            if (inpfields[i].name == "Zone_Search_" + i.ToString())
-            {
-                //inpfields[i].text = levelSet.zoneLevelSearchList[i].number_stars_per_zone.ToString();
-                levelSet.zoneLevelSearchList[i].number_stars_per_zone = int.Parse(inpfields[i].text);
+                bool hasToBeActivated = i < numberOfZones;
+                string str_i = i.ToString();
+                if (inpfields[i].name == ("Zone_Search_" + str_i)) ;
+                {
+                    inpfields[i].gameObject.SetActive(hasToBeActivated);
+                }
             }
 
-        }
 
+            for (int i = 0; i < numberOfZones; i++)
+            {
+                if (inpfields[i].name == "Zone_Search_" + i.ToString())
+                {
+                    if (!(string.IsNullOrEmpty(inpfields[i].text)))
+                    {
+                        //inpfields[i].text = levelSet.zoneLevelSearchList[i].number_stars_per_zone.ToString();
+                        levelSet.zoneLevelSearchList[i].number_stars_per_zone = int.Parse(inpfields[i].text);
+                    }
+                }
+            }
     }
 
 
