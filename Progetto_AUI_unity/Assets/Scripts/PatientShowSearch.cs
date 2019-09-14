@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 public class PatientShowSearch : MonoBehaviour {
@@ -15,6 +16,18 @@ public class PatientShowSearch : MonoBehaviour {
     public Button addButton;
     public Button deleteButton;
     public int numberOfZones;
+    public GameObject zls_0;
+    public GameObject zls_1;
+    public GameObject zls_2;
+    public GameObject zls_3;
+    public GameObject zls_4;
+    public GameObject zls_5;
+    public GameObject zls_6;
+    public GameObject zls_7;
+    public GameObject zls_8;
+    public GameObject zls_9;
+    public List<GameObject> list_zones = new List<GameObject>();
+    private bool hasToBeActivated = false;
 
     void Awake()
     {
@@ -22,30 +35,54 @@ public class PatientShowSearch : MonoBehaviour {
         deleteButton.onClick.AddListener(TaskOnClickDelete);
         TextMeshProUGUI textPatient = patientShow.GetComponentInChildren<TextMeshProUGUI>();
         textPatient.text = login.selectedPatient.last_name + " " + login.selectedPatient.first_name;
+        list_zones.Add(zls_0);
+        list_zones.Add(zls_1);
+        list_zones.Add(zls_2);
+        list_zones.Add(zls_3);
+        list_zones.Add(zls_4);
+        list_zones.Add(zls_5);
+        list_zones.Add(zls_6);
+        list_zones.Add(zls_7);
+        list_zones.Add(zls_8);
+        list_zones.Add(zls_9);
         // textPatient.GetComponent<GUIText>().text = login.selectedPatient.last_name + " " + login.selectedPatient.first_name;
-        inpfields = patientShow.GetComponentsInChildren<InputField>();
+        //search_fields = patientShow.GetComponentInChildren<Zone_Search>();
+        //Debug.Log("aaaaa SEARCH_FIELDS LENGTH: " + search_fields.Length);
+        //inpfields = patientShow.GetComponentsInChildren<InputField>();
         //numberOfZones = levelSet.zoneLevelSearch.Length;
         numberOfZones = levelSet.zoneLevelSearchList.Count;
+        /*
         Debug.Log("NUMBER OF ZONES: " + numberOfZones);
-        Debug.Log("INPUT FIELD LENGTH: " + inpfields.Length);  // Length = 6
-        for (int i=numberOfZones; i < inpfields.Length; i++)
+        Debug.Log("INPUT FIELD LENGTH: " + inpfields.Length);  // Length = 6*/
+       /* for (int i=numberOfZones; i < inpfields.Length; i++)
         {
             string str_i = i.ToString();
             if (inpfields[i].name == ("Zone_Search_" + str_i));
             {
                 inpfields[i].gameObject.SetActive(false);
             }
+        }*/
+
+        for (int i = numberOfZones; i < list_zones.Count ; i++)
+        {
+            //string str_i = i.ToString();
+            list_zones[i].gameObject.SetActive(false);
+            
         }
 
-        for(int i=0; i < numberOfZones; i++)
+        /*for (int i=0; i < numberOfZones; i++)
         {
             if(inpfields[i].name == "Zone_Search_" + i.ToString())
             {
                 inpfields[i].text = levelSet.zoneLevelSearchList[i].number_stars_per_zone.ToString();
             }
 
-        }
+        }*/
+        for (int i = 0; i < numberOfZones; i++)
+        {
+            list_zones[i].GetComponentInChildren<InputField>().text = levelSet.zoneLevelSearchList[i].number_stars_per_zone.ToString();
 
+        }
 
 
     }
@@ -53,7 +90,7 @@ public class PatientShowSearch : MonoBehaviour {
     void Update()
     {
         numberOfZones = levelSet.zoneLevelSearchList.Count;
-        Debug.Log("THE ARRAY OF ZONE HAS A LENGHT OF: " + numberOfZones);
+        /*Debug.Log("THE ARRAY OF ZONE HAS A LENGHT OF: " + numberOfZones);
             for (int i = 0; i < inpfields.Length; i++)
             {
                 bool hasToBeActivated = i < numberOfZones;
@@ -62,26 +99,53 @@ public class PatientShowSearch : MonoBehaviour {
                 {
                     inpfields[i].gameObject.SetActive(hasToBeActivated);
                 }
-            }
-
-
-            for (int i = 0; i < numberOfZones; i++)
+            }*/
+            
+        for (int i = 0; i < list_zones.Count; i++)
             {
-                if (inpfields[i].name == "Zone_Search_" + i.ToString())
-                {
-                    if (!(string.IsNullOrEmpty(inpfields[i].text)))
-                    {
-                        //inpfields[i].text = levelSet.zoneLevelSearchList[i].number_stars_per_zone.ToString();
-                        levelSet.zoneLevelSearchList[i].number_stars_per_zone = int.Parse(inpfields[i].text);
-                    }
-                }
+                if (i < numberOfZones)
+            {
+                bool hasToBeActivated = true;
+                list_zones[i].gameObject.SetActive(hasToBeActivated);
             }
+            else
+            {
+                bool hasToBeActivated = false;
+                list_zones[i].gameObject.SetActive(hasToBeActivated);
+            }
+
+            
+        }
+
+
+        /* for (int i = 0; i < numberOfZones; i++)
+         {
+             if (inpfields[i].name == "Zone_Search_" + i.ToString())
+             {
+                 if (!(string.IsNullOrEmpty(inpfields[i].text)))
+                 {
+                     //inpfields[i].text = levelSet.zoneLevelSearchList[i].number_stars_per_zone.ToString();
+                     levelSet.zoneLevelSearchList[i].number_stars_per_zone = int.Parse(inpfields[i].text);
+                 }
+             }
+         }*/
+
+        for (int i = 0; i < numberOfZones; i++)
+
+        {
+            if (!(string.IsNullOrEmpty(list_zones[i].GetComponentInChildren<InputField>().text)))
+            {
+                levelSet.zoneLevelSearchList[i].number_stars_per_zone = int.Parse(list_zones[i].GetComponentInChildren<InputField>().text);
+            }
+                
+
+        }
     }
 
 
     public void TaskOnClick()
     {
-        if(levelSet.zoneLevelSearchList.Count < 10)
+        /*if(levelSet.zoneLevelSearchList.Count < 10)
         {
             int old_num_zones = numberOfZones;
             Debug.Log("SONO DENTRO ADD BUTTON");
@@ -91,6 +155,18 @@ public class PatientShowSearch : MonoBehaviour {
             levelSet.zoneLevelSearchList.Add(new_zone);
             inpfields[old_num_zones].gameObject.SetActive(true);
             inpfields[old_num_zones].text = new_zone.number_stars_per_zone.ToString();
+        }*/
+
+        if (levelSet.zoneLevelSearchList.Count < 10)
+        {
+            int old_num_zones = numberOfZones;
+            Debug.Log("SONO DENTRO ADD BUTTON");
+            ZoneLevelSearch new_zone = new ZoneLevelSearch();
+            new_zone.number = numberOfZones + 1;
+            new_zone.number_stars_per_zone = 3;
+            levelSet.zoneLevelSearchList.Add(new_zone);
+            list_zones[old_num_zones].gameObject.SetActive(true);
+            list_zones[old_num_zones].GetComponentInChildren<InputField>().text = new_zone.number_stars_per_zone.ToString();
         }
 
         //if (levelSet.zoneLevelSearchList.Count >= 10)

@@ -9,76 +9,34 @@ using UnityEngine.Networking;
 using SimpleJSON;
 using TMPro;
 
-
-public class Login : MonoBehaviour
+public class returnToLogin : MonoBehaviour
 {
 
-
-    public GameObject email;
-    public GameObject password;
-    public Button loginButton;
-    public LoginData loginData;
-    public GameObject loginMenu;
-    public GameObject show;
-    public GameObject patientMenu;
-    public PatientData[] patientData;
-    // public ShowPatient showPatient = new ShowPatient();
-    public GameObject buttonPrefab;
-    //public GameObject panelToAttach;
     public ScrollRect scrollView;
     public GameObject scrollContent;
+    public GameObject buttonPrefab;
+    public GameObject show;
+    public Button backLoginButton;
+    public LevelSet levelSet = null;
+    public PatientData[] patientData;
+    public GameObject playModeMenu;
     public PatientData selectedPatient = new PatientData();
-    public GameObject playGameMenu;
-    public LevelSet levelSet = new LevelSet();
-    public TextMeshProUGUI error;
-   
-   
+    private bool sameScene = false;
 
-
-
-
-    void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-    }
 
     // Use this for initialization
     void Start()
     {
-        loginData = new LoginData();
-        loginButton.onClick.AddListener(TaskOnClick);
+        backLoginButton.onClick.AddListener(TaskOnClick);
+        levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
 
     }
 
     public void TaskOnClick()
     {
-        string json = JsonUtility.ToJson(loginData);
+        string json = JsonUtility.ToJson(levelSet.loginData);
         Debug.Log("TaskOnClick: -> " + json);
         StartCoroutine(SendPost(json));
-        //UnityWebRequest request = UnityWebRequest.Put(url, jsonString);
-        //request.SetRequestHeader("Content-Type", "application/json");
-        //yield return request.Send();
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (email.GetComponent<InputField>().isFocused)
-            {
-                password.GetComponent<InputField>().Select();
-            }
-            if (password.GetComponent<InputField>().isFocused)
-            {
-                email.GetComponent<InputField>().Select();
-            }
-        }
-        loginData.email = email.GetComponent<InputField>().text;
-        loginData.password = password.GetComponent<InputField>().text;
-
     }
 
 
@@ -97,13 +55,17 @@ public class Login : MonoBehaviour
         Debug.Log("sono dentro click action" + selectedPatient.id);
         levelSet.patient_last_name = selected.last_name;
         levelSet.patient_first_name = selected.first_name;
-        levelSet.loginData = loginData;
         levelSet.StartCoroutine(this);
         show.SetActive(false);
-        playGameMenu.SetActive(true);
+        playModeMenu.SetActive(true);
 
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
 
     IEnumerator SendPost(string json)
@@ -122,8 +84,6 @@ public class Login : MonoBehaviour
         if (request.isHttpError || request.isNetworkError || request.downloadHandler.text.Equals("login_unsuccessful!"))
         {
             Debug.Log("questo e' l'errore");
-            error.gameObject.SetActive(true);
-
         }
 
         else
@@ -138,28 +98,29 @@ public class Login : MonoBehaviour
             //Debug.Log("prima di utility");
             patientData = JsonHelper.getJsonArray<PatientData>(jsonString);
             //Debug.Log("Dopo Utility");
-
+            Debug.Log("PATIENT DATA LENGTH: " + patientData.Length);
             //Debug.Log(patientData[0].last_name);
             //Debug.Log(patientData.Length);
-            loginMenu.SetActive(false);
+            playModeMenu.SetActive(false);
             show.SetActive(true);
 
-            Debug.Log("PATIENT DATA: " + patientData);
-            Debug.Log("PATIENT DATA LENGTH: " + patientData.Length);
-
-
-            GameObject[] button = new GameObject[patientData.Length];
-
-            for (int i = 0; i < patientData.Length; i++)
+            if (sameScene == false)
             {
-                int temp = i;
-                button[i] = Instantiate(buttonPrefab);
-                button[i].transform.SetParent(scrollContent.transform, false);//Setting button parent
-                button[i].GetComponent<Button>().onClick.AddListener(() => ClickAction(temp));//Setting what button does when clicked                                                   //Next line assumes button has child with text as first gameobject like button created from GameObject->UI->Button
-                button[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = patientData[i].last_name + ' ' + patientData[i].first_name;
-                Debug.Log("PATIENT " + i + ": LAST_NAME: " + patientData[i].last_name + ": FIRST_NAME: " + patientData[i].first_name);
+                GameObject[] button = new GameObject[patientData.Length];
+
+                for (int i = 0; i < patientData.Length; i++)
+                {
+                    int temp = i;
+                    button[i] = Instantiate(buttonPrefab);
+                    button[i].transform.SetParent(scrollContent.transform, false);//Setting button parent
+                    button[i].GetComponent<Button>().onClick.AddListener(() => ClickAction(temp));//Setting what button does when clicked                                                   //Next line assumes button has child with text as first gameobject like button created from GameObject->UI->Button
+                    button[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = patientData[i].last_name + ' ' + patientData[i].first_name;
+                    Debug.Log("PATIENT " + i + ": LAST_NAME: " + patientData[i].last_name + ": FIRST_NAME: " + patientData[i].first_name);
+                }
+                scrollView.verticalNormalizedPosition = 1;
+
             }
-            scrollView.verticalNormalizedPosition = 1;
+            sameScene = true;
             //showPatient.setButton();
             /*for (int i = 0; i < patientData.Length; i++)
             {
@@ -170,13 +131,8 @@ public class Login : MonoBehaviour
             }*/
 
         }
+
+
     }
-
-
-
-   
-
-
-   
 
 }

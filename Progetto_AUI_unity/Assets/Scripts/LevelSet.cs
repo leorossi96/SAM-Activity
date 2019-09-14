@@ -12,6 +12,7 @@ public class LevelSet : MonoBehaviour {
     public LevelSearch[] levelSearch;
     public ZoneLevelSearch[] zoneLevelSearch;
     public List<ZoneLevelSearch> zoneLevelSearchList;
+    public LoginData loginData;
 
     void Awake()
     {
@@ -23,6 +24,15 @@ public class LevelSet : MonoBehaviour {
 
 
     public void StartCoroutine(Login login)
+    {
+        Debug.Log("LOGIN.SELECTED PATIENT: " + login.selectedPatient);
+        string json = JsonUtility.ToJson(login.selectedPatient);
+        Debug.Log("String json awake" + json);
+        StartCoroutine(SendLevelPostRun(json));
+        StartCoroutine(SendLevelPostSearch(json));
+    }
+
+    public void StartCoroutine(returnToLogin login)
     {
         Debug.Log("LOGIN.SELECTED PATIENT: " + login.selectedPatient);
         string json = JsonUtility.ToJson(login.selectedPatient);
