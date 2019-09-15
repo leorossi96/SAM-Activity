@@ -6,8 +6,8 @@
         <div class="article-metadata">
             <a class="mr-2">{{ patient.last_name }} {{ patient.first_name }}</a>
         </div>
-        <h2><a class="article-title" href="{{ url_for('sessiongame', id_ss=ss.id) }}">Session {{ ss.id }}</a></h2>
-        <p class="article-content">{{ ss.datetime }}</p>
+        <h2><a class="article-title" href="{{ url_for('sessiongame', id_ss=ss.id) }}">Session {{ ss.datetime.year }}-{{ ss.datetime.month }}-{{ ss.datetime.day }}</a></h2>
+        <b class="article-content">TIME {{ ss.datetime.hour }}:{{ ss.datetime.minute }}:{{ ss.datetime.second }}</b>
     </div>
 </article>
 {% endfor %}

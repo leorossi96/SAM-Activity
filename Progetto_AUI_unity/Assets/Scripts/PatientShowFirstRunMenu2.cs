@@ -58,28 +58,43 @@ public class PatientShowFirstRunMenu2 : MonoBehaviour {
         {
             if (inpfields[i].name == "StaticObstacle")
             {
-                levelSet.levelRun[0].static_obstacle = int.Parse(inpfields[i].text);
-                Debug.Log("UPDATE PATIENT SHOW SEARCH POWERUP: " + levelSet.levelRun[0].static_obstacle);
+                if (!(string.IsNullOrEmpty(inpfields[i].text)))
+                {
+                    levelSet.levelRun[0].static_obstacle = int.Parse(inpfields[i].text);
+                    Debug.Log("UPDATE PATIENT SHOW SEARCH POWERUP: " + levelSet.levelRun[0].static_obstacle);
+                }
             }
 
             if (inpfields[i].name == "DynamicObstacle")
             {
-                levelSet.levelRun[0].dynamic_obstacle = int.Parse(inpfields[i].text);
+                if (!(string.IsNullOrEmpty(inpfields[i].text)))
+                {
+                    levelSet.levelRun[0].dynamic_obstacle = int.Parse(inpfields[i].text);
+                }
             }
 
             if (inpfields[i].name == "MaxTime")
             {
-                levelSet.levelRun[0].max_time = int.Parse(inpfields[i].text);
+                if (!(string.IsNullOrEmpty(inpfields[i].text)))
+                {
+                    levelSet.levelRun[0].max_time = int.Parse(inpfields[i].text);
+                }
             }
 
             if (inpfields[i].name == "PowerUp")
             {
-                levelSet.levelRun[0].power_up = int.Parse(inpfields[i].text);
+                if (!(string.IsNullOrEmpty(inpfields[i].text)))
+                {
+                    levelSet.levelRun[0].power_up = int.Parse(inpfields[i].text);
+                }
             }
 
             if (inpfields[i].name == "Lives")
             {
-                levelSet.levelRun[0].lives = int.Parse(inpfields[i].text);
+                if (!(string.IsNullOrEmpty(inpfields[i].text)))
+                {
+                    levelSet.levelRun[0].lives = int.Parse(inpfields[i].text);
+                }
             }
             
 
