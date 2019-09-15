@@ -19,10 +19,12 @@ public class SessionParametersRun : MonoBehaviour {
 
     // Use this for initialization
 	void Awake () {
+        actualLevel = 1;
         levelSet = GameObject.Find("LevelSet").GetComponent<LevelSet>();
         if(levelSet!=null){
             int ran = 0;
-
+            Debug.Log("Level set diverso da null");
+            Debug.Log("ACTUAL LEVEL BEGIN: " + actualLevel);
 
             int toDisable = staticObs.Length - levelSet.levelRun[actualLevel].static_obstacle;
             if(toDisable>=0){
@@ -87,7 +89,8 @@ public class SessionParametersRun : MonoBehaviour {
 
             lifes.lifeCount = levelSet.levelRun[actualLevel].lives;
             lifes.max_time = levelSet.levelRun[actualLevel].max_time;
-
+            Debug.Log("ACTUAL LEVEL: " + actualLevel);
+            Debug.Log("MAX TIME RUN: " + lifes.max_time);
 
         }
 

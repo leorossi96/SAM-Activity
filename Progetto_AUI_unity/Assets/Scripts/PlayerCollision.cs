@@ -660,7 +660,7 @@ public class PlayerCollision : MonoBehaviour
             clock_stop = true;
             movement.start = false;
             movement.enabled = false;
-
+            Debug.Log("MAX TIME: " + max_time);
             dolphin.GetComponent<Animation>().Play("Stopping");
             dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
             StartCoroutine(deadResetAnimation());
