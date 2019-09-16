@@ -11,8 +11,10 @@ As explained before in the introduction, our solution was designed and developed
 \begin{itemize}
 		\item Other entities affected
 	\begin{itemize}
-		\item[--] Families
+		\item[--] Families of the patients
 		\item[--] Caregivers
+		\item[--] Hospitals
+		\item[--] Other specialized centers
 	\end{itemize}
 \end{itemize}
 
@@ -21,22 +23,87 @@ As explained before in the introduction, our solution was designed and developed
 	Our solution is designed to be used in centers specialized in the treatment of patients affected by NDD. In particular, given the centrality of the system-patient interaction and the key role that immersion plays in this aspect, the solution is designed to exploit the resources available in the Magic Room setup. The presence of a therapist in order to setup the activities, to monitor the patients and to analyze the information about their performances is also needed.
 	
 	\subsection{Needs addressed}
-	During the design and development of \textit{SAM Activities} we took into account the following main need of the main targets for our solution:
+	During the design and development of \textit{SAM Activities} we took into account the following main needs of the main targets for our solution:
 	\begin{description}
 		\item[\textbf{Patients}:] 
-				\item{$ - $} Stay entertained and relaxed during the activities
-				\item{$ - $} Being able to carry an activity autonomously
-				\item{$ - $} Gain a better body  awareness (both coarse and fine grained)
-				\item{$ - $} Avoid any kind of pressure
+				\item{$ - $} Be entertained and relaxed during the activities.
+				\item{$ - $} Being able to carry an activity autonomously.
+				\item {$ - $} Improve visual-motor coordination.
+				\item{$ - $} Acquire a better body awareness (both coarse and fine grained).
+				\item{$ - $} Acquire a better spacial awareness.
+				\item{$ - $} Carry out activities in a physical safe environment.
+				\item{$ - $} Avoid any kind of pressure.
 	\end{description}
 	\begin{description}
 		\item[\textbf{Therapists}:] 
-			\item{$ - $} Monitor patients during activities
-			\item{$ - $} Customize the activities based on the specific patients' conditions
-			\item{$ - $} Being able to consult some analytic about the different patients sessions
+			\item{$ - $} Monitor patients during activities.
+			\item{$ - $} Customize the activities based on the specific patients' conditions.
+			\item{$ - $} Being able to consult analytics about the different patients sessions.
+			\item{$ - $} To have activities that can be carried out autonomously by patients without the constant support of the therapist.
 	\end{description}
 \section{Constraints}
-	
-
-- Constraints, if any
-- Goals of your project
+	Regargind the constraints that had to be taken into account during development we divided them in three categories based on the source of the constraints:
+	\begin{itemize}
+		\item Context related constraints:
+		\begin{itemize}
+			\item[$ - $] The limited space available in the Magic Room is a constraint that has to be taken into account specially for activities that require coarse grained movements.
+			\item[$ - $] The limited air exchange in the room doesn't allow a too frequent or intense usage of the bubble machine as an activities' reward for the patient.
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item User related constraints:
+		Patient's affected by NDD usually are particularly sensitive to stimuli and might have difficulties to rationalize abstact concepts such as time so we took this into account in order to avoid any kind of overstimulation or confusion in the users. 
+		\begin{itemize}
+			\item[$ - $] Patients affected by NDD usually are particularly sensitive to stimuli so it was important not to overstimulate them with frequent light shifts (especially from cold and warm lights).
+			\item[$ - $] Patients affected by NDD might have limitations in focusing on multiple events at the same time so the activities in our solution have a limited number of interactive objects in order to give a linear experience to the user.
+			\item[$ - $] For the same reason above we provided our scenes with a limited graphic level of details and clear hints in order to focus the patients' attention as much as possible.
+		\end{itemize}
+	\end{itemize}
+	\begin{itemize}
+		\item Technology related constraints:
+		\begin{itemize}
+			\item[$ - $] The Magic Room system, as explained in the architecture section, allow the control of multiple smart objects that provide help provide an immersive expirience by handling http requests between smart objects. This was taken into account in order to give a fluid experience to the user by rightly calibrating the inter-request interval and the requests distribution to the various smart object and their response time.
+		\end{itemize}
+	\end{itemize}
+\section{Goals of the project}
+The main goals of our solution are the following:
+\begin{enumerate}
+	\item The system must provide multiple activities with various levels of difficulty for each one.
+	\item The system must provide an immersive environment to the patient. 
+	\item The system must put the patient in condition to relax.
+	\item The patient must be able to choose autonomously one or more activities suited for his abilities.
+	\item The therapist must be able to customize the activities in order to suite at best the current patient.
+	\item The therapist must be able to instantaneously interrupt the activity.
+	\item The therapist must be able to monitor patients’ activity during one or more sessions.
+	\item The system must help to improve patient’s motor coordination ability.
+	\item The system must help to improve patient’s focus ability.
+	\item The system must create an empathy between patient and the Dolphin SAM smart toy.
+	%Dolphin SAM corsivo%
+	\item The system must provide playful activities in an immersive environment.
+	\item Activities must not leverage on abstract concepts such as time, score, etc...
+	\item The system must limit the physical risks due to the abuse of devices.
+	%presi da power point OCCHIO gli ultimi 2 che sembravano constraints%
+\end{enumerate}
+\section{Requirements}
+In order to fulfill the goals described above the system has to meet the following functional requirements:
+\begin{enumerate}
+	\item The system must provide analytics related to the different sessions of activities carried out by a specific patient.
+	\item The system must interface with the Magic Room’s devices.
+	\item The system must provide an intuitive and accessible interface to patients within the game.
+	\item The system must provide an effective and detailed interface for the monitoring of the patients.
+	\item The system must enable the therapist to create a profile for himself/herself and his/her patients.
+	\item The system must be able to persist user’s performances and associate them to his/her profile.
+	\item The system must provide a summary dashboard of the patient’s game sessions.
+	\item The system must provide a protection for user’s personal data (depending on the domain authority).
+	%Questo non lo metterei visto che non lo facciamo in particolar modo, da levare in caso anche nel powerpoint
+	\item The patient must not be overstimulated by the activity in order to avoid restlessness and indisposition.
+	\item The system must be able to track user’s position data within the Magic Room via the Kinect.
+	%Riformulato così confronto con altri se va bene
+	\item The system must guide the patient during the activity based on the previously chosen difficulty level.
+	%Questo lo cambierei in quello sotto visto come abbiamo sviluppato la cosa
+	\item The system must support the parametrization of the activities' levels in order to let the therapist set the most suitable level of difficulty for a patient.
+	\item The system must use Dolphin SAM as an input interface (accelerometer, gyroscope, touch sensors, RFID reader).
+	\item The system must use Dolphin SAM as an output interface (lights, sounds, mouth movement, eyes movement).
+	%Questo lo cambierei in quello sotto visto che per output non usiamo il delfino sam come interfaccia output ma usiamo invece la stanza
+	\item The system must use the Magic Room's appliances as an output interface (smart lights, projectors, bubble machine).
+\end{enumerate}
