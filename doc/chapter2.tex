@@ -42,7 +42,7 @@ As explained before in the introduction, our solution was designed and developed
 			\item{$ - $} To have activities that can be carried out autonomously by patients without the constant support of the therapist.
 	\end{description}
 \section{Constraints}
-	Regargind the constraints that had to be taken into account during development we divided them in three categories based on the source of the constraints:
+	Regarding the constraints that had to be taken into account during development we divided them in three categories based on the source of the constraints:
 	\begin{itemize}
 		\item Context related constraints:
 		\begin{itemize}
@@ -52,7 +52,6 @@ As explained before in the introduction, our solution was designed and developed
 	\end{itemize}
 	\begin{itemize}
 		\item User related constraints:
-		Patient's affected by NDD usually are particularly sensitive to stimuli and might have difficulties to rationalize abstact concepts such as time so we took this into account in order to avoid any kind of overstimulation or confusion in the users. 
 		\begin{itemize}
 			\item[$ - $] Patients affected by NDD usually are particularly sensitive to stimuli so it was important not to overstimulate them with frequent light shifts (especially from cold and warm lights).
 			\item[$ - $] Patients affected by NDD might have limitations in focusing on multiple events at the same time so the activities in our solution have a limited number of interactive objects in order to give a linear experience to the user.
@@ -62,7 +61,7 @@ As explained before in the introduction, our solution was designed and developed
 	\begin{itemize}
 		\item Technology related constraints:
 		\begin{itemize}
-			\item[$ - $] The Magic Room system, as explained in the architecture section, allow the control of multiple smart objects that provide help provide an immersive expirience by handling http requests between smart objects. This was taken into account in order to give a fluid experience to the user by rightly calibrating the inter-request interval and the requests distribution to the various smart object and their response time.
+			\item[$ - $] The Magic Room system, as explained in the architecture section, allow the control of multiple smart objects that provide help provide an immersive experience by handling http requests between smart objects. This was taken into account in order to give a fluid experience to the user by rightly calibrating the inter-request interval and the requests distribution to the various smart object and their response time.
 		\end{itemize}
 	\end{itemize}
 \section{Goals of the project}
@@ -77,12 +76,11 @@ The main goals of our solution are the following:
 	\item The therapist must be able to monitor patients’ activity during one or more sessions.
 	\item The system must help to improve patient’s motor coordination ability.
 	\item The system must help to improve patient’s focus ability.
-	\item The system must create an empathy between patient and the Dolphin SAM smart toy.
-	%Dolphin SAM corsivo%
+	\item The system must create an empathy between patient and the \textit{Dolphin SAM} smart toy.
 	\item The system must provide playful activities in an immersive environment.
 	\item Activities must not leverage on abstract concepts such as time, score, etc...
+	%Chiedere a Mattia
 	\item The system must limit the physical risks due to the abuse of devices.
-	%presi da power point OCCHIO gli ultimi 2 che sembravano constraints%
 \end{enumerate}
 \section{Requirements}
 In order to fulfill the goals described above the system has to meet the following functional requirements:
@@ -95,15 +93,13 @@ In order to fulfill the goals described above the system has to meet the followi
 	\item The system must be able to persist user’s performances and associate them to his/her profile.
 	\item The system must provide a summary dashboard of the patient’s game sessions.
 	\item The system must provide a protection for user’s personal data (depending on the domain authority).
-	%Questo non lo metterei visto che non lo facciamo in particolar modo, da levare in caso anche nel powerpoint
+	%Modificare parte tra parentesi per rendere più chiaro
 	\item The patient must not be overstimulated by the activity in order to avoid restlessness and indisposition.
 	\item The system must be able to track user’s position data within the Magic Room via the Kinect.
-	%Riformulato così confronto con altri se va bene
 	\item The system must guide the patient during the activity based on the previously chosen difficulty level.
-	%Questo lo cambierei in quello sotto visto come abbiamo sviluppato la cosa
 	\item The system must support the parametrization of the activities' levels in order to let the therapist set the most suitable level of difficulty for a patient.
-	\item The system must use Dolphin SAM as an input interface (accelerometer, gyroscope, touch sensors, RFID reader).
-	\item The system must use Dolphin SAM as an output interface (lights, sounds, mouth movement, eyes movement).
+	\item The system must use \textit{Dolphin SAM} as an input interface (accelerometer, gyroscope, touch sensors, RFID reader).
+	\item The system must use \textit{Dolphin SAM's} lights as an output interface.
 	%Questo lo cambierei in quello sotto visto che per output non usiamo il delfino sam come interfaccia output ma usiamo invece la stanza
 	\item The system must use the Magic Room's appliances as an output interface (smart lights, projectors, bubble machine).
 \end{enumerate}
