@@ -3,7 +3,9 @@
 	\section{Hardware platforms}
 	{\textbf{\Large Dolphin Sam}} \newline \newline
 	The main device used was Dolphin Sam, a smart object developed by I3Lab.
-	[immagine delfino] \newline
+	\begin{center}
+		\includegraphics[width=\textwidth]{images/Dolphin.jpg}
+	\end{center}
 	\noindent
 	\textit{SAM FAI LA CITAZIONE SCHIAVO}Dolphin Sam is a stuffed toy enhanced with complex system made	up of several embedded sensors, actuators and external components. Four parts of the body, such as head, stomach, right and left fins are integrated with four touch sensors. There are light actuators on the stomach and a speaker and an RFID reader into the mouth. Eyes and mouth movements are controlled by two different motors. In addition a chip is used for Wi-Fi communication. \newline
 	All embedded components are connected and managed by an Arduino module which manages also the communication between the smart dolphin and the external components, such as smart lights and tagged RFID cards.
@@ -16,7 +18,7 @@
 	\section{Hardware architectures}
 	The hardware architecture of the system is based on a three tier client-server architecture, where we can distinguish between:
 	\begin{center}
-		\includegraphics[width=\textwidth]{images/Architecture-Diagram.png}
+		\includegraphics[width=\textwidth]{images/diagram1.png}
 	\end{center}
 	\begin{itemize}
 		\item \textbf{Data tier:} consists of a SQL Lite database
@@ -25,7 +27,7 @@
 	\end{itemize}
 	\noindent
 	Unity game activities were implemented using a fat client approach by placing the whole application logic inside the presentation level. \newline
-	Unity game engine uses the Magic Room API in order to interact with the smart object Dolphin Sam and with the external components inside the Magic Room such as kinect, smart lights and bubble machine.
+	The interactions between the system and all the smart objects and sensors inside the Magic Room, is managed through http requests to the Magic Room API, which handle the communication between the smart objects and the unity activities.
 	
 	
 	\section{Software Architectures}
