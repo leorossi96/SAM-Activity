@@ -27,6 +27,7 @@ TagManager:
   - chest_food1
   - chest_food2
   - bug_protection
+  - Board
   layers:
   - Default
   - TransparentFX

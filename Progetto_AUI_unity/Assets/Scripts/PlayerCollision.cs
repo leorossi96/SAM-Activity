@@ -249,8 +249,8 @@ public class PlayerCollision : MonoBehaviour
                 movement.start = false;
                 movement.enabled = false;
                 dolphin.GetComponent<Animation>().Play("Stopping");
-                this.GetComponent<Rigidbody>().mass = 2.0f * this.GetComponent<Rigidbody>().mass;
-                this.GetComponent<Rigidbody>().drag = 1;
+                //this.GetComponent<Rigidbody>().mass = 2.0f * this.GetComponent<Rigidbody>().mass;
+                //this.GetComponent<Rigidbody>().drag = 1;
                 if (collision.rigidbody != null)
                     this.GetComponent<Rigidbody>().AddForce((collision.collider.transform.position - this.transform.position) * collision.rigidbody.mass, ForceMode.Impulse);
                 else
@@ -286,6 +286,8 @@ public class PlayerCollision : MonoBehaviour
                 } 
             }
 
+
+
                  
 
              
@@ -315,6 +317,11 @@ public class PlayerCollision : MonoBehaviour
 
 
             }
+            /*if (collision.collider.tag == "Bound")
+            {
+                this.GetComponent<Rigidbody>().AddForce((collision.collider.transform.position - this.transform.position), ForceMode.Impulse);
+
+            }*/
         }
 	}
 
@@ -646,6 +653,32 @@ public class PlayerCollision : MonoBehaviour
 
 	void Update()
     {
+        if(Input.GetKey(KeyCode.Escape)){
+            
+
+           
+            clock_stop = true;
+            movement.start = false;
+            movement.enabled = false;
+            
+            dolphin.GetComponent<Animation>().Play("Stopping");
+            dolphin.GetComponent<Animation>().PlayQueued("UpsideDown");
+
+            dataSerializable.activated_power_up = movement.activated_powerups;
+            dataSerializable.min = (int)Time.timeSinceLevelLoad / 60;
+            dataSerializable.seconds = ((int)Time.timeSinceLevelLoad) % 60;
+            dataSerializable.life_remaining = lifeCount;
+            dataSerializable.patient_id = param.levelSet.GetLevelSearch().patient_id;
+            dataSerializable.level_completed = "No";
+
+            string json = JsonUtility.ToJson(dataSerializable);
+            StartCoroutine(SendPost(json, "http://127.0.0.1:5000/save/run"));
+
+            string json2 = JsonUtility.ToJson(param.levelSet);
+            StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));
+
+            SceneManager.LoadScene("Menu2");
+        }
 
         if ((Time.timeSinceLevelLoad < max_time + 1) && !tutorial)
         {
