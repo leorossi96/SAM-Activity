@@ -86,7 +86,7 @@ public class SessionParameters : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //update del bool endGame
-        if (Input.anyKey && Input.GetKey(KeyCode.E) && !endGame)
+        if (Input.anyKey && Input.GetKey(KeyCode.Escape) && !endGame)
         {
             endGame = true;
             SetStopChrono(true);
