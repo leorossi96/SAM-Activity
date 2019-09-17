@@ -3580,6 +3580,7 @@ MonoBehaviour:
     first_name: 
     user_id: 0
     date_of_birth: 
+  sameScene: 0
 --- !u!1 &471294647
 GameObject:
   m_ObjectHideFlags: 0
@@ -7835,7 +7836,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 447201503}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
