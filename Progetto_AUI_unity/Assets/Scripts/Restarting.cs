@@ -21,10 +21,17 @@ public class Restarting : MonoBehaviour
         
         if (GameObject.Find("Dolphin1") != null){
 
-            if (GameObject.Find("Dolphin1").GetComponent<SmartToy>().touchsensor.touchpoints[2].touched)
+            if (GameObject.Find("Dolphin1").GetComponent<SmartToy>().touchsensor.touchpoints[0].touched)
+            {
+                SceneManager.LoadScene("Menu2");
+            }
+
+            if (GameObject.Find("Dolphin1").GetComponent<SmartToy>().touchsensor.touchpoints[5].touched)
             {
                 SceneManager.LoadScene(sceneName);
             }
+
+
 
         }else{
             if (Input.GetKey(KeyCode.R))
