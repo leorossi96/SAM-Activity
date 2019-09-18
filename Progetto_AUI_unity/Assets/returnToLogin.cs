@@ -21,7 +21,7 @@ public class returnToLogin : MonoBehaviour
     public PatientData[] patientData;
     public GameObject playModeMenu;
     public PatientData selectedPatient = new PatientData();
-    private bool sameScene = false;
+    public bool sameScene = false;
 
 
     // Use this for initialization
