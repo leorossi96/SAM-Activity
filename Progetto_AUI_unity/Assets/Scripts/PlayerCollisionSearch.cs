@@ -120,6 +120,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                         images[i].GetComponent<Image>().enabled = false;
                     }
                 }
+                collider.gameObject.GetComponentInChildren<OpenChestSearch>().enabled = true;
                 StartCoroutine(ShowTextInterval(canvasPlayerCamera, "Area Completed Text", 5));
                 StartCoroutine(rewardLightInterval("#00c300", 4));
                 StartCoroutine(CameraSwitch(cameraSearch, cameraMain2, 3));
