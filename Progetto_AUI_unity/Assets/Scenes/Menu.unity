@@ -4173,7 +4173,7 @@ MonoBehaviour:
     spaceCount: 0
     wordCount: 1
     linkCount: 0
-    lineCount: 1
+    lineCount: 2
     pageCount: 1
     materialCount: 1
   m_havePropertiesChanged: 0
@@ -15647,6 +15647,8 @@ MonoBehaviour:
   loginData:
     email: 
     password: 
+  show: {fileID: 1935919795}
+  playGameMenu: {fileID: 1001773679}
 --- !u!1 &1161457623
 GameObject:
   m_ObjectHideFlags: 0
@@ -21742,7 +21744,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.42683822, y: 0.19714655}
   m_AnchorMax: {x: 0.5788382, y: 0.259}
-  m_AnchoredPosition: {x: -1.6000061, y: 1}
+  m_AnchoredPosition: {x: -1.6000061, y: 1.0000038}
   m_SizeDelta: {x: -3.199997, y: -6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1896524622

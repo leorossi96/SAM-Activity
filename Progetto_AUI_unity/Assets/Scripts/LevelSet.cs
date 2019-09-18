@@ -13,6 +13,8 @@ public class LevelSet : MonoBehaviour {
     public ZoneLevelSearch[] zoneLevelSearch;
     public List<ZoneLevelSearch> zoneLevelSearchList;
     public LoginData loginData;
+    public GameObject show;
+    public GameObject playGameMenu;
 
     void Awake()
     {
@@ -29,7 +31,7 @@ public class LevelSet : MonoBehaviour {
         string json = JsonUtility.ToJson(login.selectedPatient);
         Debug.Log("String json awake" + json);
         StartCoroutine(SendLevelPostRun(json));
-        StartCoroutine(SendLevelPostSearch(json));
+        //StartCoroutine(SendLevelPostSearch(json));
     }
 
     public void StartCoroutine(returnToLogin login)
@@ -63,6 +65,7 @@ public class LevelSet : MonoBehaviour {
         string jsonString = request.downloadHandler.text;
         levelRun = JsonHelper.getJsonArray<LevelRun>(jsonString);
         Debug.Log(levelRun[0].name);
+        StartCoroutine(SendLevelPostSearch(json));
     }
 
     IEnumerator SendLevelPostSearch(string json)
@@ -116,6 +119,8 @@ public class LevelSet : MonoBehaviour {
         zoneLevelSearchList = new List<ZoneLevelSearch>(zoneLevelSearch);
         //Debug.Log(zoneLevelSearch[0].number);
         Debug.Log("ARRAYLIST ELEM 0: " + zoneLevelSearchList[0].number);
+        show.SetActive(false);
+        playGameMenu.SetActive(true);
     }
 
     public List<ZoneLevelSearch> GetZoneLevelSearchList(){

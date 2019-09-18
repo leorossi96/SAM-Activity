@@ -99,8 +99,8 @@ public class Login : MonoBehaviour
         levelSet.patient_first_name = selected.first_name;
         levelSet.loginData = loginData;
         levelSet.StartCoroutine(this);
-        show.SetActive(false);
-        playGameMenu.SetActive(true);
+        //show.SetActive(false);
+        //playGameMenu.SetActive(true);
 
     }
 
