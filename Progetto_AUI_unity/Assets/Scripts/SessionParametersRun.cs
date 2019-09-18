@@ -30,11 +30,11 @@ public class SessionParametersRun : MonoBehaviour {
             if(toDisable>=0){
                 for (int i = 0; i < toDisable; i++){
 
-                    ran = Random.Range(0, staticObs.Length);
+                    ran = Random.Range(0, staticObs.Length - 1);
 
                     if(!staticObs[ran].activeSelf){
                         Debug.Log("SObstacle " + ran + "is not active.");
-                        i--;
+                        //i--;
                     }else{
                         staticObs[ran].SetActive(false);
                     }
@@ -49,12 +49,12 @@ public class SessionParametersRun : MonoBehaviour {
                 for (int i = 0; i < toDisable; i++)
                 {
 
-                    ran = Random.Range(0, dynObs.Length);
+                    ran = Random.Range(0, dynObs.Length - 1);
 
                     if (!dynObs[ran].activeSelf)
                     {
                         Debug.Log("DObstacle " + ran + "is not active.");
-                        i--;
+                       // i--;
                     }
                     else
                     {
