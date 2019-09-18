@@ -26,17 +26,23 @@ public class SessionParametersRun : MonoBehaviour {
             Debug.Log("Level set diverso da null");
             Debug.Log("ACTUAL LEVEL BEGIN: " + actualLevel);
 
+
             int toDisable = staticObs.Length - levelSet.levelRun[actualLevel].static_obstacle;
+            HashSet<int> alreadyDisabled = new HashSet<int>();
             if(toDisable>=0){
                 for (int i = 0; i < toDisable; i++){
 
                     ran = Random.Range(0, staticObs.Length);
 
-                    if(!staticObs[ran].activeSelf){
+                    if(  alreadyDisabled.Contains(ran)){
                         Debug.Log("SObstacle " + ran + "is not active.");
                         i--;
-                    }else{
+                    }else if(staticObs[ran].activeSelf){
                         staticObs[ran].SetActive(false);
+                        alreadyDisabled.Add(ran);
+
+                    }else{
+                        i--;
                     }
                 
                 }  
@@ -44,6 +50,7 @@ public class SessionParametersRun : MonoBehaviour {
             }
 
             toDisable = dynObs.Length - levelSet.levelRun[actualLevel].dynamic_obstacle;
+            alreadyDisabled.Clear();
             if (toDisable >= 0)
             {
                 for (int i = 0; i < toDisable; i++)
@@ -51,14 +58,17 @@ public class SessionParametersRun : MonoBehaviour {
 
                     ran = Random.Range(0, dynObs.Length);
 
-                    if (!dynObs[ran].activeSelf)
+                    if (alreadyDisabled.Contains(ran))
                     {
                         Debug.Log("DObstacle " + ran + "is not active.");
                         i--;
                     }
-                    else
+                    else if(dynObs[ran].activeSelf)
                     {
                         dynObs[ran].SetActive(false);
+                        alreadyDisabled.Add(ran);
+                    } else {
+                        i--;
                     }
 
                 }
@@ -66,6 +76,7 @@ public class SessionParametersRun : MonoBehaviour {
             }
 
             toDisable = powerUps.Length - levelSet.levelRun[actualLevel].power_up;
+            alreadyDisabled.Clear();
             if (toDisable >= 0)
             {
                 for (int i = 0; i < toDisable; i++)
@@ -73,14 +84,17 @@ public class SessionParametersRun : MonoBehaviour {
 
                     ran = Random.Range(0, powerUps.Length);
 
-                    if (!powerUps[ran].activeSelf)
+                    if (alreadyDisabled.Contains(ran))
                     {
                         Debug.Log("PowerUp " + ran + "is not active.");
                         i--;
                     }
-                    else
+                    else if(powerUps[ran].activeSelf)
                     {
                         powerUps[ran].SetActive(false);
+                        alreadyDisabled.Add(ran);
+                    }else {
+                        i--;
                     }
 
                 }
