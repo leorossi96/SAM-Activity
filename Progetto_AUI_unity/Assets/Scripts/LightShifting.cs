@@ -6,8 +6,8 @@ public class LightShifting : MonoBehaviour {
 
     public bool finish = true;
     public bool light = false;
-    public int count = 100;
-    public int temp = 100;
+    public int count = 60;
+    private int temp = 60;
     int sign = 1;
     public bool pause;
 
@@ -36,7 +36,7 @@ public class LightShifting : MonoBehaviour {
         {
             MagicRoomLightManager.instance.sendColour(Color.blue, count);
             temp = count + 50 * sign;
-            if (temp > 150 || temp < 100)
+            if (temp > 110 || temp < 60)
             {
                 sign = -sign;
                 temp = count + 50 * sign;

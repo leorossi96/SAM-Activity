@@ -103,7 +103,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchStart");
+                StartCoroutine(DelayedAnimation("DolphinWaitingForSearchStart", 0.0f));
                 magnifierUsed = true;
             }
             else if (magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && areaCompleted == 1 ) //if the user finds all the collectibles in the area
@@ -126,7 +126,7 @@ public class PlayerCollisionSearch : MonoBehaviour
                 StartCoroutine(CameraSwitch(cameraSearch, cameraMain2, 3));
                 dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
                 GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                movement.enabled = true;
+                StartCoroutine(RestartMoving(3.0f));
                 exitFromCompletedArea = true;
                 //Display.displays[0].Activate();
                 SetChildActivation(collider.gameObject, "Container", false);
@@ -234,24 +234,34 @@ public class PlayerCollisionSearch : MonoBehaviour
         cameraSearch.SetActive(false);
         cameraMain2.SetActive(true);
     }
-    
-
-   /* IEnumerator FadeTo(float aValue, float aTime)
+    public IEnumerator RestartMoving(float seconds)
     {
-        float alpha = transform.renderer.material.color.a;
-        for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
-        {
-            Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
-            transform.renderer.material.color = newColor;
-            yield return null;
-        }
+        yield return new WaitForSeconds(seconds);
+        movement.enabled = true;
     }
 
-    private IEnumerator FadeImage(Image image){
-        image.CrossFadeAlpha(1, 2.0f, false);
-
+    private IEnumerator DelayedAnimation(String animation, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        dolphin.GetComponent<Animation>().PlayQueued(animation);
     }
-*/
+
+    /* IEnumerator FadeTo(float aValue, float aTime)
+     {
+         float alpha = transform.renderer.material.color.a;
+         for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / aTime)
+         {
+             Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+             transform.renderer.material.color = newColor;
+             yield return null;
+         }
+     }
+
+     private IEnumerator FadeImage(Image image){
+         image.CrossFadeAlpha(1, 2.0f, false);
+
+     }
+ */
 
     void Update()
     {
