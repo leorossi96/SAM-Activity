@@ -69,11 +69,12 @@ public class SessionParameters : MonoBehaviour {
         zonePositionIndexes = new HashSet<int>();
 
         for (int i = 0; i < zoneCount; i++){
-            int ran = (int)UnityEngine.Random.Range(0, 9);
+            int ran = (int)UnityEngine.Random.Range(0, 10);
             if (zonePositionIndexes.Contains(ran)){
                 i--;
             }
             else{
+                zonePositionIndexes.Add(ran);
                 Vector3 position = zonePositions[ran];
                 GameObject zoneInstantiated = Instantiate(zonePrefab, position, Quaternion.identity);
                 collectiblesPerZoneCount = levelSet.GetZoneLevelSearchList()[i].number_stars_per_zone;
