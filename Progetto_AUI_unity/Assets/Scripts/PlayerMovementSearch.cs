@@ -55,7 +55,7 @@ public class PlayerMovementSearch : MonoBehaviour
         {
             if (GameObject.Find("Dolphin1") != null)
             {
-                UDPListenerForMagiKRoom.instance.StartReceiver(10);
+                //UDPListenerForMagiKRoom.instance.StartReceiver(10);
                 MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
                 MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
                 dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
@@ -248,11 +248,12 @@ public class PlayerMovementSearch : MonoBehaviour
         }
 
 
-        if (tf.position.y > 60f)
+        if (tf.position.y > 60f) //Dolphin Upper Bound
         {
             tf.position = new Vector3(tf.position.x, 60f, tf.position.z);
         }
-        if(tf.position.y < 6f){
+        if(tf.position.y < 6f) //Dolphin Lower Bound
+        {
             tf.position = new Vector3(tf.position.x, 6f, tf.position.z);
         }
 

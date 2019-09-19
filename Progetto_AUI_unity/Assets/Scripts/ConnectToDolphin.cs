@@ -5,33 +5,61 @@ using UnityEngine;
 public class ConnectToDolphin : MonoBehaviour {
 
     SmartToy dolphinController;
+    public bool openedStream = false;
 
     // Use this for initialization
-    void Start () {
+    /*void Start () {
 
            if (GameObject.Find("Dolphin1") != null)
             {
-                MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+                UDPListenerForMagiKRoom.instance.StartReceiver(10);
+                //MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
                 MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+            StartCoroutine(delayedStream());
                 dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
                 //dolphinController.objectposition.gyroscope();
                 StartCoroutine(waittoStartGreenLight());
             }
+        }*/
+
+
+    void Update()
+    {
+        
+        if (GameObject.Find("Dolphin1") != null && !openedStream)
+        {
+
+            openedStream = true;
+            UDPListenerForMagiKRoom.instance.StartReceiver(10);
+            //MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
+            MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
+            StartCoroutine(delayedStream());
+            dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
+            //dolphinController.objectposition.gyroscope();
+            StartCoroutine(DolphinConnectedGreenLight());
         }
-
-    IEnumerator waittoStartGreenLight()
+    }
+    IEnumerator DolphinConnectedGreenLight()
     {
-        yield return new WaitForSeconds(1);
-        dolphinController.executeCommandLightController(Color.green, 0, "parthead");
+        dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+        yield return new WaitForSeconds(3);
+        dolphinController.executeCommandLightController(Color.black, 0, "parthead");
     }
 
-    void Awake()
+    public IEnumerator delayedStream()
     {
-        GameObject controller = GameObject.FindGameObjectWithTag("ControllerManager");
-        GameObject dolphin1 = GameObject.FindGameObjectWithTag("Dolphin1");
+        yield return new WaitForSeconds(1.0f);
+        MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
 
-        DontDestroyOnLoad(controller);
-        DontDestroyOnLoad(dolphin1);
     }
+
+    /*    void Awake()
+        {
+            GameObject controller = GameObject.FindGameObjectWithTag("ControllerManager");
+            GameObject dolphin1 = GameObject.FindGameObjectWithTag("Dolphin1");
+
+            DontDestroyOnLoad(controller);
+            DontDestroyOnLoad(dolphin1);
+        }*/
 }
 

@@ -75,7 +75,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (GameObject.Find("Dolphin1") != null)
             {
-                UDPListenerForMagiKRoom.instance.StartReceiver(10);
+                //UDPListenerForMagiKRoom.instance.StartReceiver(10);
                 MagicRoomSmartToyManager.instance.openEventChannelSmartToy("Dolphin1");
                 MagicRoomSmartToyManager.instance.openStreamSmartToy("Dolphin1", 10f);
                 dolphinController = GameObject.Find("Dolphin1").GetComponent<SmartToy>();
@@ -151,7 +151,16 @@ public class PlayerMovement : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, transform.position + transform.up, speed);
             }
         }
-            
+
+        if (transform.position.y > 60f) //Dolphin Upper Bound
+        {
+            transform.position = new Vector3(transform.position.x, 60f, transform.position.z);
+        }
+        if (transform.position.y < 6f) //Dolphin Lower Bound
+        {
+            transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
+        }
+
 
         /*       if ((rb.position.y <= -1 || rb.position.y.ToString().Equals("NaN")) && false)
                 {
@@ -159,9 +168,9 @@ public class PlayerMovement : MonoBehaviour {
                }
                */
 
-        
-        
-        
+
+
+
     }
 
     public void powerUp(string chest_name){
@@ -174,7 +183,7 @@ public class PlayerMovement : MonoBehaviour {
                 if(dolphinController!=null)
                     dolphinController.executeCommandLightController(Color.yellow, 100, "parthead");
                 StartCoroutine(powerDown("power_up_speed")); 
-                multiplier = 2.0f;
+                multiplier = 1.3f;
                 break; 
 
             case "chest_food2":
