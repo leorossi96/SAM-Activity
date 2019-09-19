@@ -123,7 +123,9 @@ public class PlayerCollision : MonoBehaviour
 
         string json2 = JsonUtility.ToJson(param.levelSet);
         StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));
+        //MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
         yield return new WaitForSeconds(4.0f);
+        MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
         SceneManager.LoadScene("Menu2");
     }
 
@@ -211,7 +213,7 @@ public class PlayerCollision : MonoBehaviour
     {
 
         lifeCount--; 
-        TextMeshProUGUI[] text = canvas.GetComponentsInChildren<TextMeshProUGUI>();
+        /*TextMeshProUGUI[] text = canvas.GetComponentsInChildren<TextMeshProUGUI>();
         foreach (var item in text)
         {
             if ((item.name == "LifeCount"))
@@ -219,7 +221,7 @@ public class PlayerCollision : MonoBehaviour
                 item.fontSize = 75;
                 item.text = "Lives x" + lifeCount;
             }
-        }
+        }*/
 
         yield return new WaitForSeconds(2.0f);
         movement.powerUp("hit"); 
@@ -600,6 +602,8 @@ public class PlayerCollision : MonoBehaviour
                     dolphin.GetComponent<Animation>().Play("DolphinWaitingForSearchStart");
                     dolphin.GetComponent<Animation>().PlayQueued("Clapping");
                     colliderActual.enabled = false;
+                    MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
+
                     StartCoroutine(ReturnToMenu());
                     break;
                 }
@@ -715,7 +719,17 @@ public class PlayerCollision : MonoBehaviour
 
 
         }
-        
+
+        TextMeshProUGUI[] text = canvas.GetComponentsInChildren<TextMeshProUGUI>();
+        foreach (var item in text)
+        {
+            if ((item.name == "LifeCount"))
+            {
+                item.fontSize = 75;
+                item.text = "Lives x" + lifeCount;
+            }
+        }
+
         if (!delfinoFound)
         {
             if (GameObject.Find("Dolphin1") != null)
@@ -869,6 +883,13 @@ public class PlayerCollision : MonoBehaviour
 
 
     }
+
+    /*private IEnumerator BubbleMachine()
+    {
+        MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
+        yield return new WaitForSeconds(5f);
+        MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
+    }*/
 
 
 
