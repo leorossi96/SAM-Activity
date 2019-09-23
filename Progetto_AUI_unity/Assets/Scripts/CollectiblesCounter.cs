@@ -17,6 +17,8 @@ public class CollectiblesCounter : MonoBehaviour {
     public SessionParameters sessionParameters;
     public LightShifting lightShifting;
 
+    public bool levelCompleted = false;
+
 
     SmartToy Dolphin;
 
@@ -32,7 +34,7 @@ public class CollectiblesCounter : MonoBehaviour {
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("CollectibleArea").Length; i++){
             GameObject currentCollectibleArea = GameObject.FindGameObjectsWithTag("CollectibleArea")[i];
             int[] currentCollectibles = new int[3];
-            currentCollectibles[0] = GetCollectibleChildCount(currentCollectibleArea.transform, "Collectible"); //UPDATE NEEDED: aggiungi filtro per contare solo i figli con un certo tag (non tutti i figli sono collezionabili utili)
+            currentCollectibles[0] = GetCollectibleChildCount(currentCollectibleArea.transform, "Collectible"); 
             currentCollectibles[1] = 0;
             currentCollectibles[2] = 0; //0 if there're still collectibles to be found in the CollectibleArea, else 1
             collectiblesMap.Add(currentCollectibleArea, currentCollectibles);
@@ -71,6 +73,7 @@ public class CollectiblesCounter : MonoBehaviour {
 
         }
         else if (totalCollectiblesFound >= nCollectibles){
+            levelCompleted = true;
             Debug.Log("HAI VINTO");
             StartCoroutine(BubbleMachine());
             movement.enabled = false;
@@ -85,7 +88,6 @@ public class CollectiblesCounter : MonoBehaviour {
             //StartCoroutine(ShowTextInterval(canvasCameraSearch, "Area Completed Text", 10));
 
             Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
-           // Debug.Log("fFGHDHDHFHFJG");
             for (int i = 0; i < images.Length; i++)
             {
                 if (images[i].name == "Magnifier")
@@ -98,7 +100,7 @@ public class CollectiblesCounter : MonoBehaviour {
                 }
             }
             dolphin.GetComponent<Animation>().PlayQueued("Looping");
-            sessionParameters.endGame = true;
+            StartCoroutine(EndGameToSessionParameters());
         }
     }
 
@@ -116,7 +118,10 @@ public class CollectiblesCounter : MonoBehaviour {
         return collectibleChildCounter;
     }
 
-
+    private IEnumerator EndGameToSessionParameters(){
+        yield return new WaitForSeconds(7f);
+        sessionParameters.endGame = true;
+    }
     private IEnumerator BubbleMachine(){
         MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
         yield return new WaitForSeconds(5f);

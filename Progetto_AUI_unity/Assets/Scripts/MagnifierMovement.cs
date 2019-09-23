@@ -48,6 +48,7 @@ public class MagnifierMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
         if (MagicRoomKinectV2Manager.instance.skeletons[mainPlayerKinectElement].SpineBase.z < 0.1f)
         {
             float min = 10000;
@@ -86,11 +87,29 @@ public class MagnifierMovement : MonoBehaviour {
 
 
             transform.position = new Vector3((float)cameraSearch.transform.position.x+kinect_x*prva, 0.1f, (float)cameraSearch.transform.position.z+(kinect_z-kinect_roomcenter_z)*(-prva)+offset_z);
+           
+            /*//IN CASO DI UTILIZZO DA TASTIERA
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                transform.position = transform.position + transform.right * velocityApplied * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                transform.position = transform.position - transform.right * velocityApplied * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.position = transform.position - transform.forward * velocityApplied * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                transform.position = transform.position + transform.forward * velocityApplied * Time.deltaTime;
+            }*/
 
             //transform.position = new_pos + player.transform.position; 
 
 
-                //Vector3 position = transform.position;
+            //Vector3 position = transform.position;
 
             /* IN CASO DI UTILIZZO CON IL DELFINO 
              * if (dolphinController.touchsensor.touchpoints[0].touched)

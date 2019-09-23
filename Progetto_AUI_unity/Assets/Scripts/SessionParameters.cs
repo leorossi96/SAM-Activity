@@ -151,7 +151,7 @@ public class SessionParameters : MonoBehaviour {
         pos = new Vector2(this.transform.position.x - 15.68478f, this.transform.position.z - 39.47354f);
         //posArraySer.posArray.Add(pos);
         ts.posArray.Add(pos);
-        Debug.Log("Adding :" + pos.ToString());
+        //Debug.Log("Adding :" + pos.ToString());
         //return posArraySer.posArray;
         return ts.posArray;
     }

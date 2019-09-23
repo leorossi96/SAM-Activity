@@ -77,6 +77,13 @@ public class PlayerCollisionSearch : MonoBehaviour
         {
             int areaCompleted = counter.collectiblesMap[collider.gameObject][2];//integer set to 1 if all the collectibles inside this area are found, 0 otherwise
             Debug.Log("Area Completed : " + areaCompleted);
+            Debug.Log(areaCompleted == 1);
+
+            Debug.Log("magnifierUsed = " + magnifierUsed);
+            Debug.Log("exitFromCompletedArea = " + exitFromCompletedArea);
+            Debug.Log("counter.collectiblesMap.ContainsKey(collider.gameObject) = " + counter.collectiblesMap.ContainsKey(collider.gameObject));
+            Debug.Log("Condizione else: ");
+                Debug.Log(magnifierUsed && !exitFromCompletedArea && counter.collectiblesMap.ContainsKey(collider.gameObject) && areaCompleted == 1);
             if ((Input.anyKey && Input.GetKey(KeyCode.M) || GameObject.Find("Dolphin1").GetComponent<SmartToy>().rfidsensor.cardReader[7].read) && !magnifierUsed && areaCompleted == 0) //if the user uses the Magnifier RFID
             {
                 Image[] images = canvasPlayerCamera.GetComponentsInChildren<Image>();
@@ -121,12 +128,15 @@ public class PlayerCollisionSearch : MonoBehaviour
                     }
                 }
                 collider.gameObject.GetComponentInChildren<OpenChestSearch>().enabled = true;
-                StartCoroutine(ShowTextInterval(canvasPlayerCamera, "Area Completed Text", 5));
-                StartCoroutine(rewardLightInterval("#00c300", 4));
-                StartCoroutine(CameraSwitch(cameraSearch, cameraMain2, 3));
-                dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
-                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                StartCoroutine(RestartMoving(3.0f));
+                if (!counter.levelCompleted)
+                {
+                    StartCoroutine(ShowTextInterval(canvasPlayerCamera, "Area Completed Text", 5));
+                    StartCoroutine(rewardLightInterval("#00c300", 4));
+                    StartCoroutine(CameraSwitch(cameraSearch, cameraMain2, 3));
+                    dolphin.GetComponent<Animation>().PlayQueued("DolphinWaitingForSearchEnd");
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                    StartCoroutine(RestartMoving(3.0f));
+                }
                 exitFromCompletedArea = true;
                 //Display.displays[0].Activate();
                 SetChildActivation(collider.gameObject, "Container", false);
