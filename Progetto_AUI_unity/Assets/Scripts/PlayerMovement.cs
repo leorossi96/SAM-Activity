@@ -180,8 +180,8 @@ public class PlayerMovement : MonoBehaviour {
             case "chest_food1":
                 activated_powerups++;
                 manager.powerUp("power_up_speed");
-                if(dolphinController!=null)
-                    dolphinController.executeCommandLightController(Color.yellow, 100, "parthead");
+                //if(dolphinController!=null)
+                  //  dolphinController.executeCommandLightController(Color.yellow, 100, "parthead");
                 StartCoroutine(powerDown("power_up_speed")); 
                 multiplier = 1.3f;
                 break; 
@@ -189,8 +189,8 @@ public class PlayerMovement : MonoBehaviour {
             case "chest_food2":
                 activated_powerups++;
                 manager.powerUp("power_up_ind");
-                if (dolphinController != null)
-                    dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+                //if (dolphinController != null)
+                  //  dolphinController.executeCommandLightController(Color.green, 100, "parthead");
                 StartCoroutine(powerDown("power_up_ind")); 
 
                 indestructible = true; 
@@ -198,8 +198,8 @@ public class PlayerMovement : MonoBehaviour {
 
             case "hit":
                 manager.powerUp("power_up_ind");
-                if (dolphinController != null)
-                    dolphinController.executeCommandLightController(Color.green, 100, "parthead");
+               // if (dolphinController != null)
+                    //dolphinController.executeCommandLightController(Color.green, 100, "parthead");
                 StartCoroutine(powerDownAfterHit("power_up_ind"));
                 indestructible = true;
                 break;
@@ -226,8 +226,8 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         manager.powerDown(power);
-        if (dolphinController != null)
-            dolphinController.executeCommandLightController(Color.black, 0, "parthead");
+       // if (dolphinController != null)
+           // dolphinController.executeCommandLightController(Color.black, 0, "parthead");
 
         
     }

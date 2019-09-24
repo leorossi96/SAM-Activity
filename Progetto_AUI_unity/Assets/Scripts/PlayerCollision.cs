@@ -58,6 +58,7 @@ public class PlayerCollision : MonoBehaviour
     public GameObject dolphin;
 
     public bool turnLeft = false;
+    public bool finished = false;
 
     public ObstacleRotate obRotate;
 
@@ -108,6 +109,13 @@ public class PlayerCollision : MonoBehaviour
 
 	}
 
+
+    private IEnumerator BubbleMachine()
+    {
+        MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
+        yield return new WaitForSeconds(7.0f);
+        MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
+    }
     private IEnumerator ReturnToMenu(){
 
         dataSerializable.activated_power_up = movement.activated_powerups;
@@ -124,8 +132,9 @@ public class PlayerCollision : MonoBehaviour
         string json2 = JsonUtility.ToJson(param.levelSet);
         StartCoroutine(SendPost(json2, "http://127.0.0.1:5000/unity/save"));
         //MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
-        yield return new WaitForSeconds(4.0f);
-        MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
+        StartCoroutine(BubbleMachine());
+        yield return new WaitForSeconds(10.0f);
+        //MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "OFF");
         SceneManager.LoadScene("Menu2");
     }
 
@@ -592,6 +601,7 @@ public class PlayerCollision : MonoBehaviour
                 {
                     //Text = "Level Finish";
                     //GuiOn = true;
+                    finished = true;
                     TextMeshProUGUI text = canvas.GetComponentInChildren<TextMeshProUGUI>();
                     if (text.name == "Finish Level")
                     {
@@ -602,7 +612,7 @@ public class PlayerCollision : MonoBehaviour
                     dolphin.GetComponent<Animation>().Play("DolphinWaitingForSearchStart");
                     dolphin.GetComponent<Animation>().PlayQueued("Clapping");
                     colliderActual.enabled = false;
-                    MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
+                    //MagicRoomAppliancesManager.instance.sendChangeCommand("Macchina delle Bolle", "ON");
 
                     StartCoroutine(ReturnToMenu());
                     break;
@@ -684,7 +694,7 @@ public class PlayerCollision : MonoBehaviour
             SceneManager.LoadScene("Menu2");
         }
 
-        if ((Time.timeSinceLevelLoad < max_time + 1) && !tutorial)
+        if ((Time.timeSinceLevelLoad < max_time + 1) && !tutorial && !finished)
         {
 
             timeMesh.text = ((int)Time.timeSinceLevelLoad) / 60 + ":" + (((int)Time.timeSinceLevelLoad) % 60);
@@ -692,7 +702,7 @@ public class PlayerCollision : MonoBehaviour
         }
 
 
-        if (Time.timeSinceLevelLoad > max_time && !clock_stop && !tutorial)
+        if (Time.timeSinceLevelLoad > max_time && !clock_stop && !tutorial && !finished)
         {
             clock_stop = true;
             movement.start = false;
