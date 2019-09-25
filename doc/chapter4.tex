@@ -33,12 +33,12 @@ By selecting a patient from the list (Figure  \ref{fig:webPatList})  the therapi
 
 \begin{figure}[h]
 	\centering
-	\begin{minipage}[b]{0.4\textwidth}
+	\begin{minipage}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{images/UX/website/11-runAnal}
 		\caption{Session data for Dolphin Run activity}
 		\label{fig:webAnalRun}
 	\end{minipage}
-	\begin{minipage}[b]{0.4\textwidth}
+	\begin{minipage}[b]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{images/UX/website/12-searchAnal}
 		\caption{Session data for Dolphin Search activity}
 		\label{fig:webAnalSearch}
@@ -83,21 +83,27 @@ After selecting a patient it will be asked to select which one of the activities
 Depending on the selected activity then the user is redirected into the session parameters' page (Figure \ref{fig:unityParamRun}, \ref{fig:unityParamSearch}) where is possible to modify once again the patient's parameters for the next session and to store them permanently.
 \pagebreak
 \subsubsection{Dolphin Run}
-%\begin{figure}[h!]
-%	\includegraphics[width=\textwidth]{images/UX/unity/run/1-obstacleAvoid}
-%	\caption{Dolphin Run activity}
-%	\label{fig:unityObstAvoid}
-%\end{figure}
-%\begin{figure}[h!]
-%	\includegraphics[width=\textwidth]{images/UX/unity/run/1-crossroad}
-%	\caption{Example of crossroad and requested interaction in the Dolphin Run}
-%	\label{fig:unityDolphRunCross}
-%\end{figure}
+\begin{figure}[h!]
+	\includegraphics[width=\textwidth]{images/UX/unity/run/1-obstacleAvoid}
+	\caption{Dolphin Run activity}
+	\label{fig:unityObstAvoid}
+\end{figure}
+\begin{figure}[h!]
+	\includegraphics[width=\textwidth]{images/UX/unity/run/2-crossroad}
+	\caption{Example of crossroad and requested interaction in the Dolphin Run}
+	\label{fig:unityDolphRunCross}
+\end{figure}
+\pagebreak
 Once the Dolphin Run activity is selected and one of the two possible levels is chosen the session will start.
 This activity consists in an obstacle course during which the patient, interacting with the \textit{Dolphin SAM} smart toy has to control the virtual dolphin in the game in order to proceed.
 The interaction for this activity is both full body and tactile: by rotating the \textit{Dolphin SAM} smart toy upwards (by tilting the head upward like in Figure \ref{fig:unityObstAvoid}), downwards (by tilting the head downwards), clockwise (by tilting the right fin towards the ground) and counterclockwise (by tilting the left fin towards the ground) the patient is able to change the proceeding direction of the virtual dolphin respectively to an up direction, a down direction, a right direction and a left direction.
 
-During the course there are multiple obstacle both static and dynamic which density is defined by the parameters set beforehand via the website (Figure \ref{fig:webPatPar1}) or the unity menu (Figure \ref{fig:unityParamRun}). Other than obstacles is also possible to set the maximum time available to finish the level, the number of lives available and the number of power ups (like the speed up one).
+%\begin{figure}[h!]
+%	\includegraphics[width=\textwidth]{images/UX/unity/run/3-powerUp}
+%	\caption{Power up chest}
+%	\label{fig:unityRunPowerUp}
+%\end{figure}
+During the course there are multiple obstacle both static and dynamic which density is defined by the parameters set beforehand via the website (Figure \ref{fig:webPatPar1}) or the unity menu (Figure \ref{fig:unityParamRun}). Other than obstacles is also possible to set the maximum time available to finish the level, the number of lives available and the number of power ups (like the speed up one, figure \ref{fig:unityRunPowerUp}).
  Furthermore there are also crossroads in the levels in which the patient has to use the touch sensors present on the \textit{Dolphin SAM}'s right fin and left fin in order to choose in which direction to proceed (Figure \ref{fig:unityDolphRunCross}).
 
 Once completed the level the activity will terminate and forward the user back to the menu (Figure \ref{fig:unityModSel}).
@@ -105,31 +111,32 @@ Once completed the level the activity will terminate and forward the user back t
 After selecting the Dolphin Search game mode and setting the desired parameters of the session (that consists in the number of \textit{Search Zones} to be put into the game and their respective number of starfishes to collect) the Dolphin Search session will start.
 
 In this activity the patient will use multiple interaction schemes that will alternate with the two game phases of the activity:
+\pagebreak
 \begin{itemize}
-%	\begin{figure}[h!]
-%		\includegraphics[width=\textwidth]{images/UX/unity/search/searchZone}
-%		\caption{Represents a \textit{Search Zone} inside the gaming area.}
-%		\label{fig:unitySearchZone}
-%	\end{figure}
-	\item {$ - $} \textbf{Exploration phase} : in which the patient uses the same controls as in the Dolphin Run activity to move around a virtual area in order to find the \textit{Search Zones} (Figure \ref{fig:unitySearchZone}) Notice that differently from the other activity here the patient has to give an input to the system in order to move forward that consist in touching both the left and right fin of the \textit{Dolphin SAM} smart toy. 
-	%	\begin{figure}[h!]
-	%		\includegraphics[width=\textwidth]{images/UX/unity/search/magnifierRequest}
-	%		\caption{Once in a \textit{Search Zone} the magnifier is requested to pass into the search phase}
-	%		\label{fig:unityMagnifierRequest}
-	%	\end{figure}
+	\begin{figure}[h!]
+		\includegraphics[width=\textwidth]{images/UX/unity/search/1-searchZone}
+		\caption{Represents a \textit{Search Zone} inside the gaming area.}
+		\label{fig:unitySearchZone}
+	\end{figure}
+	\item \textbf{Exploration phase} : in which the patient uses the same controls as in the Dolphin Run activity to move around a virtual area in order to find the \textit{Search Zones} (Figure \ref{fig:unitySearchZone}) Notice that differently from the other activity here the patient has to give an input to the system in order to move forward that consist in touching both the left and right fin of the \textit{Dolphin SAM} smart toy. 
+	\begin{figure}[h!]
+			\includegraphics[width=\textwidth]{images/UX/unity/search/2-magnifierRequest}
+			\caption{Once in a \textit{Search Zone} the magnifier is requested to pass into the search phase}
+			\label{fig:unityMagnifierRequest}
+	\end{figure}
 	When a \textit{Search Zone} is found the user, in order to proceed to the search phase has to insert into the \textit{Dolphin SAM} mouth the magnifier toy equipped with an RFID (Figure \ref{fig:unityMagnifierRequest}).
 	Once scanned by the RFID reader in \textit{Dolphin SAM's} mouth the search phase will start.
-%	\begin{figure}[h!]
-%		\includegraphics[width=\textwidth]{images/UX/unity/search/magnifierFocus}
-%		\caption{The display on the ground shows the magnifier's focus inside the current \textit{Search Zone}}
-%		\label{fig:unityMagnifierFocus}
-%	\end{figure}
-	\item {$ - $} \textbf{Search phase} : during this phase the patient has to find the sea stars, that are hidden below the sand level in the \textit{Search Zone}, by moving around the Magic Room while having the \textit{Search Zone's} seabed projected on the ground. In fact the system tracks the position of the patient inside the magic room using the Kinect and represents it in the virtual environment by using a white disk called the magnifier's focus(Figure \ref{fig:unityMagnifierFocus}).
-	%	\begin{figure}[h!]
-	%		\includegraphics[width=\textwidth]{images/UX/unity/search/seastarFound}
-	%		\caption{The display on the ground shows when a sea star is found}
-	%		\label{fig:unityMagnifierSeastar}
-	%	\end{figure}
+	\begin{figure}[h!]
+		\includegraphics[width=\textwidth]{images/UX/unity/search/3-magnifierFocus}
+		\caption{The display on the ground shows the magnifier's focus inside the current \textit{Search Zone}}
+		\label{fig:unityMagnifierFocus}
+	\end{figure}
+	\item \textbf{Search phase} : during this phase the patient has to find the sea stars, that are hidden below the sand level in the \textit{Search Zone}, by moving around the Magic Room while having the \textit{Search Zone's} seabed projected on the ground. In fact the system tracks the position of the patient inside the magic room using the Kinect and represents it in the virtual environment by using a white disk called the magnifier's focus(Figure \ref{fig:unityMagnifierFocus}).
+		\begin{figure}[h!]
+			\includegraphics[width=\textwidth]{images/UX/unity/search/4-seastarFound}
+			\caption{The display on the ground shows when a sea star is found}
+			\label{fig:unityMagnifierSeastar}
+		\end{figure}
 	A sea star is collected when the magnifier's focus passes over it as shown in Figure \ref{fig:unityMagnifierSeastar}. Once all the sea star contained in a \textit{Search Zone} are found, if there are more \textit{Search Zones} in the map the Discovery phase will resume, otherwise the session will terminate and forward the user back to the main menu (Figure \ref{fig:unityModSel}).
 \end{itemize}
 
